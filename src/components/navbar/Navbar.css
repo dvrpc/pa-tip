@@ -1,0 +1,8 @@
+*{
+	margin: 0;
+}
+.navBar{
+	background: grey;
+	color: white;
+	padding: 3% 0 3% 0;
+}

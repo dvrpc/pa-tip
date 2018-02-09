@@ -1,0 +1,6 @@
+.appContainer {
+	display: flex;
+}
+.appContainer:first-child{
+	flex-basis: 40%;
+}
