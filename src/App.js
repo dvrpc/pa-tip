@@ -7,6 +7,7 @@ import './App.css';
 /* app components */
 import Navbar from './components/navbar/Navbar.js'
 import AppContainer from './components/app-container/AppContainer.js'
+import Footer from './components/footer/Footer.js'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <AppContainer />
+        <Footer />
       </div>
     );
   }
