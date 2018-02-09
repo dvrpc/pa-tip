@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eslint": "^4.17.0",
     "inferno": "^3.10.1",
     "inferno-component": "^3.10.1",
-    "inferno-scripts": "5.0.0"
+    "inferno-scripts": "5.0.0",
+    "mapbox-gl": "^0.44.0"
   },
   "scripts": {
     "start": "inferno-scripts start",

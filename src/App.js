@@ -1,7 +1,6 @@
 import { version } from 'inferno';
 import Component from 'inferno-component';
 import './registerServiceWorker';
-import Logo from './logo';
 import './App.css';
 
 /* app components */
