@@ -10,9 +10,9 @@ class MapComponent extends Component {
         this.map = new mapboxgl.Map({
             container: this.tipMap,
             //TODO: look into why the width is so whack
-            style: 'mapbox://styles/mapbox/streets-v9',
+            style: 'mapbox://styles/mapbox/satellite-v9',
             center: [-75.2273, 40.071],
-            zoom: 8.82
+            zoom: 12
         })
     }
 
