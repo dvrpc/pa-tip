@@ -1,7 +1,69 @@
 .tile{
-	background: #d3d3d3;
-	color: grey;
+	background: #f6f9fc;
+	color: #060d15;
 	height: 40%;
 	width: 45%;
-	margin: 3% 0 0 1%;
+	margin: 3% 0 0 3%;
+}
+
+
+/* Text Content */
+.tile h1{
+    text-align: center;
+}
+.details{
+    padding-top: 2%;
+    display: flex;
+    justify-content: space-around;
+}
+.description{
+    padding: 3% 3% 0 3%;
+}
+
+
+/* Funding Table */
+.table-num{
+    text-align: right;
+}
+table {
+    margin-top: 2%;
+    display: table;
+    width: 100%;
+}
+table thead, table tbody {
+    width: 100%;
+}
+table thead {
+    overflow-y: scroll;
+    display: table;
+    table-layout: fixed;
+    width: calc(100% - 16px);
+}
+table tbody {
+    overflow: auto;
+    height: 50px;
+    display: block;
+}
+table tr {
+    width: 100%;
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+}
+
+
+/* Comments Button */
+button{
+    background: #61421d;
+    color: #fdfdfd;
+    padding: 7px 2px 7px 2px;
+    width: 20%;
+    display: block;
+    margin: 5% auto 0 auto;
+    border-radius: 5%;
+    border: none;
+    cursor: pointer;
+}
+button:hover{
+    opacity: 0.7;
 }

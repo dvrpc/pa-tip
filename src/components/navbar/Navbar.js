@@ -7,7 +7,12 @@ class Navbar extends Component {
 	render(){
 		return(
 			<div className="navBar">
-				<h1> hello I am a navbar</h1>
+                <img src="../../../public/imgs/dvrpclogo.png" alt="logo" />
+				<h1> DVRPC PA TIP 2018</h1>
+                <input type="textarea">Search</input>
+                <input type="button">SEARCH</input>
+                <h2> I am a dropdown for FUNDS </h2>
+                <h2> I am a dropdown for CATEGORY </h2>
 			</div>
 		)
 	}
