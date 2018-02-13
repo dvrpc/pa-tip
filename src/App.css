@@ -2,5 +2,6 @@
     margin: 0;
 }
 .App {
-    font-family: ;
+    font: 16px 'Fira Sans', sans-serif;
+    line-height: 1.4;
 }

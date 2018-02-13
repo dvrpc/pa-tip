@@ -1,7 +1,7 @@
 .tilesContainer{
     z-index: 2;
    background: #4F4F4F;
-
+   overflow-x: hidden;
     /*TODO: look into why at 50% width there's white space on the right, but at greater than 51% there isn't...*/
 	max-width: 53%;
 	display: flex;
@@ -35,4 +35,8 @@
 }
 .header-filter h2:hover, .active{
     color: #457B9D;
+    cursor: pointer;
+}
+.active{
+    text-decoration: underline #457B9D;
 }

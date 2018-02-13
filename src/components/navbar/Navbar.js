@@ -11,14 +11,14 @@ class Navbar extends Component {
 				<h1> DVRPC PA TIP 2018</h1>
                 <form>
                     <input type="textarea" placeholder="Find your TIP"></input>
-                    <select name="FUNDS"> 
-                        <option selected>FUNDS</option>
+                    <select name="funds"> 
+                        <option selected disabled hidden>FUNDS</option>
                         <option>A FUND</option>
                         <option>ANOTHER FUND</option>
                         <option>3RD FUND</option>
                     </select>
                     <select name="category"> 
-                        <option selected>CATEGORY</option>
+                        <option selected disabled hidden>CATEGORY</option>
                         <option>A CATEGORY</option>
                         <option>ANOTHER CATEGORY</option>
                         <option>3RD CATEGORY</option>
