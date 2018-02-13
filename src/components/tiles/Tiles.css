@@ -2,8 +2,8 @@
 	background: #f6f9fc;
 	color: #060d15;
 	height: 40%;
-	width: 45%;
-	margin: 3% 0 0 3%;
+	width: 48.5%;
+	margin: 0.5%;
 }
 
 
@@ -41,7 +41,7 @@ table thead {
 }
 table tbody {
     overflow: auto;
-    height: 50px;
+    height: 70px;
     display: block;
 }
 table tr {

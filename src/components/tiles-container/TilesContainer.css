@@ -1,4 +1,5 @@
 .tilesContainer{
+    z-index: 2;
 	background: #e7eff8;
     /*TODO: look into why at 50% width there's white space on the right, but at greater than 51% there isn't...*/
 	max-width: 53%;
@@ -6,4 +7,7 @@
 	flex-wrap: wrap;
 	overflow-y: scroll;
 	justify-content: center;
+-webkit-box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
+box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
 }

@@ -1,4 +1,6 @@
 .appContainer {
 	display: flex;
-	height: 86vh;
+	height: 88.5vh;
+    margin: 0;
+    padding: 0;
 }

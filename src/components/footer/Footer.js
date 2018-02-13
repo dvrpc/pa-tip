@@ -6,9 +6,9 @@ class Footer extends Component {
 	//TODO: add props, lifecycle hooks, other stuff
 	render(){
 		return(
-			<div className="footer">
-				<h1> I am a Footer</h1>
-			</div>
+			<footer className="footer">
+				<h1>I am a Footer</h1>
+			</footer>
 		)
 	}
 }
