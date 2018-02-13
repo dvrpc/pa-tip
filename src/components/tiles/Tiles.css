@@ -1,5 +1,6 @@
 .tile{
-	background: #f6f9fc;
+    background: #EBEBEB;
+
 	color: #060d15;
 	height: 40%;
 	width: 48.5%;
@@ -12,7 +13,7 @@
     text-align: center;
 }
 .details{
-    padding-top: 2%;
+    padding-top: 3%;
     display: flex;
     justify-content: space-around;
 }
@@ -41,7 +42,7 @@ table thead {
 }
 table tbody {
     overflow: auto;
-    height: 70px;
+    height: 60px;
     display: block;
 }
 table tr {
@@ -54,7 +55,7 @@ table tr {
 
 /* Comments Button */
 button{
-    background: #61421d;
+    background: #457B9D;
     color: #fdfdfd;
     padding: 7px 2px 7px 2px;
     width: 20%;

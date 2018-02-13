@@ -9,11 +9,23 @@ class Navbar extends Component {
 			<div className="navBar">
                 <img src="../../../public/imgs/dvrpclogo.png" alt="logo" />
 				<h1> DVRPC PA TIP 2018</h1>
-                <input type="textarea">Search</input>
-                <input type="button">SEARCH</input>
-                <h2> I am a dropdown for FUNDS </h2>
-                <h2> I am a dropdown for CATEGORY </h2>
-			</div>
+                <form>
+                    <input type="textarea" placeholder="Find your TIP"></input>
+                    <select name="FUNDS"> 
+                        <option selected>FUNDS</option>
+                        <option>A FUND</option>
+                        <option>ANOTHER FUND</option>
+                        <option>3RD FUND</option>
+                    </select>
+                    <select name="category"> 
+                        <option selected>CATEGORY</option>
+                        <option>A CATEGORY</option>
+                        <option>ANOTHER CATEGORY</option>
+                        <option>3RD CATEGORY</option>
+                    </select>
+                    <input type="button" value="SEARCH"></input>
+                </form>
+            </div>
 		)
 	}
 }

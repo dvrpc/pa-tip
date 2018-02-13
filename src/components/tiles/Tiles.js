@@ -7,7 +7,7 @@ class Tile extends Component {
 	render(){
 		return(
 			<div className="tile">
-				<h1> I am a Project Title</h1>
+				<h1> I Am a Project Title</h1>
                 <div className="details">
                     <p><strong>AQ Code: </strong>S19</p>
                     <p><strong>County: </strong>Burlington</p>

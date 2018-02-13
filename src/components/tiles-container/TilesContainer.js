@@ -10,6 +10,18 @@ class TilesContainer extends Component {
 	render(){
 		return(
 			<div className="tilesContainer">
+				<div className="header">
+					<div className="header-content header-head">
+						<h1>Pennsylvania TIP Results</h1>
+						<p>8 results.</p>
+					</div>
+					<div className="header-content header-filter">
+						<h2 className="active">Buttons</h2>
+						<h2>To</h2>
+						<h2>Filter</h2>
+						<h2>Results</h2>
+					</div>
+				</div>
 				<Tile />
 				<Tile />
 				<Tile />
