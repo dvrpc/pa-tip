@@ -3,7 +3,7 @@
    background: #4F4F4F;
    overflow-x: hidden;
     /*TODO: look into why at 50% width there's white space on the right, but at greater than 51% there isn't...*/
-	max-width: 53%;
+	width: 95%;
 	display: flex;
 	flex-wrap: wrap;
 	overflow-y: scroll;
@@ -15,6 +15,9 @@
 .header{
     width: 100%;
 }
+.header-content *{
+    margin-right: 5%;
+}
 .header-content{
     display: flex;
     align-items: flex-end;
@@ -24,14 +27,11 @@
     font-size: 1.3em;
     color: #fff;
 }
-.header-content *{
-    padding-right: 5%;
-}
 .header-head *{
     padding-top: 1.5%;
 }
 .header-filter *{
-    font-weight: 500;
+    font-weight: 200;
 }
 .header-filter h2:hover, .active{
     color: #457B9D;

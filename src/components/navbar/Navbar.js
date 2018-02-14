@@ -7,7 +7,7 @@ class Navbar extends Component {
 	render(){
 		return(
 			<div className="navBar">
-                <img src="../../../public/imgs/dvrpclogo.png" alt="logo" />
+                <img src="/public/imgs/dvrpclogo.png" alt="logo" />
 				<h1> DVRPC PA TIP 2018</h1>
                 <form>
                     <input type="textarea" placeholder="Find your TIP"></input>
