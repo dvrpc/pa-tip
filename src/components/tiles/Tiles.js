@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Inferno from 'inferno'
 import Component from 'inferno-component'
 import { linkEvent } from 'inferno'
@@ -58,5 +57,6 @@ class Tile extends Component {
             </div>
 		)
 	}
+}
 
 export default Tile;
