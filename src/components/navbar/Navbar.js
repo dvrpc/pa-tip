@@ -10,7 +10,7 @@ class Navbar extends Component {
                 <img src="/public/imgs/dvrpclogo.png" alt="logo" />
 				<h1> DVRPC PA TIP 2018</h1>
                 <form>
-                    <input type="textarea" placeholder="Find your TIP"></input>
+                    <input type="textarea" placeholder="Enter Address"></input>
                     <select name="funds"> 
                         <option selected disabled hidden>FUNDS</option>
                         <option>A FUND</option>

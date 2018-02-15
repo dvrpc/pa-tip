@@ -31,7 +31,7 @@
     padding-top: 1.5%;
 }
 .header-filter *{
-    font-weight: 200;
+    font-weight: 50;
 }
 .header-filter h2:hover, .active{
     color: #457B9D;
