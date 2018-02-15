@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/polyline": "^0.2.0",
     "eslint": "^4.17.0",
     "inferno": "^3.10.1",
     "inferno-component": "^3.10.1",
