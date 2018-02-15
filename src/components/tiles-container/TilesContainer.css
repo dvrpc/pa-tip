@@ -1,8 +1,8 @@
 .tilesContainer{
     z-index: 2;
-   background: #4F4F4F;
-   overflow-x: hidden;
-    /*TODO: look into why at 50% width there's white space on the right, but at greater than 51% there isn't...*/
+    /*TODO: figure out the right background/text combination*/
+    background: rgba(31, 31, 31, 1);
+    overflow-x: hidden;
 	width: 95%;
 	display: flex;
     flex-wrap: wrap;
@@ -25,7 +25,7 @@
     margin-bottom: 2%;
     width: 100%;
     font-size: 1.3em;
-    color: #fff;
+    color: #eee;
 }
 .header-head *{
     padding-top: 1.5%;

@@ -5,8 +5,23 @@ import './Tiles.css'
 
 class Tile extends Component {
 	//TODO: add props, lifecycle hooks, other stuff
+    constructor(props){
+        super(props)
+        this.state = {
+            height: 300,
+            width: 300
+        }
+    }
+    componentDidMount(){
+        const tile = document.querySelector('.tile')
+        this.setState({
+            height: tile.clientHeight,
+            width: tile.clientWidth
+        })
+    }
+
     render(){
-        let path
+        let path;
         if (this.props.data.geometry.type === 'LineString') {
             path = `&path=color:0x${this.props.color}ff|weight:8|enc:${Polyline.fromGeoJSON(this.props.data)}`
         }
@@ -19,28 +34,21 @@ class Tile extends Component {
         else if (this.props.data.geometry.type === 'Polygon') {
             path = this.props.data.geometry.coordinates.map(c => `&path=color:0x${this.props.color}ff|fillcolor:0x${this.props.color}66|weight:4|enc:${Polyline.fromGeoJSON({type:'LineString',coordinates:c})}`).join('')
         }
+        //TODO: replace this API key with a process.ENV secret
+        const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${this.state.width}x${this.state.height}&maptype=hybrid${path}`
+
         return(
-			<div className="tile">
-        <div class="tile-caption">
-          <small>{this.props.data.properties.MPMS_ID}</small>
-          <h2>{this.props.data.properties.ROAD_NAME}</h2>
-          <p>{this.props.data.properties.CTY} County, PA</p>
+		<div className="tile" style={`background: url(${background})`}>
+            <div className="tile-caption">
+              <h2 className="tile-caption-text">{this.props.data.properties.ROAD_NAME}</h2>
+              <small className="tile-caption-text">AQ Code: {this.props.data.properties.MPMS_ID}</small>
+              <p className="tile-caption-text">{this.props.data.properties.CTY} County, PA</p>
+            </div>
+            <a href="#" class="tile-link"></a>
         </div>
-        <div class="tile-img">
-            <img src={`https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=300x250&maptype=hybrid${path}`} />
-        </div>
-        <a href="#" class="tile-link"></a>
-        <div className="content">
-          <h1> I Am a Project Title</h1>
-              <div className="details">
-                  <p><strong>AQ Code: </strong>S19</p>
-                  <p><strong>County: </strong>Burlington</p>
-                  <p><strong>MCD: </strong>Various</p>
-              </div>
-        </div>
-      </div>
 		)
 	}
+
 }
 
 export default Tile
