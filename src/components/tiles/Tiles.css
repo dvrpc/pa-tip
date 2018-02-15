@@ -1,6 +1,5 @@
 .tile{
     color: #fff;
-    text-shadow: 1px 1px 2px #000;
     position: relative;
     width: 300px;
     height: 200px;
@@ -9,6 +8,7 @@
     box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.6);
     border: 1px solid #666;
     border-radius: 4px;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 .tile:hover{
     box-shadow: 0px 0px 5px 1px rgba(255,255,255,0.6);
@@ -51,4 +51,65 @@
     bottom: 0;
     left: 0;
     right: 0;
+.tile h1{
+    padding-top: 1.5%;
+}
+.details{
+    font-size: 1.1em;
+    padding-top: 3%;
+    display: flex;
+    justify-content: space-around;
+}
+.content{
+    position: absolute;
+    bottom: 0px;
+}
+
+/* Funding Table */
+.table-num{
+    text-align: right;
+}
+table {
+    margin: 0 auto;
+    margin-top: 2%;
+    display: table;
+    width: 95%;
+}
+table thead, table tbody {
+    width: 100%;
+}
+table thead {
+    overflow-y: scroll;
+    display: table;
+    table-layout: fixed;
+    width: calc(100% - 16px);
+}
+table tbody {
+    overflow: auto;
+    height: 60px;
+    display: block;
+}
+table tr {
+    width: 100%;
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+}
+
+
+/* Comments Button */
+button{
+    font-size: 1em;
+    background: #457B9D;
+    color: #fdfdfd;
+    padding: 7px 2px 7px 2px;
+    width: 20%;
+    display: block;
+    margin: 5% auto 0 auto;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+button:hover{
+    opacity: 0.7;
 }

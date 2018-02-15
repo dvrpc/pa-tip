@@ -21,16 +21,24 @@ class Tile extends Component {
         }
         return(
 			<div className="tile">
-				<div class="tile-caption">
-                    <small>{this.props.data.properties.MPMS_ID}</small>
-                    <h2>{this.props.data.properties.ROAD_NAME}</h2>
-                    <p>{this.props.data.properties.CTY} County, PA</p>
-                </div>
-                <div class="tile-img">
-                    <img src={`https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=300x250&maptype=hybrid${path}`} />
-                </div>
-                <a href="#" class="tile-link"></a>
-            </div>
+        <div class="tile-caption">
+          <small>{this.props.data.properties.MPMS_ID}</small>
+          <h2>{this.props.data.properties.ROAD_NAME}</h2>
+          <p>{this.props.data.properties.CTY} County, PA</p>
+        </div>
+        <div class="tile-img">
+            <img src={`https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=300x250&maptype=hybrid${path}`} />
+        </div>
+        <a href="#" class="tile-link"></a>
+        <div className="content">
+          <h1> I Am a Project Title</h1>
+              <div className="details">
+                  <p><strong>AQ Code: </strong>S19</p>
+                  <p><strong>County: </strong>Burlington</p>
+                  <p><strong>MCD: </strong>Various</p>
+              </div>
+        </div>
+      </div>
 		)
 	}
 }
