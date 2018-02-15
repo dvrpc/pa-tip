@@ -2,6 +2,16 @@
   "name": "pa-tip",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "inferno-scripts start",
+    "build": "inferno-scripts build",
+    "test": "inferno-scripts test --env=jsdom",
+    "eject": "inferno-scripts eject",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+  	"src/**/*.{js,jsx,json}": ["prettier --write", "git add"]
+  },
   "dependencies": {
     "@mapbox/polyline": "^0.2.0",
     "eslint": "^4.17.0",
@@ -10,10 +20,9 @@
     "inferno-scripts": "5.0.0",
     "mapbox-gl": "^0.44.0"
   },
-  "scripts": {
-    "start": "inferno-scripts start",
-    "build": "inferno-scripts build",
-    "test": "inferno-scripts test --env=jsdom",
-    "eject": "inferno-scripts eject"
+  "devDependencies": {
+    "husky": "^0.15.0-rc.8",
+    "lint-staged": "^6.1.0",
+    "prettier": "^1.10.2"
   }
 }
