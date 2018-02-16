@@ -5,3 +5,28 @@
     font: 16px 'Fira Sans', sans-serif;
     line-height: 1.4;
 }
+
+/* sweetalaert module styles */
+.swal2-content p{
+    text-align: left;
+}
+.swal2-content table{
+    margin-left: 25%;
+}
+
+.swal2-footer{
+    align-items: center;
+}
+.swal2-footer h2 {
+    margin-right: 2%;
+}
+.swal2-footer textarea{
+    font-size: 1.5em;
+    height: 150px;
+    width: 35%;
+}
+.swal2-footer input{
+    font-size: 1.2em;
+    padding: 2%;
+    height: 5%;
+}
