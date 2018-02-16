@@ -38,3 +38,5 @@ input[type=button]:hover{
 input[type=button]:focus{
     outline: none;
 }
+
+/*TODO: add breakpoints to make the navbar readable on smaller screens*/

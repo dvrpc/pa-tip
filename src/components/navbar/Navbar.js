@@ -12,13 +12,13 @@ class Navbar extends Component {
                 <form>
                     <input type="textarea" placeholder="Enter Address"></input>
                     <select name="funds"> 
-                        <option value="" selected>FUNDS</option>
+                        <option value="" selected>Fund</option>
                         <option value="1">A FUND</option>
                         <option value="2">ANOTHER FUND</option>
                         <option value="3">3RD FUND</option>
                     </select>
                     <select name="category"> 
-                        <option value="" selected>CATEGORY</option>
+                        <option value="" selected>Category</option>
                         <option value="1">A CATEGORY</option>
                         <option value="2">ANOTHER CATEGORY</option>
                         <option value="3">3RD CATEGORY</option>
