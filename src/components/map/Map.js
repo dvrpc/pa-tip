@@ -6,13 +6,13 @@ import mapboxgl from 'mapbox-gl'
 class MapComponent extends Component {
 
     componentDidMount(){
+        //TODO: replace this with a process.ENV variable
         mapboxgl.accessToken = 'pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA'
         this.map = new mapboxgl.Map({
             container: this.tipMap,
-            //TODO: look into why the width is so whack
             style: 'mapbox://styles/mapbox/satellite-v9',
             center: [-75.2273, 40.071],
-            zoom: 12
+            zoom: 14
         })
     }
 

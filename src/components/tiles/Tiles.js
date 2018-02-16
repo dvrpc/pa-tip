@@ -2,6 +2,7 @@ import Inferno from 'inferno'
 import Component from 'inferno-component'
 import { linkEvent } from 'inferno'
 import Polyline from '@mapbox/polyline'
+import swal from 'sweetalert2'
 
 import './Tiles.css'
 import Modal from '../modal/modal.js'
@@ -17,15 +18,15 @@ class Tile extends Component {
             modalClicked: false
         }
     }
+
     componentDidMount(){
         const tile = document.querySelector('.tile')
         // TODO: add setState to window resizing like in the analytics dashboard page
         this.setState({
             height: tile.clientHeight,
-            width: tile.clientWidth,
+            width: tile.clientWidth
         })
     }
-
 
     render(){
         let path;
@@ -44,10 +45,9 @@ class Tile extends Component {
         //TODO: replace this API key with a process.ENV secret
         const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${this.state.width}x${this.state.height}&maptype=hybrid${path}`
 
-        //TODO: create a separate component JUST for the module & pass the information as props from tile to module
         return(
     		<div className="tile" onClick={ linkEvent(this, clickModal) } style={`background: url(${background})`}>
-                {this.state.modalClicked ? <Modal title={'the title'} text={'this is the text of the modal yay cool wow yes'} /> : null}
+                {this.state.modalClicked ? <Modal title={this.props.data.properties.ROAD_NAME} html={'this is the <strong>text</strong> of the modal yay cool wow yes'} />: null}
                 <div className="tile-caption">
                   <h2 className="tile-caption-text">{this.props.data.properties.ROAD_NAME}</h2>
                   <small className="tile-caption-text">AQ Code: {this.props.data.properties.MPMS_ID}</small>

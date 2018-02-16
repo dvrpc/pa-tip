@@ -2,6 +2,7 @@ import Inferno from 'inferno'
 import Component from 'inferno-component'
 import swal from 'sweetalert2'
 
+// issue: swal is a function that I was trying to just render as an element
 class Modal extends Component{
     constructor(props){
         super(props)
@@ -9,11 +10,15 @@ class Modal extends Component{
 
     render(){
         return(
-            swal({
-                title: this.props.title,
-                text: this.props.text,
-                type: 'info'
-            })
+            <div>
+                {
+                    swal({
+                        title: this.props.title,
+                        html: this.props.html,
+                        type: 'info'
+                    })
+                }
+            </div>
         )
     }
 }
