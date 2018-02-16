@@ -1,27 +1,27 @@
 import Inferno from 'inferno'
 import Component from 'inferno-component'
 import './Navbar.css'
+import dvrpclogo from './dvrpclogo.png'
 
 class Navbar extends Component {
-	//TODO: add props, lifecycle hooks, other stuff
 	render(){
 		return(
 			<div className="navBar">
-                <img src="/public/imgs/dvrpclogo.png" alt="logo" />
+                <img src={dvrpclogo} alt="logo" />
 				<h1> DVRPC PA TIP 2018</h1>
                 <form>
                     <input type="textarea" placeholder="Enter Address"></input>
                     <select name="funds"> 
-                        <option selected disabled hidden>FUNDS</option>
-                        <option>A FUND</option>
-                        <option>ANOTHER FUND</option>
-                        <option>3RD FUND</option>
+                        <option value="" selected>FUNDS</option>
+                        <option value="1">A FUND</option>
+                        <option value="2">ANOTHER FUND</option>
+                        <option value="3">3RD FUND</option>
                     </select>
                     <select name="category"> 
-                        <option selected disabled hidden>CATEGORY</option>
-                        <option>A CATEGORY</option>
-                        <option>ANOTHER CATEGORY</option>
-                        <option>3RD CATEGORY</option>
+                        <option value="" selected>CATEGORY</option>
+                        <option value="1">A CATEGORY</option>
+                        <option value="2">ANOTHER CATEGORY</option>
+                        <option value="3">3RD CATEGORY</option>
                     </select>
                     <input type="button" value="SEARCH"></input>
                 </form>
