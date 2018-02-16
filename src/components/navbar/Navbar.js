@@ -8,7 +8,7 @@ class Navbar extends Component {
 		return(
 			<div className="navBar">
                 <img src={dvrpclogo} alt="logo" />
-				<h1> DVRPC PA TIP 2018</h1>
+				<h2>FY2018 Transportation Improvement Program (TIP) for PA</h2>
                 <form>
                     <input type="textarea" placeholder="Enter Address"></input>
                     <select name="funds"> 
@@ -23,7 +23,7 @@ class Navbar extends Component {
                         <option value="2">ANOTHER CATEGORY</option>
                         <option value="3">3RD CATEGORY</option>
                     </select>
-                    <input type="button" value="SEARCH"></input>
+                    <input type="button" value="search"></input>
                 </form>
             </div>
 		)

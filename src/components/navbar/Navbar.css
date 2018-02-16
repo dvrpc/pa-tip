@@ -2,14 +2,20 @@
     position: relative;
     z-index: 3;
     background: #1D3557;
-    color: white;
+    color: #fdfdfd;
     padding: 1% 0 1% 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     -webkit-box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
     box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
+}
+img{
+    max-width: 130px;
+}
+.navBar h2{
+    margin-left: -15%;
 }
 input, select{
     margin: 0 15px 0 15px;
@@ -22,7 +28,13 @@ input[type=button]{
     background: #61421d;
     color: #fdfdfd;
     cursor: pointer;
+    -webkit-box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
 }
 input[type=button]:hover{
-    opacity: 0.7;
+    background: #34230f;
+}
+input[type=button]:focus{
+    outline: none;
 }
