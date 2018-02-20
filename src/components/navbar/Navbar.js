@@ -6,9 +6,9 @@ import dvrpclogo from './dvrpclogo.png'
 class Navbar extends Component {
 	render(){
 		return(
-			<div className="navBar">
+			<nav className="navBar">
                 <img src={dvrpclogo} alt="logo" />
-				<h2>FY2018 Transportation Improvement Program (TIP) for PA</h2>
+				<h2>FY2018 PA TIP</h2>
                 <form>
                     <input type="textarea" placeholder="Enter Address"></input>
                     <select name="funds"> 
@@ -25,7 +25,7 @@ class Navbar extends Component {
                     </select>
                     <input type="button" value="search"></input>
                 </form>
-            </div>
+            </nav>
 		)
 	}
 }

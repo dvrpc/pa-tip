@@ -38,3 +38,9 @@
 .swal2-footer input[type=submit]:focus{
     outline: none;
 }
+.swal2-footer input[type=submit]:active{
+    margin-top: 1%;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}

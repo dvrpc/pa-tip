@@ -15,7 +15,7 @@ img{
     max-width: 130px;
 }
 .navBar h2{
-    margin-left: -15%;
+
 }
 input, select{
     margin: 0 15px 0 15px;
@@ -38,5 +38,12 @@ input[type=button]:hover{
 input[type=button]:focus{
     outline: none;
 }
+input[type=button]:active{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 
 /*TODO: add breakpoints to make the navbar readable on smaller screens*/
+@media()
+900

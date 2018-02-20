@@ -10,11 +10,14 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-  	"src/**/*.{js,jsx,json}": ["prettier --write", "git add"]
+    "src/**/*.{js,jsx,json}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@mapbox/polyline": "^0.2.0",
-    "eslint": "^4.17.0",
+    "eslint": "^4.18.0",
     "inferno": "^3.10.1",
     "inferno-component": "^3.10.1",
     "inferno-scripts": "5.0.0",

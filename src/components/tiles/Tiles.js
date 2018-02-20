@@ -30,7 +30,6 @@ class Tile extends Component {
 
     render(){
         let path;
-        console.log('props data properties ', this.props.data.properties)
         if (this.props.data.geometry.type === 'LineString') {
             path = `&path=color:0x${this.props.color}ff|weight:8|enc:${Polyline.fromGeoJSON(this.props.data)}`
         }

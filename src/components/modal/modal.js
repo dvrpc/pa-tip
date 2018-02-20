@@ -2,11 +2,10 @@ import Inferno from 'inferno'
 import Component from 'inferno-component'
 import swal from 'sweetalert2'
 
-// TODO: include the HTML. Data table, full description, comment text area, ability to print(?)
 // TODO: update URL when a modal pops up 
-// FOOTER: it's a text box so it doesn't need to come in from props. can jsut be made right here
 
-const footer = '<h2>Add a comment </h2><textarea></textarea><input type="submit" value="submit">'
+const getComment = () => console.log('input area submitted a comment')
+
 
 class Modal extends Component{
     constructor(props){
@@ -14,6 +13,7 @@ class Modal extends Component{
     }
 
     render(){
+        const footer = `<h2>Add a comment </h2><textarea></textarea><input type="submit" value="submit" onSubmit={linkEvent(this, getComment)}>`
         return(
             <div id="modal">
                 {
