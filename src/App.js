@@ -9,6 +9,7 @@ import AppContainer from './components/app-container/AppContainer.js'
 import Homepage from './components/homepage/Homepage.js'
 
 /* FUNCTION pass the address from homepage into appContainer (which will then pass that to tilesContainer, which will make the API call and feed the results of that to Tiles) */
+/*maybe homepage on Enter triggers this? somehow? can you pass props back to their parents? that'd be the easiest.*/
 const search = (instance, address) => instance.setState({searched: true, address: 'tbd'})
 
 class App extends Component {
