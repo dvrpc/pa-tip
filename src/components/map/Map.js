@@ -7,6 +7,7 @@ class MapComponent extends Component {
 
     componentDidMount(){
         //TODO: replace this with a process.ENV variable
+        //TODO: replace center with address as props
         mapboxgl.accessToken = 'pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA'
         this.map = new mapboxgl.Map({
             container: this.tipMap,
