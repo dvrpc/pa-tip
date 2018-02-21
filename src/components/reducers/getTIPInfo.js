@@ -15,6 +15,6 @@ export default function tipReducer(info = [], action){
 }
 
 // dispatchers
-export const getTIP = projects => dispatch => {
+/*export const getTIP = projects => dispatch => {
     
-}
+}*/

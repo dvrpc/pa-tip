@@ -8,7 +8,6 @@ import Navbar from './components/navbar/Navbar.js'
 import AppContainer from './components/app-container/AppContainer.js'
 import Homepage from './components/homepage/Homepage.js'
 
-//TODO: replace all this with Redux - wrap the app in a Provider
 const search = (instance, address) => instance.setState({searched: true, address: 'tbd'})
 
 class App extends Component {
