@@ -1,30 +1,28 @@
-import Inferno from 'inferno';
-import Component from 'inferno-component';
-import { linkEvent } from 'inferno';
-import { connect } from 'inferno-redux';
+import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
 
-import './Homepage.css'
+import "./Homepage.css";
 
 const sendAddress = (instance, e) => {
-  e.preventDefault()
+  e.preventDefault();
   // TODO: SANITIZE THIS BUSINESS (autocomplete later)
-  const address = e.target.querySelector('input').value
-  instance.setState({address})
-}
+  const address = e.target.querySelector("input").value;
+  instance.setState({ address });
+};
 
 class Homepage extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
-      address: '',
+      address: "",
       searched: false
-    }
+    };
   }
 
   // pass state and bool to the redux store to render the main APP and make the
   // correct API call
-  componentDidUpdate(){
-    console.log('state is ', this.state)
+  componentDidUpdate() {
+    console.log("state is ", this.state);
   }
 
   render() {
@@ -33,9 +31,12 @@ class Homepage extends Component {
         <div className="banner">
           <h1>A cool logo will be made for this</h1>
         </div>
-        <form id="search-form" onSubmit={ linkEvent(this, sendAddress) }>
+        <form id="search-form" onSubmit={linkEvent(this, sendAddress)}>
           <h1>Search TIP Projects by Location</h1>
-          <input type="text" placeholder="Enter a municipality, city, zip code or Philadelphia neighborhood" />
+          <input
+            type="text"
+            placeholder="Enter a municipality, city, zip code or Philadelphia neighborhood"
+          />
         </form>
       </div>
     );
