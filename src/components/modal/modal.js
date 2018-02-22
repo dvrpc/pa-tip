@@ -6,6 +6,8 @@ import swal from "sweetalert2";
 const getComment = () => console.log("input area submitted a comment");
 
 class Modal extends Component {
+  // TODO: POST a user submitted comment to the database (must also create the reducer/dispatcher for this)
+  // TODO: GET user submitted comments for any particular project and display them in the modal window
   constructor(props) {
     super(props);
   }

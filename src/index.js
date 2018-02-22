@@ -7,5 +7,9 @@ import store from "./store";
 
 if (process.env.NODE_ENV === "development") require("inferno-devtools");
 
-// TODO: look into why wrapping <App /> in a Provider breaks EVERYTHING. AAAGH.
-render(<App />, document.getElementById("app"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);

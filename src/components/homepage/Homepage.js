@@ -2,27 +2,23 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 
 import "./Homepage.css";
+import { updateSearchBool } from "../reducers/getTIPInfo";
 
 const sendAddress = (instance, e) => {
   e.preventDefault();
   // TODO: SANITIZE THIS BUSINESS (autocomplete later)
   const address = e.target.querySelector("input").value;
-  instance.setState({ address });
+
+  updateSearchBool("slekfjlekfj");
 };
 
 class Homepage extends Component {
   constructor() {
     super();
-    this.state = {
-      address: "",
-      searched: false
-    };
   }
 
-  // pass state and bool to the redux store to render the main APP and make the
-  // correct API call
   componentDidUpdate() {
-    console.log("state is ", this.state);
+    console.log("entered update");
   }
 
   render() {
@@ -43,14 +39,18 @@ class Homepage extends Component {
   }
 }
 
-// pass the address to the Redux store in order to make the API call
+// update the redux store by:
+// passing the searched bool to render AppContainer
+// passing the address to use for API calls
 /*const mapDispatchToProps = dispatch => {
   return{
     getTIP: address => dispatch(getTIPInfo(address))
   }
 }*/
 // pass the boooooooool to the Redux store in order to update app.js and trigger a rendering of appContainer.js
-/*const mapStateToProps = () => {searched: true}
-*/
-/*export default connect(mapStateToProps, null)(Homepage);*/
-export default Homepage;
+const mapDispatchToProps = dispatch => {
+  return {
+    updateSearchBool: search => dispatch(updateSearchBool(search))
+  };
+};
+export default connect(null, mapDispatchToProps)(Homepage);

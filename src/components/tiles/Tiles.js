@@ -1,6 +1,5 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import Polyline from "@mapbox/polyline";
-import swal from "sweetalert2";
 
 import "./Tiles.css";
 import Modal from "../modal/Modal.js";

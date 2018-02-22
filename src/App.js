@@ -1,8 +1,9 @@
-import { version, Component } from "inferno";
+import { Component } from "inferno";
 import "./registerServiceWorker";
-import "./App.css";
+import { connect } from "inferno-redux";
 
 /* app components */
+import "./App.css";
 import Navbar from "./components/navbar/Navbar.js";
 import AppContainer from "./components/app-container/AppContainer.js";
 import Homepage from "./components/homepage/Homepage.js";
@@ -11,18 +12,22 @@ const search = (instance, address) =>
   instance.setState({ searched: true, address: "tbd" });
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log("props is ", this.props);
     this.state = {
-      searched: false,
+      searched: this.props.searched,
       address: ""
     };
   }
 
   render() {
+    // TODO: once it's set up, conditionally pass 'this.props.address' into AppContainer so that map and tilescontainer can have access to it
+    // low key might not even need to do that. If address is in global state, I can just access it from those components. TBD on whichever will
+    // cut down on API calls.
     return (
       <div>
-        {this.state.searched ? (
+        {this.props.searched ? (
           <div className="App">
             <Navbar />
             <AppContainer />
@@ -35,4 +40,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { searched: state.searched };
+};
+
+export default connect(mapStateToProps, null)(App);
