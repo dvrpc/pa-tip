@@ -1,10 +1,14 @@
 import Inferno, { Component } from "inferno";
-import "./Map.css";
 import mapboxgl from "mapbox-gl";
+import { connect } from "inferno-redux";
+import "./Map.css";
 
 class MapComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
-    //TODO: replace this with a process.ENV variable
+    //TODO: replace the accessToken with a process.ENV variable
     //TODO: replace center with address as props
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -25,4 +29,11 @@ class MapComponent extends Component {
   }
 }
 
-export default MapComponent;
+const mapStateToProps = state => {
+  console.log("state is ", state);
+  return {
+    center: state.address
+  };
+};
+
+export default connect(mapStateToProps, null)(MapComponent);

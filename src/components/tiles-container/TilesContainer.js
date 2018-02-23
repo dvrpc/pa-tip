@@ -15,6 +15,8 @@ const colors = {
   "Intersection/Interchange Improvements": "F57332",
   Other: "3b9770"
 };
+
+//TODO: replace this with the results of the API call
 const json = [
   {
     type: "Feature",

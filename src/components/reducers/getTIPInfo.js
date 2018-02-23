@@ -13,9 +13,7 @@ const initialState = {
 export default function tipReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TIP:
-      console.log("state in GET_TIP ", state);
-      console.log("action in GET_TIP ", action);
-      return state.address;
+      return action.address;
       break;
     default:
       return state;
@@ -24,7 +22,13 @@ export default function tipReducer(state = initialState, action) {
 
 // dispatchers
 export const getTIP = address => dispatch => {
+  fetch(`http://staging.dvrpc.org/data/tip/2019/list/${address}`).then(
+    response => {
+      const projects = response.json();
+      console.log("fetched projects with a given address ", projects);
+    }
+  );
+
   //TODO: make API call once address is received
-  console.log("address in getTIP ", address);
   dispatch(get_tip(address));
 };
