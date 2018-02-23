@@ -1,6 +1,7 @@
-import { createStore } from 'redux';
-import getTIP from './components/reducers/getTIPInfo'
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import getTIP from "./components/reducers/getTIPInfo";
 
-const store = createStore(getTIP)
+const store = createStore(getTIP, applyMiddleware(ReduxThunk));
 
-export default store
+export default store;

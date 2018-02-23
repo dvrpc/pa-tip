@@ -6,7 +6,9 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navBar">
-        <img src={dvrpclogo} alt="logo" />
+        <a href="/">
+          <img src={dvrpclogo} alt="logo" />
+        </a>
         <h2>FY2018 PA TIP</h2>
         <form>
           <input type="textarea" placeholder="Enter Address" />
