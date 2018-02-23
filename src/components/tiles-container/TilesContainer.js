@@ -1,6 +1,7 @@
 import Inferno, { Component } from "inferno";
-import "./TilesContainer.css";
+import { connect } from "inferno-redux";
 
+import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 
@@ -525,6 +526,9 @@ const json = [
 ];
 
 class TilesContainer extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="tilesContainer">
@@ -549,4 +553,9 @@ class TilesContainer extends Component {
   }
 }
 
-export default TilesContainer;
+const mapStateToProps = state => {
+  console.log("state is ", state);
+  return {};
+};
+
+export default connect(mapStateToProps, null)(TilesContainer);

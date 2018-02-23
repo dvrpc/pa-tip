@@ -30,7 +30,6 @@ class MapComponent extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state is ", state);
   return {
     center: state.address
   };

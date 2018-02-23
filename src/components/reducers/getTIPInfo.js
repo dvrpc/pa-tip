@@ -6,14 +6,16 @@ const get_tip = address => ({ type: GET_TIP, address });
 
 // initial state
 const initialState = {
-  address: ""
+  projects: ""
 };
 
 // reducers
 export default function tipReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TIP:
-      return action.address;
+      // calling the LIST api returns an object with cateogry, county, id, road_name and description (but description hasn't showed up yet...)
+      console.log("action is ", action.projects);
+      return action;
       break;
     default:
       return state;
@@ -25,10 +27,9 @@ export const getTIP = address => dispatch => {
   fetch(`http://staging.dvrpc.org/data/tip/2019/list/${address}`).then(
     response => {
       const projects = response.json();
-      console.log("fetched projects with a given address ", projects);
+      dispatch(get_tip(projects));
     }
   );
 
   //TODO: make API call once address is received
-  dispatch(get_tip(address));
 };

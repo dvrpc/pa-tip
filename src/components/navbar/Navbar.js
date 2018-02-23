@@ -1,8 +1,33 @@
-import Inferno, { Component } from "inferno";
+import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
+
+import { getTIP } from "../reducers/getTIPInfo";
 import "./Navbar.css";
 import dvrpclogo from "./dvrpclogo.png";
 
+// since this function exists in navbar and homepage, the possibility of extracting it as a UTILITIES function
+// is now real. TODO: this^ (would need to make whatever is pushed to history a paramater
+// from homepage you'd push main + queryInformation and from navBar you'd just push queryInformation
+
+const searchTIP = (instance, e) => {
+  e.preventDefault();
+  const address = e.target.querySelector("input").value;
+  let validAddress = true;
+
+  // TODO: validate the search input BEFORE pushing to history
+  if (validAddress) {
+    // hit the dispatch
+    instance.props.getTIP(address);
+  } else {
+    // do something to prompt re-entry from a user
+  }
+};
+
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <nav className="navBar">
@@ -10,7 +35,7 @@ class Navbar extends Component {
           <img src={dvrpclogo} alt="logo" />
         </a>
         <h2>FY2018 PA TIP</h2>
-        <form>
+        <form onSubmit={linkEvent(this, searchTIP)}>
           <input type="textarea" placeholder="Enter Address" />
           <select name="funds">
             <option value="" selected>
@@ -35,4 +60,12 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapDispatchToProps = dispatch => {
+  return {
+    getTIP: address => {
+      dispatch(getTIP(address));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Navbar);

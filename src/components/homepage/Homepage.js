@@ -43,7 +43,6 @@ class Homepage extends Component {
   }
 }
 
-// TODO: hook this up to send the search information to the store so the jawns can API
 const mapDispatchToProps = dispatch => {
   return {
     getTIP: address => {
