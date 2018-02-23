@@ -3,12 +3,20 @@ import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Homepage.css";
-import { updateSearchBool } from "../reducers/getTIPInfo";
+import { getTIP } from "../reducers/getTIPInfo";
 
-const changePage = instance => {
-  console.log("instance in change page ", changePage);
-  {
+const changePage = (instance, e) => {
+  e.preventDefault();
+  const address = e.target.querySelector("input").value;
+  let validAddress = true;
+
+  // TODO: validate the search input BEFORE pushing to history
+  if (validAddress) {
+    // hit the dispatch
+    instance.props.getTIP(address);
     instance.props.history.push("/main");
+  } else {
+    // do something to prompt re-entry from a user
   }
 };
 
@@ -36,9 +44,13 @@ class Homepage extends Component {
 }
 
 // TODO: hook this up to send the search information to the store so the jawns can API
-/*const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
+  return {
+    getTIP: address => {
+      dispatch(getTIP(address));
+    }
+  };
 };
-*/
 
 // TODO: get redux back with THIS: export default withRouter(connect(...)(Homepage))
-export default withRouter(Homepage);
+export default withRouter(connect(null, mapDispatchToProps)(Homepage));

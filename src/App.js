@@ -1,6 +1,5 @@
 import { Component } from "inferno";
 import "./registerServiceWorker";
-import { connect } from "inferno-redux";
 import { BrowserRouter, Route, Switch } from "inferno-router";
 
 /* app components */
@@ -9,11 +8,6 @@ import AppContainer from "./components/app-container/AppContainer.js";
 import Homepage from "./components/homepage/Homepage.js";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log("app props ", this.props);
-  }
-
   render() {
     // TODO: add a variable to the results path to make it unique to the search query
     return (
@@ -27,8 +21,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { searched: state.searched };
-};
-
-export default connect(mapStateToProps, null)(App);
+export default App;

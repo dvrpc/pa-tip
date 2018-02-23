@@ -1,15 +1,11 @@
 // actions
 const GET_TIP = "GET_TIP";
-const GET_ADDRESS = "GET_ADDRESS";
-const MAKE_SEARCH = "MAKE_SEARCH";
 
 // action creators
-const get_tip = project => ({ type: GET_TIP, project });
-const make_search = search => ({ type: MAKE_SEARCH, search });
+const get_tip = address => ({ type: GET_TIP, address });
 
 // initial state
 const initialState = {
-  searched: false,
   address: ""
 };
 
@@ -17,14 +13,9 @@ const initialState = {
 export default function tipReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TIP:
-      return action.project || [];
-      break;
-    case GET_ADDRESS:
-      return action.address;
-      break;
-    case MAKE_SEARCH:
-      console.log("make search reducer hit");
-      return action.search;
+      console.log("state in GET_TIP ", state);
+      console.log("action in GET_TIP ", action);
+      return state.address;
       break;
     default:
       return state;
@@ -32,7 +23,8 @@ export default function tipReducer(state = initialState, action) {
 }
 
 // dispatchers
-/*export const getTIP = projects => dispatch => {
-    
-}*/
-export const updateSearchBool = search => dispatch => make_search(search);
+export const getTIP = address => dispatch => {
+  //TODO: make API call once address is received
+  console.log("address in getTIP ", address);
+  dispatch(get_tip(address));
+};
