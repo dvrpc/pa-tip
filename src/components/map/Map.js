@@ -14,8 +14,8 @@ class MapComponent extends Component {
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
     this.map = new mapboxgl.Map({
       container: this.tipMap,
-      style: "mapbox://styles/mapbox/satellite-v9",
-      center: [-75.2273, 40.071],
+      style: "mapbox://styles/mapbox/streets-v9",
+      center: [-75.1633, 39.9522],
       zoom: 14
     });
   }

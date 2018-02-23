@@ -9,7 +9,6 @@
     background-size: cover;
 }
 .banner h1{
-    filter: unset;
     padding: 5% 0 5% 0;
     margin: 0 auto;
     color: #eee;
@@ -25,7 +24,7 @@
     width: 65%;
     margin: 0 auto;
     padding: 4%;
-    margin-top: 5%;
+    margin-top: 8%;
     text-align: center;
 }
 #search-form input{
