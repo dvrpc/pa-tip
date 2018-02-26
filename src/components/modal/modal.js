@@ -13,20 +13,19 @@ class Modal extends Component {
     super(props);
   }
 
-  render() {
+  componentDidMount() {
     const footer = `<h2>Add a comment </h2><textarea></textarea><input type="submit" value="submit" >`;
-    return (
-      <div id="modal">
-        {swal({
-          title: this.props.title,
-          width: "50%",
-          padding: 80,
-          html: this.props.html,
-          showConfirmButton: false,
-          footer: footer
-        })}
-      </div>
-    );
+    swal({
+      title: this.props.title,
+      width: "50%",
+      padding: 80,
+      html: this.props.html,
+      showConfirmButton: false,
+      footer: footer
+    });
+  }
+  render() {
+    return <div id="modal" />;
   }
 }
 
