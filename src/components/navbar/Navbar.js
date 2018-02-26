@@ -64,9 +64,7 @@ class Navbar extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIP: address => {
-      dispatch(getTIP(address));
-    }
+    getTIP: address => dispatch(getTIP(address))
   };
 };
 

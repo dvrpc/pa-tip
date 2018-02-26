@@ -4,18 +4,7 @@ import { connect } from "inferno-redux";
 import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
-
-const colors = {
-  "Bicycle/Pedestrian Improvement": "3388FF",
-  "Bridge Repair/Replacement": "b50103",
-  Streetscape: "00c8a9",
-  "Transit Improvements": "4240BF",
-  "Signal/ITS Improvements": "e8c346",
-  "Roadway Rehabilitation": "BF409F",
-  "Roadway New Capacity": "BF8A40",
-  "Intersection/Interchange Improvements": "F57332",
-  Other: "3b9770"
-};
+import { colors } from "../../utils/tileGeometryColorType.js";
 
 const json = [
   {
@@ -545,7 +534,9 @@ class TilesContainer extends Component {
           </div>
         </div>
         {this.props.projects && this.props.projects.length ? (
-          this.props.projects.map(feature => <Tile data={feature} />)
+          this.props.projects.map(feature => (
+            <Tile data={feature} key={feature.id} />
+          ))
         ) : (
           <h1 id="no-results"> No results for your search you IDIOT </h1>
         )}
