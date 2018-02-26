@@ -13,8 +13,6 @@ const initialState = {
 export default function tipReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TIP:
-      // calling the LIST api returns an object with cateogry, county, id, road_name and description (but description hasn't showed up yet...)
-      console.log("action is ", action.projects);
       return action;
       break;
     default:
@@ -23,13 +21,17 @@ export default function tipReducer(state = initialState, action) {
 }
 
 // dispatchers
+
+// gets basic information about a project to display in tilescontainer on search.
 export const getTIP = address => dispatch => {
   fetch(`http://staging.dvrpc.org/data/tip/2019/list/${address}`).then(
-    response => {
-      const projects = response.json();
-      dispatch(get_tip(projects));
-    }
+    response => response.json().then(projects => dispatch(get_tip(projects)))
   );
+};
 
-  //TODO: make API call once address is received
+// gets the full information for a project to display in the modal when a tile is clicked
+export const getFullTIP = id => dispatch => {
+  fetch(`http://staging.dvrpc.org/data/tip/2019/id/${id}`).then(response => {
+    console.log("id endpoint hit with a response of: ", response.json());
+  });
 };

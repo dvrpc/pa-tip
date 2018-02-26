@@ -17,6 +17,7 @@ class Tile extends Component {
   }
 
   componentDidMount() {
+    console.log("props in the tile component ", this.props);
     const tile = document.querySelector(".tile");
     // TODO: add setState to window resizing like in the analytics dashboard page
     this.setState({
@@ -26,7 +27,8 @@ class Tile extends Component {
   }
 
   render() {
-    let path;
+    //TODO: GET THE GEOMETRY INFO added to the list API call
+    /*    let path;
     if (this.props.data.geometry.type === "LineString") {
       path = `&path=color:0x${
         this.props.color
@@ -59,11 +61,11 @@ class Tile extends Component {
             })}`
         )
         .join("");
-    }
+    }*/
     //TODO: replace this API key with a process.ENV secret
-    const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
+    /*    const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
       this.state.width
-    }x${this.state.height}&maptype=hybrid${path}`;
+    }x${this.state.height}&maptype=hybrid${path}`;*/
     const table =
       "<table><thead><th>Phase</th><th>Fund</th><th>Year</th></thead><tbody><tr><td>CON</td><td>TOLL</td><td>2017</td></tr><tr><td>DRF</td><td>TAU</td><td>2021</td></tr><tr><td>EKL</td><td>NOP</td><td>2029</td></tr></tbody></table>";
     const description =
@@ -72,23 +74,21 @@ class Tile extends Component {
       <div
         className="tile"
         onClick={linkEvent(this, clickModal)}
-        style={`background: url(${background})`}
+        /*style={`background: url(${background})`}*/
       >
-        {this.state.modalClicked ? (
+        {this.props.data && this.state.modalClicked ? (
           <Modal
-            title={this.props.data.properties.ROAD_NAME}
+            title={this.props.data.road_name}
             html={`${description} ${table}`}
           />
         ) : null}
         <div className="tile-caption">
-          <h2 className="tile-caption-text">
-            {this.props.data.properties.ROAD_NAME}
-          </h2>
+          <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
           <small className="tile-caption-text">
-            AQ Code: {this.props.data.properties.MPMS_ID}
+            AQ Code: {this.props.data.aq_code}
           </small>
           <p className="tile-caption-text">
-            {this.props.data.properties.CTY} County, PA
+            {this.props.data.county} County, PA
           </p>
         </div>
         <a href="#" class="tile-link" />

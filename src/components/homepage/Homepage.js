@@ -14,7 +14,7 @@ const changePage = (instance, e) => {
   if (validAddress) {
     // hit the dispatch
     instance.props.getTIP(address);
-    instance.props.history.push("/main");
+    instance.props.history.push(`/main/${address}`);
   } else {
     // do something to prompt re-entry from a user
   }

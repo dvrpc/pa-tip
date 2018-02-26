@@ -529,6 +529,17 @@ class TilesContainer extends Component {
   constructor(props) {
     super(props);
   }
+
+  // props from the homepage search
+  componentDidMount() {
+    console.log("tile container props after home search ", this.props.projects);
+  }
+
+  // props from the navbar search
+  componentDidUpdate() {
+    console.log("did update props tiles container ", this.props.projects);
+  }
+
   render() {
     return (
       <div className="tilesContainer">
@@ -544,9 +555,11 @@ class TilesContainer extends Component {
             <h2>Results</h2>
           </div>
         </div>
-        {json.map(feature => (
-          <Tile color={colors[feature.properties.DESCRIPTIO]} data={feature} />
-        ))}
+        {this.props.projects ? (
+          this.props.projects.map(feature => <Tile data={feature} />)
+        ) : (
+          <h1 style="color: white;"> no tiles for you </h1>
+        )}
         <Footer />
       </div>
     );
@@ -554,8 +567,9 @@ class TilesContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state is ", state);
-  return {};
+  return {
+    projects: state.address
+  };
 };
 
 export default connect(mapStateToProps, null)(TilesContainer);
