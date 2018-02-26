@@ -40,3 +40,7 @@
 .active{
     text-decoration: underline #457B9D;
 }
+#no-results{
+    color: #eee;
+    margin: 0 auto;
+}

@@ -17,7 +17,6 @@ const colors = {
   Other: "3b9770"
 };
 
-//TODO: replace this with the results of the API call
 const json = [
   {
     type: "Feature",
@@ -530,16 +529,6 @@ class TilesContainer extends Component {
     super(props);
   }
 
-  // props from the homepage search
-  componentDidMount() {
-    console.log("tile container props after home search ", this.props.projects);
-  }
-
-  // props from the navbar search
-  componentDidUpdate() {
-    console.log("did update props tiles container ", this.props.projects);
-  }
-
   render() {
     return (
       <div className="tilesContainer">
@@ -555,10 +544,10 @@ class TilesContainer extends Component {
             <h2>Results</h2>
           </div>
         </div>
-        {this.props.projects ? (
+        {this.props.projects && this.props.projects.length ? (
           this.props.projects.map(feature => <Tile data={feature} />)
         ) : (
-          <h1 style="color: white;"> no tiles for you </h1>
+          <h1 id="no-results"> No results for your search you IDIOT </h1>
         )}
         <Footer />
       </div>

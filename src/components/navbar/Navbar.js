@@ -1,5 +1,6 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
+import { withRouter } from "inferno-router";
 
 import { getTIP } from "../reducers/getTIPInfo";
 import "./Navbar.css";
@@ -18,6 +19,7 @@ const searchTIP = (instance, e) => {
   if (validAddress) {
     // hit the dispatch
     instance.props.getTIP(address);
+    instance.props.history.push(`/main/${address}`);
   } else {
     // do something to prompt re-entry from a user
   }
@@ -68,4 +70,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Navbar);
+export default withRouter(connect(null, mapDispatchToProps)(Navbar));

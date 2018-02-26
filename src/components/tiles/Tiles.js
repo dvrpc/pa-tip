@@ -17,7 +17,6 @@ class Tile extends Component {
   }
 
   componentDidMount() {
-    console.log("props in the tile component ", this.props);
     const tile = document.querySelector(".tile");
     // TODO: add setState to window resizing like in the analytics dashboard page
     this.setState({
@@ -80,6 +79,7 @@ class Tile extends Component {
           <Modal
             title={this.props.data.road_name}
             html={`${description} ${table}`}
+            id={this.props.data.id}
           />
         ) : null}
         <div className="tile-caption">

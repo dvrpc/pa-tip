@@ -14,7 +14,7 @@ class Modal extends Component {
   }
 
   render() {
-    const footer = `<h2>Add a comment </h2><textarea></textarea><input type="submit" value="submit" onSubmit={linkEvent(this, getComment)}>`;
+    const footer = `<h2>Add a comment </h2><textarea></textarea><input type="submit" value="submit" >`;
     return (
       <div id="modal">
         {swal({
@@ -29,5 +29,7 @@ class Modal extends Component {
     );
   }
 }
+
+// TODO: connect to the redux store to dispatch the ID API
 
 export default Modal;
