@@ -1,10 +1,17 @@
 import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
 
 import "./Tiles.css";
 import Modal from "../modal/Modal.js";
 import { geometryColorType } from "../../utils/tileGeometryColorType.js";
+import { getFullTIP } from "../reducers/getTIPInfo";
 
-const clickModal = instance => instance.setState({ modalClicked: true });
+const clickModal = instance => {
+  instance.setState({
+    modalClicked: true,
+    toModal: instance.props.getFullTIP(instance.props.data.id)
+  });
+};
 
 class Tile extends Component {
   constructor(props) {
@@ -12,7 +19,8 @@ class Tile extends Component {
     this.state = {
       height: 300,
       width: 300,
-      modalClicked: false
+      modalClicked: false,
+      toModal: []
     };
   }
 
@@ -38,9 +46,7 @@ class Tile extends Component {
         onClick={linkEvent(this, clickModal)}
         /*style={`background: url(${background})`}*/
       >
-        {this.props.data && this.state.modalClicked ? (
-          <Modal title={this.props.data.road_name} id={this.props.data.id} />
-        ) : null}
+        {this.props.data && this.state.modalClicked ? <Modal /> : null}
         <div className="tile-caption">
           <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
           <small className="tile-caption-text">
@@ -56,4 +62,10 @@ class Tile extends Component {
   }
 }
 
-export default Tile;
+const mapDispatchToProps = dispatch => {
+  return {
+    getFullTIP: id => dispatch(getFullTIP(id))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Tile);

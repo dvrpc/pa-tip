@@ -6,22 +6,13 @@ const GET_DETAILS = "GET_DETAILS";
 const get_tip = address => ({ type: GET_TIP, address });
 const get_details = id => ({ type: GET_DETAILS, id });
 
-// initial state
-const initialState = {
-  projects: ""
-};
-
 // reducers
-export default function tipReducer(state = initialState, action) {
+export default function tipReducer(state = [], action) {
   switch (action.type) {
     case GET_TIP:
-      return action;
-      break;
+      return Object.assign({}, state, { address: action.address });
     case GET_DETAILS:
-      console.log("get details STATE ", state);
-      console.log("get details ACTION ", action);
-      return action;
-      break;
+      return Object.assign({}, state, { details: action.id });
     default:
       return state;
   }
@@ -38,10 +29,9 @@ export const getTIP = address => dispatch => {
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
-  fetch(`http://staging.dvrpc.org/data/tip/2019/id/${id}`).then(response => {
-    response =>
-      response
-        .json()
-        .then(projectDetails => dispatch(get_details(projectDetails)));
-  });
+  fetch(`http://staging.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
+    response
+      .json()
+      .then(projectDetails => dispatch(get_details(projectDetails)))
+  );
 };
