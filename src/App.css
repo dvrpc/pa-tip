@@ -9,17 +9,22 @@
 /* sweetalaert module styles */
 .swal2-content p{
     text-align: left;
+    line-height: 1.4;
+    max-height: 300px;
+    overflow-y: auto;
 }
+.swal2-content #expandButton{
+    margin-top: 8%;
+}
+
 .swal2-footer{
     align-items: center;
 }
-.swal2-footer h2 {
-    margin-right: 2%;
-}
 .swal2-footer textarea{
     font-size: 1.5em;
-    height: 150px;
-    width: 45%;
+    height: 125px;
+    width: 70%;
+    border-radius: 3px;
 }
 .swal2-footer input[type=submit]{
     font-size: 1.2em;
