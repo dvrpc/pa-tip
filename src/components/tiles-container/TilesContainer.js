@@ -5,6 +5,7 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
+import loading from "./loading.gif";
 
 class TilesContainer extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class TilesContainer extends Component {
         {projects && projects.length ? (
           projects.map(feature => <Tile data={feature} key={feature.id} />)
         ) : (
-          <h1 id="no-results"> No results for your search </h1>
+          <img id="no-results" src={loading} alt="loading" />
         )}
         <Footer />
       </div>

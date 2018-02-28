@@ -28,14 +28,11 @@ class Homepage extends Component {
   render() {
     return (
       <div className="homepage">
-        <div className="banner">
-          <h1>A cool logo will be made for this</h1>
-        </div>
+        <h1>FY19 PA TRANSPORTATION IMPROVEMENT PROGRAM</h1>
         <form id="search-form" onSubmit={linkEvent(this, changePage)}>
-          <h1>Search TIP Projects by Location</h1>
           <input
             type="text"
-            placeholder="Enter a municipality, city, zip code or Philadelphia neighborhood"
+            placeholder="Enter a municipality, city, zip code or neighborhood"
           />
         </form>
       </div>

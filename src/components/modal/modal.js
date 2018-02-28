@@ -22,19 +22,26 @@ class Modal extends Component {
     // limit the modal to description + add a comment.
     const table =
       "<table><thead><th>Phase</th><th>Fund</th><th>Year</th></thead><tbody><tr><td>CON</td><td>TOLL</td><td>2017</td></tr><tr><td>DRF</td><td>TAU</td><td>2021</td></tr><tr><td>EKL</td><td>NOP</td><td>2029</td></tr></tbody></table>";
-    const footer = `<textarea></textarea><input type="submit" value="submit" onSubmit=${linkEvent(
+    const footer = `<textarea></textarea><input id="submitCommentButton" class="modalButton" type="submit" value="submit" onSubmit=${linkEvent(
       this,
       getComment
     )} >`;
-    const expandButton = `<input id="expandButton" type="submit" value="click to expand" onClick=${linkEvent(
+    const goToProjectButton = `<input id="goToProjectButton" class="modalButton" type="submit" value="go to project" onClick=${linkEvent(
+      this,
+      expandModal
+    )} />`;
+    const expandButton = `<input id="expandButton" class="modalButton" type="submit" value="more information" onClick=${linkEvent(
       this,
       expandModal
     )} />`;
     swal({
       title: details.road_name,
       width: "50%",
-      padding: 80,
-      html: `<p>${details.description}</p>  ${expandButton}`,
+      padding: 40,
+      background: "#eee",
+      html: `<p>${
+        details.description
+      }</p> <div>${goToProjectButton} ${expandButton}</div>`,
       showConfirmButton: false,
       footer: footer
     });

@@ -36,7 +36,7 @@ class Navbar extends Component {
         <a href="/">
           <img src={dvrpclogo} alt="logo" />
         </a>
-        <h2>FY2018 PA TIP</h2>
+        <h2>FY2019 PA TIP</h2>
         <form onSubmit={linkEvent(this, searchTIP)}>
           <input type="textarea" placeholder="Enter Address" />
           <select name="funds">
