@@ -5,6 +5,9 @@
             rgba(0, 0, 0, 0.5)
         ),
         url("https://i.kinja-img.com/gawker-media/image/upload/t_original/qhdwiecqfo74iw1k54gr.gif");
+        /* tilt shift: https://www.walldevil.com/wallpapers/w01/448918-bridges-cities-tilt-shift-traffic.jpg
+           goofy  gif: https://i.kinja-img.com/gawker-media/image/upload/t_original/qhdwiecqfo74iw1k54gr.gif
+        */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -26,6 +29,7 @@
     color: black;
     width: 50%;
     border-radius: 3px;
+    border-bottom: 5px solid #1D3557;
 }
 
 #search-form input{

@@ -32,7 +32,7 @@ class Homepage extends Component {
         <form id="search-form" onSubmit={linkEvent(this, changePage)}>
           <input
             type="text"
-            placeholder="Enter a municipality, city, zip code or neighborhood"
+            placeholder="Search by municipality, city, zip code or neighborhood"
           />
         </form>
       </div>
