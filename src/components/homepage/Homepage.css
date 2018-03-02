@@ -1,3 +1,5 @@
+/* TODO: vertically center the h1 and form component (div, flex align blah blah)*/
+
 .homepage{
     background-image:
         linear-gradient(
@@ -15,6 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 .homepage h1{
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
@@ -22,9 +25,9 @@
     font-weight: 900;
     font-size: 4rem;
     text-align: center;
-    padding: 200px 0 100px 0;
 }
 #search-form {
+    margin-top: 10%;
     background: #eee;
     color: black;
     width: 50%;

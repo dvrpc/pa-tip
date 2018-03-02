@@ -6,16 +6,21 @@ import { getTIP } from "../reducers/getTIPInfo";
 import "./Navbar.css";
 import dvrpclogo from "./dvrpclogo.png";
 
-// since this function exists in navbar and homepage, the possibility of extracting it as a UTILITIES function
-// is now real. TODO: this^ (would need to make whatever is pushed to history a paramater
-// from homepage you'd push main + queryInformation and from navBar you'd just push queryInformation
-
 const searchTIP = (instance, e) => {
   e.preventDefault();
-  const address = e.target.querySelector("input").value;
+  const fundsSelector = e.target.querySelector("#selectedFunds");
+  const categorySelector = e.target.querySelector("#selectedCategory");
+
+  // get a handle on inputted search values (for now, address is the only one used)
+  const address = e.target.querySelector("#navSearch").value;
+  const funds = fundsSelector.options[fundsSelector.selectedIndex].text;
+  const category =
+    categorySelector.options[categorySelector.selectedIndex].text;
+
   let validAddress = true;
 
   // TODO: validate the search input BEFORE pushing to history
+  // TODO pt. 2: Consider making the validator a function and importing it in from utils.js.
   if (validAddress) {
     // hit the dispatch
     instance.props.getTIP(address);
@@ -37,8 +42,8 @@ class Navbar extends Component {
           <img src={dvrpclogo} alt="logo" />
         </a>
         <form onSubmit={linkEvent(this, searchTIP)}>
-          <input type="textarea" placeholder="Enter Address" />
-          <select name="funds">
+          <input id="navSearch" type="textarea" placeholder="Enter Address" />
+          <select id="selectedFunds" name="funds">
             <option value="" selected>
               Fund
             </option>
@@ -46,7 +51,7 @@ class Navbar extends Component {
             <option value="2">ANOTHER FUND</option>
             <option value="3">3RD FUND</option>
           </select>
-          <select name="category">
+          <select id="selectedCategory" name="category">
             <option value="" selected>
               Category
             </option>

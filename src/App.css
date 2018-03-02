@@ -1,6 +1,10 @@
 *{
     margin: 0;
 }
+a{
+    color: #17618b;
+    text-decoration: none;
+}
 .App {
     line-height: 1.4;
 }
@@ -22,11 +26,11 @@
 #links{
     margin-top: 10%;
 }
-#linkToProject{
+.linkToMoreInfo{
     color: #17618b;
     text-decoration: none;
 }
-#linkToProject:hover{
+.swal2-content a:hover{
     color: #e66572;
 }
 .swal2-content hr{
@@ -42,8 +46,13 @@
     border-color: #f1f1f1;
     font-size: 1.1rem;
     height: 125px;
-    width: 100%;
+    width: 300px;
     border-radius: 3px;
+}
+#modalForm{
+    display: flex;
+    align-items: center;
+
 }
 #submitCommentButton{
     background: #ffa600;
