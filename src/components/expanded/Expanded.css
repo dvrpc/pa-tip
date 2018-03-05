@@ -1,0 +1,82 @@
+/* General Purpose Targetting */
+.expanded{
+    background: #eee;
+}
+.wrapper{
+    display: flex;
+    align-items: center;
+    padding: 2%;
+}
+.wrapper h1{
+    text-align: center;
+}
+.left-column{
+    width: 40%;
+    line-height: 1.7;
+}
+.right-column{
+    margin-left: 2%;
+    flex-direction: row;
+    text-align: right;
+    width: 60%;
+}
+.card{
+    padding: 2%;
+    background: white;
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* Funding Table */
+.table-num{
+    text-align: right;
+}
+table {
+    margin: 0 auto;
+    margin-top: 2%;
+    display: table;
+    width: 70%;
+    /*hack for now, just a mockup atm*/
+    padding-left: 10%;
+
+}
+table thead, table tbody {
+    width: 100%;
+}
+table thead {
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+table tbody {
+    overflow: auto;
+    display: block;
+}
+table tr {
+    width: 100%;
+    text-align: left;
+    display: table;
+    table-layout: fixed;
+}
+
+
+/* Comments component */
+.comments{
+    margin-top: 3%;
+}
+.commentsForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    text-align: center;
+}
+.commentsForm textarea{
+    width: 50%;
+    height: 100px;
+}
+.commentsForm input[type=submit]{
+}
+
+
+/* TODO: media query set right-column to flex-column so everything stacks on smaller viewports*/

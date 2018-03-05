@@ -10,7 +10,7 @@ import Expanded from "./components/expanded/Expanded.js";
 
 class App extends Component {
   render() {
-    // TODO: add a variable to the results path to make it unique to the search query
+    // TODO: create a catch page for broken links that says something like 'oops, page doesn't exist' and then redirects to the homepage
     return (
       <BrowserRouter>
         <Switch>

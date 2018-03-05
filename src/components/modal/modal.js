@@ -37,12 +37,10 @@ class Modal extends Component {
   componentDidUpdate() {
     const details = this.props.details;
     // TODO: put create a new page that has fund + achievements + all of the other relevant info on it. Make it exportable/printable/whatever
-    const table =
-      "<table><thead><th>Phase</th><th>Fund</th><th>Year</th></thead><tbody><tr><td>CON</td><td>TOLL</td><td>2017</td></tr><tr><td>DRF</td><td>TAU</td><td>2021</td></tr><tr><td>EKL</td><td>NOP</td><td>2029</td></tr></tbody></table>";
     const footer = `<form id="modalForm" onSubmit=${linkEvent(
       this,
       getComment
-    )}><textarea placeholder="Submit a comment for this project"></textarea><input id="submitCommentButton" type="submit" value="submit"></form`;
+    )}><textarea placeholder="Submit a comment for this project"></textarea><input id="submitCommentButton" type="submit" value="submit" /></form`;
     let linkToProject;
     details.video
       ? (linkToProject = `<a href="${

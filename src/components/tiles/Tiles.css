@@ -47,37 +47,6 @@
     right: 0;
 }
 
-/* Funding Table */
-.table-num{
-    text-align: right;
-}
-table {
-    margin: 0 auto;
-    margin-top: 2%;
-    display: table;
-    width: 75%;
-}
-table thead, table tbody {
-    width: 100%;
-}
-table thead {
-    overflow-y: scroll;
-    display: table;
-    table-layout: fixed;
-    width: calc(100% - 16px);
-}
-table tbody {
-    overflow: auto;
-    height: 60px;
-    display: block;
-}
-table tr {
-    width: 100%;
-    text-align: left;
-    display: table;
-    table-layout: fixed;
-}
-
 
 /* Comments Button */
 button{
