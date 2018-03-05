@@ -12,6 +12,7 @@ class TilesContainer extends Component {
     super(props);
   }
 
+  // TODO: add a 'no results found' message when the API request comes up blank
   render() {
     const projects = this.props.projects ? this.props.projects : [];
     return (

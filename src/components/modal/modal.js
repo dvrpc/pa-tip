@@ -9,7 +9,6 @@ import Tile from "../tiles/Tiles.js";
 const getComment = (instance, e) => {
   e.preventDefault();
   e.stopPropagation();
-  console.log("COMMENT SUBBMITTED AAAAAAH");
   swal({
     title: "YOU HAVE SUBMITTED A COMMENT INTO THE OCTAGON",
     text: "THIS PLEASES ME",
@@ -52,7 +51,7 @@ class Modal extends Component {
       : (linkToProject = "");
     const linkToMoreInfo = `<a href="/expanded/${details.county}/${
       details.id
-    }">expand for more info</a>`;
+    }">view more info</a>`;
     swal({
       title: details.road_name,
       width: "50%",
