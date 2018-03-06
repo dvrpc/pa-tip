@@ -11,14 +11,14 @@
     text-align: center;
 }
 .left-column{
-    width: 40%;
+    width: 45%;
     line-height: 1.7;
 }
 .right-column{
     margin-left: 2%;
     flex-direction: row;
     text-align: right;
-    width: 60%;
+    width: 55%;
 }
 .card{
     padding: 2%;
@@ -26,7 +26,14 @@
     box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
 }
 
+/*Paragraph and Title*/
+.project-details{
+    display: flex;
+}
+
 /* Funding Table */
+.tabs{
+}
 .table-num{
     text-align: right;
 }
@@ -62,7 +69,7 @@ table tr {
 
 /* Comments component */
 .comments{
-    margin-top: 3%;
+    margin-top: 10%;
 }
 .commentsForm{
     display: flex;

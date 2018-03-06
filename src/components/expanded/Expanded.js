@@ -25,8 +25,13 @@ class Expanded extends Component {
       <div className="expanded">
         <Navbar />
         <div className="wrapper">
-          <section className="left-column card">
+          <section className="left-column">
             <h1>Project Title</h1>
+            <div className="project-details">
+              <h4>Delaware County</h4>
+              <h4>Bicycle/Pedestrian Improvement</h4>
+              <h4>AQ Code: 20302</h4>
+            </div>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               malesuada magna eget orci sodales sagittis. Suspendisse viverra
