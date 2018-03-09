@@ -6,10 +6,21 @@ import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import loading from "./loading.gif";
+import { getGeometry } from "../reducers/getTIPInfo.js";
 
 class TilesContainer extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {
+    console.log("projects field are ", this.props.projects);
+    const test = this.props.projects
+      ? this.props.projects.map(project => this.props.geometry(project.id))
+      : "fail or whatever";
+    console.log("test is ", test);
   }
 
   // TODO: add a 'no results found' message when the API request comes up blank
@@ -46,4 +57,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(TilesContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    geometry: id => dispatch(getGeometry(id))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);

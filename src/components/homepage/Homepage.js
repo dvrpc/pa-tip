@@ -48,5 +48,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-// TODO: get redux back with THIS: export default withRouter(connect(...)(Homepage))
 export default withRouter(connect(null, mapDispatchToProps)(Homepage));
