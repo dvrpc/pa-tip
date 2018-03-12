@@ -34,12 +34,14 @@ class Tile extends Component {
   }
 
   render() {
-    //TODO: call geometryColorType w/geometry data once it gets added to the API response
-
+    /*  
+    // The following has been refactored to work from utils, just need to get the geo data from arcGIS
+    const path = geometryColorType(this.props.data)
     //TODO: replace this API key with a process.ENV secret
-    /*    const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
+    const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
       this.state.width
     }x${this.state.height}&maptype=hybrid${path}`;*/
+
     return (
       <div
         className="tile"

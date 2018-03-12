@@ -41,9 +41,13 @@ export const getFullTIP = id => dispatch => {
   );
 };
 
-export const getGeometry = geoData => dispatch => {
+// query arcGIS with the boundaries of whatever is searched & have it grab ALL TIP projects within that boundary. 1 API call gets all instead of point/pointline/polygon for each project
+// once all projects in the boundary are returned, associate the projects with the tiles to set up the background images
+// pop them all on the map too
+// https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/MapServer/identify ---> ask Robert how to query this
+export const getGeometry = id => dispatch => {
   fetch(
-    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/2/query?where=MPMS_ID+in+(12923)&geometryType=esriGeometryPoint&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=pjson`
+    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?where=MPMS_ID%3D${id}&objectIds=&time=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&f=pjson`
   ).then(response =>
     response
       .json()
