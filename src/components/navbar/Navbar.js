@@ -2,7 +2,7 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import { getTIP } from "../reducers/getTIPInfo";
+import { getTIPByKeywords } from "../reducers/getTIPInfo";
 import "./Navbar.css";
 import dvrpclogo from "./dvrpclogo.png";
 
@@ -23,7 +23,7 @@ const searchTIP = (instance, e) => {
   // TODO pt. 2: Consider making the validator a function and importing it in from utils.js.
   if (validAddress) {
     // hit the dispatch
-    instance.props.getTIP(address);
+    instance.props.getTIPByKeywords(address);
     instance.props.history.push(`/main/${address}`);
   } else {
     // do something to prompt re-entry from a user
@@ -68,7 +68,7 @@ class Navbar extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIP: address => dispatch(getTIP(address))
+    getTIPByKeywords: address => dispatch(getTIPByKeywords(address))
   };
 };
 

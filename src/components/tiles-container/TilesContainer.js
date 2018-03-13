@@ -6,7 +6,7 @@ import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import loading from "./loading.gif";
-import { getGeometry } from "../reducers/getTIPInfo.js";
+import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
 
 class TilesContainer extends Component {
   constructor(props) {
@@ -50,13 +50,13 @@ class TilesContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    projects: state.address
+    projects: state.keyword
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    geometry: id => dispatch(getGeometry(id))
+    geometry: id => dispatch(getTIPByMunicipalBoundaries(id))
   };
 };
 

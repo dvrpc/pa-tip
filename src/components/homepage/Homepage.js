@@ -1,24 +1,60 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
+import geocoder from "geocoder";
 
 import "./Homepage.css";
-import { getTIP } from "../reducers/getTIPInfo";
+import { getTIPByKeywords, getTIPByAddress } from "../reducers/getTIPInfo";
 import bus from "./bus.svg";
 import dna from "./dna.svg";
 import globe from "./globe.svg";
 import philly from "./philly.mp4";
 
+// TODO: refactor this function as a UTILS function and plug it in to here and navbar.js
 const changePage = (instance, e) => {
   e.preventDefault();
-  const address = e.target.querySelector("input").value;
+  // TODO: figure out how to sort search inputs to hit the right API call
+  const input = {
+    value: e.target.querySelector("input").value,
+    // TODO: find a way to dynamically judge and replace the type of input
+    /*
+        option 1: 
+        standardize the input & compare it to the municipal dictionary. if it's in there, input.type = municipal
+        if it's not in the municipal dictionary, input.type = geocode and then:
+          if error in geocoding, run the keyword API call
+          if success, call the address geocode jawnnnnn 
+      */
+    type: "address"
+  };
+  // TODO: validate the search input BEFORE pushing to history
   let validAddress = true;
 
-  // TODO: validate the search input BEFORE pushing to history
   if (validAddress) {
-    // hit the dispatch
-    instance.props.getTIP(address);
-    instance.props.history.push(`/main/${address}`);
+    // goal:
+    /*
+        if(input.type === municipal boundary) getTIPByMunicipalBoundaries(input.value)
+        if(input.type === address) getTIPByAddress(input.value)
+        else getTIPByKeywords
+      */
+    if (input.type === "municipal boundary") {
+      // get tip by municipal boundaries
+    } else if (input.type === "address") {
+      // geocode address to get the lat/long of it
+      geocoder.geocode(input.value, (err, data) => {
+        // TODO: error handling
+        console.log("geocoded data is ", data);
+        const lat = data.results[0].geometry.location.lat;
+        const long = data.results[0].geometry.location.lng;
+        console.log("lat is ", lat);
+        console.log("long is ", long);
+        //
+        instance.props.getTIPByAddress(data);
+      });
+    } else {
+      instance.props.getTIPByKeywords(input.value);
+    }
+
+    instance.props.history.push(`/main/${input.value}`);
   } else {
     // do something to prompt re-entry from a user
   }
@@ -112,8 +148,11 @@ class Homepage extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIP: address => {
-      dispatch(getTIP(address));
+    getTIPByKeywords: keywords => {
+      dispatch(getTIPByKeywords(keywords));
+    },
+    getTIPByAddress: address => {
+      dispatch(getTIPByAddress(address));
     }
   };
 };
