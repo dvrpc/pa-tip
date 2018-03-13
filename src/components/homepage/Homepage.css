@@ -16,8 +16,8 @@
 .landing{
     background-image:
         linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
         );
     height: 100vh;
     display: flex;
@@ -82,4 +82,16 @@
 .tip-info-big-column h2{
     text-align: center;
     padding-bottom: 2.5%;
+}
+
+
+/* Media Query to Replace Video w/Static Image on Mobile*/
+@media screen and (max-device-width: 800px) {
+    .landing{
+        background: url("https://im3.ezgif.com/tmp/ezgif-3-07d0d7756b.gif") no-repeat;
+        background-size: cover;
+    }
+    #bgvid {
+        display: none;
+    }
 }

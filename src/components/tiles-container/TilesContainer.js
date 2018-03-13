@@ -13,10 +13,7 @@ class TilesContainer extends Component {
     super(props);
   }
 
-  componentDidMount() {}
-
   componentDidUpdate() {
-    console.log("projects field are ", this.props.projects);
     const test = this.props.projects
       ? this.props.projects.map(project => this.props.geometry(project.id))
       : "fail or whatever";
