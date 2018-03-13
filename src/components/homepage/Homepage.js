@@ -4,7 +4,11 @@ import { withRouter } from "inferno-router";
 import geocoder from "geocoder";
 
 import "./Homepage.css";
-import { getTIPByKeywords, getTIPByAddress } from "../reducers/getTIPInfo";
+import {
+  getTIPByKeywords,
+  getTIPByAddress,
+  setMapCenter
+} from "../reducers/getTIPInfo";
 import bus from "./bus.svg";
 import dna from "./dna.svg";
 import globe from "./globe.svg";
@@ -13,7 +17,6 @@ import philly from "./philly.mp4";
 // TODO: refactor this function as a UTILS function and plug it in to here and navbar.js
 const changePage = (instance, e) => {
   e.preventDefault();
-  // TODO: figure out how to sort search inputs to hit the right API call
   const input = {
     value: e.target.querySelector("input").value,
     // TODO: find a way to dynamically judge and replace the type of input
@@ -30,24 +33,21 @@ const changePage = (instance, e) => {
   let validAddress = true;
 
   if (validAddress) {
-    // goal:
-    /*
-        if(input.type === municipal boundary) getTIPByMunicipalBoundaries(input.value)
-        if(input.type === address) getTIPByAddress(input.value)
-        else getTIPByKeywords
-      */
     if (input.type === "municipal boundary") {
       // get tip by municipal boundaries
     } else if (input.type === "address") {
       // geocode address to get the lat/long of it
       geocoder.geocode(input.value, (err, data) => {
         // TODO: error handling
-        console.log("geocoded data is ", data);
-        const lat = data.results[0].geometry.location.lat;
-        const long = data.results[0].geometry.location.lng;
-        console.log("lat is ", lat);
-        console.log("long is ", long);
-        //
+        const southwest = data.results[0].geometry.bounds.northeast;
+        const northeast = data.results[0].geometry.bounds.southwest;
+        instance.props.setMapCenter([northeast, southwest]);
+        // PROCESS:
+        // send Lat Long to the store as the new Center object to the store
+        // Map.js updates itself according to the new Center in the store
+        // Map.js dispatches it's BoundingBox to the store, which will go to a function that
+        // makes an arcGIS call for all the projects within those boundaries
+
         instance.props.getTIPByAddress(data);
       });
     } else {
@@ -153,6 +153,9 @@ const mapDispatchToProps = dispatch => {
     },
     getTIPByAddress: address => {
       dispatch(getTIPByAddress(address));
+    },
+    setMapCenter: latlng => {
+      dispatch(setMapCenter(latlng));
     }
   };
 };

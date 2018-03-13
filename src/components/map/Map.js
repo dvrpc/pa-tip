@@ -20,6 +20,13 @@ class MapComponent extends Component {
     });
   }
 
+  componentDidUpdate() {
+    // receive the center props
+    console.log("updated props are ", this.props);
+    // TODO: look into updating the map center, but all the information is here!
+    this.map.center = this.props.center[0];
+  }
+
   componentWillUnmount() {
     this.map.remove();
   }
@@ -31,7 +38,7 @@ class MapComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    center: state.address
+    center: state.center
   };
 };
 

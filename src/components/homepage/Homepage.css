@@ -11,7 +11,7 @@
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     /*TODO: replace this with a screenshot of the background video*/
-    background: url("https://im3.ezgif.com/tmp/ezgif-3-07d0d7756b.gif") no-repeat;
+    background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
 }
 .landing{
     background-image:
@@ -88,7 +88,7 @@
 /* Media Query to Replace Video w/Static Image on Mobile*/
 @media screen and (max-device-width: 800px) {
     .landing{
-        background: url("https://im3.ezgif.com/tmp/ezgif-3-07d0d7756b.gif") no-repeat;
+        background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
         background-size: cover;
     }
     #bgvid {
