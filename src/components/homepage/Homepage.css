@@ -1,25 +1,31 @@
 /* TODO: vertically center the h1 and form component (div, flex align blah blah)*/
-
-.homepage{
+#bgvid{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    /*TODO: replace this with a screenshot of the background video*/
+    background: url("https://im3.ezgif.com/tmp/ezgif-3-07d0d7756b.gif") no-repeat;
+}
+.landing{
     background-image:
         linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-        ),
-        url("https://i.kinja-img.com/gawker-media/image/upload/t_original/qhdwiecqfo74iw1k54gr.gif");
-        /* tilt shift: https://www.walldevil.com/wallpapers/w01/448918-bridges-cities-tilt-shift-traffic.jpg
-           goofy  gif: https://i.kinja-img.com/gawker-media/image/upload/t_original/qhdwiecqfo74iw1k54gr.gif
-        */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+        );
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.homepage h1{
+.landing h1{
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
     color: white;
     font-weight: 900;
@@ -32,7 +38,7 @@
     color: black;
     width: 50%;
     border-radius: 3px;
-    border-bottom: 5px solid #1D3557;
+    border-bottom: 5px solid #ffa600;
 }
 
 #search-form input{
@@ -44,4 +50,36 @@
 }
 #search-form input:focus{
     outline: none;
+}
+
+
+/* Information Section */
+.tip-info{
+    background: #eee;
+    line-height: 1.5;
+}
+.tip-info h1{
+    text-align: center;
+    padding-top: 5%;
+}
+.tip-info-row{
+    display: flex;
+}
+.tip-columns{
+    padding: 5%;
+    flex-direction: row;
+}
+.columns-icon{
+    margin-left: 28%;
+}
+.tip-columns h2{
+    text-align: center;
+    padding-bottom: 5%;
+}
+.tip-info-big-column{
+    padding: 5%;
+}
+.tip-info-big-column h2{
+    text-align: center;
+    padding-bottom: 2.5%;
 }
