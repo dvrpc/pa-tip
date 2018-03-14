@@ -1,12 +1,15 @@
 import Inferno, { Component } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
+
+import { getTIPByMapBounds } from "../reducers/getTIPInfo";
 import "./Map.css";
 
 class MapComponent extends Component {
   constructor(props) {
     super(props);
   }
+
   componentDidMount() {
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
@@ -14,13 +17,28 @@ class MapComponent extends Component {
     this.map = new mapboxgl.Map({
       container: this.tipMap,
       style: "mapbox://styles/mapbox/streets-v9",
-      center: [-75.1633, 39.9522],
-      zoom: 14
+      // mount w/searched co-ordinates or default to center
+      center: this.props.center ? this.props.center[0] : [-75.1633, 39.9522],
+      zoom: 13
     });
   }
 
   componentDidUpdate() {
     this.map.flyTo({ center: this.props.center[0] });
+
+    // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
+    const bounds = this.map.getBounds();
+    const NEbounds = bounds.getNorthEast();
+    const NWbounds = bounds.getNorthWest();
+    const SEbounds = bounds.getSouthEast();
+    const SWbounds = bounds.getSouthWest();
+
+    console.log("northeast bounds ", NEbounds);
+    console.log("northwest bounds ", NWbounds);
+    console.log("sw ", SWbounds);
+    console.log("southestast ", SEbounds);
+
+    this.props.getTIPByMapBounds([NWbounds, NEbounds, SEbounds, SWbounds]);
   }
 
   componentWillUnmount() {
@@ -38,4 +56,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(MapComponent);
+const mapDispatchToProps = dispatch => {
+  return {
+    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

@@ -4,11 +4,7 @@ import { withRouter } from "inferno-router";
 import geocoder from "geocoder";
 
 import "./Homepage.css";
-import {
-  getTIPByKeywords,
-  getTIPByAddress,
-  setMapCenter
-} from "../reducers/getTIPInfo";
+import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
 import bus from "./bus.svg";
 import dna from "./dna.svg";
 import globe from "./globe.svg";
@@ -21,39 +17,33 @@ const changePage = (instance, e) => {
     value: e.target.querySelector("input").value,
     // TODO: find a way to dynamically judge and replace the type of input
     /*
-        option 1: 
-        standardize the input & compare it to the municipal dictionary. if it's in there, input.type = municipal
-        if it's not in the municipal dictionary, input.type = geocode and then:
-          if error in geocoding, run the keyword API call
-          if success, call the address geocode jawnnnnn 
-      */
+      option 1:
+      standardize the input & compare it to the municipal dictionary. if it's in there, input.type = municipal
+      if it's not in the municipal dictionary, input.type = geocode and then:
+        if error in geocoding, run the keyword API call
+        if success, call the address geocode jawnnnnn
+    */
     type: "address"
   };
-  // TODO: validate the search input BEFORE pushing to history
   let validAddress = true;
 
   if (validAddress) {
     if (input.type === "municipal boundary") {
       // get tip by municipal boundaries
+      // TBD on updating the map cause the JSON municipals might already have the jawns jawned out
     } else if (input.type === "address") {
       // geocode address to get the lat/long of it
       geocoder.geocode(input.value, (err, data) => {
         // TODO: error handling
-        const southwest = data.results[0].geometry.bounds.northeast;
-        const northeast = data.results[0].geometry.bounds.southwest;
+        const northeast = data.results[0].geometry.bounds.northeast;
+        const southwest = data.results[0].geometry.bounds.southwest;
         instance.props.setMapCenter([northeast, southwest]);
-        // PROCESS:
-        // send Lat Long to the store as the new Center object to the store
-        // Map.js updates itself according to the new Center in the store
-        // Map.js dispatches it's BoundingBox to the store, which will go to a function that
-        // makes an arcGIS call for all the projects within those boundaries
-
-        instance.props.getTIPByAddress(data);
       });
     } else {
       instance.props.getTIPByKeywords(input.value);
     }
 
+    // TODO: validate the search input BEFORE pushing to history
     instance.props.history.push(`/main/${input.value}`);
   } else {
     // do something to prompt re-entry from a user
@@ -74,7 +64,7 @@ class Homepage extends Component {
             autoplay
             muted
             loop
-            poster="https://im3.ezgif.com/tmp/ezgif-3-07d0d7756b.gif"
+            poster="https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg"
             id="bgvid"
           >
             <source src={philly} type="video/mp4" />
@@ -150,9 +140,6 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => {
       dispatch(getTIPByKeywords(keywords));
-    },
-    getTIPByAddress: address => {
-      dispatch(getTIPByAddress(address));
     },
     setMapCenter: latlng => {
       dispatch(setMapCenter(latlng));

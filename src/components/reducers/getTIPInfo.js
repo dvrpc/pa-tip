@@ -4,6 +4,7 @@ const GET_TIP_BY_MUNICIPAL_BOUNDARIES = "GET_TIP_BY_MUNICIPAL_BOUNDARIES";
 const GET_TIP_BY_ADDRESS = "GET_TIP_BY_ADDRESS";
 const GET_FULL_TIP = "GET_FULL_TIP";
 const SET_MAP_CENTER = "SET_MAP_CENTER";
+const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 
 /*** ACTION_CREATORS ***/
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
@@ -14,6 +15,10 @@ const get_tip_by_municipal_boundaries = geoData => ({
 });
 const get_tip_by_address = address => ({ type: GET_TIP_BY_ADDRESS, address });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
+const get_tip_by_map_bounds = bounds => ({
+  type: GET_TIP_BY_MAP_BOUNDS,
+  bounds
+});
 
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
@@ -21,15 +26,17 @@ export default function tipReducer(state = [], action) {
     case GET_TIP_KEYWORDS:
       return Object.assign({}, state, { keyword: action.keyword });
     case GET_TIP_BY_MUNICIPAL_BOUNDARIES:
-      console.log("hit the get geometry jawn with: ", action.geoData);
+      console.log("hit the municipal boundaries jawn with: ", action.geoData);
       return Object.assign({}, state, { geoData: action.geoData });
     case GET_TIP_BY_ADDRESS:
       console.log("got that address jawn ", action.address);
       return Object.assign({}, state, { address: action.address });
-    case GET_FULL_TIP:
-      return Object.assign({}, state, { details: action.id });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
+    case GET_TIP_BY_MAP_BOUNDS:
+      return Object.assign({}, state, { projects: action.bounds });
+    case GET_FULL_TIP:
+      return Object.assign({}, state, { details: action.id });
     default:
       return state;
   }
@@ -57,19 +64,22 @@ export const getTIPByMunicipalBoundaries = id => dispatch => {
   );
 };
 
-// TODO: make two functions here
-// 1 that receives the lat/long from search and uses it to update the center of the map
-// 1 that receives the bounded box from the updated map center and uses that to make a an arcGIS call
-// case that gets tip projects surrounding a specific address
 export const getTIPByAddress = address => dispatch => {
   // need to somehow get the mapboxGL boxbounds from this ishhhh
   // with the geocoded address, update the center props in the store which map will access
   console.log("address is ", address);
 };
 
-export const setMapCenter = latlng => dispatch => {
-  console.log("set map center hit with ", latlng);
+export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
+
+export const getTIPByMapBounds = bounds => dispatch => {
+  console.log("the bounds are ", bounds);
+  fetch(
+    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/MapServer/0/query?where=&text=&objectIds=&time=&geometry=%5B${bounds}%5D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelWithin&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&returnTrueCurves=false&resultOffset=&resultRecordCount=&f=pjson`
+  ).then(response =>
+    response.json().then(projects => dispatch(get_tip_by_map_bounds))
+  );
 };
 
 // gets the full information for a project to display in the modal when a tile is clicked
