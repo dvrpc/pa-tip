@@ -9,7 +9,6 @@ class MapComponent extends Component {
   }
   componentDidMount() {
     //TODO: replace the accessToken with a process.ENV variable
-    //TODO: replace center with address as props
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
     this.map = new mapboxgl.Map({
@@ -21,10 +20,7 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate() {
-    // receive the center props
-    console.log("updated props are ", this.props);
-    // TODO: look into updating the map center, but all the information is here!
-    this.map.center = this.props.center[0];
+    this.map.flyTo({ center: this.props.center[0] });
   }
 
   componentWillUnmount() {
