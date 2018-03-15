@@ -9,7 +9,7 @@ p{
     border-bottom: 15px solid white;
 }
 #banner-logo{
-    padding-right: 24vw;
+    padding-right: 30vw;
 }
 #banner-tip-logo{
     padding-right: 2%;
@@ -35,7 +35,7 @@ p{
 }
 #search-form {
     /*TODO: fix this margin-right hack. maybe set width or something*/
-    margin: 5% 5% 0 40vw;
+    margin: 5% 5% 0 44vw;
     background: #eee;
     color: black;
     width: 50%;

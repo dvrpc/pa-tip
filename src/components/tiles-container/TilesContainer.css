@@ -18,14 +18,18 @@
     color: #FFFFFF;
     height: 12%;
 }
+.header h2{
+    font-size: 1.3rem;
+    font-weight: 400;
+}
 #no-results{
     margin: 0 auto;
     max-height: 5%;
     max-width: 8%;
 }
 #selectedCategory{
-    margin: 0 15px 0 15px;
-    padding: 10px;
+    margin: 0 19% 0 4%;
+    padding: 8px;
     border-radius: 5px;
     border: none;
     font-size: 1em;

@@ -29,7 +29,7 @@ class TilesContainer extends Component {
           <h2>filter results...</h2>
           <select id="selectedCategory" name="category">
             <option value="" selected>
-              Category
+              category
             </option>
             <option value="1">A CATEGORY</option>
             <option value="2">ANOTHER CATEGORY</option>

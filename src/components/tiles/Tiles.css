@@ -1,13 +1,12 @@
 .tile{
+    background: #ffffff;
     color: #fff;
     position: relative;
-    height: 40%;
-    width: 48.5%;
+    height: 35%;
+    width: 45%;
+    margin: 2%;
     overflow: hidden;
-    margin: 0.5%;
-    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.6);
-    border: 1px solid #666;
-    border-radius: 4px;
+    border-radius: 15px;
 }
 .tile:hover{
     box-shadow: 0px 0px 5px 1px rgba(255,255,255,0.6);
@@ -21,22 +20,19 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) -10%,rgba(0,0,0,0.8) 75%);
+    /* TODO: move this background property to a tiles.js CSS object that accepts it's values from props*/
+    background: linear-gradient(to bottom, #ffffff, #660066 75%);
     padding: 2rem 3px 3px;
 }
 .tile-caption-text{
     margin: 1% 0 2% 2%;
 }
 .tile-caption h2 {
-    font-size: 1.5rem;
-}
-.tile-caption small {
-    font-size: 1.1rem;
-    box-decoration-break: clone;
+    font-size: 1.3rem;
 }
 .tile-caption p {
     padding-top: 2%;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .tile-link{
     position: absolute;
@@ -46,7 +42,6 @@
     left: 0;
     right: 0;
 }
-
 
 /* Comments Button */
 button{

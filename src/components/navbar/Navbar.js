@@ -9,15 +9,8 @@ import TIP_logo from "./TIP_logo.png";
 
 const searchTIP = (instance, e) => {
   e.preventDefault();
-  const fundsSelector = e.target.querySelector("#selectedFunds");
-  const categorySelector = e.target.querySelector("#selectedCategory");
-
   // get a handle on inputted search values (for now, address is the only one used)
   const address = e.target.querySelector("#navSearch").value;
-  const funds = fundsSelector.options[fundsSelector.selectedIndex].text;
-  const category =
-    categorySelector.options[categorySelector.selectedIndex].text;
-
   let validAddress = true;
 
   // TODO: validate the search input BEFORE pushing to history

@@ -53,9 +53,6 @@ class Tile extends Component {
         {this.props.data && this.state.modalClicked ? <Modal /> : null}
         <div className="tile-caption">
           <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
-          <small className="tile-caption-text">
-            {this.props.data.category}
-          </small>
           <p className="tile-caption-text">
             {this.props.data.county} County, PA
           </p>
