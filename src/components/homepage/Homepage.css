@@ -24,16 +24,16 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
+    width: 100%;
     min-height: 85%;
     z-index: -100;
     -ms-transform: translateX(-50%) translateY(-40%);
     -moz-transform: translateX(-50%) translateY(-40%);
     -webkit-transform: translateX(-50%) translateY(-40%);
-    transform: translateX(-50%) translateY(-40%);
+    transform: translateX(-50%) translateY(-45%);
     /*TODO: replace this with a screenshot of the background video*/
-    background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
-}
+/*    background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
+*/}
 #search-form {
     /*TODO: fix this margin-right hack. maybe set width or something*/
     margin: 5% 5% 0 40%;
@@ -56,9 +56,9 @@
 }
 .homepage-bottom-bar{
     /*fix this margin-top hack to fix it to the bottom of the page, but for now it's ok*/
-    margin-top: 45%;
+    margin-top: 62vh;
     background: #303030;
-    padding: 1.8%;
+    padding: 1.5%;
 }
 .homepage-bottom-bar img{
     /*TODO: fix this hack - the arrow should align with the search bar & this can be done better*/
@@ -66,14 +66,15 @@
     margin-left: 95%;
 }
 
+
 /* Information Section */
 #tip-info{
-    width: 95%;
     background: #494848;
     padding: 3%;
     line-height: 1.4;
 }
 .tip-info-cluster{
+    width: 95%;
     display: flex;
     justify-content: center;
 }
