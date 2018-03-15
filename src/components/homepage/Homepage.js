@@ -100,47 +100,60 @@ class Homepage extends Component {
         </div>
 
         <div id="tip-info">
-          <h2>About DVRPC</h2>
-          <h2>and the TIP</h2>
-          <p>
-            The Delaware Valley Regional Planning Commission is the federally
-            designated Metropolitan Planning Organization for a diverse
-            nine-county region in two states: Bucks, Chester, Delaware,
-            Montgomery, and Philadelphia in Pennsylvania; and Burlington,
-            Camden, Gloucester, and Mercer in New Jersey.
-          </p>
-          <p>
-            DVRPC’s vision for the Greater Philadelphia Region is a prosperous,
-            innovative, equitable, resilient, and sustainable region that
-            increases mobility choices by investing in a safe and modern
-            transportation system; that protects and preserves our natural
-            resources while creating healthy communities; and that fosters
-            greater opportunities for all.
-          </p>
-          <p>
-            DVRPC’s mission is to achieve this vision by convening the widest
-            array of partners to inform and facilitate data-driven
-            decision-making. We are engaged across the region, and strive to be
-            leaders and innovators, exploring new ideas and creating best
-            practices.
-          </p>
+          <div className="tip-info-cluster">
+            <div className="tip-info-headers">
+              <h2>About DVRPC</h2>
+              <h2>and the TIP</h2>
+            </div>
+            <div className="tip-info-paragraphs">
+              <p>
+                The Delaware Valley Regional Planning Commission is the
+                federally designated Metropolitan Planning Organization for a
+                diverse nine-county region in two states: Bucks, Chester,
+                Delaware, Montgomery, and Philadelphia in Pennsylvania; and
+                Burlington, Camden, Gloucester, and Mercer in New Jersey.
+              </p>
+              <p>
+                DVRPC’s vision for the Greater Philadelphia Region is a
+                prosperous, innovative, equitable, resilient, and sustainable
+                region that increases mobility choices by investing in a safe
+                and modern transportation system; that protects and preserves
+                our natural resources while creating healthy communities; and
+                that fosters greater opportunities for all.
+              </p>
+              <p>
+                DVRPC’s mission is to achieve this vision by convening the
+                widest array of partners to inform and facilitate data-driven
+                decision-making. We are engaged across the region, and strive to
+                be leaders and innovators, exploring new ideas and creating best
+                practices.
+              </p>
+            </div>
+          </div>
 
           <hr />
 
-          <h2>How to Use</h2>
-          <h2>this Application</h2>
-          <p>
-            The Delaware Valley Regional Planning Commission is the federally
-            designated Metropolitan Planning Organization for a diverse
-            nine-county region in two states: Bucks, Chester, Delaware,
-            Montgomery, and Philadelphia in Pennsylvania; and Burlington,
-            Camden, Gloucester, and Mercer in New Jersey. DVRPC fully complies
-            with Title VI of the Civil Rights Act of 1964 and related
-            nondiscrimination statutes in all activities. For more information,
-            visit www.dvrpc.org/GetInvolved/TitleVI. The authors are solely
-            responsible for the findings and conclusions herein, which may not
-            represent the official views or policies of the funding agencies.
-          </p>
+          <div className="tip-info-cluster">
+            <div className="tip-info-headers">
+              <h2>How to Use</h2>
+              <h2>this Application</h2>
+            </div>
+            <div className="tip-info-paragraphs">
+              <p>
+                The Delaware Valley Regional Planning Commission is the
+                federally designated Metropolitan Planning Organization for a
+                diverse nine-county region in two states: Bucks, Chester,
+                Delaware, Montgomery, and Philadelphia in Pennsylvania; and
+                Burlington, Camden, Gloucester, and Mercer in New Jersey. DVRPC
+                fully complies with Title VI of the Civil Rights Act of 1964 and
+                related nondiscrimination statutes in all activities. For more
+                information, visit www.dvrpc.org/GetInvolved/TitleVI. The
+                authors are solely responsible for the findings and conclusions
+                herein, which may not represent the official views or policies
+                of the funding agencies.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );

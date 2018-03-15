@@ -73,10 +73,24 @@
     padding: 3%;
     line-height: 1.4;
 }
+.tip-info-cluster{
+    display: flex;
+    justify-content: center;
+}
 #tip-info h2{
+    font-weight: 400;
     color: #E5C942;
+    text-align: right;
+}
+.tip-info-headers{
+    padding-right: 3%;
 }
 #tip-info p{
+    padding-bottom: 1%;
+}
+.tip-info-paragraphs{
+    flex-direction: row;
+    width: 80%;
     color: #FFFFFF;
 }
 #tip-info hr{
