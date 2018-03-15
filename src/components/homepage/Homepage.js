@@ -35,6 +35,7 @@ const changePage = (instance, e) => {
     } else if (input.type === "address") {
       // geocode address to get the lat/long of it
       geocoder.geocode(input.value, (err, data) => {
+        console.log("data is ", data);
         // TODO: error handling
         const northeast = data.results[0].geometry.bounds.northeast;
         const southwest = data.results[0].geometry.bounds.southwest;
@@ -147,10 +148,13 @@ class Homepage extends Component {
                 Burlington, Camden, Gloucester, and Mercer in New Jersey. DVRPC
                 fully complies with Title VI of the Civil Rights Act of 1964 and
                 related nondiscrimination statutes in all activities. For more
-                information, visit www.dvrpc.org/GetInvolved/TitleVI. The
-                authors are solely responsible for the findings and conclusions
-                herein, which may not represent the official views or policies
-                of the funding agencies.
+                information, visit{" "}
+                <a href="www.dvrpc.org/GetInvolved/TitleVI">
+                  {" "}
+                  the DVRPC Title VI page{" "}
+                </a>. The authors are solely responsible for the findings and
+                conclusions herein, which may not represent the official views
+                or policies of the funding agencies.
               </p>
             </div>
           </div>

@@ -4,7 +4,8 @@ import { withRouter } from "inferno-router";
 
 import { getTIPByKeywords } from "../reducers/getTIPInfo";
 import "./Navbar.css";
-import dvrpclogo from "./dvrpclogo.png";
+import logo from "./logo.png";
+import TIP_logo from "./TIP_logo.png";
 
 const searchTIP = (instance, e) => {
   e.preventDefault();
@@ -39,26 +40,15 @@ class Navbar extends Component {
     return (
       <nav className="navBar">
         <a href="/">
-          <img src={dvrpclogo} alt="logo" />
+          <img src={TIP_logo} alt="TIP logo" />
+          <img src={logo} alt="DVRPC logo" />
         </a>
-        <form onSubmit={linkEvent(this, searchTIP)}>
-          <input id="navSearch" type="textarea" placeholder="Enter Address" />
-          <select id="selectedFunds" name="funds">
-            <option value="" selected>
-              Fund
-            </option>
-            <option value="1">A FUND</option>
-            <option value="2">ANOTHER FUND</option>
-            <option value="3">3RD FUND</option>
-          </select>
-          <select id="selectedCategory" name="category">
-            <option value="" selected>
-              Category
-            </option>
-            <option value="1">A CATEGORY</option>
-            <option value="2">ANOTHER CATEGORY</option>
-            <option value="3">3RD CATEGORY</option>
-          </select>
+        <form id="nav-search-form" onSubmit={linkEvent(this, searchTIP)}>
+          <input
+            id="navSearch"
+            type="textarea"
+            placeholder="search by municipality, city, zip code, project, or fund"
+          />
           <input type="button" value="search" />
         </form>
       </nav>

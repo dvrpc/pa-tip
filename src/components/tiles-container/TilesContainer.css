@@ -1,47 +1,37 @@
 .tilesContainer{
     z-index: 2;
-    /*TODO: figure out the right background/text combination*/
-    background: #303030;
+    background: #666666;
     overflow-x: hidden;
 	width: 95%;
 	display: flex;
     flex-wrap: wrap;
 	overflow-y: scroll;
 	justify-content: flex-start;
-    -webkit-box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
-    -moz-box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
-    box-shadow: -7px 0px 5px -2px rgba(0,0,0,0.75);
+    margin-left: 1%;
 }
 .header{
-    width: 100%;
-}
-.header-content *{
-    margin-right: 5%;
-}
-.header-content{
+    padding: 3%;
     display: flex;
-    align-items: flex-end;
-    padding-left: 1%;
-    margin-bottom: 2%;
+    align-items: center;
     width: 100%;
-    font-weight: 900;
-    color: #eee;
-}
-.header-head *{
-    padding-top: 1.5%;
-}
-.header-filter *{
-    font-weight: 100;
-}
-.header-filter h2:hover, .active{
-    color: #457B9D;
-    cursor: pointer;
-}
-.active{
-    text-decoration: underline #457B9D;
+    background: #333333;
+    color: #FFFFFF;
+    height: 12%;
 }
 #no-results{
     margin: 0 auto;
     max-height: 5%;
     max-width: 8%;
+}
+#selectedCategory{
+    margin: 0 15px 0 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+}
+.vr{
+    height: 45%;
+    border: thin solid #ffffff;
+    margin-right: 3%;
 }

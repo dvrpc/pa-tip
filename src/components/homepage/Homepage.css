@@ -1,4 +1,5 @@
-.landing{
+p{
+    font-size: 16px;
 }
 .homepage-banner{
     display: flex;
@@ -8,7 +9,7 @@
     border-bottom: 15px solid white;
 }
 #banner-logo{
-    padding-right: 27%;
+    padding-right: 24vw;
 }
 #banner-tip-logo{
     padding-right: 2%;
@@ -31,12 +32,10 @@
     -moz-transform: translateX(-50%) translateY(-40%);
     -webkit-transform: translateX(-50%) translateY(-40%);
     transform: translateX(-50%) translateY(-45%);
-    /*TODO: replace this with a screenshot of the background video*/
-/*    background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
-*/}
+}
 #search-form {
     /*TODO: fix this margin-right hack. maybe set width or something*/
-    margin: 5% 5% 0 40%;
+    margin: 5% 5% 0 40vw;
     background: #eee;
     color: black;
     width: 50%;
@@ -80,10 +79,10 @@
 }
 #tip-info h2{
     font-weight: 400;
-    color: #E5C942;
-    text-align: right;
 }
 .tip-info-headers{
+    color: #E5C942;
+    text-align: right;
     padding-right: 3%;
 }
 #tip-info p{
