@@ -8,6 +8,7 @@ import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
 // TODO: get illustrator to properly export and SVG so I don't have to store PNG
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
+import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 
 // TODO: refactor this function as a UTILS function and plug it in to here and navbar.js
@@ -61,7 +62,11 @@ class Homepage extends Component {
         <div className="landing">
           <div className="homepage-banner">
             <img id="banner-logo" src={logo} alt="dvrpc logo" />
-            <img src={TIP_logo} alt="Transportation Improvement Program logo" />
+            <img
+              id="banner-tip-logo"
+              src={TIP_logo}
+              alt="Transportation Improvement Program logo"
+            />
             <div className="stacked-headers">
               <h1>FY19 PA Transportation</h1>
               <h1>Improvement Program</h1>
@@ -82,14 +87,19 @@ class Homepage extends Component {
             <form id="search-form" onSubmit={linkEvent(this, changePage)}>
               <input
                 type="text"
-                placeholder="Search by municipality, city, zip code or neighborhood"
+                placeholder="search by municipality, city, zip code, project, or fund"
               />
             </form>
           </div>
 
-          <div className="homepage-bottom-bar" />
+          <div className="homepage-bottom-bar">
+            <a href="#tip-info">
+              <img src={arrow} alt="down navigation arrow" />
+            </a>
+          </div>
         </div>
-        <div className="tip-info">
+
+        <div id="tip-info">
           <h2>About DVRPC</h2>
           <h2>and the TIP</h2>
           <p>

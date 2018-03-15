@@ -5,18 +5,21 @@
     align-items: center;
     padding: 2.5%;
     background: linear-gradient( to right, white 35%, #E8E8E8 65%, #DCDCDC);
+    border-bottom: 15px solid white;
 }
 #banner-logo{
     padding-right: 27%;
 }
+#banner-tip-logo{
+    padding-right: 2%;
+}
 .homepage-banner h1{
+    line-height: 1.1;
     color: #303030;
     font-weight: 600;
-    font-size: 2.3rem;
+    font-size: 1.9rem;
 }
 /*TODO: get the linear gradient from yellow to grey*/
-.homepage-main{
-}
 #bgvid{
     position: absolute;
     top: 50%;
@@ -32,12 +35,13 @@
     background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
 }
 #search-form {
+    /*TODO: fix this margin-right hack. maybe set width or something*/
     margin: 5% 5% 0 40%;
     background: #eee;
     color: black;
     width: 50%;
     border-radius: 3px;
-    box-shadow: 1px 3px 1px 2px rgba(0,0,0, 0.55);
+    box-shadow: 2px 3px 4px 1px rgba(0,0,0, 0.55);
 }
 
 #search-form input{
@@ -45,28 +49,43 @@
     padding-left: 30px;
     font-size: 1.4rem;
     width: 90%;
-    padding: 5%;
+    padding: 3% 5% 3% 5%;
 }
 #search-form input:focus{
     outline: none;
 }
 .homepage-bottom-bar{
     /*fix this margin-top hack to fix it to the bottom of the page, but for now it's ok*/
-    margin-top: 41%;
+    margin-top: 45%;
     background: #303030;
-    padding: 2.5%;
+    padding: 1.8%;
+}
+.homepage-bottom-bar img{
+    /*TODO: fix this hack - the arrow should align with the search bar & this can be done better*/
+    /*TODO: smooth scroll to the tip-info page*/
+    margin-left: 95%;
 }
 
 /* Information Section */
-.tip-info{
+#tip-info{
+    width: 95%;
     background: #494848;
     padding: 3%;
+    line-height: 1.4;
 }
-.tip-info h2{
+#tip-info h2{
     color: #E5C942;
 }
-.tip-info hr{
-    color: #E5C942;
+#tip-info p{
+    color: #FFFFFF;
+}
+#tip-info hr{
+    margin: 0 auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: #E5C942;
+    height: 2px;
+    border: 0;
 }
 
 /* Media Query to Replace Video w/Static Image on Mobile*/
