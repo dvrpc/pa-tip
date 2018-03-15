@@ -5,9 +5,9 @@ import geocoder from "geocoder";
 
 import "./Homepage.css";
 import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
-import bus from "./bus.svg";
-import dna from "./dna.svg";
-import globe from "./globe.svg";
+// TODO: get illustrator to properly export and SVG so I don't have to store PNG
+import logo from "./logo.png";
+import TIP_logo from "./TIP_logo.png";
 import philly from "./philly.mp4";
 
 // TODO: refactor this function as a UTILS function and plug it in to here and navbar.js
@@ -59,77 +59,78 @@ class Homepage extends Component {
     return (
       <div>
         <div className="landing">
-          <video
-            playsinline
-            autoplay
-            muted
-            loop
-            poster="https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg"
-            id="bgvid"
-          >
-            <source src={philly} type="video/mp4" />
-          </video>
-          <h1>FY19 PA TRANSPORTATION IMPROVEMENT PROGRAM</h1>
-          <form id="search-form" onSubmit={linkEvent(this, changePage)}>
-            <input
-              type="text"
-              placeholder="Search by municipality, city, zip code or neighborhood"
-            />
-          </form>
+          <div className="homepage-banner">
+            <img id="banner-logo" src={logo} alt="dvrpc logo" />
+            <img src={TIP_logo} alt="Transportation Improvement Program logo" />
+            <div className="stacked-headers">
+              <h1>FY19 PA Transportation</h1>
+              <h1>Improvement Program</h1>
+            </div>
+          </div>
+
+          <div className="homepage-main">
+            <video
+              playsinline
+              autoplay
+              muted
+              loop
+              poster="https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg"
+              id="bgvid"
+            >
+              <source src={philly} type="video/mp4" />
+            </video>
+            <form id="search-form" onSubmit={linkEvent(this, changePage)}>
+              <input
+                type="text"
+                placeholder="Search by municipality, city, zip code or neighborhood"
+              />
+            </form>
+          </div>
+
+          <div className="homepage-bottom-bar" />
         </div>
         <div className="tip-info">
-          <h1>What is the TIP?</h1>
-          <div className="tip-info-row">
-            <div className="tip-columns">
-              <img src={bus} alt="trendy icon" className="columns-icon" />
-              <h2>Trendy</h2>
-              <p>
-                really informative block of text telling you all you'd need to
-                know about the tip in a variety of ways maybe some kind of
-                graphic icon above each header would make it extra cool and
-                trendy. Writing out all this dummy text is a great use of my
-                time im really killing it as far as efficiency is concerned.
-              </p>
-            </div>
-            <div className="tip-columns">
-              <img src={dna} alt="trendy icon" className="columns-icon" />
-              <h2> Information</h2>
-              <p>
-                really informative block of text telling you all you'd need to
-                know about the tip in a variety of ways maybe some kind of
-                graphic icon above each header would make it extra cool and
-                trendy. Writing out all this dummy text is a great use of my
-                time im really killing it as far as efficiency is concerned.
-              </p>
-            </div>
-            <div className="tip-columns">
-              <img src={globe} alt="trendy icon" className="columns-icon" />
-              <h2>Columns</h2>
-              <p>
-                really informative block of text telling you all you'd need to
-                know about the tip in a variety of ways maybe some kind of
-                graphic icon above each header would make it extra cool and
-                trendy. Writing out all this dummy text is a great use of my
-                time im really killing it as far as efficiency is concerned.
-              </p>
-            </div>
-          </div>
-          <div className="tip-info-big-column">
-            <h2>Super Important Header</h2>
-            <p>
-              A full width information column to define a very important aspect
-              of the TIP. Again, I have no idea what kind of content is even
-              going here so I'm just making up a layout as I go along. Could be
-              great, could be awful. Who knows. Certainly not me. Maybe this
-              isn't even necessary. I'm just writing enough text so that this
-              temporary layout can work. Seems like it needs more text which
-              could be remedied by increasing font size but for now i'm just
-              going to write more nonsense. Maybe this section could be used to
-              explain how to use the app - what to search for, how to interpret
-              the results page, how to filter results, how to share results,
-              what everything means, etc.
-            </p>
-          </div>
+          <h2>About DVRPC</h2>
+          <h2>and the TIP</h2>
+          <p>
+            The Delaware Valley Regional Planning Commission is the federally
+            designated Metropolitan Planning Organization for a diverse
+            nine-county region in two states: Bucks, Chester, Delaware,
+            Montgomery, and Philadelphia in Pennsylvania; and Burlington,
+            Camden, Gloucester, and Mercer in New Jersey.
+          </p>
+          <p>
+            DVRPC’s vision for the Greater Philadelphia Region is a prosperous,
+            innovative, equitable, resilient, and sustainable region that
+            increases mobility choices by investing in a safe and modern
+            transportation system; that protects and preserves our natural
+            resources while creating healthy communities; and that fosters
+            greater opportunities for all.
+          </p>
+          <p>
+            DVRPC’s mission is to achieve this vision by convening the widest
+            array of partners to inform and facilitate data-driven
+            decision-making. We are engaged across the region, and strive to be
+            leaders and innovators, exploring new ideas and creating best
+            practices.
+          </p>
+
+          <hr />
+
+          <h2>How to Use</h2>
+          <h2>this Application</h2>
+          <p>
+            The Delaware Valley Regional Planning Commission is the federally
+            designated Metropolitan Planning Organization for a diverse
+            nine-county region in two states: Bucks, Chester, Delaware,
+            Montgomery, and Philadelphia in Pennsylvania; and Burlington,
+            Camden, Gloucester, and Mercer in New Jersey. DVRPC fully complies
+            with Title VI of the Civil Rights Act of 1964 and related
+            nondiscrimination statutes in all activities. For more information,
+            visit www.dvrpc.org/GetInvolved/TitleVI. The authors are solely
+            responsible for the findings and conclusions herein, which may not
+            represent the official views or policies of the funding agencies.
+          </p>
         </div>
       </div>
     );
