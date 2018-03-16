@@ -1,13 +1,18 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
+import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
 import { geometryColorType } from "../../utils/tileGeometryColorType.js";
 import { getFullTIP } from "../reducers/getTIPInfo";
 
-const clickTile = instance => {
-  // this function will eventually handle transition animation as well as the URL change
-  // TODO: link to the expanded page so that I can do the re-design for it
+const clickTile = (instance, e) => {
+  e.preventDefault();
+  // TODO: animated transition from results page to expanded page
+  const county = instance.props.data.county;
+  const id = instance.props.data.id;
+  instance.props.getFullTIP(id);
+  instance.props.history.push(`/expanded/${county}/${id}`);
 };
 
 class Tile extends Component {
@@ -20,6 +25,7 @@ class Tile extends Component {
   }
 
   componentDidMount() {
+    console.log("this is ", this);
     const tile = document.querySelector(".tile");
     // TODO: add setState to window resizing like in the analytics dashboard page
     this.setState({
@@ -63,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Tile);
+export default withRouter(connect(null, mapDispatchToProps)(Tile));

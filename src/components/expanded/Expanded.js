@@ -2,22 +2,17 @@ import Inferno, { Component, linkEvent } from "inferno";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
-// GOAL: a printable, shareable view of the modal which includes all the information in the modal + the data tables
-// To populate: Pass the entire response object as props from modal to Expanded.js and go from there
-// include the dispatcher to the comments database for people that want to submit comments.
-// needs to connect to redux ONLY to dispatch the comment (information will be passed directly from parent component...should it come from redux store?)
-
-// LAYOUT:
-// navbar
-// two column:
-// column-left: title and description
-// column-right: two rows
-// top row: tab component displaying either the funds data table or the milestone data table
-// bottom row: make and/or view comments
 
 class Expanded extends Component {
   constructor(props) {
     super(props);
+    console.log("this props ", this.props);
+    /* the values for the background colors will be replaced by props that correspond the project type*/
+    this.state = {
+      backgroundDarkest: { background: "#660066" },
+      backgroundMiddle: "",
+      backgroundLightest: ""
+    };
   }
 
   render() {
@@ -26,13 +21,29 @@ class Expanded extends Component {
         <Navbar />
         <div className="wrapper">
           <section className="left-column">
-            <h1>Project Title</h1>
-            <div className="project-details">
-              <h4>Delaware County</h4>
-              <h4>Bicycle/Pedestrian Improvement</h4>
-              <h4>AQ Code: 20302</h4>
+            <div
+              id="content-mini-nav"
+              className="left-column-padding"
+              style={this.state.backgroundDarkest}
+            >
+              <h3> back to results </h3>
+              <em>
+                <h3>print page</h3>
+              </em>
             </div>
-            <p>
+
+            <figure>
+              <div id="placeholder" />
+            </figure>
+
+            <h1 id="expanded-project-title" className="left-column-padding">
+              Project Title
+            </h1>
+
+            <p
+              id="expanded-project-description"
+              className="left-column-padding"
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
               malesuada magna eget orci sodales sagittis. Suspendisse viverra
               purus at elit placerat imperdiet. Vestibulum mauris urna, gravida
@@ -58,7 +69,6 @@ class Expanded extends Component {
           </section>
           <section className="right-column">
             <div className="tabs card">
-              <h1> Data tables Go Here </h1>
               <table>
                 <thead>
                   <th>Phase</th>
@@ -100,9 +110,8 @@ class Expanded extends Component {
                 </tbody>
               </table>
             </div>
-            <div className="comments card">
-              <h1> Comments Widget Goes Here </h1>
-              <form className="commentsForm">
+            <div className="comments">
+              <form className="comments-form">
                 <textarea placeholder="Submit a comment for this project" />
                 <input id="submitCommentButton" type="submit" value="submit" />
               </form>

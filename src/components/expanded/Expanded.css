@@ -1,39 +1,40 @@
 /* General Purpose Targetting */
-.expanded{
-    background: #eee;
-}
 .wrapper{
     display: flex;
-    align-items: center;
-    padding: 2%;
-}
-.wrapper h1{
-    text-align: center;
 }
 .left-column{
-    width: 45%;
+    width: 50%;
     line-height: 1.7;
+    color: #FFFFFF;
 }
 .right-column{
     margin-left: 2%;
     flex-direction: row;
     text-align: right;
-    width: 55%;
-}
-.card{
-    padding: 2%;
-    background: white;
-    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+    width: 50%;
 }
 
 /*Paragraph and Title*/
-.project-details{
+.left-column-padding{
+    padding: 3% 5% 3% 5%;
+}
+#content-mini-nav{
     display: flex;
+    margin-bottom: 2%;
+}
+#placeholder{
+    width: 100%;
+    height: 250px;
+    background: url("http://i.dailymail.co.uk/i/pix/2013/02/14/article-2278605-179228F1000005DC-472_634x519.jpg");
+}
+#expanded-project-title{
+    background: #333333;
+}
+#expanded-project-description{
+    background: #666666;
 }
 
 /* Funding Table */
-.tabs{
-}
 .table-num{
     text-align: right;
 }
@@ -69,20 +70,17 @@ table tr {
 
 /* Comments component */
 .comments{
-    margin-top: 10%;
+    background: #999999;
+    margin-top: 3%;
+    padding: 5%;
 }
-.commentsForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2%;
-    text-align: center;
+
+.comments-form textarea{
+    width: 100%;
+    height: 200px;
 }
-.commentsForm textarea{
-    width: 50%;
-    height: 100px;
-}
-.commentsForm input[type=submit]{
+.comments-form input[type=submit]{
+    margin-top: 3%;
 }
 
 
