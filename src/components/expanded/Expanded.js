@@ -9,9 +9,9 @@ class Expanded extends Component {
     console.log("this props ", this.props);
     /* the values for the background colors will be replaced by props that correspond the project type*/
     this.state = {
-      backgroundDarkest: { background: "#660066" },
-      backgroundMiddle: "",
-      backgroundLightest: ""
+      backgroundDarkest: { background: "rgba(102, 0, 102, 1)" },
+      backgroundMiddle: { background: "rgba(102, 0, 102, 0.5)" },
+      backgroundLightest: { background: "rgba(102, 0, 102, 0.1)" }
     };
   }
 
@@ -26,7 +26,9 @@ class Expanded extends Component {
               className="left-column-padding"
               style={this.state.backgroundDarkest}
             >
-              <h3> back to results </h3>
+              <em>
+                <h3> back to results </h3>
+              </em>
               <em>
                 <h3>print page</h3>
               </em>
@@ -68,15 +70,15 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <div className="tabs card">
+            <div>
               <table>
-                <thead>
+                <thead style={this.state.backgroundMiddle}>
                   <th>Phase</th>
                   <th>Fund</th>
                   <th>Year</th>
                   <th>Other</th>
                 </thead>
-                <tbody>
+                <tbody style={this.state.backgroundLightest}>
                   <tr>
                     <td>CON</td>
                     <td>TOLL</td>
@@ -113,7 +115,12 @@ class Expanded extends Component {
             <div className="comments">
               <form className="comments-form">
                 <textarea placeholder="Submit a comment for this project" />
-                <input id="submitCommentButton" type="submit" value="submit" />
+                <input
+                  id="submitCommentButton"
+                  type="submit"
+                  value="submit"
+                  style={this.state.backgroundDarkest}
+                />
               </form>
             </div>
           </section>
