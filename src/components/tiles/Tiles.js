@@ -2,15 +2,12 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 
 import "./Tiles.css";
-import Modal from "../modal/Modal.js";
 import { geometryColorType } from "../../utils/tileGeometryColorType.js";
 import { getFullTIP } from "../reducers/getTIPInfo";
 
-const clickModal = instance => {
-  instance.setState({
-    modalClicked: true,
-    toModal: instance.props.getFullTIP(instance.props.data.id)
-  });
+const clickTile = instance => {
+  // this function will eventually handle transition animation as well as the URL change
+  // TODO: link to the expanded page so that I can do the re-design for it
 };
 
 class Tile extends Component {
@@ -18,9 +15,7 @@ class Tile extends Component {
     super(props);
     this.state = {
       height: 300,
-      width: 300,
-      modalClicked: false,
-      toModal: []
+      width: 300
     };
   }
 
@@ -47,10 +42,9 @@ class Tile extends Component {
     return (
       <div
         className="tile"
-        onClick={linkEvent(this, clickModal)}
+        onClick={linkEvent(this, clickTile)}
         /*style={`background: url(${background})`}*/
       >
-        {this.props.data && this.state.modalClicked ? <Modal /> : null}
         <div className="tile-caption">
           <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
           <p className="tile-caption-text">

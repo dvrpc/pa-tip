@@ -45,9 +45,8 @@ export default function tipReducer(state = [], action) {
 /*** DISPATCHERS ***/
 // fallback case that gets tip projects by keywords
 export const getTIPByKeywords = keyword => dispatch => {
-  fetch(`http://staging.dvrpc.org/data/tip/2019/list/${keyword}`).then(
-    response =>
-      response.json().then(projects => dispatch(get_tip_keywords(projects)))
+  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(response =>
+    response.json().then(projects => dispatch(get_tip_keywords(projects)))
   );
 };
 
