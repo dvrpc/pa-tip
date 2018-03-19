@@ -21,6 +21,11 @@ p{
     font-size: 1.9rem;
 }
 /*TODO: get the linear gradient from yellow to grey*/
+.homepage-main{
+    background: linear-gradient(to right, rgba(245, 181, 10, 0.6), rgba(0, 0, 0, 0.1) 50%);
+    height: 75vh;
+    border: thin solid rgba(0, 0, 0, 0);
+}
 #bgvid{
     position: absolute;
     top: 50%;
@@ -36,7 +41,7 @@ p{
 #search-form {
     /*TODO: fix this margin-right hack. maybe set width or something*/
     margin: 5% 5% 0 44vw;
-    background: #eee;
+    background: rgba(238, 238, 238, 0.7);
     color: black;
     width: 50%;
     border-radius: 3px;
@@ -55,7 +60,6 @@ p{
 }
 .homepage-bottom-bar{
     /*fix this margin-top hack to fix it to the bottom of the page, but for now it's ok*/
-    margin-top: 62vh;
     background: #303030;
     padding: 1.5%;
 }
@@ -78,6 +82,7 @@ p{
     justify-content: center;
 }
 #tip-info h2{
+    font-size: 1.7rem;
     font-weight: 400;
 }
 .tip-info-headers{
@@ -86,6 +91,7 @@ p{
     padding-right: 3%;
 }
 #tip-info p{
+    font-size: 1.1rem;
     padding-bottom: 1%;
 }
 .tip-info-paragraphs{
