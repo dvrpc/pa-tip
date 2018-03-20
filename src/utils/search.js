@@ -12,7 +12,8 @@ export const search = (instance, e) => {
         if error in geocoding, run the keyword API call
         if success, call the address geocode jawnnnnn
     */
-    type: "address"
+    // using LIST search API for now to implement the expanded.js styles
+    type: "norf"
   };
   let validAddress = true;
 

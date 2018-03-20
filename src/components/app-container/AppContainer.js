@@ -7,9 +7,11 @@ import TilesContainer from "../tiles-container/TilesContainer.js";
 
 class AppContainer extends Component {
   render() {
+    const background =
+      "background: linear-gradient( to right, white 35%, #E8E8E8 65%, #DCDCDC)";
     return (
       <div>
-        <Navbar />
+        <Navbar backgroundGradient={background} />
         <div className="appContainer">
           <MapComponent />
           <TilesContainer />

@@ -1,8 +1,8 @@
 .navBar{
     position: relative;
     z-index: 3;
-    background: linear-gradient( to right, white 35%, #E8E8E8 65%, #DCDCDC);
-    color: #fdfdfd;
+/*    background: linear-gradient( to right, white 35%, #E8E8E8 65%, #DCDCDC);
+*/    color: #fdfdfd;
     padding: 2%;
     margin-bottom: 1%;
     display: flex;

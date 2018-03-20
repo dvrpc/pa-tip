@@ -9,22 +9,25 @@ class Expanded extends Component {
     console.log("this props ", this.props);
     /* the values for the background colors will be replaced by props that correspond the project type*/
     this.state = {
-      backgroundDarkest: { background: "rgba(102, 0, 102, 1)" },
-      backgroundMiddle: { background: "rgba(102, 0, 102, 0.5)" },
-      backgroundLightest: { background: "rgba(102, 0, 102, 0.1)" }
+      backgroundDarkest: "rgba(102, 0, 102, 1)",
+      backgroundMiddle: "rgba(102, 0, 102, 0.5)",
+      backgroundLightest: "rgba(102, 0, 102, 0.1)"
     };
   }
 
   render() {
+    const navBackground = `background: linear-gradient(to right, white 35%, ${
+      this.state.backgroundLightest
+    } 65%, ${this.state.backgroundMiddle})`;
     return (
       <div className="expanded">
-        <Navbar />
+        <Navbar backgroundGradient={navBackground} />
         <div className="wrapper">
           <section className="left-column">
             <div
               id="content-mini-nav"
               className="left-column-padding"
-              style={this.state.backgroundDarkest}
+              style={`background: ${this.state.backgroundDarkest}`}
             >
               <em>
                 <h3> back to results </h3>
@@ -70,48 +73,54 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <div>
-              <table>
-                <thead style={this.state.backgroundMiddle}>
-                  <th>Phase</th>
-                  <th>Fund</th>
-                  <th>Year</th>
-                  <th>Other</th>
-                </thead>
-                <tbody style={this.state.backgroundLightest}>
-                  <tr>
-                    <td>CON</td>
-                    <td>TOLL</td>
-                    <td>2017</td>
-                    <td>test</td>
-                  </tr>
-                  <tr>
-                    <td>DRF</td>
-                    <td>TAU</td>
-                    <td>2021</td>
-                    <td>test</td>
-                  </tr>
-                  <tr>
-                    <td>EKL</td>
-                    <td>NOP</td>
-                    <td>2029</td>
-                    <td>test</td>
-                  </tr>
-                  <tr>
-                    <td>EKL</td>
-                    <td>NOP</td>
-                    <td>2029</td>
-                    <td>test</td>
-                  </tr>
-                  <tr>
-                    <td>EKL</td>
-                    <td>NOP</td>
-                    <td>2029</td>
-                    <td>test</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <table>
+              <thead style={`background: ${this.state.backgroundMiddle}`}>
+                <th>
+                  <h3>Phase</h3>
+                </th>
+                <th>
+                  <h3>Fund</h3>
+                </th>
+                <th>
+                  <h3>Year</h3>
+                </th>
+                <th>
+                  <h3>Other</h3>
+                </th>
+              </thead>
+              <tbody style={`background: ${this.state.backgroundLightest}`}>
+                <tr>
+                  <td>CON</td>
+                  <td>TOLL</td>
+                  <td>2017</td>
+                  <td>test</td>
+                </tr>
+                <tr>
+                  <td>DRF</td>
+                  <td>TAU</td>
+                  <td>2021</td>
+                  <td>test</td>
+                </tr>
+                <tr>
+                  <td>EKL</td>
+                  <td>NOP</td>
+                  <td>2029</td>
+                  <td>test</td>
+                </tr>
+                <tr>
+                  <td>EKL</td>
+                  <td>NOP</td>
+                  <td>2029</td>
+                  <td>test</td>
+                </tr>
+                <tr>
+                  <td>EKL</td>
+                  <td>NOP</td>
+                  <td>2029</td>
+                  <td>test</td>
+                </tr>
+              </tbody>
+            </table>
             <div className="comments">
               <form className="comments-form">
                 <textarea placeholder="Submit a comment for this project" />
@@ -119,7 +128,7 @@ class Expanded extends Component {
                   id="submitCommentButton"
                   type="submit"
                   value="submit"
-                  style={this.state.backgroundDarkest}
+                  style={`background: ${this.state.backgroundDarkest}`}
                 />
               </form>
             </div>
