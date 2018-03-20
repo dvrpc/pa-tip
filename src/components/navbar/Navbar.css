@@ -1,24 +1,26 @@
 .navBar{
     position: relative;
-    z-index: 3;
-/*    background: linear-gradient( to right, white 35%, #E8E8E8 65%, #DCDCDC);
-*/    color: #fdfdfd;
+    color: #fdfdfd;
     padding: 2%;
     margin-bottom: 1%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
-input{
-    margin: 0 15px 0 15px;
-    padding: 10px;
+#nav-search-form input{
     border-radius: 5px;
     border: none;
     font-size: 1em;
 }
-input[type=textarea]{
+#nav-search-form{
+    display: flex;
+    margin-right: 3%;
 }
-input[type=button]{
+#navSearch{
+    margin-right: 10%;
+}
+#navBarButton{
+    padding: 3% 8% 3% 8%;
     background: #333333;
     color: #f1f1f1;
     cursor: pointer;
@@ -26,13 +28,14 @@ input[type=button]{
     -moz-box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
     box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.75);
 }
-input[type=button]:hover{
-    background: #ff7e3c;
+#navBarButton:hover{
+    background: #666666;
 }
-input[type=button]:focus{
+#navBarButton:focus{
     outline: none;
 }
-input[type=button]:active{
+#navBarButton:active{
+    margin-top: 1%;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;

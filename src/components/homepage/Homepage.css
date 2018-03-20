@@ -37,17 +37,17 @@
     transform: translateX(-50%) translateY(-45%);
 }
 #search-form {
-    /*TODO: fix this margin-right hack. maybe set width or something*/
+    border-radius: 3px;
     margin: 5% 5% 0 calc(30vw + 137px + 2.5%);
     background: rgba(238, 238, 238, 0.7);
     color: black;
     width: 50%;
-    border-radius: 3px;
     box-shadow: 2px 3px 4px 1px rgba(0,0,0, 0.55);
 }
 
 #search-form input{
-    background: url('./magnifying-glass.png') no-repeat scroll 0px 50%;
+    border: none;
+    background: url('./magnifying-glass.png') no-repeat scroll 7px 50%;
     padding-left: 30px;
     font-size: 1.4rem;
     width: 90%;

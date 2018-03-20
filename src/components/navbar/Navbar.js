@@ -11,7 +11,6 @@ import TIP_logo from "./TIP_logo.png";
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    console.log("navbar props are ", this.props.backgroundGradient);
   }
 
   render() {
@@ -27,7 +26,7 @@ class Navbar extends Component {
             type="textarea"
             placeholder="search by municipality, city, zip code, project, or fund"
           />
-          <input type="button" value="search" />
+          <input id="navBarButton" type="button" value="search" />
         </form>
       </nav>
     );
