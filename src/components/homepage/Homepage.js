@@ -115,19 +115,19 @@ class Homepage extends Component {
                 Burlington, Camden, Gloucester, and Mercer in New Jersey.
               </p>
               <p>
-                DVRPC’s vision for the Greater Philadelphia Region is a
-                prosperous, innovative, equitable, resilient, and sustainable
-                region that increases mobility choices by investing in a safe
-                and modern transportation system; that protects and preserves
-                our natural resources while creating healthy communities; and
-                that fosters greater opportunities for all.
+                <strong>DVRPC’s vision</strong> for the Greater Philadelphia
+                Region is a prosperous, innovative, equitable, resilient, and
+                sustainable region that increases mobility choices by investing
+                in a safe and modern transportation system; that protects and
+                preserves our natural resources while creating healthy
+                communities; and that fosters greater opportunities for all.
               </p>
               <p>
-                DVRPC’s mission is to achieve this vision by convening the
-                widest array of partners to inform and facilitate data-driven
-                decision-making. We are engaged across the region, and strive to
-                be leaders and innovators, exploring new ideas and creating best
-                practices.
+                <strong>DVRPC’s mission</strong> is to achieve this vision by
+                convening the widest array of partners to inform and facilitate
+                data-driven decision-making. We are engaged across the region,
+                and strive to be leaders and innovators, exploring new ideas and
+                creating best practices.
               </p>
             </div>
           </div>
