@@ -20,6 +20,7 @@
     margin-right: 10%;
 }
 #navBarButton{
+    width: 100%;
     padding: 3% 8% 3% 8%;
     background: #333333;
     color: #f1f1f1;
