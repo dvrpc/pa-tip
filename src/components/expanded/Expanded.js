@@ -73,7 +73,7 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <table>
+            <table id="funding-and-awards-table">
               <thead style={`background: ${this.state.backgroundMiddle}`}>
                 <th>
                   <h3>Phase</h3>
@@ -90,31 +90,31 @@ class Expanded extends Component {
               </thead>
               <tbody style={`background: ${this.state.backgroundLightest}`}>
                 <tr>
-                  <td>CON</td>
+                  <td>Phase 3</td>
                   <td>TOLL</td>
                   <td>2017</td>
                   <td>test</td>
                 </tr>
                 <tr>
-                  <td>DRF</td>
+                  <td>Phase 10</td>
                   <td>TAU</td>
                   <td>2021</td>
                   <td>test</td>
                 </tr>
                 <tr>
-                  <td>EKL</td>
+                  <td>Phase 6</td>
                   <td>NOP</td>
                   <td>2029</td>
                   <td>test</td>
                 </tr>
                 <tr>
-                  <td>EKL</td>
+                  <td>Phase 8</td>
                   <td>NOP</td>
                   <td>2029</td>
                   <td>test</td>
                 </tr>
                 <tr>
-                  <td>EKL</td>
+                  <td>Phase 1</td>
                   <td>NOP</td>
                   <td>2029</td>
                   <td>test</td>
