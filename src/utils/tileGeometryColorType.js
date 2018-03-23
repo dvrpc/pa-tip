@@ -53,14 +53,14 @@ export const geometryColorType = project => {
   let path;
   if (geometryType === "LineString") {
     path = `&path=color:0x${
-      colors[geometryType]
+      colors[geometryType].darkest
     }ff|weight:8|enc:${Polyline.fromGeoJSON(project)}`;
   } else if (geometryType === "MultiLineString") {
     path = project.geometry.coordinates
       .map(
         c =>
           `&path=color:0x${
-            colors[geometryType]
+            colors[geometryType].darkest
           }ff|weight:8|enc:${Polyline.fromGeoJSON({
             type: "LineString",
             coordinates: c
@@ -68,15 +68,15 @@ export const geometryColorType = project => {
       )
       .join("");
   } else if (geometryType === "Point") {
-    path = `&markers=color:0x${colors[geometryType]}|${
+    path = `&markers=color:0x${colors[geometryType].darkest}|${
       project.geometry.coordinates[1]
     },${project.geometry.coordinates[0]}`;
   } else if (geometryType === "Polygon") {
     path = project.geometry.coordinates
       .map(
         c =>
-          `&path=color:0x${colors[geometryType]}ff|fillcolor:0x${
-            colors[geometryType]
+          `&path=color:0x${colors[geometryType].darkest}ff|fillcolor:0x${
+            colors[geometryType].darkest
           }66|weight:4|enc:${Polyline.fromGeoJSON({
             type: "LineString",
             coordinates: c

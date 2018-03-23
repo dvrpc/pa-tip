@@ -26,16 +26,15 @@ export default function tipReducer(state = [], action) {
     case GET_TIP_KEYWORDS:
       return Object.assign({}, state, { keyword: action.keyword });
     case GET_TIP_BY_MUNICIPAL_BOUNDARIES:
-      console.log("hit the municipal boundaries jawn with: ", action.geoData);
       return Object.assign({}, state, { geoData: action.geoData });
     case GET_TIP_BY_ADDRESS:
-      console.log("got that address jawn ", action.address);
       return Object.assign({}, state, { address: action.address });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
     case GET_TIP_BY_MAP_BOUNDS:
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
+      console.log("full tip REDUCER with ", action.id);
       return Object.assign({}, state, { details: action.id });
     default:
       return state;

@@ -17,7 +17,6 @@ class TilesContainer extends Component {
     const test = this.props.projects
       ? this.props.projects.map(project => this.props.geometry(project.id))
       : "fail or whatever";
-    console.log("test is ", test);
   }
 
   // TODO: add a 'no results found' message when the API request comes up blank

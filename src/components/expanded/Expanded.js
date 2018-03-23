@@ -1,24 +1,37 @@
 import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
 
+import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 
+// TODO BY EOD TODAY: get full tip from props
+// use the category type from the full tip response to dynamically set the COLORS
 class Expanded extends Component {
   constructor(props) {
     super(props);
-    console.log("this props ", this.props);
+    console.log("expanded props ", this.props);
     /* the values for the background colors will be replaced by props that correspond the project type*/
     this.state = {
-      backgroundDarkest: "rgba(102, 0, 102, 1)",
-      backgroundMiddle: "rgba(102, 0, 102, 0.5)",
-      backgroundLightest: "rgba(102, 0, 102, 0.1)"
+      colorScheme: {
+        lightest: "white",
+        middle: "grey",
+        darkest: "black"
+      }
     };
   }
 
+  componentDidUpdate() {
+    const colorScheme = colors[this.props.details.category];
+    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
+    console.log("state after colorscheme update ", this.state);
+  }
+
   render() {
+    const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
-      this.state.backgroundLightest
-    } 65%, ${this.state.backgroundMiddle})`;
+      colorScheme.lightest
+    } 65%, ${colorScheme.middle})`;
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />
@@ -27,7 +40,7 @@ class Expanded extends Component {
             <div
               id="content-mini-nav"
               className="left-column-padding"
-              style={`background: ${this.state.backgroundDarkest}`}
+              style={`background: ${colorScheme.darkest}`}
             >
               <em>
                 <h3 onClick={this.props.history.goBack}> back to results </h3>
@@ -74,7 +87,7 @@ class Expanded extends Component {
           </section>
           <section className="right-column">
             <table id="funding-and-awards-table">
-              <thead style={`background: ${this.state.backgroundMiddle}`}>
+              <thead style={`background: ${colorScheme.middle}`}>
                 <th>
                   <h3>Phase</h3>
                 </th>
@@ -88,7 +101,7 @@ class Expanded extends Component {
                   <h3>Other</h3>
                 </th>
               </thead>
-              <tbody style={`background: ${this.state.backgroundLightest}`}>
+              <tbody style={`background: ${colorScheme.lightest}`}>
                 <tr>
                   <td>Phase 3</td>
                   <td>TOLL</td>
@@ -128,7 +141,7 @@ class Expanded extends Component {
                   id="submitCommentButton"
                   type="submit"
                   value="submit"
-                  style={`background: ${this.state.backgroundDarkest}`}
+                  style={`background: ${colorScheme.darkest}`}
                 />
               </form>
             </div>
@@ -139,4 +152,10 @@ class Expanded extends Component {
   }
 }
 
-export default Expanded;
+const mapStateToProps = state => {
+  return {
+    details: state.details
+  };
+};
+
+export default connect(mapStateToProps, null)(Expanded);

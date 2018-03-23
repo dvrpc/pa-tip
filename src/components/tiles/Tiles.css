@@ -14,17 +14,16 @@
 
 /* Text Content */
 .tile-caption{
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    position: absolute;
+/*    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+*/    position: absolute;
     z-index: 1;
     left: 0;
     right: 0;
     bottom: 0;
-    /* TODO: move this background property to a tiles.js CSS object that accepts it's values from props*/
-    background: linear-gradient(to bottom, #ffffff, #660066 75%);
     padding: 2rem 3px 3px;
 }
 .tile-caption-text{
+    color: #333333;
     margin: 1% 0 2% 2%;
 }
 .tile-caption h2 {

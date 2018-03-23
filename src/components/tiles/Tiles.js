@@ -3,7 +3,10 @@ import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
-import { geometryColorType } from "../../utils/tileGeometryColorType.js";
+import {
+  geometryColorType,
+  colors
+} from "../../utils/tileGeometryColorType.js";
 import { getFullTIP } from "../reducers/getTIPInfo";
 
 const clickTile = (instance, e) => {
@@ -25,7 +28,6 @@ class Tile extends Component {
   }
 
   componentDidMount() {
-    console.log("this is ", this);
     const tile = document.querySelector(".tile");
     // TODO: add setState to window resizing like in the analytics dashboard page
     this.setState({
@@ -45,13 +47,20 @@ class Tile extends Component {
     }x${this.state.height}&maptype=hybrid${path}`;
     */
 
+    // based on the project type, assign the gradient value
+    // TODO: see how this changes depending on the serach type: the props extension might be different for the geocoded searches
+    const projectType = this.props.data.category;
+    const gradient = `background: linear-gradient(to bottom, ${
+      colors[projectType].lightest
+    }, ${colors[projectType].middle} 75%)`;
+
     return (
       <div
         className="tile"
         onClick={linkEvent(this, clickTile)}
         /*style={`background: url(${background})`}*/
       >
-        <div className="tile-caption">
+        <div className="tile-caption" style={gradient}>
           <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
           <p className="tile-caption-text">
             {this.props.data.county} County, PA
