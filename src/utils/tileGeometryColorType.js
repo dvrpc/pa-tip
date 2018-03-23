@@ -1,15 +1,51 @@
 import Polyline from "@mapbox/polyline";
 
 export const colors = {
-  "Bicycle/Pedestrian Improvement": "3388FF",
-  "Bridge Repair/Replacement": "b50103",
-  Streetscape: "00c8a9",
-  "Transit Improvements": "4240BF",
-  "Signal/ITS Improvements": "e8c346",
-  "Roadway Rehabilitation": "BF409F",
-  "Roadway New Capacity": "BF8A40",
-  "Intersection/Interchange Improvements": "F57332",
-  Other: "3b9770"
+  "Bicycle/Pedestrian Improvement": {
+    lightest: "rgba(242, 101, 34, 0.1)",
+    middle: "rgba(242, 101, 34, 0.5)",
+    darkest: "rgba(242, 101, 34, 1)"
+  },
+  "Bridge Repair/Replacement": {
+    lightest: "rgba(34, 56, 96, 0.1)",
+    middle: "rgba(34, 56, 96, 0.5)",
+    darkest: "rgba(34, 56, 96, 1)"
+  },
+  Streetscape: {
+    lightest: "rgba(11, 109, 50, 0.1)",
+    middle: "rgba(11, 109, 50, 0.5)",
+    darkest: "rgba(11, 109, 50, 1)"
+  },
+  "Transit Improvements": {
+    lightest: "rgba(114, 159, 170, 0.1)",
+    middle: "rgba(114, 159, 170, 0.5)",
+    darkest: "rgba(114, 159, 170, 1)"
+  },
+  "Signal/ITS Improvements": {
+    lightest: "rbga(237, 28, 36, 0.1)",
+    middle: "rbga(237, 28, 36, 0.5)",
+    darkest: "rbga(237, 28, 36, 1)"
+  },
+  "Roadway Rehabilitation": {
+    lightest: "rgba(81, 24, 81, 0.1)",
+    middle: "rgba(81, 24, 81, 0.5)",
+    darkest: "rgba(81, 24, 81, 1)"
+  },
+  "Roadway New Capacity": {
+    lightest: "rgba(157, 29, 32, 0.1)",
+    middle: "rgba(157, 29, 32, 0.5)",
+    darkest: "rgba(157, 29, 32, 1)"
+  },
+  "Intersection/Interchange Improvements": {
+    lightest: "rgba(255, 193, 14, 0.1)",
+    middle: "rgba(255, 193, 14, 0.5)",
+    darkest: "rgba(255, 193, 14, 1)"
+  },
+  Other: {
+    lightest: "rgba(90, 191, 65, 0.1)",
+    middle: "rgba(90, 191, 65, 0.5)",
+    darkest: "rgba(90, 191, 65, 1)"
+  }
 };
 
 export const geometryColorType = project => {

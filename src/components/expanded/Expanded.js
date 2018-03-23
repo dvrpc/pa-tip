@@ -30,7 +30,7 @@ class Expanded extends Component {
               style={`background: ${this.state.backgroundDarkest}`}
             >
               <em>
-                <h3> back to results </h3>
+                <h3 onClick={this.props.history.goBack}> back to results </h3>
               </em>
               <em>
                 <h3>print page</h3>
