@@ -14,14 +14,20 @@ class TilesContainer extends Component {
   }
 
   componentDidUpdate() {
-    const test = this.props.projects
-      ? this.props.projects.map(project => this.props.geometry(project.id))
+    console.log("tile container props at didUpdate() ", this.props);
+    const test = this.props.keywordProjects
+      ? this.props.keywordProjects.map(project =>
+          this.props.geometry(project.id)
+        )
       : "fail or whatever";
   }
 
   // TODO: add a 'no results found' message when the API request comes up blank
   render() {
-    const projects = this.props.projects ? this.props.projects : [];
+    // TODO: a better way than nested ternaries b/c this condition will get more complicated
+    const projects = this.props.keywordProjects
+      ? this.props.keywordProjects
+      : this.props.boundsProjects ? this.props.boundsProjects.features : [];
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -50,7 +56,8 @@ class TilesContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    projects: state.keyword
+    keywordProjects: state.keyword,
+    boundsProjects: state.projects
   };
 };
 

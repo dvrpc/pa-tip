@@ -2,7 +2,11 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import { getTIPByKeywords } from "../reducers/getTIPInfo";
+import {
+  getTIPByKeywords,
+  setMapCenter,
+  getTIPByMapBounds
+} from "../reducers/getTIPInfo";
 import { search } from "../../utils/search.js";
 import "./Navbar.css";
 import logo from "./logo.png";
@@ -35,7 +39,8 @@ class Navbar extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIPByKeywords: address => dispatch(getTIPByKeywords(address))
+    getTIPByKeywords: address => dispatch(getTIPByKeywords(address)),
+    setMapCenter: latlng => dispatch(setMapCenter(latlng))
   };
 };
 

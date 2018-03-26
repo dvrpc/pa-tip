@@ -46,6 +46,7 @@ class Homepage extends Component {
             </video>
             <form id="search-form" onSubmit={linkEvent(this, search)}>
               <input
+                required
                 type="text"
                 placeholder="search by municipality, city, zip code, project, or fund"
               />

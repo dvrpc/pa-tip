@@ -33,11 +33,6 @@ class MapComponent extends Component {
     const SEbounds = bounds.getSouthEast();
     const SWbounds = bounds.getSouthWest();
 
-    console.log("northeast bounds ", NEbounds);
-    console.log("northwest bounds ", NWbounds);
-    console.log("sw ", SWbounds);
-    console.log("southestast ", SEbounds);
-
     this.props.getTIPByMapBounds([NWbounds, NEbounds, SEbounds, SWbounds]);
   }
 

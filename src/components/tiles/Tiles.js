@@ -37,19 +37,24 @@ class Tile extends Component {
   }
 
   render() {
-    /*  
-    // The following has been refactored to work from utils:
+    console.log("what is props data ", this.props.data);
 
-    const path = geometryColorType(this.props.data)
+    // Get a background image for the project according to its type (function needs coords & category)
+    const project = this.props.data.attributes || this.props.data;
+    // this.props.attributes is for arcGIS searches
+    // this.props.data is for keyword searches
+    const path = geometryColorType(project);
+
     //TODO: replace this API key with a process.ENV secret
     const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
       this.state.width
     }x${this.state.height}&maptype=hybrid${path}`;
-    */
 
-    // based on the project type, assign the gradient value
-    // TODO: see how this changes depending on the serach type: the props extension might be different for the geocoded searches
-    const projectType = this.props.data.category;
+    console.log("background of the tile is ", background);
+
+    // based on the project type, assign the gradient value for the caption text
+    const projectType =
+      this.props.data.attributes.DESCRIPTIO || this.props.data.category;
     const gradient = `background: linear-gradient(to bottom, ${
       colors[projectType].lightest
     }, ${colors[projectType].middle} 75%)`;
@@ -58,7 +63,7 @@ class Tile extends Component {
       <div
         className="tile"
         onClick={linkEvent(this, clickTile)}
-        /*style={`background: url(${background})`}*/
+        style={`background: url(${background})`}
       >
         <div className="tile-caption" style={gradient}>
           <h2 className="tile-caption-text">{this.props.data.road_name}</h2>

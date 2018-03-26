@@ -32,9 +32,9 @@ export default function tipReducer(state = [], action) {
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
     case GET_TIP_BY_MAP_BOUNDS:
+      console.log("API response for the map bounds reducer is ", action.bounds);
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
-      console.log("full tip REDUCER with ", action.id);
       return Object.assign({}, state, { details: action.id });
     default:
       return state;
@@ -62,21 +62,20 @@ export const getTIPByMunicipalBoundaries = id => dispatch => {
   );
 };
 
+// TODO: maybe delete this is could be obsolete
 export const getTIPByAddress = address => dispatch => {
-  // need to somehow get the mapboxGL boxbounds from this ishhhh
-  // with the geocoded address, update the center props in the store which map will access
   console.log("address is ", address);
 };
 
 export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
 
+// get all projects within the boundaires of the current mapbox view
 export const getTIPByMapBounds = bounds => dispatch => {
-  console.log("the bounds are ", bounds);
   fetch(
-    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/MapServer/0/query?where=&text=&objectIds=&time=&geometry=%5B${bounds}%5D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelWithin&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&returnTrueCurves=false&resultOffset=&resultRecordCount=&f=pjson`
+    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/MapServer/0/query?where=&text=&objectIds=&time=&geometry=%5B${bounds}%5D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelWithin&relationParam=&outFields=*&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&returnTrueCurves=false&resultOffset=&resultRecordCount=&f=pjson`
   ).then(response =>
-    response.json().then(projects => dispatch(get_tip_by_map_bounds))
+    response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
   );
 };
 

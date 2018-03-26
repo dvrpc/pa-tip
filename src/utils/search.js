@@ -13,18 +13,17 @@ export const search = (instance, e) => {
         if success, call the address geocode jawnnnnn
     */
     // using LIST search API for now to implement the expanded.js styles
-    type: "norf"
+    type: "address"
   };
+
   let validAddress = true;
 
   if (validAddress) {
+    // get projects by municipal boundaries
     if (input.type === "municipal boundary") {
-      // get tip by municipal boundaries
-      // TBD on updating the map cause the JSON municipals might already have the jawns jawned out
-    } else if (input.type === "address") {
       // geocode address to get the lat/long of it
+    } else if (input.type === "address") {
       geocoder.geocode(input.value, (err, data) => {
-        console.log("data is ", data);
         // TODO: error handling
         const northeast = data.results[0].geometry.bounds.northeast;
         const southwest = data.results[0].geometry.bounds.southwest;
@@ -32,6 +31,8 @@ export const search = (instance, e) => {
       });
     } else {
       instance.props.getTIPByKeywords(input.value);
+      // TODO: a way to update the map and get co-ordinate data from keyword search otherwise
+      // it's pretty much useless. Unless it can get folded into the 'municipal boundary' search
     }
 
     // TODO: validate the search input BEFORE pushing to history
