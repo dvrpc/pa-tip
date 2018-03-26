@@ -9,6 +9,7 @@ import {
 } from "../../utils/tileGeometryColorType.js";
 import { getFullTIP } from "../reducers/getTIPInfo";
 
+// TODO: refactor this to accept the inputs given by the arcGIS call
 const clickTile = (instance, e) => {
   e.preventDefault();
   // TODO: animated transition from results page to expanded page
@@ -37,8 +38,6 @@ class Tile extends Component {
   }
 
   render() {
-    console.log("what is props data ", this.props.data);
-
     // Get a background image for the project according to its type (function needs coords & category)
     const project = this.props.data.attributes || this.props.data;
     // this.props.attributes is for arcGIS searches
@@ -50,6 +49,7 @@ class Tile extends Component {
       this.state.width
     }x${this.state.height}&maptype=hybrid${path}`;
 
+    // TODO: find out why this is global default view and not the specific point...
     console.log("background of the tile is ", background);
 
     // based on the project type, assign the gradient value for the caption text
@@ -59,6 +59,7 @@ class Tile extends Component {
       colors[projectType].lightest
     }, ${colors[projectType].middle} 75%)`;
 
+    // TODO: refactor this to work with the output of the arcGIS call
     return (
       <div
         className="tile"

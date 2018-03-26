@@ -5,55 +5,55 @@ export const colors = {
     lightest: "rgba(242, 101, 34, 0.1)",
     middle: "rgba(242, 101, 34, 0.5)",
     darkest: "rgba(242, 101, 34, 1)",
-    map: "#f26522"
+    forMap: "#f26522"
   },
   "Bridge Repair/Replacement": {
     lightest: "rgba(34, 56, 96, 0.1)",
     middle: "rgba(34, 56, 96, 0.5)",
     darkest: "rgba(34, 56, 96, 1)",
-    map: "#223860"
+    forMap: "#223860"
   },
   Streetscape: {
     lightest: "rgba(11, 109, 50, 0.1)",
     middle: "rgba(11, 109, 50, 0.5)",
     darkest: "rgba(11, 109, 50, 1)",
-    map: "#0b6d32"
+    forMap: "#0b6d32"
   },
   "Transit Improvements": {
     lightest: "rgba(114, 159, 170, 0.1)",
     middle: "rgba(114, 159, 170, 0.5)",
     darkest: "rgba(114, 159, 170, 1)",
-    map: "#729faa"
+    forMap: "#729faa"
   },
   "Signal/ITS Improvements": {
     lightest: "rgba(237, 28, 36, 0.1)",
     middle: "rgba(237, 28, 36, 0.5)",
     darkest: "rgba(237, 28, 36, 1)",
-    map: "#ed1c24"
+    forMap: "#ed1c24"
   },
   "Roadway Rehabilitation": {
     lightest: "rgba(81,24,81,0.1)",
     middle: "rgba(81,24,81,0.5)",
     darkest: "rgba(81,24,81,1)",
-    map: "#511851"
+    forMap: "#511851"
   },
   "Roadway New Capacity": {
     lightest: "rgba(157, 29, 32, 0.1)",
     middle: "rgba(157, 29, 32, 0.5)",
     darkest: "rgba(157, 29, 32, 1)",
-    map: "#9d1d20"
+    forMap: "#9d1d20"
   },
   "Intersection/Interchange Improvements": {
     lightest: "rgba(255,193,14,0.1)",
     middle: "rgba(255,193,14,0.5)",
     darkest: "rgba(255,193,14,1)",
-    map: "#ffc10e"
+    forMap: "#ffc10e"
   },
   Other: {
     lightest: "rgba(90, 191, 65, 0.1)",
     middle: "rgba(90, 191, 65, 0.5)",
     darkest: "rgba(90, 191, 65, 1)",
-    map: "#5abf41"
+    forMap: "#5abf41"
   }
 };
 
@@ -72,11 +72,11 @@ export const geometryColorType = project => {
   const category = project.category || project.DESCRIPTIO;
 
   // this line is just to TEST the arcGIS points to see if they will work
-  let path = `&markers=color:0x${colors[category].map}|${project.LNG},${
-    project.LAG
+  // AS IS: a generic map view gets set so this is NOT working
+  let path = `&markers=color:0x${colors[category].forMap}|${project.LAG},${
+    project.LNG
   }`;
 
-  console.log("path is ", path);
   /*  
   This block works for the keyword and MAY WORK for the arcGIS stuff w/some refactoring down the road
   if (geometryType === "LineString") {
