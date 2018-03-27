@@ -25,9 +25,7 @@ export const search = (instance, e) => {
     } else if (input.type === "address") {
       geocoder.geocode(input.value, (err, data) => {
         // TODO: error handling
-        const northeast = data.results[0].geometry.bounds.northeast;
-        const southwest = data.results[0].geometry.bounds.southwest;
-        instance.props.setMapCenter([northeast, southwest]);
+        instance.props.setMapCenter(data.results[0].geometry.location);
       });
     } else {
       instance.props.getTIPByKeywords(input.value);
