@@ -5,17 +5,10 @@ export const search = (instance, e) => {
   const input = {
     value: e.target.querySelector("input").value,
     // TODO: find a way to dynamically judge and replace the type of input
-    /*
-      option 1:
-      standardize the input & compare it to the municipal dictionary. if it's in there, input.type = municipal
-      if it's not in the municipal dictionary, input.type = geocode and then:
-        if error in geocoding, run the keyword API call
-        if success, call the address geocode jawnnnnn
-    */
-    // using LIST search API for now to implement the expanded.js styles
-    type: "address"
+    type: "test"
   };
 
+  // TODO: input validation
   let validAddress = true;
 
   if (validAddress) {

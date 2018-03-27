@@ -19,7 +19,6 @@ class Expanded extends Component {
 
   // use the category type from the full tip response to brand the page by category color scheme
   componentDidUpdate() {
-    console.log("expanded props on update ", this.props);
     // TODO: error handling when going back to main page
     const colorScheme = colors[this.props.details.category];
     if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });

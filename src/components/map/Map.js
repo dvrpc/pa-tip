@@ -19,14 +19,14 @@ class MapComponent extends Component {
       style: "mapbox://styles/mapbox/streets-v9",
       // mount w/searched co-ordinates or default to center
       center: this.props.center
-        ? [this.props.center[1], this.props.center[0]]
+        ? [this.props.center.lng, this.props.center.lat]
         : [-75.1633, 39.9522],
       zoom: 13
     });
   }
 
   componentDidUpdate() {
-    this.map.flyTo({ center: [this.props.center[1], this.props.center[0]] });
+    this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
 
     // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
     const bounds = this.map.getBounds();
@@ -35,7 +35,7 @@ class MapComponent extends Component {
     const SEbounds = bounds.getSouthEast();
     const SWbounds = bounds.getSouthWest();
 
-    this.props.getTIPByMapBounds([NWbounds, NEbounds, SEbounds, SWbounds]);
+    this.props.getTIPByMapBounds([NEbounds, NWbounds, SWbounds, SEbounds]);
   }
 
   componentWillUnmount() {

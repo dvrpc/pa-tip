@@ -11,6 +11,7 @@ import { getFullTIP } from "../reducers/getTIPInfo";
 
 // TODO: refactor this to accept the inputs given by the arcGIS call
 const clickTile = (instance, e) => {
+  console.log("tile js instance props ", instance.props);
   e.preventDefault();
   // TODO: animated transition from results page to expanded page
   const county = instance.props.data.county;
@@ -47,19 +48,18 @@ class Tile extends Component {
     //TODO: replace this API key with a process.ENV secret
     const background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${
       this.state.width
-    }x${this.state.height}&maptype=hybrid${path}`;
+    }x${this.state.height}&maptype=satellite${path}`;
 
     // TODO: find out why this is global default view and not the specific point...
     console.log("background of the tile is ", background);
 
     // based on the project type, assign the gradient value for the caption text
-    const projectType =
-      this.props.data.attributes.DESCRIPTIO || this.props.data.category;
+    const projectType = project.DESCRIPTIO || project.category;
     const gradient = `background: linear-gradient(to bottom, ${
       colors[projectType].lightest
-    }, ${colors[projectType].middle} 75%)`;
+    }, ${colors[projectType].darkest} 45%)`;
 
-    // TODO: refactor this to work with the output of the arcGIS call
+    // TODO: refactor this to work with the output of the arcGIS call (add a conditional for the project. instances)
     return (
       <div
         className="tile"
@@ -67,10 +67,8 @@ class Tile extends Component {
         style={`background: url(${background})`}
       >
         <div className="tile-caption" style={gradient}>
-          <h2 className="tile-caption-text">{this.props.data.road_name}</h2>
-          <p className="tile-caption-text">
-            {this.props.data.county} County, PA
-          </p>
+          <h2 className="tile-caption-text">{project.road_name}</h2>
+          <p className="tile-caption-text">{project.county} County, PA</p>
         </div>
         <a href="#" class="tile-link" />
       </div>
