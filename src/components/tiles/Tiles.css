@@ -1,6 +1,5 @@
 .tile{
     background: #ffffff;
-    color: #fff;
     position: relative;
     height: 35%;
     width: 45%;
@@ -14,8 +13,8 @@
 
 /* Text Content */
 .tile-caption{
-/*    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-*/    position: absolute;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    position: absolute;
     z-index: 1;
     left: 0;
     right: 0;
@@ -23,7 +22,7 @@
     padding: 2rem 3px 3px;
 }
 .tile-caption-text{
-    color: #333333;
+    color: #ffffff;
     margin: 1% 0 2% 2%;
 }
 .tile-caption h2 {
@@ -40,21 +39,4 @@
     bottom: 0;
     left: 0;
     right: 0;
-}
-
-/* Comments Button */
-button{
-    font-size: 1em;
-    background: #457B9D;
-    color: #fdfdfd;
-    padding: 7px 2px 7px 2px;
-    width: 20%;
-    display: block;
-    margin: 5% auto 0 auto;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-button:hover{
-    opacity: 0.7;
 }

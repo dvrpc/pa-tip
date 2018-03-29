@@ -14,7 +14,6 @@ class TilesContainer extends Component {
   }
 
   componentDidUpdate() {
-    console.log("tile container props at didUpdate() ", this.props);
     const test = this.props.keywordProjects
       ? this.props.keywordProjects.map(project =>
           this.props.geometry(project.id)
@@ -44,6 +43,14 @@ class TilesContainer extends Component {
           <p>{projects.length} results.</p>
         </div>
         {projects && projects.length ? (
+          /* issue: keyword search yields info as this.props.data while geocode search yields
+          info as this.props.data.attributes. I could trim it here so that Tile (and geoColorType)
+          have the same input format to work with..
+          An advantage of this is that rn, the keys are undefined. trimming off attributes
+          gives access to the key, but doesn't actually change anything else tbh. 
+          Seems like the fix at this point is just to make the keys more selective
+            
+          */
           projects.map(feature => <Tile data={feature} key={feature.id} />)
         ) : (
           <img id="no-results" src={loading} alt="loading" />

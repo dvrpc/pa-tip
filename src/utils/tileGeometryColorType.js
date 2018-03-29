@@ -1,3 +1,4 @@
+// TODO: DELETE THIS IF MY REFACTOR TURNS OUT TO BE THE MOVE
 import Polyline from "@mapbox/polyline";
 
 export const colors = {
@@ -59,15 +60,9 @@ export const colors = {
 
 // CONSIDER: having this function take parameters - category & co-ordinates. Do the logic from tiles.js and only send what's necessary instead of the whole project
 export const geometryColorType = project => {
-  console.log("project received from arcGIS call ", project);
-
-  // Format the projects lat/lng to work with static google maps API
-  // const formattedLatLng = project.coordinates.join('|')
-  const formattedLatLng = [
-    [39.9522, -75.1633],
-    [39.949052, -75.155296],
-    [39.949053, -75.144653]
-  ].join("|");
+  // Format the projects lat/lng to work with static google maps API: lat,lng|lat,lng|lat,lng|etc.,
+  // TODO: map more than just points...
+  const formattedLatLng = `${project.LAG},${project.LNG}` + "";
 
   // get the Category (streestcape, transit improvement, etc., of a project)
   // project.category is for keyword search

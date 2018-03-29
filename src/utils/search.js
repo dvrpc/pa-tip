@@ -5,7 +5,7 @@ export const search = (instance, e) => {
   const input = {
     value: e.target.querySelector("input").value,
     // TODO: find a way to dynamically judge and replace the type of input
-    type: "test"
+    type: "address"
   };
 
   // TODO: input validation
