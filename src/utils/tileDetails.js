@@ -3,10 +3,10 @@ import { geometryColorType, colors } from "./tileGeometryColorType.js";
 export const tileDetails = (propsProject, width, height) => {
   let projectName;
   let background;
-  let gradient;
   let projectType;
   let county;
   let id;
+  let borderBottom;
 
   // project.attributes is for arcGIS searches
   // project.data is for keyword searches
@@ -27,11 +27,10 @@ export const tileDetails = (propsProject, width, height) => {
 
     // based on the project type, assign the gradient value for the caption text
     projectType = project.DESCRIPTIO || project.category;
-    gradient = `background: linear-gradient(to bottom, ${
-      colors[projectType].lightest
-    }, ${colors[projectType].darkest} 45%)`;
 
-    return { background, gradient, projectName, county, id };
+    borderBottom = `border-bottom: 8px solid ${colors[projectType].darkest}`;
+
+    return { background, borderBottom, projectName, county, id };
   } else {
     return false;
   }

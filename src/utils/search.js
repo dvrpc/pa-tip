@@ -5,7 +5,7 @@ export const search = (instance, e) => {
   const input = {
     value: e.target.querySelector("input").value,
     // TODO: find a way to dynamically judge and replace the type of input
-    type: "address"
+    type: "geocode"
   };
 
   // TODO: input validation
@@ -14,8 +14,8 @@ export const search = (instance, e) => {
   if (validAddress) {
     // get projects by municipal boundaries
     if (input.type === "municipal boundary") {
-      // geocode address to get the lat/long of it
-    } else if (input.type === "address") {
+      // geocode geocode to get the lat/long of it
+    } else if (input.type === "geocode") {
       geocoder.geocode(input.value, (err, data) => {
         // TODO: error handling
         instance.props.setMapCenter(data.results[0].geometry.location);

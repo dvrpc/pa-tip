@@ -46,9 +46,11 @@ class Tile extends Component {
         style={`background: url(${project.background})`}
         ref={tile => (this.tileRef = tile)}
       >
-        <div className="tile-caption" style={project.gradient}>
+        <div className="tile-caption" style={project.borderBottom}>
           <h2 className="tile-caption-text">{project.projectName}</h2>
-          <p className="tile-caption-text">{project.county} County, PA</p>
+          <p className="tile-caption-text">
+            {project.county} County | {project.id}
+          </p>
         </div>
       </div>
     );
