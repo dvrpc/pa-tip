@@ -25,17 +25,21 @@ class MapComponent extends Component {
     });
   }
 
+  // TODO: MAP MARKERS! can the data be pulled from the store immediately after dispatching? is that possible?
   componentDidUpdate() {
     this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
 
+    // TODO: set up ZOOM END on mapbox so that the bounds call only happens AFTER the map has set up in the new digs
+
     // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
-    const bounds = this.map.getBounds();
+    let bounds = this.map.getBounds();
+
     const NEbounds = bounds.getNorthEast();
-    const NWbounds = bounds.getNorthWest();
-    const SEbounds = bounds.getSouthEast();
     const SWbounds = bounds.getSouthWest();
 
-    this.props.getTIPByMapBounds([NEbounds, NWbounds, SWbounds, SEbounds]);
+    bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
+
+    this.props.getTIPByMapBounds(bounds);
   }
 
   componentWillUnmount() {

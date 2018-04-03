@@ -73,7 +73,7 @@ export const setMapCenter = latlng => dispatch =>
 // get all projects within the boundaires of the current mapbox view
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
-    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/MapServer/0/query?where=&text=&objectIds=&time=&geometry=%5B${bounds}%5D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelWithin&relationParam=&outFields=*&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&returnTrueCurves=false&resultOffset=&resultRecordCount=&f=pjson`
+    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=json`
   ).then(response =>
     response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
   );
