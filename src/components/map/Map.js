@@ -29,17 +29,18 @@ class MapComponent extends Component {
   componentDidUpdate() {
     this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
 
-    // TODO: set up ZOOM END on mapbox so that the bounds call only happens AFTER the map has set up in the new digs
+    // wait for the map to zoom to its location before
+    this.map.on("zoomend", () => {
+      // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
+      let bounds = this.map.getBounds();
 
-    // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
-    let bounds = this.map.getBounds();
+      const NEbounds = bounds.getNorthEast();
+      const SWbounds = bounds.getSouthWest();
 
-    const NEbounds = bounds.getNorthEast();
-    const SWbounds = bounds.getSouthWest();
+      bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
 
-    bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
-
-    this.props.getTIPByMapBounds(bounds);
+      this.props.getTIPByMapBounds(bounds);
+    });
   }
 
   componentWillUnmount() {

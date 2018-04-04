@@ -28,7 +28,8 @@ export const search = (instance, e) => {
     } else if (input.type === "geocode") {
       geocoder.geocode(input.value, (err, data) => {
         console.log("data at search geocode is ", data);
-        if (data) {
+        if (data.results) {
+          console.log("what is data ", data);
           instance.props.setMapCenter(data.results[0].geometry.location);
         } else {
           // TODO: error handling

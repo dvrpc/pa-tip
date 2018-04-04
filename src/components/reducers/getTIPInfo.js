@@ -32,7 +32,6 @@ export default function tipReducer(state = [], action) {
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
     case GET_TIP_BY_MAP_BOUNDS:
-      console.log("API response for the map bounds reducer is ", action.bounds);
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
