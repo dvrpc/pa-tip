@@ -1,3 +1,5 @@
+// util function to handle search input and find the corresponding TIP projects
+
 import geocoder from "geocoder";
 
 export const search = (instance, e) => {

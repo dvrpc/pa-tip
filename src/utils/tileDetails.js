@@ -1,3 +1,5 @@
+// util function to populate tiles with information (background, title, etc)
+
 import { geometryColorType, colors } from "./tileGeometryColorType.js";
 
 export const tileDetails = (propsProject, width, height) => {

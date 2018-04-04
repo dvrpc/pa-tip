@@ -1,5 +1,4 @@
-// TODO: DELETE THIS IF MY REFACTOR TURNS OUT TO BE THE MOVE
-import Polyline from "@mapbox/polyline";
+// util function to establish color schemes for projects based on their category
 
 export const colors = {
   "Bicycle/Pedestrian Improvement": {
@@ -58,9 +57,7 @@ export const colors = {
   }
 };
 
-// CONSIDER: having this function take parameters - category & co-ordinates. Do the logic from tiles.js and only send what's necessary instead of the whole project
 export const geometryColorType = project => {
-  // Format the projects lat/lng to work with static google maps API: lat,lng|lat,lng|lat,lng|etc.,
   // TODO: map more than just points...
   const formattedLatLng = `${project.LAG},${project.LNG}` + "";
 

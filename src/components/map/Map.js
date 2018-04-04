@@ -3,7 +3,9 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
+import { updateMarkers } from "../../utils/updateMarkers";
 import "./Map.css";
+import "./streetscape.svg";
 
 class MapComponent extends Component {
   constructor(props) {
@@ -23,6 +25,8 @@ class MapComponent extends Component {
         : [-75.1633, 39.9522],
       zoom: 13
     });
+
+    updateMarkers(this, [-75.1633, 39.9522]);
   }
 
   // TODO: MAP MARKERS! can the data be pulled from the store immediately after dispatching? is that possible?
