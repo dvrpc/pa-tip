@@ -12,16 +12,17 @@ import bridge_replacement from "./markers/bridge_replacement.svg";
 
 // object to access the marker SVG's by project category
 const markers = {
-  "Bridge Replacement": bridge_replacement.svg,
-  "Bicycle/Pedestrian Improvement": bicycle_pedestrian_improvement.svg,
-  "Signal/ITS Improvement": signal_its_improvements.svg,
-  Streetscape: streetscape.svg,
-  "Transit Improvement": transit_improvement.svg,
-  "Roadway Rehabilitation": roadway_rehabilitation.svg,
-  "Roadway New Capacity": roadway_new_capacity.svg,
-  "Intersection Improvements": intersection_improvements.svg,
-  Other: other.svg
+  Other: other,
+  "Bicycle/Pedestrian Improvement": bicycle_pedestrian_improvement,
+  "Signal/ITS Improvement": signal_its_improvements,
+  Streetscape: streetscape,
+  "Transit Improvements": transit_improvement,
+  "Roadway Rehabilitation": roadway_rehabilitation,
+  "Roadway New Capacity": roadway_new_capacity,
+  "Intersection/Interchange Improvements": intersection_improvements,
+  "Bridge Repair/Replacement": bridge_replacement
 };
+console.log("update map markers object is: ", markers);
 
 export const updateBounds = mapReference => {
   let bounds = mapReference.map.getBounds();
@@ -35,8 +36,6 @@ export const updateBounds = mapReference => {
 };
 
 export const updateMarkers = mapReference => {
-  console.log("mapReference at updateMarkers ", mapReference);
-
   // sometimes it's undefined (race condition?)
   let projects = mapReference.props.projects
     ? mapReference.props.projects.features
@@ -51,10 +50,13 @@ export const updateMarkers = mapReference => {
       const category = project.attributes.DESCRIPTIO;
 
       // match the category to the appropriate marker
-      const svgMarker = markers.category;
+      const svgMarker = markers[category];
+
+      console.log("category is ", category);
+      console.log("svgMarker is ", svgMarker);
 
       // add the marker to the map
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker(svgMarker)
         .setLngLat(coords)
         .addTo(mapReference.map);
     });
