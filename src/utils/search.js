@@ -1,6 +1,9 @@
 // util function to handle search input and find the corresponding TIP projects
 
-import geocoder from "geocoder";
+const geocoder = new window.google.maps.Geocoder();
+
+// once this is replaced w/the google maps geocoder, set Region Code Biasing
+// to Pennsylvannia
 
 export const search = (instance, e) => {
   e.preventDefault();
@@ -12,40 +15,45 @@ export const search = (instance, e) => {
   // GEO data from keyword - need to make another call w/the object ID's to the open data portal
   // to get all the lat/lng stuff (the arcGIS feature service garbage)
 
-  // TODO: look into limiting the response area of the geocoder - set the bounds to PA
-
   const input = {
-    value: e.target.querySelector("input").value,
-    // TODO: find a way to dynamically judge and replace the type of input
-    type: "geocode"
+    address: e.target.querySelector("input").value
   };
+  const options = {
+    types: ["(cities)"],
+    componentRestrictions: { country: "us" }
+  };
+
+  // this isn't doing anything...
+  const autocomplete = new window.google.maps.places.Autocomplete(
+    e.target.querySelector("input"),
+    options
+  );
 
   // TODO: input validation
   let validAddress = true;
 
   if (validAddress) {
-    // get projects by municipal boundaries
-    if (input.type === "municipal boundary") {
-      // geocode geocode to get the lat/long of it
-    } else if (input.type === "geocode") {
-      geocoder.geocode(input.value, (err, data) => {
-        console.log("data at search geocode is ", data);
-        if (data.results) {
-          console.log("what is data ", data);
-          instance.props.setMapCenter(data.results[0].geometry.location);
-        } else {
-          // TODO: error handling
-          // Dispatch some kind of `no results for ${input.value} found` render
-          alert("geocoding error");
-        }
-      });
-    } else {
-      instance.props.getTIPByKeywords(input.value);
-    }
+    geocoder.geocode(input, (results, status) => {
+      if (status == "OK") {
+        console.log("results with the region tag ", results);
+        // IF I can't limit the results to PA from google, I'll have to sort through results here
+        // search through address results
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
 
-    // TODO: validate the search input BEFORE pushing to history
-    instance.props.history.push(`/main/${input.value}`);
+        // TODO: validation. Check that lat & lng exist befoe pushing
+        instance.props.setMapCenter({ lng, lat });
+      } else {
+        console.log("Geocode failed because : ", status);
+
+        // if geocode failed & the address is valid, fall back to keyword search
+        instance.props.getTIPByKeywords(input.value);
+      }
+    });
+    // at this point a valid search has been made and the proper endpoints have been hit
+    // navigate to the results
+    instance.props.history.push(`/main/${input.address}`);
   } else {
-    // do something to prompt re-entry from a user
+    // error handling for invalid inputs
   }
 };

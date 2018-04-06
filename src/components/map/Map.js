@@ -3,9 +3,8 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
-import { updateMarkers } from "../../utils/updateMarkers";
+import { updateBounds, updateMarkers } from "../../utils/updateMap";
 import "./Map.css";
-import "./streetscape.svg";
 
 class MapComponent extends Component {
   constructor(props) {
@@ -25,26 +24,17 @@ class MapComponent extends Component {
         : [-75.1633, 39.9522],
       zoom: 13
     });
-
-    updateMarkers(this, [-75.1633, 39.9522]);
   }
 
-  // TODO: MAP MARKERS! can the data be pulled from the store immediately after dispatching? is that possible?
   componentDidUpdate() {
     this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
 
     // wait for the map to zoom to its location before
     this.map.on("zoomend", () => {
       // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
-      let bounds = this.map.getBounds();
-
-      const NEbounds = bounds.getNorthEast();
-      const SWbounds = bounds.getSouthWest();
-
-      bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
-
-      this.props.getTIPByMapBounds(bounds);
+      updateBounds(this);
     });
+    // call the 'update markers' function here - hopefully it'll only invoke *after* zoomend
   }
 
   componentWillUnmount() {
