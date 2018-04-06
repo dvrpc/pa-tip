@@ -1,4 +1,5 @@
 import mapboxgl from "mapbox-gl";
+import { createVNode } from "inferno";
 
 import other from "./markers/other.svg";
 import bicycle_pedestrian_improvement from "./markers/bicycle_pedestrian_improvement.svg";
@@ -22,7 +23,6 @@ const markers = {
   "Intersection/Interchange Improvements": intersection_improvements,
   "Bridge Repair/Replacement": bridge_replacement
 };
-console.log("update map markers object is: ", markers);
 
 export const updateBounds = mapReference => {
   let bounds = mapReference.map.getBounds();
@@ -35,8 +35,9 @@ export const updateBounds = mapReference => {
   mapReference.props.getTIPByMapBounds(bounds);
 };
 
+//TODO: give the rest of the svg's height and width (biped improvement already has it)
 export const updateMarkers = mapReference => {
-  // sometimes it's undefined (race condition?)
+  // grab projects when they become available
   let projects = mapReference.props.projects
     ? mapReference.props.projects.features
     : false;
@@ -44,7 +45,12 @@ export const updateMarkers = mapReference => {
   projects &&
     projects.forEach(project => {
       // lag = geometry.y, lng = geometry.x
-      let coords = [project.geometry.x, project.geometry.y];
+      const coords = [project.geometry.x, project.geometry.y];
+
+      // create a vnode div to act as the marker
+      const markerNode = createVNode();
+
+      // set the height/width of the markerNode
 
       // get the project category in order to select the appropriate marker
       const category = project.attributes.DESCRIPTIO;
@@ -52,10 +58,9 @@ export const updateMarkers = mapReference => {
       // match the category to the appropriate marker
       const svgMarker = markers[category];
 
-      console.log("category is ", category);
-      console.log("svgMarker is ", svgMarker);
+      // set the background of markerNode as the svg
 
-      // add the marker to the map
+      // add the marker (the vnode div) to the map
       const marker = new mapboxgl.Marker(svgMarker)
         .setLngLat(coords)
         .addTo(mapReference.map);

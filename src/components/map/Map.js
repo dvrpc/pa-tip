@@ -18,6 +18,7 @@ class MapComponent extends Component {
     this.map = new mapboxgl.Map({
       container: this.tipMap,
       style: "mapbox://styles/mapbox/streets-v9",
+
       // mount w/searched co-ordinates or default to center
       center: this.props.center
         ? [this.props.center.lng, this.props.center.lat]
@@ -34,6 +35,7 @@ class MapComponent extends Component {
       // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
       updateBounds(this);
     });
+
     // call the 'update markers' function here - hopefully it'll only invoke *after* zoomend
     updateMarkers(this);
   }
