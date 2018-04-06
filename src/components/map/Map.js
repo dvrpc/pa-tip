@@ -35,6 +35,7 @@ class MapComponent extends Component {
       updateBounds(this);
     });
     // call the 'update markers' function here - hopefully it'll only invoke *after* zoomend
+    updateMarkers(this);
   }
 
   componentWillUnmount() {
@@ -48,7 +49,8 @@ class MapComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    center: state.center
+    center: state.center,
+    projects: state.projects
   };
 };
 

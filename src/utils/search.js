@@ -35,7 +35,6 @@ export const search = (instance, e) => {
   if (validAddress) {
     geocoder.geocode(input, (results, status) => {
       if (status == "OK") {
-        console.log("results with the region tag ", results);
         // IF I can't limit the results to PA from google, I'll have to sort through results here
         // search through address results
         const lat = results[0].geometry.location.lat();

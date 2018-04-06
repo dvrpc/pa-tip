@@ -1,8 +1,7 @@
 .tilesContainer{
-    z-index: 2;
     background: #666666;
     overflow-x: hidden;
-	width: 95%;
+	width: 100%;
 	display: flex;
     flex-wrap: wrap;
 	overflow-y: scroll;
