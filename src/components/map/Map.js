@@ -32,11 +32,11 @@ class MapComponent extends Component {
 
     // wait for the map to zoom to its location before
     this.map.on("zoomend", () => {
+      console.log("zoomend hit ");
       // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
       updateBounds(this);
     });
-
-    // call the 'update markers' function here - hopefully it'll only invoke *after* zoomend
+    // update markers with the fetched projects
     updateMarkers(this);
   }
 
