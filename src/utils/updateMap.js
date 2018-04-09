@@ -1,5 +1,6 @@
 import mapboxgl from "mapbox-gl";
 import { createVNode } from "inferno";
+import { VNodeFlags } from "inferno-vnode-flags";
 
 import other from "./markers/other.svg";
 import bicycle_pedestrian_improvement from "./markers/bicycle_pedestrian_improvement.svg";
@@ -48,9 +49,9 @@ export const updateMarkers = mapReference => {
       const coords = [project.geometry.x, project.geometry.y];
 
       // create a vnode div to act as the marker
-      const markerNode = createVNode();
+      let markerNode = createVNode(VNodeFlags.HtmlElement, "div", "marker");
 
-      // set the height/width of the markerNode
+      console.log("marker node is ", markerNode);
 
       // get the project category in order to select the appropriate marker
       const category = project.attributes.DESCRIPTIO;
@@ -59,10 +60,16 @@ export const updateMarkers = mapReference => {
       const svgMarker = markers[category];
 
       // set the background of markerNode as the svg
+      //markerNode.style.background = svgMarker
 
       // add the marker (the vnode div) to the map
-      const marker = new mapboxgl.Marker(svgMarker)
+      const marker = new mapboxgl.Marker()
         .setLngLat(coords)
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<h2>${project.attributes.ROAD_NAME}</h2>`
+          )
+        )
         .addTo(mapReference.map);
     });
 };

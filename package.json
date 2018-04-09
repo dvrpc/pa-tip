@@ -23,6 +23,7 @@
     "inferno-redux": "^4.0.4",
     "inferno-router": "^4.0.4",
     "inferno-scripts": "^6.0.0",
+    "inferno-vnode-flags": "^5.0.2",
     "mapbox-gl": "^0.44.1",
     "react-tabs": "^2.2.1",
     "redux": "^3.7.2",
