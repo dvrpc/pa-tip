@@ -25,18 +25,17 @@ class MapComponent extends Component {
         : [-75.1633, 39.9522],
       zoom: 13
     });
+    // wait for the map to zoom to its location before
+    this.map.on("zoomend", () => {
+      console.log("zoomened at didmount and hit with props as: ", this.props);
+      // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
+      updateBounds(this);
+      // update markers with the fetched projects
+    });
   }
 
   componentDidUpdate() {
     this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
-
-    // wait for the map to zoom to its location before
-    this.map.on("zoomend", () => {
-      console.log("zoomend hit ");
-      // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
-      updateBounds(this);
-    });
-    // update markers with the fetched projects
     updateMarkers(this);
   }
 
