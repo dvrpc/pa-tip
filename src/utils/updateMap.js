@@ -75,7 +75,7 @@ export const updateMarkers = mapReference => {
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
             `<h2>${project.attributes.ROAD_NAME}</h2>
-            <p style="border-bottom: thick solid #${
+            <p style="border-bottom: 8px solid #${
               colors[category].forMap
             };">ID: ${project.attributes.MPMS_ID}</p>`
           )

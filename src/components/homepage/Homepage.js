@@ -10,6 +10,8 @@ import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
+// cant find module file-loader when adding a new image...
+//import poster2 from "./poster2.png"
 
 class Homepage extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class Homepage extends Component {
               autoplay
               muted
               loop
-              poster="https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg"
+              poster="http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg"
               id="bgvid"
             >
               <source src={philly} type="video/mp4" />

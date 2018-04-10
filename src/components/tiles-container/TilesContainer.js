@@ -25,7 +25,7 @@ class TilesContainer extends Component {
     // TODO: a better way than nested ternaries b/c this condition will get more complicated
     const projects = this.props.keywordProjects
       ? this.props.keywordProjects
-      : this.props.boundsProjects ? this.props.boundsProjects.features : [];
+      : this.props.boundsProjects ? this.props.boundsProjects.features : null;
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -39,9 +39,9 @@ class TilesContainer extends Component {
             <option value="3">3RD CATEGORY</option>
           </select>
           <span className="vr" />
-          <p>{projects.length} results.</p>
+          <p>{projects ? projects.length : 0} results.</p>
         </div>
-        {projects && projects.length ? (
+        {projects ? (
           projects.map(feature => <Tile data={feature} key={feature.id} />)
         ) : (
           <img id="no-results" src={loading} alt="loading" />
