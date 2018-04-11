@@ -47,8 +47,10 @@
 }
 
 /* Funding Table */
-#funding-and-awards-table {
-    /*this is a hack to make up for the difference in header height*/
+#funding-and-awards-table thead tr{
+    color: #ffffff;
+}
+/*#funding-and-awards-table {
     margin-top: -1%;
     display: table;
     width: 100%;
@@ -66,7 +68,6 @@
     width: 100%;
     color: #ffffff;
     border-bottom: 6px solid white;
-    /*having this match the mini-nav header is awful. TODO: revisit and fix this */
     height: calc(100% - 318px);
 }
 #funding-and-awards-table tbody {
@@ -89,7 +90,7 @@
 }
 #funding-and-awards-table td:first-child, #funding-and-awards-table th:first-child {
     border-left: none;
-}
+}*/
 
 /* Comments component */
 .comments{

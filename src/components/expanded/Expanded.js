@@ -20,12 +20,14 @@ class Expanded extends Component {
   // use the category type from the full tip response to brand the page by category color scheme
   componentDidUpdate() {
     // TODO: error handling when going back to main page
+    // why is this even being called when navigating away? is it the act of clicking on the back button..?
     const colorScheme = colors[this.props.details.category];
     if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
   }
 
   render() {
     const details = this.props.details;
+    console.log("details are ", details);
     const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
@@ -65,51 +67,46 @@ class Expanded extends Component {
           </section>
           <section className="right-column">
             <table id="funding-and-awards-table">
-              <thead style={`background: ${colorScheme.middle}`}>
-                <th>
-                  <h3>Phase</h3>
-                </th>
-                <th>
-                  <h3>Fund</h3>
-                </th>
-                <th>
-                  <h3>Year</h3>
-                </th>
-                <th>
-                  <h3>Other</h3>
-                </th>
+              <thead>
+                {/*primary header*/}
+                <tr>
+                  <td colspan="2" style={`background: ${colorScheme.middle}`} />
+                  <td colspan="4" style={`background: ${colorScheme.darkest}`}>
+                    TIP Program Years ($)
+                  </td>
+                  <td colspan="2" style={`background: ${colorScheme.middle}`} />
+                </tr>
               </thead>
-              <tbody style={`background: ${colorScheme.lightest}`}>
+              <tbody>
+                {/*secondary header*/}
                 <tr>
-                  <td>Phase 3</td>
-                  <td>TOLL</td>
-                  <td>2017</td>
-                  <td>test</td>
-                </tr>
-                <tr>
-                  <td>Phase 10</td>
-                  <td>TAU</td>
+                  <td>
+                    <a href="">Phase</a>
+                  </td>
+                  <td>
+                    <a href="">Fund</a>
+                  </td>
+                  <td>2018</td>
+                  <td>2019</td>
+                  <td>2020</td>
                   <td>2021</td>
-                  <td>test</td>
+                  <td>2022-2025</td>
+                  <td>2026-2029</td>
                 </tr>
-                <tr>
-                  <td>Phase 6</td>
-                  <td>NOP</td>
-                  <td>2029</td>
-                  <td>test</td>
-                </tr>
-                <tr>
-                  <td>Phase 8</td>
-                  <td>NOP</td>
-                  <td>2029</td>
-                  <td>test</td>
-                </tr>
-                <tr>
-                  <td>Phase 1</td>
-                  <td>NOP</td>
-                  <td>2029</td>
-                  <td>test</td>
-                </tr>
+                {/*insert dynamic table information here: */}
+                {details &&
+                  details.funding.data.map(row => (
+                    <tr>
+                      <td>{row[0]}</td>
+                      <td>{row[1]}</td>
+                      <td>{row[2]}</td>
+                      <td>{row[3]}</td>
+                      <td>{row[4]}</td>
+                      <td>{row[5]}</td>
+                      <td>{row[6]}</td>
+                      <td>{row[7]}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
             <div className="comments">

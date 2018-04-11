@@ -34,9 +34,15 @@ class TilesContainer extends Component {
             <option value="" selected>
               category
             </option>
-            <option value="1">A CATEGORY</option>
-            <option value="2">ANOTHER CATEGORY</option>
-            <option value="3">3RD CATEGORY</option>
+            <option value="1">Bicycle/Pedestrian Improvement</option>
+            <option value="2">Bridge Replacement</option>
+            <option value="3">Streetscape</option>
+            <option value="4">Transit Improvements</option>
+            <option value="5">Signal/ITS Improvements</option>
+            <option value="6">Roadway Rehabilitation</option>
+            <option value="7">Roadway New Capacity</option>
+            <option value="8">Intersection Improvements</option>
+            <option value="9">Other</option>
           </select>
           <span className="vr" />
           <p>{projects ? projects.length : 0} results.</p>

@@ -27,7 +27,7 @@ class MapComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     // check if center has been updated by the search bar and flyTo if so
-    if (nextProps.center != this.props.center)
+    if (nextProps.center !== this.props.center)
       this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
   }
 

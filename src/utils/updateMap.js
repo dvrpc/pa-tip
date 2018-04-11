@@ -3,6 +3,7 @@ import { createVNode } from "inferno";
 import { VNodeFlags } from "inferno-vnode-flags";
 
 import { colors } from "./tileGeometryColorType.js";
+
 import other from "./markers/other.svg";
 import bicycle_pedestrian_improvement from "./markers/bicycle_pedestrian_improvement.svg";
 import signal_its_improvements from "./markers/signal_its_improvements.svg";
@@ -50,7 +51,6 @@ export const updateMarkers = mapReference => {
       const coords = [project.geometry.x, project.geometry.y];
 
       // TODO: refactor with vnodes instead of direct DOM manipulation. For small sets this is fine, but if someone zooms way out and asks 100+ markers to be shown this is not performant.
-      // figure out the vNode business.
       //let markerNode = createVNode(VNodeFlags.HtmlElement, "div", "marker");
 
       // get the project category in order to select the appropriate marker
@@ -62,16 +62,17 @@ export const updateMarkers = mapReference => {
       // set the background of markerNode as the svg
       //markerNode.style.background = svgMarker
 
-      // test with  DOM manipulation (this works - refactor to use a VNode)
-      let test = document.createElement("div");
-      test.classList.add("marker");
-      test.style.backgroundImage = `url(${svgMarker}`;
-      test.style.backgroundSize = "cover";
-      test.style.height = "55px";
-      test.style.width = "55px";
+      // DOM manipulation for now (this works - refactor to use a VNode)
+      let markerDiv = document.createElement("div");
+      markerDiv.classList.add("marker");
+      markerDiv.style.backgroundImage = `url(${svgMarker}`;
+      markerDiv.style.backgroundSize = "cover";
+      markerDiv.style.height = "55px";
+      markerDiv.style.width = "55px";
 
       // add the marker to the map
-      const marker = new mapboxgl.Marker(test)
+      // TODO: look into markers appearing on HOVER, and redirection to expanded page on CLICK
+      const marker = new mapboxgl.Marker(markerDiv)
         .setLngLat(coords)
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
