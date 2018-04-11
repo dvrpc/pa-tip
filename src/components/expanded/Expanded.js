@@ -72,31 +72,31 @@ class Expanded extends Component {
                 <tr>
                   <td colspan="2" style={`background: ${colorScheme.middle}`} />
                   <td colspan="4" style={`background: ${colorScheme.darkest}`}>
-                    TIP Program Years ($)
+                    <h3>TIP Program Years ($)</h3>
                   </td>
                   <td colspan="2" style={`background: ${colorScheme.middle}`} />
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={`background: ${colorScheme.lightest}`}>
                 {/*secondary header*/}
                 <tr>
-                  <td>
+                  <td style={`background: ${colorScheme.middle}`}>
                     <a href="">Phase</a>
                   </td>
-                  <td>
+                  <td style={`background: ${colorScheme.middle}`}>
                     <a href="">Fund</a>
                   </td>
-                  <td>2018</td>
-                  <td>2019</td>
-                  <td>2020</td>
-                  <td>2021</td>
-                  <td>2022-2025</td>
-                  <td>2026-2029</td>
+                  <td style={`background: ${colorScheme.darkest}`}>2018</td>
+                  <td style={`background: ${colorScheme.darkest}`}>2019</td>
+                  <td style={`background: ${colorScheme.darkest}`}>2020</td>
+                  <td style={`background: ${colorScheme.darkest}`}>2021</td>
+                  <td style={`background: ${colorScheme.middle}`}>2022-2025</td>
+                  <td style={`background: ${colorScheme.middle}`}>2026-2029</td>
                 </tr>
                 {/*insert dynamic table information here: */}
                 {details &&
                   details.funding.data.map(row => (
-                    <tr>
+                    <tr className="table-data-rows">
                       <td>{row[0]}</td>
                       <td>{row[1]}</td>
                       <td>{row[2]}</td>
