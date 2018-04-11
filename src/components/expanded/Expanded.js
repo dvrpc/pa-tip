@@ -109,36 +109,36 @@ class Expanded extends Component {
                   ))}
               </tbody>
             </table>
-            <div className="comments">
-              <form className="comments-form">
-                <input
-                  className="comment-form-info"
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                />
-                <input
-                  className="comment-form-info"
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                />
-                <input
-                  className="comment-form-info"
-                  type="text"
-                  name="county"
-                  placeholder="county of residence"
-                />
-                <textarea placeholder="Submit a comment for this project" />
-                <input
-                  id="submitCommentButton"
-                  type="submit"
-                  value="submit"
-                  style={`background: ${colorScheme.darkest}`}
-                />
-              </form>
-            </div>
           </section>
+        </div>
+        <div className="comments">
+          <form className="comments-form">
+            <input
+              className="comment-form-info"
+              type="text"
+              name="name"
+              placeholder="name"
+            />
+            <input
+              className="comment-form-info"
+              type="email"
+              name="email"
+              placeholder="email"
+            />
+            <input
+              className="comment-form-info"
+              type="text"
+              name="county"
+              placeholder="county of residence"
+            />
+            <textarea placeholder="Submit a comment for this project" />
+            <input
+              id="submitCommentButton"
+              type="submit"
+              value="submit"
+              style={`background: ${colorScheme.darkest}`}
+            />
+          </form>
         </div>
       </div>
     );

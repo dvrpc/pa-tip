@@ -4,7 +4,6 @@
     position: relative;
     display: flex;
     overflow: hidden;
-    max-height: calc(100vh - 143px);
 }
 .left-column{
     width: 50%;
@@ -68,6 +67,7 @@
 #funding-and-awards-table thead {
     display: table;
     table-layout: fixed;
+    margin-bottom: 1%;
 }
 #funding-and-awards-table tbody {
     overflow: auto;
@@ -84,7 +84,7 @@
 #funding-and-awards-table tr:last-child{
     border-bottom: none;
 }
-#funding-and-awards-table td, th {
+#funding-and-awards-table tbody td, th {
     border-left: 5px solid white;
 }
 #funding-and-awards-table td:first-child, #funding-and-awards-table th:first-child {
