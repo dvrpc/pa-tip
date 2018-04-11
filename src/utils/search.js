@@ -23,7 +23,7 @@ export const search = (instance, e) => {
     componentRestrictions: { country: "us" }
   };
 
-  // this isn't doing anything...
+  // this isn't doing anything b/c the app isnt registered with google. TODO: register
   const autocomplete = new window.google.maps.places.Autocomplete(
     e.target.querySelector("input"),
     options

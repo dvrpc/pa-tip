@@ -6,9 +6,14 @@ import { getTIPByMapBounds } from "../reducers/getTIPInfo";
 import { updateBounds, updateMarkers } from "../../utils/updateMap";
 import "./Map.css";
 
+// one option: local state bool of 'flown' initially set to true. have if(flown) in didUpdate -flyTo then set it to false.
+// alt: hold searched center in local state as 'searchedCenter'. in didMount (or will update - which ones faster?), check if searchedCenter === props.center
+// only flyTo if it doesn't equal
+// setSTate as the new jawn - this will trigger a re-render tho so hmmm. maybe best to do in willupdate? fuck if i know the difference in performance
 class MapComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = { searchedCenter: this.props.center || null };
   }
 
   componentDidMount() {
@@ -19,23 +24,29 @@ class MapComponent extends Component {
       container: this.tipMap,
       style: "mapbox://styles/mapbox/streets-v9",
 
-      // mount w/searched co-ordinates or default to center
-      center: this.props.center
-        ? [this.props.center.lng, this.props.center.lat]
-        : [-75.1633, 39.9522],
+      // default to center city - flyTo new co-ordinates on search
+      center: [-75.1633, 39.9522],
       zoom: 13
-    });
-    // wait for the map to zoom to its location before
-    this.map.on("zoomend", () => {
-      console.log("zoomened at didmount and hit with props as: ", this.props);
-      // now that the map is centered on the right location, use dispatch the arcGIS call w/the bounding box of the current map window
-      updateBounds(this);
-      // update markers with the fetched projects
     });
   }
 
+  // maybe here we can listen for new center and flip the flown bool? fack
+  componentWillUpdate() {}
+
   componentDidUpdate() {
-    this.map.flyTo({ center: [this.props.center.lng, this.props.center.lat] });
+    // only flyTo if a new center has been established by the search function
+    if (this.state.searchedCenter != this.props.center) {
+      this.map.flyTo({
+        center: [this.props.center.lng, this.props.center.lat]
+      });
+      this.setState({ searchedCenter: this.props.center });
+    }
+
+    // handle user events to update map results
+    this.map.once("zoomend", () => updateBounds(this));
+    this.map.once("moveend", () => updateBounds(this));
+
+    // update markers with the fetched projects
     updateMarkers(this);
   }
 
