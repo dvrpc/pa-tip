@@ -49,7 +49,8 @@ export const updateMarkers = mapReference => {
       // lag = geometry.y, lng = geometry.x
       const coords = [project.geometry.x, project.geometry.y];
 
-      // TODO: refactor with vnodes instead of direct DOM manipulation.
+      // TODO: refactor with vnodes instead of direct DOM manipulation. For small sets this is fine, but if someone zooms way out and asks 100+ markers to be shown this is not performant.
+      // figure out the vNode business.
       //let markerNode = createVNode(VNodeFlags.HtmlElement, "div", "marker");
 
       // get the project category in order to select the appropriate marker

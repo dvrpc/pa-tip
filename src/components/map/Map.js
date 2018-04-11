@@ -9,7 +9,6 @@ import "./Map.css";
 class MapComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchedCenter: this.props.center || null };
   }
 
   componentDidMount() {
@@ -26,20 +25,13 @@ class MapComponent extends Component {
     });
   }
 
-  // look into having the flyTo check would be more performant as a willupdate or a didupdate
-  // same applies for the zoomend and moveend. UpdateMarkers could be the only thing that's needed in didUpdate...
-  componentWillUpdate() {}
+  componentWillReceiveProps(nextProps) {
+    // check if center has been updated by the search bar and flyTo if so
+    if (nextProps.center != this.props.center)
+      this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
+  }
 
   componentDidUpdate() {
-    // only flyTo if a new center has been established by the search function
-    if (this.state.searchedCenter != this.props.center) {
-      this.map.flyTo({
-        center: [this.props.center.lng, this.props.center.lat]
-      });
-      // this triggers a re-render which is not optimal. It works, but a better solution for only updating on search has to exist.
-      this.setState({ searchedCenter: this.props.center });
-    }
-
     // handle user events to update map results
     this.map.once("zoomend", () => updateBounds(this));
     this.map.once("moveend", () => updateBounds(this));

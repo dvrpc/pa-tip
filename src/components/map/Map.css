@@ -6,6 +6,7 @@
     cursor: pointer;
 }
 .mapboxgl-popup{
+    min-width: 100px;
     max-width: 350px;
     min-height: 100px;
 }
