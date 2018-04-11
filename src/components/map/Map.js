@@ -6,10 +6,6 @@ import { getTIPByMapBounds } from "../reducers/getTIPInfo";
 import { updateBounds, updateMarkers } from "../../utils/updateMap";
 import "./Map.css";
 
-// one option: local state bool of 'flown' initially set to true. have if(flown) in didUpdate -flyTo then set it to false.
-// alt: hold searched center in local state as 'searchedCenter'. in didMount (or will update - which ones faster?), check if searchedCenter === props.center
-// only flyTo if it doesn't equal
-// setSTate as the new jawn - this will trigger a re-render tho so hmmm. maybe best to do in willupdate? fuck if i know the difference in performance
 class MapComponent extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +26,8 @@ class MapComponent extends Component {
     });
   }
 
-  // maybe here we can listen for new center and flip the flown bool? fack
+  // look into having the flyTo check would be more performant as a willupdate or a didupdate
+  // same applies for the zoomend and moveend. UpdateMarkers could be the only thing that's needed in didUpdate...
   componentWillUpdate() {}
 
   componentDidUpdate() {
@@ -39,6 +36,7 @@ class MapComponent extends Component {
       this.map.flyTo({
         center: [this.props.center.lng, this.props.center.lat]
       });
+      // this triggers a re-render which is not optimal. It works, but a better solution for only updating on search has to exist.
       this.setState({ searchedCenter: this.props.center });
     }
 
