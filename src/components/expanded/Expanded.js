@@ -119,32 +119,35 @@ class Expanded extends Component {
           </section>
         </div>
         <div className="comments" id="comments-anchor">
+          <h1>Leave a Comment for This Project</h1>
           <form className="comments-form">
-            <input
-              className="comment-form-info"
-              type="text"
-              name="name"
-              placeholder="name"
-            />
-            <input
-              className="comment-form-info"
-              type="email"
-              name="email"
-              placeholder="email"
-            />
-            <input
-              className="comment-form-info"
-              type="text"
-              name="county"
-              placeholder="county of residence"
-            />
             <textarea placeholder="Submit a comment for this project" />
-            <input
-              id="submitCommentButton"
-              type="submit"
-              value="submit"
-              style={`background: ${colorScheme.darkest}`}
-            />
+            <div className="input-fields">
+              <input
+                className="comment-form-info"
+                type="text"
+                name="name"
+                placeholder="name"
+              />
+              <input
+                className="comment-form-info"
+                type="email"
+                name="email"
+                placeholder="email"
+              />
+              <input
+                className="comment-form-info"
+                type="text"
+                name="county"
+                placeholder="county of residence"
+              />
+              <input
+                id="submitCommentButton"
+                type="submit"
+                value="submit"
+                style={`background: ${colorScheme.darkest}`}
+              />
+            </div>
           </form>
         </div>
       </div>
