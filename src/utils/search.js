@@ -18,6 +18,7 @@ export const search = (instance, e) => {
   const input = {
     address: e.target.querySelector("input").value
   };
+
   const options = {
     types: ["(cities)"],
     componentRestrictions: { country: "us" }

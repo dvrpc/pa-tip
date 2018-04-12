@@ -67,8 +67,8 @@ export const updateMarkers = mapReference => {
       markerDiv.classList.add("marker");
       markerDiv.style.backgroundImage = `url(${svgMarker}`;
       markerDiv.style.backgroundSize = "cover";
-      markerDiv.style.height = "55px";
-      markerDiv.style.width = "55px";
+      markerDiv.style.height = "42px";
+      markerDiv.style.width = "42px";
 
       // add the marker to the map
       // TODO: look into markers appearing on HOVER, and redirection to expanded page on CLICK
@@ -84,4 +84,6 @@ export const updateMarkers = mapReference => {
         )
         .addTo(mapReference.map);
     });
+
+  // TODO: destroy markers that aren't in the viewport b/c as of now they stack on stack on stack
 };

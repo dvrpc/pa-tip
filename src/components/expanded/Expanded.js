@@ -45,6 +45,13 @@ class Expanded extends Component {
               <em>
                 <h3 onClick={this.props.history.goBack}> back to results </h3>
               </em>
+              <span class="divider">|</span>
+              <a href="#comments-anchor">
+                <em>
+                  <h3>comments</h3>
+                </em>
+              </a>
+              <span class="divider">|</span>
               <em>
                 <h3>print page</h3>
               </em>
@@ -111,7 +118,7 @@ class Expanded extends Component {
             </table>
           </section>
         </div>
-        <div className="comments">
+        <div className="comments" id="comments-anchor">
           <form className="comments-form">
             <input
               className="comment-form-info"

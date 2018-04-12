@@ -1,9 +1,9 @@
 /* General Purpose Targetting */
 .wrapper{
-    overflow: none;
+    overflow-x: none;
     position: relative;
     display: flex;
-    overflow: hidden;
+    max-height: 80vh;
 }
 .left-column{
     width: 50%;
@@ -14,7 +14,6 @@
     flex-direction: row;
     width: 50%;
     padding-left: 1%;
-    margin-right: -1%;
 }
 
 /*Paragraph and Title*/
@@ -26,7 +25,9 @@
     padding-top: 2%;
     padding-bottom: 2%;
     margin-bottom: 1%;
-    justify-content: space-between;
+}
+.divider{
+    margin: 0 1% 0 1%;
 }
 #content-mini-nav h3:hover{
     cursor: pointer;
@@ -40,9 +41,9 @@
     background: #333333;
 }
 #expanded-project-description{
-    background: #666666;
+    max-height: 34.5vh;
     overflow-y: auto;
-    height: 48%;
+    background: #666666;
 }
 
 /* Funding Table */
