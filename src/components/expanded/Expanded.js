@@ -4,6 +4,7 @@ import { connect } from "inferno-redux";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+import submitComment from "../reducers/commentsReducer.js";
 
 class Expanded extends Component {
   constructor(props) {
@@ -120,7 +121,10 @@ class Expanded extends Component {
         </div>
         <div className="comments" id="comments-anchor">
           <h1>Leave a Comment for This Project</h1>
-          <form className="comments-form">
+          <form
+            className="comments-form"
+            onSubmit={linkEvent(this, submitComment)}
+          >
             <textarea placeholder="Submit a comment for this project" />
             <div className="input-fields">
               <input
@@ -128,18 +132,21 @@ class Expanded extends Component {
                 type="text"
                 name="name"
                 placeholder="name"
+                required
               />
               <input
                 className="comment-form-info"
                 type="email"
                 name="email"
                 placeholder="email"
+                required
               />
               <input
                 className="comment-form-info"
                 type="text"
                 name="county"
                 placeholder="county of residence"
+                required
               />
               <input
                 id="submitCommentButton"
@@ -161,4 +168,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Expanded);
+const mapDispatchToProps = dispatch => {
+  return {
+    submitComment: comment => {
+      dispatch(submitComment(comment));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Expanded);
