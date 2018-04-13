@@ -16,6 +16,7 @@ export const search = (instance, e) => {
   // to get all the lat/lng stuff (the arcGIS feature service garbage)
 
   const input = {
+    // TODO: refactor this to use refs and not querySelector
     address: e.target.querySelector("input").value
   };
 

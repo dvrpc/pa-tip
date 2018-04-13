@@ -5,10 +5,7 @@ import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 import submitComment from "../reducers/commentsReducer.js";
-
-const switchTab = (e, table) => {
-  console.log("tab clicked");
-};
+import { switchTabs } from "../../utils/switchTabs.js";
 
 class Expanded extends Component {
   constructor(props) {
@@ -78,16 +75,20 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <div className="tab">
-              <button class="tablinks" onClick={linkEvent(this, switchTab)}>
+            <div className="tabs">
+              <button class="tablinks" onClick={linkEvent(this, switchTabs)}>
                 Funding
               </button>
-              <button class="tablinks" onClick={linkEvent(this, switchTab)}>
+              <button class="tablinks" onClick={linkEvent(this, switchTabs)}>
                 Milestones
               </button>
             </div>
             {/*Funding table*/}
-            <table className="funding-and-awards-table">
+            <table
+              id="Funding"
+              className="funding-and-awards-table"
+              ref={e => (this.funding = e)}
+            >
               <thead>
                 {/*primary header*/}
                 <tr>
@@ -132,7 +133,11 @@ class Expanded extends Component {
             </table>
 
             {/*Awards table*/}
-            <table className="funding-and-awards-table hidden">
+            <table
+              id="Milestones"
+              className="funding-and-awards-table hidden"
+              ref={e => (this.milestones = e)}
+            >
               <thead>
                 {/*primary header*/}
                 <th>
