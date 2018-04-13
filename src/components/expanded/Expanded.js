@@ -6,6 +6,10 @@ import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 import submitComment from "../reducers/commentsReducer.js";
 
+const switchTab = (e, table) => {
+  console.log("tab clicked");
+};
+
 class Expanded extends Component {
   constructor(props) {
     super(props);
@@ -74,7 +78,16 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <table id="funding-and-awards-table">
+            <div className="tab">
+              <button class="tablinks" onClick={linkEvent(this, switchTab)}>
+                Funding
+              </button>
+              <button class="tablinks" onClick={linkEvent(this, switchTab)}>
+                Milestones
+              </button>
+            </div>
+            {/*Funding table*/}
+            <table className="funding-and-awards-table">
               <thead>
                 {/*primary header*/}
                 <tr>
@@ -113,6 +126,45 @@ class Expanded extends Component {
                       <td>{row[5]}</td>
                       <td>{row[6]}</td>
                       <td>{row[7]}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            {/*Awards table*/}
+            <table className="funding-and-awards-table hidden">
+              <thead>
+                {/*primary header*/}
+                <th>
+                  <td style={`background: ${colorScheme.darkest}`}>
+                    <h3>PHS Type</h3>
+                  </td>
+                </th>
+                <th>
+                  <td style={`background: ${colorScheme.darkest}`}>
+                    <h3>Milestone</h3>
+                  </td>
+                </th>
+                <th>
+                  <td style={`background: ${colorScheme.darkest}`}>
+                    <h3>Estimated Date</h3>
+                  </td>
+                </th>
+                <th>
+                  <td style={`background: ${colorScheme.darkest}`}>
+                    <h3>Actual Date</h3>
+                  </td>
+                </th>
+              </thead>
+              <tbody style={`background: ${colorScheme.lightest}`}>
+                {/*insert dynamic table information here: */}
+                {details &&
+                  details.milestones.data.map(row => (
+                    <tr className="table-data-rows">
+                      <td>{row[0]}</td>
+                      <td>{row[1]}</td>
+                      <td>{row[2]}</td>
+                      <td>{row[3]}</td>
                     </tr>
                   ))}
               </tbody>
