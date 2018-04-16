@@ -45,17 +45,17 @@ class Expanded extends Component {
               style={`background: ${colorScheme.darkest}`}
             >
               <em>
-                <h3 onClick={this.props.history.goBack}> back to results </h3>
+                <p onClick={this.props.history.goBack}> back to results </p>
               </em>
               <span class="divider">|</span>
               <a href="#comments-anchor">
                 <em>
-                  <h3>comments</h3>
+                  <p>comments</p>
                 </em>
               </a>
               <span class="divider">|</span>
               <em>
-                <h3>print page</h3>
+                <p>print page</p>
               </em>
             </div>
 
@@ -76,13 +76,22 @@ class Expanded extends Component {
           </section>
           <section className="right-column">
             <div className="tabs">
-              <button class="tablinks" onClick={linkEvent(this, switchTabs)}>
+              <button
+                class="tablinks active"
+                onClick={linkEvent(this, switchTabs)}
+                ref={e => (this.fundingButton = e)}
+              >
                 Funding
               </button>
-              <button class="tablinks" onClick={linkEvent(this, switchTabs)}>
+              <button
+                class="tablinks"
+                onClick={linkEvent(this, switchTabs)}
+                ref={e => (this.milestonesButton = e)}
+              >
                 Milestones
               </button>
             </div>
+
             {/*Funding table*/}
             <table
               id="Funding"

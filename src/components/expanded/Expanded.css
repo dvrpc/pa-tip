@@ -3,7 +3,7 @@
     overflow-x: none;
     position: relative;
     display: flex;
-    max-height: 80vh;
+    height: 80vh;
 }
 .left-column{
     width: 50%;
@@ -26,10 +26,9 @@
     padding: 3% 5% 3% 5%;
 }
 #content-mini-nav{
+    height: 4vh;
     display: flex;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    margin-bottom: 1%;
+    margin-bottom: 1vh;
 }
 .divider{
     margin: 0 1% 0 1%;
@@ -52,20 +51,46 @@
 }
 
 
-/* Funding Table */
+/* Data Tables Tabs */
+.tabs{
+    background: #333333;
+    height: 8vh;
+    margin-bottom: 1vh;
+}
+.tablinks{
+    padding: 0 3% 0 3%;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+    height: 100%;
+    border: none;
+    font-size: 1.17rem;
+}
+.active{
+    background: #666666;
+}
+.tablinks:focus{
+    outline: none;
+}
+.tablinks:hover{
+    background: #757575;
+}
+
+
+/* Funding and Milestones Tables */
+.funding-and-awards-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    overflow: auto;
+}
 .funding-and-awards-table thead tr, td{
     color: #ffffff;
 }
 .table-data-rows, .table-data-rows td{
     color: #333333;
 }
-.funding-and-awards-table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
-
 .funding-and-awards-table thead {
     display: table;
     table-layout: fixed;
@@ -85,7 +110,8 @@
 .funding-and-awards-table tr:last-child{
     border-bottom: none;
 }
-.funding-and-awards-table tbody td, th {
+.funding-and-awards-table th{
+
 }
 .funding-and-awards-table td:first-child, .funding-and-awards-table th:first-child {
     border-left: none;
