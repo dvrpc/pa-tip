@@ -1,7 +1,6 @@
 /* General Purpose Targetting */
 .wrapper{
     overflow-x: none;
-    position: relative;
     display: flex;
     height: 80vh;
 }
@@ -9,11 +8,12 @@
     width: 50%;
     line-height: 1.7;
     color: #FFFFFF;
+    border: thin solid green;
 }
 .right-column{
-    flex-direction: row;
     width: 50%;
     padding-left: 1%;
+    border: thin solid blue;
 }
 .hidden{
     position: absolute;
@@ -26,15 +26,17 @@
     padding: 3% 5% 3% 5%;
 }
 #content-mini-nav{
-    height: 4vh;
+    height: 8vh;
     display: flex;
+    align-items: center;
+    padding-left: 5%;
     margin-bottom: 1vh;
+}
+#content-mini-nav p:hover{
+    cursor: pointer;
 }
 .divider{
     margin: 0 1% 0 1%;
-}
-#content-mini-nav h3:hover{
-    cursor: pointer;
 }
 #placeholder{
     width: 100%;
@@ -45,7 +47,10 @@
     background: #333333;
 }
 #expanded-project-description{
-    max-height: 34.5vh;
+    position: relative;
+    /*to-do: figure out a way to make this fill the rest of the container and then apply that
+    same solution to the data tables*/
+    height: 35%;
     overflow-y: auto;
     background: #666666;
 }
@@ -53,13 +58,12 @@
 
 /* Data Tables Tabs */
 .tabs{
-    background: #333333;
     height: 8vh;
     margin-bottom: 1vh;
 }
 .tablinks{
+    background: none;
     padding: 0 3% 0 3%;
-    background: #333333;
     color: #ffffff;
     cursor: pointer;
     height: 100%;
@@ -67,7 +71,7 @@
     font-size: 1.17rem;
 }
 .active{
-    background: #666666;
+    background: #333333;
 }
 .tablinks:focus{
     outline: none;
@@ -80,10 +84,15 @@
 /* Funding and Milestones Tables */
 .funding-and-awards-table {
     display: table;
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     overflow: auto;
+    /*
+    // calculate the height of the data tables as 100% of parent - size of header (milestones buttons & their margin-bottom)
+    height: calc(xxvh - 9vh);
+    */
 }
 .funding-and-awards-table thead tr, td{
     color: #ffffff;
@@ -102,7 +111,6 @@
 .funding-and-awards-table tr {
     width: 100%;
     height: 60px;
-    border-bottom-width: 60%;
     border-bottom: 4px solid white;
     display: table;
     table-layout: fixed;

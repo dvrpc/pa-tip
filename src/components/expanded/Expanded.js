@@ -41,22 +41,26 @@ class Expanded extends Component {
           <section className="left-column">
             <div
               id="content-mini-nav"
-              className="left-column-padding"
+              className=""
               style={`background: ${colorScheme.darkest}`}
             >
-              <em>
-                <p onClick={this.props.history.goBack}> back to results </p>
-              </em>
+              <p onClick={this.props.history.goBack}>
+                <em>back to results</em>
+              </p>
+
               <span class="divider">|</span>
+
               <a href="#comments-anchor">
-                <em>
-                  <p>comments</p>
-                </em>
+                <p>
+                  <em>comments</em>
+                </p>
               </a>
+
               <span class="divider">|</span>
-              <em>
-                <p>print page</p>
-              </em>
+
+              <p>
+                <em>print page</em>
+              </p>
             </div>
 
             <figure>
@@ -75,7 +79,7 @@ class Expanded extends Component {
             </p>
           </section>
           <section className="right-column">
-            <div className="tabs">
+            <div className="tabs" style={`background: ${colorScheme.darkest}`}>
               <button
                 class="tablinks active"
                 onClick={linkEvent(this, switchTabs)}
@@ -101,28 +105,28 @@ class Expanded extends Component {
               <thead>
                 {/*primary header*/}
                 <tr>
-                  <td colspan="2" style={`background: ${colorScheme.middle}`} />
-                  <td colspan="4" style={`background: ${colorScheme.darkest}`}>
+                  <td colspan="2" style={"background: #666666"} />
+                  <td colspan="4" style={"background: #333333"}>
                     <h3>TIP Program Years ($)</h3>
                   </td>
-                  <td colspan="2" style={`background: ${colorScheme.middle}`} />
+                  <td colspan="2" style={"background: #666666"} />
                 </tr>
               </thead>
               <tbody style={`background: ${colorScheme.lightest}`}>
                 {/*secondary header*/}
                 <tr>
-                  <td style={`background: ${colorScheme.middle}`}>
+                  <td style={"background: #666666"}>
                     <a href="">Phase</a>
                   </td>
-                  <td style={`background: ${colorScheme.middle}`}>
+                  <td style={"background: #666666"}>
                     <a href="">Fund</a>
                   </td>
-                  <td style={`background: ${colorScheme.darkest}`}>2018</td>
-                  <td style={`background: ${colorScheme.darkest}`}>2019</td>
-                  <td style={`background: ${colorScheme.darkest}`}>2020</td>
-                  <td style={`background: ${colorScheme.darkest}`}>2021</td>
-                  <td style={`background: ${colorScheme.middle}`}>2022-2025</td>
-                  <td style={`background: ${colorScheme.middle}`}>2026-2029</td>
+                  <td style={"background: #333333"}>2018</td>
+                  <td style={"background: #333333"}>2019</td>
+                  <td style={"background: #333333"}>2020</td>
+                  <td style={"background: #333333"}>2021</td>
+                  <td style={"background: #666666"}>2022-2025</td>
+                  <td style={"background: #666666"}>2026-2029</td>
                 </tr>
                 {/*insert dynamic table information here: */}
                 {details &&
