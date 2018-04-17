@@ -30,8 +30,10 @@ export default function tipReducer(state = [], action) {
     case GET_TIP_BY_ADDRESS:
       return Object.assign({}, state, { address: action.address });
     case SET_MAP_CENTER:
+      console.log("set map center hit with ", action);
       return Object.assign({}, state, { center: action.latlng });
     case GET_TIP_BY_MAP_BOUNDS:
+      console.log("map bounds response with combine reducers ", action);
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
@@ -59,11 +61,6 @@ export const getTIPByMunicipalBoundaries = id => dispatch => {
         dispatch(get_tip_by_municipal_boundaries(responseGeometry))
       )
   );
-};
-
-// TODO: maybe delete this is could be obsolete
-export const getTIPByAddress = address => dispatch => {
-  console.log("address is ", address);
 };
 
 export const setMapCenter = latlng => dispatch =>

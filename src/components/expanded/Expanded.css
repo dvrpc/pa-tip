@@ -23,13 +23,13 @@
 
 /*Paragraph and Title*/
 .left-column-padding{
-    padding: 3% 5% 3% 5%;
+    padding: 2vh 2vw;
 }
 #content-mini-nav{
     height: 8vh;
     display: flex;
     align-items: center;
-    padding-left: 5%;
+    padding-left: 2vw;
     margin-bottom: 1vh;
 }
 #content-mini-nav p:hover{
@@ -44,13 +44,13 @@
     background: url("http://i.dailymail.co.uk/i/pix/2013/02/14/article-2278605-179228F1000005DC-472_634x519.jpg");
 }
 #expanded-project-title{
+    min-height: 5vh;
     background: #333333;
 }
 #expanded-project-description{
-    position: relative;
-    /*to-do: figure out a way to make this fill the rest of the container and then apply that
-    same solution to the data tables*/
-    height: 35%;
+    /*this makes no sense but it works?*/
+    min-height: calc(100% - 21.5vh - 250px);
+    max-height: calc(100% - 18vh - 250px);
     overflow-y: auto;
     background: #666666;
 }
@@ -89,10 +89,7 @@
     border-collapse: collapse;
     text-align: center;
     overflow: auto;
-    /*
-    // calculate the height of the data tables as 100% of parent - size of header (milestones buttons & their margin-bottom)
-    height: calc(xxvh - 9vh);
-    */
+    
 }
 .funding-and-awards-table thead tr, td{
     color: #ffffff;
@@ -107,6 +104,7 @@
 .funding-and-awards-table tbody {
     overflow: auto;
     display: block;
+    height: calc(100% - 9vh);
 }
 .funding-and-awards-table tr {
     width: 100%;
@@ -117,9 +115,6 @@
 }
 .funding-and-awards-table tr:last-child{
     border-bottom: none;
-}
-.funding-and-awards-table th{
-
 }
 .funding-and-awards-table td:first-child, .funding-and-awards-table th:first-child {
     border-left: none;

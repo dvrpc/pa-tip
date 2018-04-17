@@ -1,14 +1,14 @@
 /*** ACTIONS ***/
-const POST_COMMENT = "POST_COMMENT";
+const GET_COMMENTS = "GET_COMMENTS";
 
 /*** ACTION_CREATORS ***/
-const post_comment = comment => ({ type: POST_COMMENT, comment });
+const get_comments = comments => ({ type: GET_COMMENTS, comments });
 
 /*** REDUCERS ***/
-export default function tipReducer(state = [], action) {
+export default function commentReducer(state = [], action) {
   switch (action.type) {
-    case POST_COMMENT:
-      return Object.assign({}, state, { comment: action.comment });
+    case GET_COMMENTS:
+      return Object.assign({}, state, { comment: action.comments });
     default:
       return state;
   }
@@ -16,15 +16,18 @@ export default function tipReducer(state = [], action) {
 
 /*** DISPATCHERS ***/
 export const submitComment = comment => dispatch => {
+  console.log("comment is ", comment);
   // POST to the comment db
-  fetch("comment endpoint goes here", { method: "post", body: comment }).then(
-    response => {
-      // placeholder for now until the api gets set up
-      if (response === 200) {
-        console.log("commented successfully posted to database");
-      } else {
-        console.log("failed to post comment to database");
-      }
+  fetch("https://www.dvrpc.org/data/tip/2019/comments", {
+    method: "post",
+    body: comment
+  }).then(response => {
+    console.log("submit comment api response is ", response);
+    if (response === 200) {
+      // when the api is set up, dispatch a response that updates the comments form to let users know they successfully submitted a comment
+      console.log("commented successfully posted to database");
+    } else {
+      console.log("failed to post comment to database");
     }
-  );
+  });
 };

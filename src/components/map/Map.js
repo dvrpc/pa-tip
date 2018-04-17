@@ -27,6 +27,7 @@ class MapComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     // check if center has been updated by the search bar and flyTo if so
+    console.log("map center is ", this.props.center);
     if (nextProps.center !== this.props.center)
       this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
   }
@@ -50,9 +51,10 @@ class MapComponent extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("what the fuck is state ", state);
   return {
-    center: state.center,
-    projects: state.projects
+    center: state.getTIP.center,
+    projects: state.getTIP.projects
   };
 };
 

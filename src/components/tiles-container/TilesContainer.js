@@ -60,8 +60,8 @@ class TilesContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    keywordProjects: state.keyword,
-    boundsProjects: state.projects
+    keywordProjects: state.getTIP.keyword,
+    boundsProjects: state.getTIP.projects
   };
 };
 

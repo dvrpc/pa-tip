@@ -35,6 +35,7 @@ export const updateBounds = mapReference => {
 
   bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
 
+  console.log("bounds at update bounds ", bounds);
   mapReference.props.getTIPByMapBounds(bounds);
 };
 
