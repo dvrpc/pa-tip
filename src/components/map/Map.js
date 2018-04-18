@@ -23,6 +23,8 @@ class MapComponent extends Component {
       center: this.props.center || [-75.1633, 39.9522],
       zoom: 13
     });
+
+    // populate map on initial load && for navigating back to the page
     updateBounds(this);
     updateMarkers(this);
   }
@@ -52,7 +54,6 @@ class MapComponent extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("what the fuck is state ", state);
   return {
     center: state.getTIP.center,
     projects: state.getTIP.projects
