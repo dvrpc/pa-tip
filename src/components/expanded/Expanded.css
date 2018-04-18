@@ -8,12 +8,10 @@
     width: 50%;
     line-height: 1.7;
     color: #FFFFFF;
-    border: thin solid green;
 }
 .right-column{
     width: 50%;
     padding-left: 1%;
-    border: thin solid blue;
 }
 .hidden{
     position: absolute;
@@ -82,32 +80,23 @@
 
 
 /* Funding and Milestones Tables */
+.table-wrapper{
+    height: calc(100% - 9vh);
+    overflow-x: auto;
+    overflow-y: auto;
+}
 .funding-and-awards-table {
     display: table;
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    text-align: center;
-    overflow: auto;
-    
+    text-align: center;    
 }
 .funding-and-awards-table thead tr, td{
     color: #ffffff;
 }
 .table-data-rows, .table-data-rows td{
     color: #333333;
-}
-.funding-and-awards-table thead {
-    display: table;
-    table-layout: fixed;
-}
-.funding-and-awards-table th {
-    width: 25%;
-}
-.funding-and-awards-table tbody {
-    overflow: auto;
-    display: block;
-    height: calc(100% - 9vh);
 }
 .funding-and-awards-table tr {
     width: 100%;

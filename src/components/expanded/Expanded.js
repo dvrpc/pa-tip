@@ -105,94 +105,96 @@ class Expanded extends Component {
               </button>
             </div>
 
-            {/*Funding table*/}
-            <table
+            <div
               id="Funding"
-              className="funding-and-awards-table"
+              class="table-wrapper"
               ref={e => (this.funding = e)}
             >
-              <thead>
-                {/*primary header*/}
-                <tr>
-                  <td colspan="2" style={"background: #666666"} />
-                  <td colspan="4" style={"background: #333333"}>
-                    <h3>TIP Program Years ($)</h3>
-                  </td>
-                  <td colspan="2" style={"background: #666666"} />
-                </tr>
-              </thead>
-              <tbody style={`background: ${colorScheme.lightest}`}>
-                {/*secondary header*/}
-                <tr>
-                  <td style={"background: #666666"}>
-                    <a href="">Phase</a>
-                  </td>
-                  <td style={"background: #666666"}>
-                    <a href="">Fund</a>
-                  </td>
-                  <td style={"background: #333333"}>2018</td>
-                  <td style={"background: #333333"}>2019</td>
-                  <td style={"background: #333333"}>2020</td>
-                  <td style={"background: #333333"}>2021</td>
-                  <td style={"background: #666666"}>2022-2025</td>
-                  <td style={"background: #666666"}>2026-2029</td>
-                </tr>
-                {/*insert dynamic table information here: */}
-                {details &&
-                  details.funding.data.map(row => (
-                    <tr className="table-data-rows">
-                      <td>{row[0]}</td>
-                      <td>{row[1]}</td>
-                      <td>{row[2]}</td>
-                      <td>{row[3]}</td>
-                      <td>{row[4]}</td>
-                      <td>{row[5]}</td>
-                      <td>{row[6]}</td>
-                      <td>{row[7]}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+              <table className="funding-and-awards-table">
+                <thead>
+                  {/*primary header*/}
+                  <tr>
+                    <td colspan="2" style={"background: #666666"} />
+                    <td colspan="4" style={"background: #333333"}>
+                      <h3>TIP Program Years ($)</h3>
+                    </td>
+                    <td colspan="2" style={"background: #666666"} />
+                  </tr>
+                </thead>
+                <tbody style={`background: ${colorScheme.lightest}`}>
+                  {/*secondary header*/}
+                  <tr>
+                    <td style={"background: #666666"}>
+                      <a href="">Phase</a>
+                    </td>
+                    <td style={"background: #666666"}>
+                      <a href="">Fund</a>
+                    </td>
+                    <td style={"background: #333333"}>2018</td>
+                    <td style={"background: #333333"}>2019</td>
+                    <td style={"background: #333333"}>2020</td>
+                    <td style={"background: #333333"}>2021</td>
+                    <td style={"background: #666666"}>2022-2025</td>
+                    <td style={"background: #666666"}>2026-2029</td>
+                  </tr>
+                  {/*insert dynamic table information here: */}
+                  {details &&
+                    details.funding.data.map(row => (
+                      <tr className="table-data-rows">
+                        <td>{row[0]}</td>
+                        <td>{row[1]}</td>
+                        <td>{row[2]}</td>
+                        <td>{row[3]}</td>
+                        <td>{row[4]}</td>
+                        <td>{row[5]}</td>
+                        <td>{row[6]}</td>
+                        <td>{row[7]}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
 
-            {/*Awards table*/}
-            <table
+            <div
               id="Milestones"
-              className="funding-and-awards-table hidden"
+              class="table-wrapper hidden"
               ref={e => (this.milestones = e)}
             >
-              <thead>
-                {/*primary header*/}
-                <tr>
-                  <th style={`background: ${colorScheme.darkest}`}>
-                    <h3>PHS Type</h3>
-                  </th>
+              <table className="funding-and-awards-table">
+                <thead>
+                  {/*primary header*/}
+                  <tr>
+                    <th style={"background: #333333"}>
+                      <h3>PHS Type</h3>
+                    </th>
 
-                  <th style={`background: ${colorScheme.darkest}`}>
-                    <h3>Milestone</h3>
-                  </th>
+                    <th style={"background: #333333"}>
+                      <h3>Milestone</h3>
+                    </th>
 
-                  <th style={`background: ${colorScheme.darkest}`}>
-                    <h3>Estimated Date</h3>
-                  </th>
+                    <th style={"background: #333333"}>
+                      <h3>Estimated Date</h3>
+                    </th>
 
-                  <th style={`background: ${colorScheme.darkest}`}>
-                    <h3>Actual Date</h3>
-                  </th>
-                </tr>
-              </thead>
-              <tbody style={`background: ${colorScheme.lightest}`}>
-                {/*insert dynamic table information here: */}
-                {details &&
-                  details.milestones.data.map(row => (
-                    <tr className="table-data-rows">
-                      <td>{row[0]}</td>
-                      <td>{row[1]}</td>
-                      <td>{row[2]}</td>
-                      <td>{row[3]}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                    <th style={"background: #333333"}>
+                      <h3>Actual Date</h3>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style={`background: ${colorScheme.lightest}`}>
+                  {/*insert dynamic table information here: */}
+                  {details &&
+                    details.milestones.data.map(row => (
+                      <tr className="table-data-rows">
+                        <td>{row[0]}</td>
+                        <td>{row[1]}</td>
+                        <td>{row[2]}</td>
+                        <td>{row[3]}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </section>
         </div>
         <div className="comments" id="comments-anchor">
