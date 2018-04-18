@@ -4,7 +4,7 @@ import { withRouter } from "inferno-router";
 
 import "./Homepage.css";
 import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
-import { search } from "../../utils/search.js";
+import { search, generateAutocomplete } from "../../utils/search.js";
 // TODO: get illustrator to properly export and SVG so I don't have to store PNG
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
@@ -16,7 +16,23 @@ import philly from "./philly.mp4";
 class Homepage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      value: ""
+    };
   }
+
+  componentDidMount() {
+    generateAutocomplete(this.input, () => {
+      this.handleChange.call(this, { target: { value: this.input.value } });
+      search(this, new Event(null));
+    });
+  }
+
+  handleChange = e => {
+    console.log(e);
+    this.setState({ value: e.target.value });
+  };
 
   render() {
     return (
@@ -51,6 +67,11 @@ class Homepage extends Component {
                 required
                 type="text"
                 placeholder="search by municipality, city, zip code, project, or fund"
+                value={this.state.value}
+                onInput={this.handleChange}
+                ref={i => {
+                  this.input = i;
+                }}
               />
             </form>
           </div>

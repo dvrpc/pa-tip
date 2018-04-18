@@ -1,9 +1,17 @@
 // util function to handle search input and find the corresponding TIP projects
 
 const geocoder = new window.google.maps.Geocoder();
+const bounds = new window.google.maps.LatLngBounds(
+  { lat: 39.514909, lng: -76.13659 },
+  { lat: 40.608542, lng: -74.389531 }
+);
 
-// once this is replaced w/the google maps geocoder, set Region Code Biasing
-// to Pennsylvannia
+export const generateAutocomplete = (element, callback) => {
+  new window.google.maps.places.Autocomplete(element, {
+    bounds,
+    strictBounds: true
+  }).addListener("place_changed", callback);
+};
 
 export const search = (instance, e) => {
   e.preventDefault();
@@ -16,20 +24,10 @@ export const search = (instance, e) => {
   // to get all the lat/lng stuff (the arcGIS feature service garbage)
 
   const input = {
-    // TODO: refactor this to use refs and not querySelector
-    address: e.target.querySelector("input").value
+    address: instance.state.value,
+    // Hardcoded to the entire region
+    bounds
   };
-
-  const options = {
-    types: ["(cities)"],
-    componentRestrictions: { country: "us" }
-  };
-
-  // this isn't doing anything b/c the app isnt registered with google. TODO: register
-  const autocomplete = new window.google.maps.places.Autocomplete(
-    e.target.querySelector("input"),
-    options
-  );
 
   // TODO: input validation
   let validAddress = true;
