@@ -101,6 +101,9 @@
     display: table;
     table-layout: fixed;
 }
+.funding-and-awards-table th {
+    width: 25%;
+}
 .funding-and-awards-table tbody {
     overflow: auto;
     display: block;

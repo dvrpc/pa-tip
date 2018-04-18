@@ -162,26 +162,23 @@ class Expanded extends Component {
             >
               <thead>
                 {/*primary header*/}
-                <th>
-                  <td style={`background: ${colorScheme.darkest}`}>
+                <tr>
+                  <th style={`background: ${colorScheme.darkest}`}>
                     <h3>PHS Type</h3>
-                  </td>
-                </th>
-                <th>
-                  <td style={`background: ${colorScheme.darkest}`}>
+                  </th>
+
+                  <th style={`background: ${colorScheme.darkest}`}>
                     <h3>Milestone</h3>
-                  </td>
-                </th>
-                <th>
-                  <td style={`background: ${colorScheme.darkest}`}>
+                  </th>
+
+                  <th style={`background: ${colorScheme.darkest}`}>
                     <h3>Estimated Date</h3>
-                  </td>
-                </th>
-                <th>
-                  <td style={`background: ${colorScheme.darkest}`}>
+                  </th>
+
+                  <th style={`background: ${colorScheme.darkest}`}>
                     <h3>Actual Date</h3>
-                  </td>
-                </th>
+                  </th>
+                </tr>
               </thead>
               <tbody style={`background: ${colorScheme.lightest}`}>
                 {/*insert dynamic table information here: */}
