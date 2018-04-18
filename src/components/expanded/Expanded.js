@@ -143,10 +143,18 @@ class Expanded extends Component {
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
                         <td>{row[1]}</td>
-                        <td>{row[2]}</td>
-                        <td>{row[3]}</td>
-                        <td>{row[4]}</td>
-                        <td>{row[5]}</td>
+                        <td style={`background: ${colorScheme.middle}`}>
+                          {row[2]}
+                        </td>
+                        <td style={`background: ${colorScheme.middle}`}>
+                          {row[3]}
+                        </td>
+                        <td style={`background: ${colorScheme.middle}`}>
+                          {row[4]}
+                        </td>
+                        <td style={`background: ${colorScheme.middle}`}>
+                          {row[5]}
+                        </td>
                         <td>{row[6]}</td>
                         <td>{row[7]}</td>
                       </tr>

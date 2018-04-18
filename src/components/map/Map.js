@@ -20,14 +20,15 @@ class MapComponent extends Component {
       style: "mapbox://styles/mapbox/streets-v9",
 
       // default to center city - flyTo new co-ordinates on search
-      center: [-75.1633, 39.9522],
+      center: this.props.center || [-75.1633, 39.9522],
       zoom: 13
     });
+    updateBounds(this);
+    updateMarkers(this);
   }
 
   componentWillReceiveProps(nextProps) {
     // check if center has been updated by the search bar and flyTo if so
-    console.log("map center is ", this.props.center);
     if (nextProps.center !== this.props.center)
       this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
   }
