@@ -35,6 +35,17 @@ class Expanded extends Component {
     // why is this even being called when navigating away? is it the act of clicking on the back button..?
     const colorScheme = colors[this.props.details.category];
     if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
+
+    window.streetview = new window.google.maps.StreetViewPanorama(
+      this.streetview,
+      {
+        position: {
+          lat: this.props.info.attributes.LAG,
+          lng: this.props.info.attributes.LNG
+        },
+        zoom: 0
+      }
+    );
   }
 
   render() {
@@ -74,7 +85,7 @@ class Expanded extends Component {
             </div>
 
             <figure>
-              <div id="placeholder" />
+              <div id="placeholder" ref={x => (this.streetview = x)} />
             </figure>
 
             <h1 id="expanded-project-title" className="left-column-padding">
@@ -138,7 +149,7 @@ class Expanded extends Component {
                     <td style={"background: #666666"}>2026-2029</td>
                   </tr>
                   {/*insert dynamic table information here: */}
-                  {details &&
+                  {details.funding &&
                     details.funding.data.map(row => (
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
@@ -191,7 +202,7 @@ class Expanded extends Component {
                 </thead>
                 <tbody style={`background: ${colorScheme.lightest}`}>
                   {/*insert dynamic table information here: */}
-                  {details &&
+                  {details.milestones &&
                     details.milestones.data.map(row => (
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
@@ -250,7 +261,8 @@ class Expanded extends Component {
 
 const mapStateToProps = state => {
   return {
-    details: state.getTIP.details
+    details: state.getTIP.details,
+    info: state.getTIP.currentProject
   };
 };
 
