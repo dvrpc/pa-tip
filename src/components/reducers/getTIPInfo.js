@@ -4,6 +4,7 @@ const GET_TIP_BY_MUNICIPAL_BOUNDARIES = "GET_TIP_BY_MUNICIPAL_BOUNDARIES";
 const GET_TIP_BY_ADDRESS = "GET_TIP_BY_ADDRESS";
 const GET_FULL_TIP = "GET_FULL_TIP";
 const SET_MAP_CENTER = "SET_MAP_CENTER";
+const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 
 /*** ACTION_CREATORS ***/
@@ -14,6 +15,7 @@ const get_tip_by_municipal_boundaries = geoData => ({
   geoData
 });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
+const set_current_project = props => ({ type: SET_CURRENT_PROJECT, props });
 const get_tip_by_map_bounds = bounds => ({
   type: GET_TIP_BY_MAP_BOUNDS,
   bounds
@@ -29,6 +31,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { geoData: action.geoData });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
+    case SET_CURRENT_PROJECT:
+      return Object.assign({}, state, { currentProject: action.props });
     case GET_TIP_BY_MAP_BOUNDS:
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
@@ -63,6 +67,9 @@ export const getTIPByMunicipalBoundaries = id => dispatch => {
 export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
 
+export const setCurrentProject = props => dispatch =>
+  dispatch(set_current_project(props));
+
 // get all projects within the boundaires of the current mapbox view
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
@@ -74,7 +81,7 @@ export const getTIPByMapBounds = bounds => dispatch => {
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
-  fetch(`http://staging.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
+  fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
     response
       .json()
       .then(projectDetails => dispatch(get_full_tip(projectDetails)))
