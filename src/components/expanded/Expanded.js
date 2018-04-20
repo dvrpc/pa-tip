@@ -40,8 +40,8 @@ class Expanded extends Component {
       this.streetview,
       {
         position: {
-          lat: this.props.info.attributes.LAG,
-          lng: this.props.info.attributes.LNG
+          lat: this.props.info.geometry.y,
+          lng: this.props.info.geometry.x
         },
         zoom: 0
       }
@@ -49,7 +49,7 @@ class Expanded extends Component {
   }
 
   render() {
-    const details = this.props.details;
+    const details = this.props.details || {};
     console.log("details are ", details);
     const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
