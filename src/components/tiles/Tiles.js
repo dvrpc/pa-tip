@@ -18,6 +18,9 @@ const clickTile = (instance, e) => {
   instance.props.history.push(`/expanded/${county}/${id}`);
 };
 
+import { clickTile } from "../../utils/clickTile.js";
+import { getFullTIP } from "../reducers/getTIPInfo";
+
 class Tile extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +41,6 @@ class Tile extends Component {
   }
 
   render() {
-    // render tiles or a 'no results found for ____' jawn
     const project = this.state.details;
     return (
       <div

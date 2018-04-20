@@ -19,19 +19,18 @@ class Navbar extends Component {
     this.state = {
       value: ""
     };
+
+    this.handleChange.bind(this);
   }
 
   componentDidMount() {
     generateAutocomplete(this.input, () => {
-      this.handleChange.call(this, { target: { value: this.input.value } });
+      this.handleChange({ target: { value: this.input.value } });
       search(this, new Event(null));
     });
   }
 
-  handleChange = e => {
-    console.log(e);
-    this.setState({ value: e.target.value });
-  };
+  handleChange = e => this.setState({ value: e.target.value });
 
   render() {
     return (

@@ -46,7 +46,14 @@ export const search = (instance, e) => {
         console.log("Geocode failed because : ", status);
 
         // if geocode failed & the address is valid, fall back to keyword search
-        instance.props.getTIPByKeywords(input.value);
+        console.log("is input.value truthy ", input.value);
+        if (input.value) {
+          console.log(
+            "hitting the get tip by keywords endoint with a truthy value of ",
+            input.value
+          );
+          instance.props.getTIPByKeywords(input.value);
+        }
       }
     });
     // at this point a valid search has been made and the proper endpoints have been hit

@@ -13,19 +13,24 @@ class TilesContainer extends Component {
   }
 
   componentDidUpdate() {
-    const test = this.props.keywordProjects
+    const keywordGeometry = this.props.keywordProjects
       ? this.props.keywordProjects.map(project =>
-          this.props.geometry(project.id)
+          this.props.getTIPByMunicipalBoundaries(project.id)
         )
-      : "fail or whatever";
+      : null;
+
+    console.log("keyword project geometry iiiiiis ", keywordGeometry);
   }
 
-  // TODO: add a 'no results found' message when the API request comes up blank
   render() {
-    // TODO: a better way than nested ternaries b/c this condition will get more complicated
-    const projects = this.props.keywordProjects
-      ? this.props.keywordProjects
-      : this.props.boundsProjects ? this.props.boundsProjects.features : null;
+    // handle keyword and bounds projects concurrently
+    let keywordProjects = this.props.keywordProjects || [];
+    let boundsProjects = this.props.boundsProjects
+      ? this.props.boundsProjects.features
+      : [];
+
+    // concat as a set to remove any duplicate projects
+    const projects = [...new Set(keywordProjects.concat(boundsProjects))];
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -48,7 +53,12 @@ class TilesContainer extends Component {
           <p>{projects ? projects.length : 0} results.</p>
         </div>
         {projects ? (
-          projects.map(feature => <Tile data={feature} key={feature.id} />)
+          projects.map(feature => (
+            <Tile
+              data={feature}
+              key={feature.id || feature.attributes.OBJECTID}
+            />
+          ))
         ) : (
           <img id="no-results" src={loading} alt="loading" />
         )}
@@ -67,7 +77,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    geometry: id => dispatch(getTIPByMunicipalBoundaries(id))
+    getTIPByMunicipalBoundaries: id => dispatch(getTIPByMunicipalBoundaries(id))
   };
 };
 

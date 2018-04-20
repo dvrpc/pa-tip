@@ -9,6 +9,11 @@ import "./Map.css";
 class MapComponent extends Component {
   constructor(props) {
     super(props);
+
+    // keep a reference for existing markers since mapbox doesn't do it
+    this.state = {
+      markerReference: {}
+    };
   }
 
   componentDidMount() {
@@ -21,8 +26,15 @@ class MapComponent extends Component {
 
       // default to center city - flyTo new co-ordinates on search
       center: this.props.center || [-75.1633, 39.9522],
-      zoom: 13
+      zoom: 13,
+      pitch: 60
     });
+
+    // handle user events to update map results
+    this.map.on("zoomend", () => updateBounds(this));
+    this.map.on("moveend", () => updateBounds(this));
+
+    // populate map on initial load && for navigating back to the page
     updateBounds(this);
     updateMarkers(this);
   }
@@ -34,10 +46,6 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate() {
-    // handle user events to update map results
-    this.map.once("zoomend", () => updateBounds(this));
-    this.map.once("moveend", () => updateBounds(this));
-
     // update markers with the fetched projects
     updateMarkers(this);
   }
@@ -52,7 +60,6 @@ class MapComponent extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("what the fuck is state ", state);
   return {
     center: state.getTIP.center,
     projects: state.getTIP.projects

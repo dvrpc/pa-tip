@@ -14,7 +14,6 @@ const get_tip_by_municipal_boundaries = geoData => ({
   type: GET_TIP_BY_MUNICIPAL_BOUNDARIES,
   geoData
 });
-const get_tip_by_address = address => ({ type: GET_TIP_BY_ADDRESS, address });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
 const set_current_project = props => ({ type: SET_CURRENT_PROJECT, props });
 const get_tip_by_map_bounds = bounds => ({
@@ -26,18 +25,15 @@ const get_tip_by_map_bounds = bounds => ({
 export default function tipReducer(state = [], action) {
   switch (action.type) {
     case GET_TIP_KEYWORDS:
+      console.log("get tip keywords hit");
       return Object.assign({}, state, { keyword: action.keyword });
     case GET_TIP_BY_MUNICIPAL_BOUNDARIES:
       return Object.assign({}, state, { geoData: action.geoData });
-    case GET_TIP_BY_ADDRESS:
-      return Object.assign({}, state, { address: action.address });
     case SET_MAP_CENTER:
-      console.log("set map center hit with ", action);
       return Object.assign({}, state, { center: action.latlng });
     case SET_CURRENT_PROJECT:
       return Object.assign({}, state, { currentProject: action.props });
     case GET_TIP_BY_MAP_BOUNDS:
-      console.log("map bounds response with combine reducers ", action);
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
@@ -49,6 +45,7 @@ export default function tipReducer(state = [], action) {
 /*** DISPATCHERS ***/
 // fallback case that gets tip projects by keywords
 export const getTIPByKeywords = keyword => dispatch => {
+  console.log("keyword dispatcher hit with ", keyword);
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(response =>
     response.json().then(projects => dispatch(get_tip_keywords(projects)))
   );

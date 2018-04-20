@@ -35,7 +35,6 @@ export const updateBounds = mapReference => {
 
   bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
 
-  console.log("bounds at update bounds ", bounds);
   mapReference.props.getTIPByMapBounds(bounds);
 };
 
@@ -48,6 +47,14 @@ export const updateMarkers = mapReference => {
   // loop through projects in the map and add markers w/popups to them
   projects &&
     projects.forEach(project => {
+      const id = project.attributes.OBJECTID;
+
+      // dont add markers that are already on the map
+      if (mapReference.state.markerReference[id]) return;
+
+      // save a reference to any new markers
+      mapReference.state.markerReference[id] = id;
+
       // lag = geometry.y, lng = geometry.x
       const coords = [project.geometry.x, project.geometry.y];
 
@@ -85,6 +92,4 @@ export const updateMarkers = mapReference => {
         )
         .addTo(mapReference.map);
     });
-
-  // TODO: destroy markers that aren't in the viewport b/c as of now they stack on stack on stack
 };
