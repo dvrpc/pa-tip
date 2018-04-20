@@ -13,12 +13,13 @@ class TilesContainer extends Component {
   }
 
   componentDidUpdate() {
-    /* Refactor this as a better way to get GIS info from keyword results
-      const test = this.props.keywordProjects
+    const keywordGeometry = this.props.keywordProjects
       ? this.props.keywordProjects.map(project =>
           this.props.getTIPByMunicipalBoundaries(project.id)
         )
-      : "fail or whatever";*/
+      : null;
+
+    console.log("keyword project geometry iiiiiis ", keywordGeometry);
   }
 
   render() {

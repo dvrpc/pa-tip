@@ -30,6 +30,10 @@ class MapComponent extends Component {
       pitch: 60
     });
 
+    // handle user events to update map results
+    this.map.on("zoomend", () => updateBounds(this));
+    this.map.on("moveend", () => updateBounds(this));
+
     // populate map on initial load && for navigating back to the page
     updateBounds(this);
     updateMarkers(this);
@@ -42,10 +46,6 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate() {
-    // handle user events to update map results
-    this.map.once("zoomend", () => updateBounds(this));
-    this.map.once("moveend", () => updateBounds(this));
-
     // update markers with the fetched projects
     updateMarkers(this);
   }
