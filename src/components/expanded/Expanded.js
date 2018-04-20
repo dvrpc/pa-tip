@@ -1,10 +1,12 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 
-import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+
 import { submitComment } from "../reducers/commentsReducer.js";
+
+import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 
 const formatComment = (instance, e) => {
@@ -55,11 +57,11 @@ class Expanded extends Component {
 
   render() {
     const details = this.props.details || {};
-    console.log("details are ", details);
     const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
+
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />

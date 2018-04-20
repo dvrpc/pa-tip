@@ -5,6 +5,8 @@ import { withRouter } from "inferno-router";
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
 import { getFullTIP, setCurrentProject } from "../reducers/getTIPInfo";
+import { clickTile } from "../../utils/clickTile.js";
+import { getFullTIP } from "../reducers/getTIPInfo";
 
 const clickTile = (instance, e) => {
   e.preventDefault();
@@ -17,9 +19,6 @@ const clickTile = (instance, e) => {
   instance.props.setCurrentProject(instance.props.data);
   instance.props.history.push(`/expanded/${county}/${id}`);
 };
-
-import { clickTile } from "../../utils/clickTile.js";
-import { getFullTIP } from "../reducers/getTIPInfo";
 
 class Tile extends Component {
   constructor(props) {
