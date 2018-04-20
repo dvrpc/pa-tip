@@ -17,6 +17,11 @@ const formatComment = (instance, e) => {
   instance.props.submitComment({ comment, name, email, county, projectID });
 };
 
+const goBack = (instance, e) => {
+  e.preventDefault();
+  instance.props.history.goBack;
+};
+
 class Expanded extends Component {
   constructor(props) {
     super(props);

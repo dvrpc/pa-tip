@@ -37,7 +37,6 @@ class Tile extends Component {
   }
 
   render() {
-    // render tiles or a 'no results found for ____' jawn
     const project = this.state.details;
     return (
       <div
