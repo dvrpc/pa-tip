@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 
 import "./TilesContainer.css";
@@ -7,36 +7,80 @@ import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
 import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
 
+const filterByCategory = (instance, e) => {
+  console.log("instance is ", instance);
+
+  // get a handle on the selected option
+  const selector = instance.categorySelector;
+  const categoryToFilter = selector.options[selector.selectedIndex].text;
+
+  // update the selected option
+
+  // update state with that option & the new flag
+  instance.setState({
+    filtered: true,
+    categoryToFilter
+  });
+};
+
 class TilesContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      filtered: false,
+      categoryToFilter: ""
+    };
   }
 
   componentDidUpdate() {
-    const keywordGeometry = this.props.keywordProjects
+    // NOTE: category selector triggers this, so any kind of functionality in here
+    // will need to be aware of that before being built
+    /*    const keywordGeometry = this.props.keywordProjects
       ? this.props.keywordProjects.map(project =>
           this.props.getTIPByMunicipalBoundaries(project.id)
         )
       : null;
-
-    console.log("keyword project geometry iiiiiis ", keywordGeometry);
+      */
   }
 
   render() {
+    let projects;
+
+    // TODO: modularize. turn the following into a function b/c why not
+
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
     let boundsProjects = this.props.boundsProjects
       ? this.props.boundsProjects.features
       : [];
 
-    // concat as a set to remove any duplicate projects
-    const projects = [...new Set(keywordProjects.concat(boundsProjects))];
+    // determine whether to display all projects, or filtered projects
+    if (this.state.filtered) {
+      projects = keywordProjects.concat(boundsProjects).filter(project => {
+        // handle bounds projects
+        if (project.attributes) {
+          return project.attributes.DESCRIPTIO === this.state.categoryToFilter;
+
+          // handle keyword projects
+        } else {
+          return project.category === this.state.categoryToFilter;
+        }
+      });
+    } else {
+      projects = keywordProjects.concat(boundsProjects);
+    }
+
     return (
       <div className="tilesContainer">
         <div className="header">
           <h2>filter results...</h2>
-          <select id="selectedCategory" name="category">
-            <option value="" selected>
+          <select
+            id="selectedCategory"
+            name="category"
+            onChange={linkEvent(this, filterByCategory)}
+            ref={e => (this.categorySelector = e)}
+          >
+            <option value="false" selected>
               category
             </option>
             <option value="1">Bicycle/Pedestrian Improvement</option>

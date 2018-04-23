@@ -6,5 +6,6 @@ export const clickTile = (instance, e) => {
   const county = data.county || data.attributes.CTY;
   const id = data.id || data.attributes.MPMS_ID;
   instance.props.getFullTIP(id);
+  instance.props.setCurrentProject(instance.props.data);
   instance.props.history.push(`/expanded/${county}/${id}`);
 };
