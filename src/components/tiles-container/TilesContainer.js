@@ -8,19 +8,21 @@ import loading from "./loading.gif";
 import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
 
 const filterByCategory = (instance, e) => {
-  console.log("instance is ", instance);
-
   // get a handle on the selected option
   const selector = instance.categorySelector;
   const categoryToFilter = selector.options[selector.selectedIndex].text;
 
-  // update the selected option
+  // apply or remove filter depending on the selected option
+  if (categoryToFilter === "All Categories") {
+    instance.setState({ filtered: false });
+  } else {
+    instance.setState({
+      filtered: true,
+      categoryToFilter
+    });
+  }
 
-  // update state with that option & the new flag
-  instance.setState({
-    filtered: true,
-    categoryToFilter
-  });
+  // for later: update markers state with the selected filter (someway, somehow!)
 };
 
 class TilesContainer extends Component {
@@ -46,8 +48,6 @@ class TilesContainer extends Component {
   render() {
     let projects;
 
-    // TODO: modularize. turn the following into a function b/c why not
-
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
     let boundsProjects = this.props.boundsProjects
@@ -58,14 +58,15 @@ class TilesContainer extends Component {
     if (this.state.filtered) {
       projects = keywordProjects.concat(boundsProjects).filter(project => {
         // handle bounds projects
-        if (project.attributes) {
+        if (project.attributes)
           return project.attributes.DESCRIPTIO === this.state.categoryToFilter;
-
+        else {
           // handle keyword projects
-        } else {
           return project.category === this.state.categoryToFilter;
         }
       });
+
+      // display all projects when no filter is selected
     } else {
       projects = keywordProjects.concat(boundsProjects);
     }
@@ -80,17 +81,15 @@ class TilesContainer extends Component {
             onChange={linkEvent(this, filterByCategory)}
             ref={e => (this.categorySelector = e)}
           >
-            <option value="false" selected>
-              category
-            </option>
+            <option value="false">All Categories</option>
             <option value="1">Bicycle/Pedestrian Improvement</option>
-            <option value="2">Bridge Replacement</option>
+            <option value="2">Bridge Repair/Replacement</option>
             <option value="3">Streetscape</option>
             <option value="4">Transit Improvements</option>
             <option value="5">Signal/ITS Improvements</option>
             <option value="6">Roadway Rehabilitation</option>
             <option value="7">Roadway New Capacity</option>
-            <option value="8">Intersection Improvements</option>
+            <option value="8">Intersection/Interchange Improvements</option>
             <option value="9">Other</option>
           </select>
           <span className="vr" />
