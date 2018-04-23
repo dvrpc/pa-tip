@@ -36,12 +36,16 @@ class Expanded extends Component {
     };
   }
 
-  // use the category type from the full tip response to brand the page by category color scheme
-  componentDidUpdate() {
-    // TODO: error handling when going back to main page
-    // why is this even being called when navigating away? is it the act of clicking on the back button..?
+  componentWillReceiveProps(nextProps) {
+    // apply color scheme on project load
+    const colorScheme = colors[nextProps.details.category];
+    this.setState({ colorScheme });
+  }
+
+  componentDidMount() {
+    // maintain color scheme on refresh
     const colorScheme = colors[this.props.details.category];
-    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
+    this.setState({ colorScheme });
 
     window.streetview = new window.google.maps.StreetViewPanorama(
       this.streetview,

@@ -6,24 +6,7 @@ import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
 import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
-
-const filterByCategory = (instance, e) => {
-  // get a handle on the selected option
-  const selector = instance.categorySelector;
-  const categoryToFilter = selector.options[selector.selectedIndex].text;
-
-  // apply or remove filter depending on the selected option
-  if (categoryToFilter === "All Categories") {
-    instance.setState({ filtered: false });
-  } else {
-    instance.setState({
-      filtered: true,
-      categoryToFilter
-    });
-  }
-
-  // for later: update markers state with the selected filter (someway, somehow!)
-};
+import { filterByCategory } from "../../utils/filterByCategory.js";
 
 class TilesContainer extends Component {
   constructor(props) {
@@ -50,7 +33,7 @@ class TilesContainer extends Component {
 
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects = this.props.boundsProjects
+    let boundsProjects = this.props.boundsProjects.features.length
       ? this.props.boundsProjects.features
       : [];
 
