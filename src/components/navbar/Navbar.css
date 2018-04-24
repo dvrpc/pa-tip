@@ -7,17 +7,17 @@
     justify-content: space-between;
     align-items: center;
 }
+#nav-search-form{
+    display: flex;
+    padding-right: 6%;
+}
 #nav-search-form input{
     border-radius: 5px;
     border: none;
     font-size: 1em;
 }
-#nav-search-form{
-    display: flex;
-    margin-right: 3%;
-}
 #navSearch{
-    margin-right: 10%;
+    margin-right: 5%;
 }
 #navBarButton{
     width: 100%;
@@ -36,10 +36,9 @@
     outline: none;
 }
 #navBarButton:active{
-    margin-top: 1%;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
 }
 
 /*TODO: add breakpoints to make the navbar readable on smaller screens*/
