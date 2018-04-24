@@ -1,10 +1,12 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 
-import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+
 import { submitComment } from "../reducers/commentsReducer.js";
+
+import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 
 const formatComment = (instance, e) => {
@@ -15,6 +17,11 @@ const formatComment = (instance, e) => {
   const county = e.target[3].value;
   const projectID = instance.props.details ? instance.props.details.id : "test";
   instance.props.submitComment({ comment, name, email, county, projectID });
+};
+
+const goBack = (instance, e) => {
+  e.preventDefault();
+  instance.props.history.goBack;
 };
 
 class Expanded extends Component {
@@ -29,21 +36,36 @@ class Expanded extends Component {
     };
   }
 
-  // use the category type from the full tip response to brand the page by category color scheme
-  componentDidUpdate() {
-    // TODO: error handling when going back to main page
-    // why is this even being called when navigating away? is it the act of clicking on the back button..?
+  componentWillReceiveProps(nextProps) {
+    // apply color scheme on project load
+    const colorScheme = colors[nextProps.details.category];
+    this.setState({ colorScheme });
+  }
+
+  componentDidMount() {
+    // maintain color scheme on refresh
     const colorScheme = colors[this.props.details.category];
-    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
+    this.setState({ colorScheme });
+
+    window.streetview = new window.google.maps.StreetViewPanorama(
+      this.streetview,
+      {
+        position: {
+          lat: this.props.info.geometry.y,
+          lng: this.props.info.geometry.x
+        },
+        zoom: 0
+      }
+    );
   }
 
   render() {
-    const details = this.props.details;
-    console.log("details are ", details);
+    const details = this.props.details || {};
     const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
+
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />
@@ -74,7 +96,7 @@ class Expanded extends Component {
             </div>
 
             <figure>
-              <div id="placeholder" />
+              <div id="placeholder" ref={x => (this.streetview = x)} />
             </figure>
 
             <h1 id="expanded-project-title" className="left-column-padding">
@@ -138,7 +160,7 @@ class Expanded extends Component {
                     <td style={"background: #666666"}>2026-2029</td>
                   </tr>
                   {/*insert dynamic table information here: */}
-                  {details &&
+                  {details.funding &&
                     details.funding.data.map(row => (
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
@@ -191,7 +213,7 @@ class Expanded extends Component {
                 </thead>
                 <tbody style={`background: ${colorScheme.lightest}`}>
                   {/*insert dynamic table information here: */}
-                  {details &&
+                  {details.milestones &&
                     details.milestones.data.map(row => (
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
@@ -250,7 +272,8 @@ class Expanded extends Component {
 
 const mapStateToProps = state => {
   return {
-    details: state.getTIP.details
+    details: state.getTIP.details,
+    info: state.getTIP.currentProject
   };
 };
 

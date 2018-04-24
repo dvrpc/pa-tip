@@ -4,18 +4,8 @@ import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
-import { getFullTIP } from "../reducers/getTIPInfo";
-
-const clickTile = (instance, e) => {
-  e.preventDefault();
-  const data = instance.props.data;
-
-  // render for keywords or geocoded response format
-  const county = data.county || data.attributes.CTY;
-  const id = data.id || data.attributes.MPMS_ID;
-  instance.props.getFullTIP(id);
-  instance.props.history.push(`/expanded/${county}/${id}`);
-};
+import { getFullTIP, setCurrentProject } from "../reducers/getTIPInfo";
+import { clickTile } from "../../utils/clickTile.js";
 
 class Tile extends Component {
   constructor(props) {
@@ -37,7 +27,6 @@ class Tile extends Component {
   }
 
   render() {
-    // render tiles or a 'no results found for ____' jawn
     const project = this.state.details;
     return (
       <div
@@ -59,7 +48,8 @@ class Tile extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFullTIP: id => dispatch(getFullTIP(id))
+    getFullTIP: id => dispatch(getFullTIP(id)),
+    setCurrentProject: props => dispatch(setCurrentProject(props))
   };
 };
 

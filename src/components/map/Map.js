@@ -17,7 +17,8 @@ class MapComponent extends Component {
         "Connections 2045 Centers": false,
         "Freight Centers": false
       },
-      toggleDropdown: false
+      toggleDropdown: false,
+      markerReference: {}
     };
   }
 
@@ -57,7 +58,8 @@ class MapComponent extends Component {
 
       // default to center city - flyTo new co-ordinates on search
       center: this.props.center || [-75.1633, 39.9522],
-      zoom: 13
+      zoom: 13,
+      pitch: 45
     });
 
     this.map.on("load", () => {
@@ -158,6 +160,11 @@ class MapComponent extends Component {
       this.updateLayerVisibility(null);
     });
 
+    // handle user events to update map results
+    this.map.on("zoomend", () => updateBounds(this));
+    this.map.on("moveend", () => updateBounds(this));
+
+    // populate map on initial load && for navigating back to the page
     updateBounds(this);
     updateMarkers(this);
   }
@@ -172,10 +179,6 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate() {
-    // handle user events to update map results
-    this.map.once("zoomend", () => updateBounds(this));
-    this.map.once("moveend", () => updateBounds(this));
-
     // update markers with the fetched projects
     updateMarkers(this);
   }

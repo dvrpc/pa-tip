@@ -5,13 +5,11 @@ import { withRouter } from "inferno-router";
 import "./Homepage.css";
 import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
-// TODO: get illustrator to properly export and SVG so I don't have to store PNG
+
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
-// cant find module file-loader when adding a new image...
-//import poster2 from "./poster2.png"
 
 class Homepage extends Component {
   constructor(props) {
@@ -20,19 +18,18 @@ class Homepage extends Component {
     this.state = {
       value: ""
     };
+
+    this.handleChange.bind(this);
   }
 
   componentDidMount() {
     generateAutocomplete(this.input, () => {
-      this.handleChange.call(this, { target: { value: this.input.value } });
+      this.handleChange({ target: { value: this.input.value } });
       search(this, new Event(null));
     });
   }
 
-  handleChange = e => {
-    console.log(e);
-    this.setState({ value: e.target.value });
-  };
+  handleChange = e => this.setState({ value: e.target.value });
 
   render() {
     return (
