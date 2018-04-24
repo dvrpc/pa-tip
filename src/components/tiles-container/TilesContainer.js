@@ -54,6 +54,8 @@ class TilesContainer extends Component {
       projects = keywordProjects.concat(boundsProjects);
     }
 
+    console.log("projects ", projects);
+
     return (
       <div className="tilesContainer">
         <div className="header">

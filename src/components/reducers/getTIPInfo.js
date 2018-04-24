@@ -52,6 +52,7 @@ export const getTIPByKeywords = keyword => dispatch => {
 };
 
 // case that gets tip projects by municipal boundaries
+// UPDATE TO INCLUDE MARKER FILTERING
 export const getTIPByMunicipalBoundaries = id => dispatch => {
   fetch(
     `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?where=MPMS_ID%3D${id}&objectIds=&time=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&f=pjson`
@@ -71,6 +72,7 @@ export const setCurrentProject = props => dispatch =>
   dispatch(set_current_project(props));
 
 // get all projects within the boundaires of the current mapbox view
+// UPDATE TO INCLUDE MARKER FILTERING
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
     `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=json`
@@ -87,3 +89,5 @@ export const getFullTIP = id => dispatch => {
       .then(projectDetails => dispatch(get_full_tip(projectDetails)))
   );
 };
+
+// make a function that filters response objects from getTIPByMapBounds and getTIPByMunicipalBoundaries (basically does the same as filterByCategory)

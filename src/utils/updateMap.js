@@ -47,7 +47,7 @@ export const updateMarkers = mapReference => {
   // loop through projects in the map and add markers w/popups to them
   projects &&
     projects.forEach(project => {
-      const id = project.attributes.OBJECTID;
+      const id = project.attributes.MPMS_ID;
 
       // dont add markers that are already on the map
       if (mapReference.state.markerReference[id]) return;
