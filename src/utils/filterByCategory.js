@@ -14,8 +14,6 @@ export const filterByCategory = (instance, e) => {
   }
 
   // for later: update markers state with the selected filter (someway, somehow!)
-  // how to communicate with the map component from here? dont. just invoke
-  // another function that does
 
   /* METHOD: 
     1) Pass a bool (or a string, like above) (markerFilter) to the store
