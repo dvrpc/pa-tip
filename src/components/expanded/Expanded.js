@@ -19,11 +19,6 @@ const formatComment = (instance, e) => {
   instance.props.submitComment({ comment, name, email, county, projectID });
 };
 
-const goBack = (instance, e) => {
-  e.preventDefault();
-  instance.props.history.goBack;
-};
-
 class Expanded extends Component {
   constructor(props) {
     super(props);
@@ -73,8 +68,7 @@ class Expanded extends Component {
           <section className="left-column">
             <div
               id="content-mini-nav"
-              className=""
-              style={`background: ${colorScheme.darkest}`}
+              style={{ background: colorScheme.darkest }}
             >
               <p onClick={this.props.history.goBack}>
                 <em>back to results</em>
@@ -100,17 +94,32 @@ class Expanded extends Component {
             </figure>
 
             <h1 id="expanded-project-title" className="left-column-padding">
-              {details ? details.road_name : "Project Title"}
+              {details.id
+                ? details.id + ": " + details.road_name
+                : "Project Title"}
             </h1>
 
-            <div id="expanded-project-description">
-              <p className="left-column-padding">
-                {details ? details.description : "Project Description"}
+            <div
+              id="expanded-project-description"
+              className="left-column-padding"
+            >
+              <p>
+                {details.description.length
+                  ? details.description
+                  : "Project Description"}
               </p>
+              {details.limits.length && <div>{details.limits}</div>}
+              <p>
+                {details.municipalities.length && (
+                  <span>{details.municipalities}, </span>
+                )}
+                {details.county.length && <span>{details.county} County</span>}
+              </p>
+              {details.aq_code.length && <p>AQ Code: {details.aq_code}</p>}
             </div>
           </section>
           <section className="right-column">
-            <div className="tabs" style={`background: ${colorScheme.darkest}`}>
+            <div className="tabs" style={{ background: colorScheme.darkest }}>
               <button
                 class="tablinks active"
                 onClick={linkEvent(this, switchTabs)}
@@ -136,28 +145,24 @@ class Expanded extends Component {
                 <thead>
                   {/*primary header*/}
                   <tr>
-                    <td colspan="2" style={"background: #666666"} />
-                    <td colspan="4" style={"background: #333333"}>
+                    <td colspan="2" style={{ background: "#666" }} />
+                    <td colspan="4" style={{ background: "#333" }}>
                       <h3>TIP Program Years ($)</h3>
                     </td>
-                    <td colspan="2" style={"background: #666666"} />
+                    <td colspan="2" style={{ background: "#666" }} />
                   </tr>
                 </thead>
-                <tbody style={`background: ${colorScheme.lightest}`}>
+                <tbody style={{ background: colorScheme.lightest }}>
                   {/*secondary header*/}
                   <tr>
-                    <td style={"background: #666666"}>
-                      <a href="">Phase</a>
-                    </td>
-                    <td style={"background: #666666"}>
-                      <a href="">Fund</a>
-                    </td>
-                    <td style={"background: #333333"}>2018</td>
-                    <td style={"background: #333333"}>2019</td>
-                    <td style={"background: #333333"}>2020</td>
-                    <td style={"background: #333333"}>2021</td>
-                    <td style={"background: #666666"}>2022-2025</td>
-                    <td style={"background: #666666"}>2026-2029</td>
+                    <td style={{ background: "#666" }}>Phase</td>
+                    <td style={{ background: "#666" }}>Fund</td>
+                    <td style={{ background: "#333" }}>2018</td>
+                    <td style={{ background: "#333" }}>2019</td>
+                    <td style={{ background: "#333" }}>2020</td>
+                    <td style={{ background: "#333" }}>2021</td>
+                    <td style={{ background: "#666" }}>2022-2025</td>
+                    <td style={{ background: "#666" }}>2026-2029</td>
                   </tr>
                   {/*insert dynamic table information here: */}
                   {details.funding &&
@@ -165,16 +170,16 @@ class Expanded extends Component {
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
                         <td>{row[1]}</td>
-                        <td style={`background: ${colorScheme.middle}`}>
+                        <td style={{ background: colorScheme.middle }}>
                           {row[2]}
                         </td>
-                        <td style={`background: ${colorScheme.middle}`}>
+                        <td style={{ background: colorScheme.middle }}>
                           {row[3]}
                         </td>
-                        <td style={`background: ${colorScheme.middle}`}>
+                        <td style={{ background: colorScheme.middle }}>
                           {row[4]}
                         </td>
-                        <td style={`background: ${colorScheme.middle}`}>
+                        <td style={{ background: colorScheme.middle }}>
                           {row[5]}
                         </td>
                         <td>{row[6]}</td>
@@ -194,24 +199,24 @@ class Expanded extends Component {
                 <thead>
                   {/*primary header*/}
                   <tr>
-                    <th style={"background: #333333"}>
+                    <th style={{ background: "#333" }}>
                       <h3>PHS Type</h3>
                     </th>
 
-                    <th style={"background: #333333"}>
+                    <th style={{ background: "#333" }}>
                       <h3>Milestone</h3>
                     </th>
 
-                    <th style={"background: #333333"}>
+                    <th style={{ background: "#333" }}>
                       <h3>Estimated Date</h3>
                     </th>
 
-                    <th style={"background: #333333"}>
+                    <th style={{ background: "#333" }}>
                       <h3>Actual Date</h3>
                     </th>
                   </tr>
                 </thead>
-                <tbody style={`background: ${colorScheme.lightest}`}>
+                <tbody style={{ background: colorScheme.lightest }}>
                   {/*insert dynamic table information here: */}
                   {details.milestones &&
                     details.milestones.data.map(row => (
@@ -260,7 +265,7 @@ class Expanded extends Component {
                 id="submitCommentButton"
                 type="submit"
                 value="submit"
-                style={`background: ${colorScheme.darkest}`}
+                style={{ background: colorScheme.darkest }}
               />
             </div>
           </form>
