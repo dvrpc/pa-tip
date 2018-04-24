@@ -77,7 +77,7 @@ export const getTIPByMapBounds = bounds => dispatch => {
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
-  fetch(`http://staging.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
+  fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
     response
       .json()
       .then(projectDetails => dispatch(get_full_tip(projectDetails)))

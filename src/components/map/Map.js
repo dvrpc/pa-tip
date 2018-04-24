@@ -12,26 +12,39 @@ class MapComponent extends Component {
 
     this.state = {
       layers: {
-        ipd: false,
-        cmp: false,
-        connections: false,
-        freight: false
-      }
+        "Indicators of Potential Disadvantage": false,
+        "CMP Corridors": false,
+        "Connections 2045 Centers": false,
+        "Freight Centers": false
+      },
+      toggleDropdown: false
     };
-
-    this.map = new mapboxgl.Map();
   }
 
-  updateLayerVisibility = (selectedLayer, layers) => {
-    if (selectedLayer !== null)
-      this.state[selectedLayer] = !this.state[selectedLayer];
-    Object.keys(layers).forEach(layer =>
+  updateLayerVisibility = selectedLayer => {
+    let { layers } = this.state;
+
+    //toggle selected layer state
+    if (selectedLayer !== null) {
+      layers = {
+        ...this.state.layers,
+        [selectedLayer]: !this.state.layers[selectedLayer]
+      };
+    }
+
+    Object.keys(layers).forEach(layer => {
+      //set other layer states to false
+      if (layer !== selectedLayer) layers[layer] = false;
+
+      //update layers
       this.map.setLayoutProperty(
         layer,
         "visibility",
-        this.state.layers[layer] ? "visible" : "none"
-      )
-    );
+        layers[layer] ? "visible" : "none"
+      );
+    });
+
+    this.setState({ layers });
   };
 
   componentDidMount() {
@@ -55,7 +68,7 @@ class MapComponent extends Component {
       });
       this.map.addLayer(
         {
-          id: "ipd",
+          id: "Indicators of Potential Disadvantage",
           type: "fill",
           source: "IPD",
           paint: {
@@ -85,7 +98,7 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "waterway-label"
+        "water-shadow"
       );
 
       this.map.addSource("CMP", {
@@ -95,7 +108,7 @@ class MapComponent extends Component {
       });
       this.map.addLayer(
         {
-          id: "cmp",
+          id: "CMP Corridors",
           type: "fill",
           source: "CMP",
           paint: {
@@ -103,7 +116,7 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "waterway-label"
+        "water-shadow"
       );
 
       this.map.addSource("Connections", {
@@ -113,7 +126,7 @@ class MapComponent extends Component {
       });
       this.map.addLayer(
         {
-          id: "connections",
+          id: "Connections 2045 Centers",
           type: "fill",
           source: "Connections",
           paint: {
@@ -121,7 +134,7 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "waterway-label"
+        "water-shadow"
       );
 
       this.map.addSource("Freight", {
@@ -131,7 +144,7 @@ class MapComponent extends Component {
       });
       this.map.addLayer(
         {
-          id: "freight",
+          id: "Freight Centers",
           type: "fill",
           source: "Freight",
           paint: {
@@ -139,15 +152,18 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "waterway-label"
+        "water-shadow"
       );
 
-      this.updateLayerVisibility(null, this.state.layers);
+      this.updateLayerVisibility(null);
     });
 
     updateBounds(this);
     updateMarkers(this);
   }
+
+  toggleDropdown = () =>
+    this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
   componentWillReceiveProps(nextProps) {
     // check if center has been updated by the search bar and flyTo if so
@@ -171,23 +187,38 @@ class MapComponent extends Component {
   render() {
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
-        <nav
-          style="position:absolute; z-index:99999; background: rgba(255,255,255,.75);margin-left:10px;margin-top:10px;"
-          className="layer-menu"
-        >
-          {Object.keys(this.state.layers).map(layer => {
-            console.log(layer);
-            return (
-              <a
-                style="display:block;text-decoration:none;margin:3px 5px 3px 20px"
-                href="#"
-                className={this.state[layer] ? "active" : ""}
-                onClick={this.updateLayerVisibility(layer, this.state.layers)}
-              >
-                {layer}
-              </a>
-            );
-          })}
+        <nav>
+          <button
+            className="btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded={this.state.toggleDropdown}
+            onClick={this.toggleDropdown}
+          >
+            Layers
+          </button>
+          <div
+            className={
+              "layer-menu " + (this.state.toggleDropdown ? "show" : "")
+            }
+          >
+            {Object.keys(this.state.layers).map(layer => {
+              return (
+                <a
+                  href="#"
+                  className={
+                    "dropdown-item " +
+                    (this.state.layers[layer] ? "selected" : "")
+                  }
+                  onClick={() => this.updateLayerVisibility(layer)}
+                >
+                  {layer}
+                </a>
+              );
+            })}
+          </div>
         </nav>
       </div>
     );
@@ -195,7 +226,6 @@ class MapComponent extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("what the fuck is state ", state);
   return {
     center: state.getTIP.center,
     projects: state.getTIP.projects
