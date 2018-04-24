@@ -48,6 +48,9 @@ class MapComponent extends Component {
     this.setState({ layers });
   };
 
+  toggleDropdown = () =>
+    this.setState({ toggleDropdown: !this.state.toggleDropdown });
+
   componentDidMount() {
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
@@ -169,9 +172,6 @@ class MapComponent extends Component {
     updateMarkers(this);
   }
 
-  toggleDropdown = () =>
-    this.setState({ toggleDropdown: !this.state.toggleDropdown });
-
   componentWillReceiveProps(nextProps) {
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
@@ -190,7 +190,7 @@ class MapComponent extends Component {
   render() {
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
-        <nav>
+        <nav className="dropdown-nav">
           <button
             className="btn dropdown-toggle"
             type="button"

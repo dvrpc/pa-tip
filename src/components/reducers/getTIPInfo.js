@@ -91,3 +91,9 @@ export const getFullTIP = id => dispatch => {
 };
 
 // make a function that filters response objects from getTIPByMapBounds and getTIPByMunicipalBoundaries (basically does the same as filterByCategory)
+const filterMarkers = category => {
+  // don't filter the projects at all if All Categories is selected
+  // wait, won't this make hte other filter meaningless? If this throttles projects at the source, there's
+  // no need for a bool or any of that business, right? Projects display as they are...
+  if (category === "All Categories") return;
+};

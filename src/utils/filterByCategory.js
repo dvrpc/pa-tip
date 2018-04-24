@@ -19,11 +19,12 @@ export const filterByCategory = (instance, e) => {
 
   /* METHOD: 
     1) Pass a bool (or a string, like above) (markerFilter) to the store
+    A) do the logic at the reducer - check for the bool after response and filter accordingly
+    
     2) have Map.js listen for that bool on the store
-      3) before calling updateMarkers in the didUpdate() hook, check if(markerFilter)
-        4) true: 
-          A) do the logic at the reducer - check for the bool after response and filter accordingly
-          B) filter state and call updateMarkers()?
-        5) false: call updateMarkers as usual
+      a) before calling updateMarkers in the didUpdate() hook, check if(markerFilter)
+        b) true: 
+          ba) filter state and call updateMarkers()?
+        c) false: call updateMarkers as usual
   */
 };
