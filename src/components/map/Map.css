@@ -1,25 +1,104 @@
 .map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-.marker:hover{
-    cursor: pointer;
+.marker:hover {
+  cursor: pointer;
 }
-.mapboxgl-popup{
-    min-width: 100px;
-    max-width: 350px;
-    min-height: 100px;
+.mapboxgl-popup {
+  min-width: 100px;
+  max-width: 350px;
+  min-height: 100px;
 }
-.mapboxgl-popup:hover{
-    cursor: pointer;
+.mapboxgl-popup:hover {
+  cursor: pointer;
 }
-.mapboxgl-popup-content{
-    border: 4px solid #cccccc;
-    background: #ffffff;
-    color: #333333;
-    padding: 5%;
-    text-align: center;
+.mapboxgl-popup-content {
+  border: 4px solid #cccccc;
+  background: #ffffff;
+  color: #333333;
+  padding: 5%;
+  text-align: center;
 }
-.mapboxgl-popup-content p{
-    padding: 3% 0 3% 0;
+.mapboxgl-popup-content p {
+  padding: 3% 0 3% 0;
+}
+nav {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  z-index: 1;
+}
+.btn {
+  user-select: none;
+  padding: 0.46875rem 1rem;
+  line-height: 1.5;
+  border-radius: 0.125rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow, transform;
+  background-color: transparent;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.btn:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.btn:after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.255em;
+  vertical-align: 0.15em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+.layer-menu {
+  display: none;
+  border: 0;
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  min-width: 10rem;
+  padding: 0.25rem 0;
+  margin: 0.125rem 0 0;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.125rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.layer-menu.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 1rem;
+  overflow: hidden;
+  line-height: 1;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  color: inherit;
+  white-space: nowrap;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.selected {
+  background-color: #ddd;
 }
