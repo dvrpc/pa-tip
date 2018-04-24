@@ -46,13 +46,11 @@
   background: #333333;
 }
 #expanded-project-description {
-  /*this makes no sense but it works?*/
-  min-height: calc(100% - 21.5vh - 250px);
-  max-height: calc(100% - 18vh - 250px);
+  height: calc(100% - 22vh - 2em - 250px);
   overflow-y: auto;
   background: #666666;
 }
-p {
+#expanded-project-description p {
   margin-bottom: 1em;
 }
 
@@ -177,4 +175,24 @@ th {
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
 }
 
-/* TODO: media query set right-column to flex-column so everything stacks on smaller viewports*/
+/* TODO: 
+ 1)media query set right-column to flex-column so everything stacks on smaller viewports
+ */
+ @media screen and (max-width: 880px) {
+  .wrapper{
+    flex-direction: column;
+    height: 100%;
+  }
+  .left-column, .right-column {
+    width: 100%;
+  }
+  .right-column{
+    padding: 0;
+    margin: 1% 0 1% 0;
+  }
+ }
+@media screen and (min-width: 1400px) {
+  #expanded-project-description{
+    height: calc(100% - 22vh - 250px);
+  }
+}
