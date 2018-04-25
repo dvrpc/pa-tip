@@ -38,3 +38,10 @@
     border: thin solid #ffffff;
     margin-right: 3%;
 }
+
+ @media screen and (max-width: 880px) {
+  .tilesContainer{
+    margin-left: 0;
+    max-height: 50vh;
+  }
+ }

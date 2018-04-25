@@ -102,3 +102,11 @@
 .selected {
   background-color: #ddd;
 }
+
+/*just guessing here...*/
+ @media screen and (max-width: 880px) {
+  .map{
+    height: 36.5vh;
+    width: 100%;
+  }
+ }

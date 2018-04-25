@@ -45,9 +45,10 @@ export default function tipReducer(state = [], action) {
 /*** DISPATCHERS ***/
 // fallback case that gets tip projects by keywords
 export const getTIPByKeywords = keyword => dispatch => {
+  /*This doesnt work b/c the test ID's were MPMS, which is all that gets returned from keyword API. If Jesse can add object ID's, were cooking. https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?objectIds=103556,93446,70220,93440&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=json*/
   console.log("keyword dispatcher hit with ", keyword);
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(response =>
-    // TODO: at this step for keyword projects, loop thru each one and make an arcGIS call for them.
+    // TODO: at this step for keyword projects, loop thru each one to get the object Id's in a comme delineated string and then make the ObjectID's arcGIS call
     response.json().then(projects => dispatch(get_tip_keywords(projects)))
   );
 };
@@ -56,7 +57,7 @@ export const getTIPByKeywords = keyword => dispatch => {
 // UPDATE TO INCLUDE MARKER FILTERING
 export const getTIPByMunicipalBoundaries = id => dispatch => {
   fetch(
-    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?where=MPMS_ID%3D${id}&objectIds=&time=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&f=pjson`
+    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?where=MPMS_ID=${id}&objectIds=&time=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&f=pjson`
   ).then(response =>
     response
       .json()

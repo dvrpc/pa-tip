@@ -20,8 +20,9 @@ class TilesContainer extends Component {
   render() {
     let projects;
 
+    // soon keyword projects and bounds projects will have the exact same properties...
     // handle keyword and bounds projects concurrently
-    let keywordProjects = this.props.keywordProjects.length || [];
+    let keywordProjects = this.props.keywordProjects || [];
     let boundsProjects = this.props.boundsProjects.features
       ? this.props.boundsProjects.features
       : [];
@@ -42,6 +43,8 @@ class TilesContainer extends Component {
     } else {
       projects = keywordProjects.concat(boundsProjects);
     }
+    console.log("props is ", this.props);
+    console.log("projects are ", projects);
 
     return (
       <div className="tilesContainer">

@@ -42,3 +42,18 @@
     left: 0;
     right: 0;
 }
+
+/*something is wrong with tile, they are displaying behind map/tilesContainer but still
+allocating space at tilesContainer...
+SOMEHOW, adding padding made them display properly but the container still eats the map
+biggest issue: # of displayed projects determines how much space tilesContainer takes up.
+more project = full screen, fewer gives map room to breath*/
+ @media screen and (max-width: 880px) {
+  .tile{
+    margin: 0 auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    padding: 10%;
+    width: 10%;
+  }
+ }

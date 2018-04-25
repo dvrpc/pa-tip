@@ -14,7 +14,6 @@ export const generateAutocomplete = (element, callback) => {
 };
 
 export const search = (instance, e) => {
-  console.log("new instance is ", instance);
   e.preventDefault();
 
   const input = {
@@ -24,8 +23,10 @@ export const search = (instance, e) => {
   };
 
   if (instance.state.selectedButton === "Place") {
+    console.log("place hit ");
     geocoder.geocode(input, (results, status) => {
       if (status === "OK") {
+        console.log("results are ", results);
         const lat = results[0].geometry.location.lat();
         const lng = results[0].geometry.location.lng();
 
@@ -36,7 +37,7 @@ export const search = (instance, e) => {
       }
     });
   } else {
-    console.log("what is the inputed query ", input.addess);
+    console.log("not polace hit ");
     instance.props.getTIPByKeywords(input.query);
   }
 

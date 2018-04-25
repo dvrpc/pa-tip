@@ -12,7 +12,6 @@ import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 
 const handleRadioChange = (instance, e) => {
-  console.log("e ", e.target.value);
   instance.setState({
     selectedButton: e.target.value
   });
