@@ -17,23 +17,12 @@ class TilesContainer extends Component {
     };
   }
 
-  componentDidUpdate() {
-    // NOTE: category selector triggers this, so any kind of functionality in here
-    // will need to be aware of that before being built
-    /*    const keywordGeometry = this.props.keywordProjects
-      ? this.props.keywordProjects.map(project =>
-          this.props.getTIPByMunicipalBoundaries(project.id)
-        )
-      : null;
-      */
-  }
-
   render() {
     let projects;
 
     // handle keyword and bounds projects concurrently
-    let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects = this.props.boundsProjects.features.length
+    let keywordProjects = this.props.keywordProjects.length || [];
+    let boundsProjects = this.props.boundsProjects.features
       ? this.props.boundsProjects.features
       : [];
 
@@ -53,8 +42,6 @@ class TilesContainer extends Component {
     } else {
       projects = keywordProjects.concat(boundsProjects);
     }
-
-    console.log("projects ", projects);
 
     return (
       <div className="tilesContainer">

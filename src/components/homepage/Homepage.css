@@ -44,13 +44,30 @@
     width: 50%;
     box-shadow: 2px 3px 4px 1px rgba(0,0,0, 0.55);
 }
-
-#search-form input{
+.homepage-radio-group{
+    font-size: 1.4rem;
+    border-radius: 3px;
+    background: rgba(238, 238, 238, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+}
+.homepage-radio-group input[type="radio"] {
+    margin-right: 1%
+}
+#MPMS {
+    margin-left: 5%;
+}
+#Keyword {
+    margin-left: 5%;
+}
+#homepage-search-bar{
     border: none;
-    background: url('./magnifying-glass.png') no-repeat scroll 7px 50%;
+    background: url('./magnifying-glass.png') no-repeat scroll 10px 50%;
     padding-left: 30px;
     font-size: 1.4rem;
-    width: 90%;
+    width: 100%;
     padding: 3% 5% 3% 5%;
 }
 #search-form input:focus{

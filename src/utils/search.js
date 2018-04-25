@@ -14,36 +14,33 @@ export const generateAutocomplete = (element, callback) => {
 };
 
 export const search = (instance, e) => {
+  console.log("new instance is ", instance);
   e.preventDefault();
 
   const input = {
-    address: instance.state.value,
+    query: instance.state.value,
     // Hardcoded to the entire region
     bounds
   };
 
-  geocoder.geocode(input, (results, status) => {
-    if (status === "OK") {
-      const lat = results[0].geometry.location.lat();
-      const lng = results[0].geometry.location.lng();
+  if (instance.state.selectedButton === "Place") {
+    geocoder.geocode(input, (results, status) => {
+      if (status === "OK") {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
 
-      instance.props.setMapCenter({ lng, lat });
-    } else {
-      console.log("Geocode failed because : ", status);
-      console.log("geocorder results in the fail condition are ", results);
-
-      // if geocode failed & the address is valid, fall back to keyword search
-      console.log("is input.value truthy ", input.address);
-      if (input.address) {
-        console.log(
-          "hitting the get tip by keywords endoint with a truthy value of ",
-          input.address
-        );
-        instance.props.getTIPByKeywords(input.address);
+        instance.props.setMapCenter({ lng, lat });
+      } else {
+        console.log("Geocode failed because : ", status);
+        // error handling, maybe?
       }
-    }
-  });
+    });
+  } else {
+    console.log("what is the inputed query ", input.addess);
+    instance.props.getTIPByKeywords(input.query);
+  }
+
   // at this point a valid search has been made and the proper endpoints have been hit
   // navigate to the results
-  instance.props.history.push(`/main/${input.address}`);
+  instance.props.history.push(`/main/${input.query}`);
 };

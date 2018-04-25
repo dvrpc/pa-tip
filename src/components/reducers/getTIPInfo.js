@@ -48,7 +48,6 @@ export const getTIPByKeywords = keyword => dispatch => {
   console.log("keyword dispatcher hit with ", keyword);
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(response =>
     // TODO: at this step for keyword projects, loop thru each one and make an arcGIS call for them.
-    // can't work on it right now because the arcGIS server is returning 400's
     response.json().then(projects => dispatch(get_tip_keywords(projects)))
   );
 };

@@ -11,12 +11,20 @@ import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 
+const handleRadioChange = (instance, e) => {
+  console.log("e ", e.target.value);
+  instance.setState({
+    selectedButton: e.target.value
+  });
+};
+
 class Homepage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: ""
+      value: "",
+      selectedButton: "Place"
     };
 
     this.handleChange.bind(this);
@@ -59,11 +67,52 @@ class Homepage extends Component {
             >
               <source src={philly} type="video/mp4" />
             </video>
-            <form id="search-form" onSubmit={linkEvent(this, search)}>
+            <form
+              role="search"
+              id="search-form"
+              method="get"
+              action={linkEvent(this, search)}
+            >
+              <div
+                className="homepage-radio-group"
+                ref={e => (this.radioGroup = e)}
+              >
+                <input
+                  type="radio"
+                  name="searchType"
+                  id="Place"
+                  value="Place"
+                  checked={this.state.selectedButton === "Place"}
+                  onChange={linkEvent(this, handleRadioChange)}
+                />
+                <label for="Place">Place</label>
+
+                <input
+                  type="radio"
+                  name="searchType"
+                  id="MPMS"
+                  value="MPMS"
+                  checked={this.state.selectedButton === "MPMS"}
+                  onChange={linkEvent(this, handleRadioChange)}
+                />
+                <label for="MPMS">MPMS ID</label>
+
+                <input
+                  type="radio"
+                  name="searchType"
+                  id="Keyword"
+                  value="Keyword"
+                  checked={this.state.selectedButton === "Keyword"}
+                  onChange={linkEvent(this, handleRadioChange)}
+                />
+                <label for="Keyword">Keyword</label>
+              </div>
+
               <input
+                id="homepage-search-bar"
                 required
                 type="text"
-                placeholder="search by municipality, city, zip code, project, or fund"
+                placeholder="search projects by place, MPMS ID or keywords"
                 value={this.state.value}
                 onInput={this.handleChange}
                 ref={i => {
