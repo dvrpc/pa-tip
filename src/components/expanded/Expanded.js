@@ -46,8 +46,8 @@ class Expanded extends Component {
       this.streetview,
       {
         position: {
-          lat: this.props.info.geometry.y,
-          lng: this.props.info.geometry.x
+          lat: this.props.info.attributes.LAG,
+          lng: this.props.info.attributes.LNG
         },
         zoom: 0
       }
