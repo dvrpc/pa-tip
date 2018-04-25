@@ -234,6 +234,18 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    switch (nextProps.category) {
+      case "All Categories":
+        this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
+        break;
+      default:
+        this.map.setFilter("pa-tip-projects", [
+          "==",
+          "DESCRIPTIO",
+          nextProps.category
+        ]);
+    }
+
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
       this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
@@ -289,7 +301,8 @@ class MapComponent extends Component {
 const mapStateToProps = state => {
   return {
     center: state.getTIP.center,
-    projects: state.getTIP.projects
+    projects: state.getTIP.projects,
+    category: state.getTIP.category
   };
 };
 

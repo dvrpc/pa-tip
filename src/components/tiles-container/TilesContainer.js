@@ -5,7 +5,10 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
-import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
+import {
+  getTIPByMunicipalBoundaries,
+  setFilter
+} from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
 
 class TilesContainer extends Component {
@@ -33,7 +36,7 @@ class TilesContainer extends Component {
 
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects = this.props.boundsProjects.features.length
+    let boundsProjects = this.props.boundsProjects.features
       ? this.props.boundsProjects.features
       : [];
 
@@ -105,7 +108,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIPByMunicipalBoundaries: id => dispatch(getTIPByMunicipalBoundaries(id))
+    getTIPByMunicipalBoundaries: id =>
+      dispatch(getTIPByMunicipalBoundaries(id)),
+    setFilter: category => dispatch(setFilter(category))
   };
 };
 

@@ -6,6 +6,7 @@ const GET_FULL_TIP = "GET_FULL_TIP";
 const SET_MAP_CENTER = "SET_MAP_CENTER";
 const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
+const SET_FILTER = "SET_FILTER";
 
 /*** ACTION_CREATORS ***/
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
@@ -20,6 +21,7 @@ const get_tip_by_map_bounds = bounds => ({
   type: GET_TIP_BY_MAP_BOUNDS,
   bounds
 });
+const set_filter = category => ({ type: SET_FILTER, category });
 
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
@@ -37,6 +39,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
+    case SET_FILTER:
+      return Object.assign({}, state, { category: action.category });
     default:
       return state;
   }
@@ -70,6 +74,10 @@ export const setMapCenter = latlng => dispatch =>
 
 export const setCurrentProject = props => dispatch =>
   dispatch(set_current_project(props));
+
+export const setFilter = category => dispatch => {
+  dispatch(set_filter(category));
+};
 
 // get all projects within the boundaires of the current mapbox view
 // UPDATE TO INCLUDE MARKER FILTERING
