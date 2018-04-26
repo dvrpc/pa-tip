@@ -80,11 +80,11 @@ class MapComponent extends Component {
         layout: {
           "icon-image": "{DESCRIPTIO}",
           "icon-allow-overlap": true,
-          "icon-ignore-placement": false,
+          "icon-ignore-placement": true,
+          "text-allow-overlap": true,
+          "text-ignore-placement": true,
           "icon-anchor": "bottom",
-          "icon-offset": [2, 8],
-          "symbol-spacing": 1,
-          "icon-padding": 0
+          "icon-offset": [2, 8]
         },
         interactive: true
       });
