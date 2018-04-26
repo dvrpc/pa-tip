@@ -61,7 +61,8 @@ class MapComponent extends Component {
 
       // default to center city - flyTo new co-ordinates on search
       center: this.props.center || [-75.1633, 39.9522],
-      zoom: 13
+      zoom: 13,
+      dragRotate: false
     });
 
     this.map.on("load", () => {
