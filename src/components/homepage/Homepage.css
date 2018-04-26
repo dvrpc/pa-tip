@@ -44,14 +44,26 @@
     width: 50%;
     box-shadow: 2px 3px 4px 1px rgba(0,0,0, 0.55);
 }
-
-#search-form input{
-    border: none;
-    background: url('./magnifying-glass.png') no-repeat scroll 7px 50%;
-    padding-left: 30px;
+.homepage-radio-group{
     font-size: 1.4rem;
-    width: 90%;
-    padding: 3% 5% 3% 5%;
+    border-radius: 3px;
+    background: rgba(238, 238, 238, 0.9);
+    display: flex;
+    align-items: center;
+    padding: 3%;
+}
+.homepage-radio-group input[type="radio"], #MPMS, #Keyword {
+    margin-left: 5%;
+}
+.homepage-radio-group input[type="radio"]{
+    margin-right: 1%;
+}
+#homepage-search-bar{
+    border: none;
+    background: url('./magnifying-glass.png') no-repeat scroll 3% 50%;
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 3% 5% 3% 7%;
 }
 #search-form input:focus{
     outline: none;
@@ -61,8 +73,6 @@
     padding: 1.5%;
 }
 .homepage-bottom-bar img{
-    /*TODO: fix this hack - the arrow should align with the search bar & this can be done better*/
-    /*TODO: smooth scroll to the tip-info page*/
     margin-left: 95%;
 }
 

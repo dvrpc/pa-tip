@@ -34,13 +34,13 @@ class Expanded extends Component {
   componentWillReceiveProps(nextProps) {
     // apply color scheme on project load
     const colorScheme = colors[nextProps.details.category];
-    this.setState({ colorScheme });
+    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
   }
 
   componentDidMount() {
     // maintain color scheme on refresh
     const colorScheme = colors[this.props.details.category];
-    this.setState({ colorScheme });
+    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
 
     window.streetview = new window.google.maps.StreetViewPanorama(
       this.streetview,
@@ -61,6 +61,7 @@ class Expanded extends Component {
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
 
+    console.log("expanded details ", details);
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />
