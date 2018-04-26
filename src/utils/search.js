@@ -17,13 +17,20 @@ export const search = (instance, e) => {
   e.preventDefault();
 
   const input = {
-    query: instance.state.value,
+    address: instance.state.value,
     // Hardcoded to the entire region
     bounds
   };
 
+  console.log(
+    "selectedButton is place",
+    instance.state.selectedButton === "Place"
+  );
+
   if (instance.state.selectedButton === "Place") {
-    console.log("place hit ");
+    // clear keyword projects from memory
+    instance.context.store.getState().getTIP.keyword = [];
+
     geocoder.geocode(input, (results, status) => {
       if (status === "OK") {
         console.log("results are ", results);
@@ -37,11 +44,11 @@ export const search = (instance, e) => {
       }
     });
   } else {
-    console.log("not polace hit ");
-    instance.props.getTIPByKeywords(input.query);
+    // todo: this does nothing to update map center...
+    instance.props.getTIPByKeywords(input.address);
   }
 
   // at this point a valid search has been made and the proper endpoints have been hit
   // navigate to the results
-  instance.props.history.push(`/main/${input.query}`);
+  instance.props.history.push(`/main/${input.address}`);
 };

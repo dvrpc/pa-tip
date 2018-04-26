@@ -12,22 +12,22 @@ import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 
 const handleRadioChange = (instance, e) => {
-  switch (e.target.value) {
-    case "Place":
-      return (instance.input.placeholder =
-        "search by address, location, building, etc");
-    case "MPMS":
-      return (instance.input.placeholder = "search by project MPMS ID");
-    case "Keyword":
-      return (instance.input.placeholder = "search by project keywords");
-    default:
-      return (instance.input.placeholder =
-        "search by address, location, building, etc");
-  }
-
   instance.setState({
     selectedButton: e.target.value
   });
+
+  switch (e.target.value) {
+    case "Place":
+      return (instance.input.placeholder =
+        "enter address, location, building, etc");
+    case "MPMS":
+      return (instance.input.placeholder = "enter project MPMS ID");
+    case "Keyword":
+      return (instance.input.placeholder = "enter project keywords");
+    default:
+      return (instance.input.placeholder =
+        "enter address, location, building, etc");
+  }
 };
 
 class Homepage extends Component {
@@ -125,7 +125,7 @@ class Homepage extends Component {
                 id="homepage-search-bar"
                 required
                 type="text"
-                placeholder="search by address, location, building, etc"
+                placeholder="enter address, location, building, etc"
                 value={this.state.value}
                 onInput={this.handleChange}
                 ref={i => {

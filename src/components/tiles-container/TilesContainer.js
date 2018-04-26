@@ -5,7 +5,6 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
-import { getTIPByMunicipalBoundaries } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
 
 class TilesContainer extends Component {
@@ -23,9 +22,10 @@ class TilesContainer extends Component {
     // soon keyword projects and bounds projects will have the exact same properties...
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects = this.props.boundsProjects.features
-      ? this.props.boundsProjects.features
-      : [];
+    let boundsProjects =
+      this.props.boundsProjects && this.props.boundsProjects.features
+        ? this.props.boundsProjects.features
+        : [];
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
@@ -43,8 +43,6 @@ class TilesContainer extends Component {
     } else {
       projects = keywordProjects.concat(boundsProjects);
     }
-    console.log("props is ", this.props);
-    console.log("projects are ", projects);
 
     return (
       <div className="tilesContainer">
@@ -93,10 +91,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getTIPByMunicipalBoundaries: id => dispatch(getTIPByMunicipalBoundaries(id))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
+export default connect(mapStateToProps, null)(TilesContainer);

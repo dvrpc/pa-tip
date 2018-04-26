@@ -55,13 +55,15 @@
 .homepage-radio-group input[type="radio"], #MPMS, #Keyword {
     margin-left: 5%;
 }
+.homepage-radio-group input[type="radio"]{
+    margin-right: 1%;
+}
 #homepage-search-bar{
     border: none;
-    background: url('./magnifying-glass.png') no-repeat scroll 10px 50%;
-    padding-left: 30px;
+    background: url('./magnifying-glass.png') no-repeat scroll 3% 50%;
     font-size: 1.4rem;
     width: 100%;
-    padding: 3% 5% 3% 5%;
+    padding: 3% 5% 3% 7%;
 }
 #search-form input:focus{
     outline: none;
