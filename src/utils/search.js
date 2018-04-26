@@ -22,11 +22,6 @@ export const search = (instance, e) => {
     bounds
   };
 
-  console.log(
-    "selectedButton is place",
-    instance.state.selectedButton === "Place"
-  );
-
   if (instance.state.selectedButton === "Place") {
     // clear keyword projects from memory
     instance.context.store.getState().getTIP.keyword = [];
