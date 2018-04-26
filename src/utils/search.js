@@ -28,7 +28,6 @@ export const search = (instance, e) => {
 
     geocoder.geocode(input, (results, status) => {
       if (status === "OK") {
-        console.log("results are ", results);
         const lat = results[0].geometry.location.lat();
         const lng = results[0].geometry.location.lng();
 
@@ -38,7 +37,6 @@ export const search = (instance, e) => {
       }
     });
   } else {
-    // todo: this doesn't update map center, look into the general boundary update that peeping TIME uses
     instance.props.getTIPByKeywords(input.address);
   }
 

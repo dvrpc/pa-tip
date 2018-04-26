@@ -20,10 +20,13 @@ class TilesContainer extends Component {
   render() {
     let projects;
 
-    // soon keyword projects and bounds projects will have the exact same properties...
     // handle keyword and bounds projects concurrently
-    let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects = this.props.boundsProjects && this.props.boundsProjects.features
+    let keywordProjects =
+      this.props.keywordProjects && this.props.keywordProjects.features
+        ? this.props.keywordProjects.features
+        : [];
+    let boundsProjects =
+      this.props.boundsProjects && this.props.boundsProjects.features
         ? this.props.boundsProjects.features
         : [];
 
@@ -44,6 +47,7 @@ class TilesContainer extends Component {
       projects = keywordProjects.concat(boundsProjects);
     }
 
+    // TODO: now that keyword and bounds projects have the same properties, conditionals at render aren't necessary!
     return (
       <div className="tilesContainer">
         <div className="header">

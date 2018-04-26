@@ -193,6 +193,6 @@ th {
  }
 @media screen and (min-width: 1400px) {
   #expanded-project-description{
-    height: calc(100% - 22vh - 250px);
+    height: calc(100% - 22vh - 1.7em - 250px);
   }
 }

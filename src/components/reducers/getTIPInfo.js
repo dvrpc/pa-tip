@@ -22,7 +22,10 @@ const set_filter = category => ({ type: SET_FILTER, category });
 export default function tipReducer(state = [], action) {
   switch (action.type) {
     case GET_TIP_KEYWORDS:
-      console.log("get tip keywords hit");
+      console.log(
+        "keyword projects with GEOSPATIAL INFORMATION BIIIIIIIIIIIIIITCH ",
+        action.keyword
+      );
       return Object.assign({}, state, { keyword: action.keyword });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
@@ -41,13 +44,21 @@ export default function tipReducer(state = [], action) {
 
 /*** DISPATCHERS ***/
 export const getTIPByKeywords = keyword => dispatch => {
-  console.log("keyword dispatcher hit with ", keyword);
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
     response => {
       response.json().then(projects => {
-        // in order to avoid making arcGIS calls, get the keyword projects and communicate with the mapboxgl vector tiles
-        // to get project geometry from there. TODO still.
-        dispatch(get_tip_keywords(projects));
+        // get geometry & rest of project information from the arcGIS server
+        let mpms_array = projects
+          .map(project => `MPMS_ID=${project.id} OR `)
+          .join("")
+          .slice(0, -4);
+        fetch(
+          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=${mpms_array}&geometryType=esriGeometryPoint&inSR=4326&outFields=FID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LAG,LNG&returnGeometry=false&outSR=4326&f=json`
+        ).then(response => {
+          response
+            .json()
+            .then(projects => dispatch(get_tip_keywords(projects)));
+        });
       });
     }
   );
