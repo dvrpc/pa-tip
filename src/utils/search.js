@@ -40,11 +40,10 @@ export const search = (instance, e) => {
         instance.props.setMapCenter({ lng, lat });
       } else {
         console.log("Geocode failed because : ", status);
-        // error handling, maybe?
       }
     });
   } else {
-    // todo: this does nothing to update map center...
+    // todo: this doesn't update map center, look into the general boundary update that peeping TIME uses
     instance.props.getTIPByKeywords(input.address);
   }
 
