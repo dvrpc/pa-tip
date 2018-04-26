@@ -5,30 +5,12 @@ import { withRouter } from "inferno-router";
 import "./Homepage.css";
 import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
+import { handleRadioChange } from "../../utils/handleRadioChange.js";
 
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
-
-const handleRadioChange = (instance, e) => {
-  instance.setState({
-    selectedButton: e.target.value
-  });
-
-  switch (e.target.value) {
-    case "Place":
-      return (instance.input.placeholder =
-        "enter address, location, building, etc");
-    case "MPMS":
-      return (instance.input.placeholder = "enter project MPMS ID");
-    case "Keyword":
-      return (instance.input.placeholder = "enter project keywords");
-    default:
-      return (instance.input.placeholder =
-        "enter address, location, building, etc");
-  }
-};
 
 class Homepage extends Component {
   constructor(props) {

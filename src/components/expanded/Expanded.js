@@ -5,19 +5,9 @@ import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 
 import { submitComment } from "../reducers/commentsReducer.js";
-
+import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
-
-const formatComment = (instance, e) => {
-  e.preventDefault();
-  const comment = e.target[0].value;
-  const name = e.target[1].value;
-  const email = e.target[2].value;
-  const county = e.target[3].value;
-  const projectID = instance.props.details ? instance.props.details.id : "test";
-  instance.props.submitComment({ comment, name, email, county, projectID });
-};
 
 class Expanded extends Component {
   constructor(props) {
@@ -236,7 +226,7 @@ class Expanded extends Component {
           <h1>Leave a Comment for This Project</h1>
           <form
             className="comments-form"
-            onSubmit={linkEvent(this, formatComment)}
+            onSubmit={linkEvent(this, POSTComment)}
           >
             <textarea placeholder="Submit a comment for this project" />
             <div className="input-fields">

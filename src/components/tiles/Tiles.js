@@ -27,19 +27,24 @@ class Tile extends Component {
   }
 
   render() {
-    console.log("tile props ", this.props);
-    const project = this.state.details;
+    const calculatedProjectInfo = this.state.details;
+    const project = this.props.data.attributes;
     return (
       <div
         className="tile"
         onClick={linkEvent(this, clickTile)}
-        style={`background: url(${project.background})`}
+        style={`background: url(${calculatedProjectInfo.background})`}
         ref={tile => (this.tileRef = tile)}
       >
-        <div className="tile-caption" style={project.borderBottom}>
-          <h2 className="tile-caption-text">{project.projectName}</h2>
+        <div
+          className="tile-caption"
+          style={calculatedProjectInfo.borderBottom}
+        >
+          <h2 className="tile-caption-text">
+            {calculatedProjectInfo.projectName}
+          </h2>
           <p className="tile-caption-text">
-            {project.county} County | {project.id}
+            {project.CTY} County | {project.MPMS_ID}
           </p>
         </div>
       </div>

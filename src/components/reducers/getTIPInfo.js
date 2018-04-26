@@ -22,10 +22,6 @@ const set_filter = category => ({ type: SET_FILTER, category });
 export default function tipReducer(state = [], action) {
   switch (action.type) {
     case GET_TIP_KEYWORDS:
-      console.log(
-        "keyword projects with GEOSPATIAL INFORMATION BIIIIIIIIIIIIIITCH ",
-        action.keyword
-      );
       return Object.assign({}, state, { keyword: action.keyword });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });

@@ -20,8 +20,6 @@ class TilesContainer extends Component {
   render() {
     let projects;
 
-    console.log("props at tiles container ", this.props);
-
     // handle keyword and bounds projects concurrently
     let keywordProjects =
       this.props.keywordProjects && this.props.keywordProjects.features
@@ -35,23 +33,19 @@ class TilesContainer extends Component {
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
-      projects = keywordProjects.concat(boundsProjects).filter(project => {
-        // handle bounds projects
-        if (project.attributes)
-          return project.attributes.DESCRIPTIO === this.state.categoryToFilter;
-        else {
-          // handle keyword projects
-          return project.category === this.state.categoryToFilter;
-        }
-      });
+      projects = keywordProjects
+        .concat(boundsProjects)
+        .filter(
+          project =>
+            project.attributes.DESCRIPTIO === this.state.categoryToFilter
+        );
 
       // display all projects when no filter is selected
     } else {
       projects = keywordProjects.concat(boundsProjects);
     }
 
-    // TODO: now that keyword and bounds projects have the same properties, conditionals at render aren't necessary!
-    // issue: projects w/the same keys b/c there can be overlap between keyword and bounds projects...
+    // TODO: once the keywords project filter is set up, customize a 'no results found' option (replace loading)
     return (
       <div className="tilesContainer">
         <div className="header">
