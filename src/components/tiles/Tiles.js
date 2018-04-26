@@ -27,6 +27,7 @@ class Tile extends Component {
   }
 
   render() {
+    console.log("tile props ", this.props);
     const project = this.state.details;
     return (
       <div

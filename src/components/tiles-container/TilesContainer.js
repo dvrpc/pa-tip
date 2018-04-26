@@ -20,11 +20,14 @@ class TilesContainer extends Component {
   render() {
     let projects;
 
+    console.log("props at tiles container ", this.props);
+
     // handle keyword and bounds projects concurrently
     let keywordProjects =
       this.props.keywordProjects && this.props.keywordProjects.features
         ? this.props.keywordProjects.features
         : [];
+
     let boundsProjects =
       this.props.boundsProjects && this.props.boundsProjects.features
         ? this.props.boundsProjects.features
@@ -48,6 +51,7 @@ class TilesContainer extends Component {
     }
 
     // TODO: now that keyword and bounds projects have the same properties, conditionals at render aren't necessary!
+    // issue: projects w/the same keys b/c there can be overlap between keyword and bounds projects...
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -74,7 +78,7 @@ class TilesContainer extends Component {
         </div>
         {projects ? (
           projects.map(feature => (
-            <Tile data={feature} key={feature.id || feature.attributes.FID} />
+            <Tile data={feature} key={feature.attributes.FID} />
           ))
         ) : (
           <img id="no-results" src={loading} alt="loading" />

@@ -61,7 +61,6 @@ class Expanded extends Component {
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
 
-    console.log("expanded details ", details);
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />
