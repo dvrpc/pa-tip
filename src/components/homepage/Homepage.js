@@ -12,6 +12,19 @@ import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 
 const handleRadioChange = (instance, e) => {
+  switch (e.target.value) {
+    case "Place":
+      return (instance.input.placeholder =
+        "search by address, location, building, etc");
+    case "MPMS":
+      return (instance.input.placeholder = "search by project MPMS ID");
+    case "Keyword":
+      return (instance.input.placeholder = "search by project keywords");
+    default:
+      return (instance.input.placeholder =
+        "search by address, location, building, etc");
+  }
+
   instance.setState({
     selectedButton: e.target.value
   });
@@ -76,6 +89,7 @@ class Homepage extends Component {
                 className="homepage-radio-group"
                 ref={e => (this.radioGroup = e)}
               >
+                <p> Search by: </p>
                 <input
                   type="radio"
                   name="searchType"
@@ -111,7 +125,7 @@ class Homepage extends Component {
                 id="homepage-search-bar"
                 required
                 type="text"
-                placeholder="search projects by place, MPMS ID or keywords"
+                placeholder="search by address, location, building, etc"
                 value={this.state.value}
                 onInput={this.handleChange}
                 ref={i => {

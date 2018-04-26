@@ -49,17 +49,10 @@
     border-radius: 3px;
     background: rgba(238, 238, 238, 0.9);
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 3%;
 }
-.homepage-radio-group input[type="radio"] {
-    margin-right: 1%
-}
-#MPMS {
-    margin-left: 5%;
-}
-#Keyword {
+.homepage-radio-group input[type="radio"], #MPMS, #Keyword {
     margin-left: 5%;
 }
 #homepage-search-bar{
@@ -78,8 +71,6 @@
     padding: 1.5%;
 }
 .homepage-bottom-bar img{
-    /*TODO: fix this hack - the arrow should align with the search bar & this can be done better*/
-    /*TODO: smooth scroll to the tip-info page*/
     margin-left: 95%;
 }
 
