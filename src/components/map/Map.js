@@ -3,8 +3,10 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
-import { updateBounds, updateMarkers } from "../../utils/updateMap";
+import { updateBounds } from "../../utils/updateMap";
+import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Map.css";
+import mapStyle from "./style.json";
 
 class MapComponent extends Component {
   constructor(props) {
@@ -57,7 +59,7 @@ class MapComponent extends Component {
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
     this.map = new mapboxgl.Map({
       container: this.tipMap,
-      style: "mapbox://styles/mapbox/streets-v9",
+      style: mapStyle,
 
       // default to center city - flyTo new co-ordinates on search
       center: this.props.center || [-75.1633, 39.9522],
@@ -66,6 +68,9 @@ class MapComponent extends Component {
     });
 
     this.map.on("load", () => {
+      //map ready - get features
+      updateBounds(this);
+
       this.map.addSource("IPD", {
         type: "geojson",
         data:
@@ -163,25 +168,69 @@ class MapComponent extends Component {
       this.updateLayerVisibility(null);
     });
 
+    // handle mouse interaction with projects
+    this.map.on("click", "pa-tip-projects", e => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const category = e.features[0].properties.DESCRIPTIO;
+      const mpms = e.features[0].properties.MPMS_ID;
+      const name = e.features[0].properties.ROAD_NAME;
+
+      new mapboxgl.Popup({
+        offset: {
+          top: [0, 0],
+          "top-left": [0, 0],
+          "top-right": [0, 0],
+          bottom: [0, -38],
+          "bottom-left": [0, -38],
+          "bottom-right": [0, -38],
+          left: [15, -26],
+          right: [-15, -26]
+        }
+      })
+        .setLngLat(coordinates)
+        .setHTML(
+          `<h2>${name}</h2>
+            <p style="border-bottom: 8px solid #${
+              colors[category].forMap
+            };">ID: ${mpms}</p>`
+        )
+        .addTo(this.map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the projects layer.
+    this.map.on("mouseenter", "pa-tip-projects", () => {
+      this.map.getCanvas().style.cursor = "pointer";
+    });
+
+    // Change it back to a pointer when it leaves.
+    this.map.on("mouseleave", "pa-tip-projects", () => {
+      this.map.getCanvas().style.cursor = "";
+    });
+
     // handle user events to update map results
     this.map.on("zoomend", () => updateBounds(this));
     this.map.on("moveend", () => updateBounds(this));
-
-    // populate map on initial load && for navigating back to the page
-    updateBounds(this);
-    updateMarkers(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    switch (nextProps.category) {
+      case "All Categories":
+        this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
+        break;
+      default:
+        this.map.setFilter("pa-tip-projects", [
+          "==",
+          "DESCRIPTIO",
+          nextProps.category
+        ]);
+    }
+
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
       this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
   }
 
-  componentDidUpdate() {
-    // update markers with the fetched projects
-    updateMarkers(this);
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {
     this.map.remove();
@@ -231,7 +280,8 @@ class MapComponent extends Component {
 const mapStateToProps = state => {
   return {
     center: state.getTIP.center,
-    projects: state.getTIP.projects
+    projects: state.getTIP.projects,
+    category: state.getTIP.category
   };
 };
 

@@ -5,6 +5,7 @@ const GET_FULL_TIP = "GET_FULL_TIP";
 const SET_MAP_CENTER = "SET_MAP_CENTER";
 const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
+const SET_FILTER = "SET_FILTER";
 
 /*** ACTION_CREATORS ***/
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
@@ -15,6 +16,7 @@ const get_tip_by_map_bounds = bounds => ({
   type: GET_TIP_BY_MAP_BOUNDS,
   bounds
 });
+const set_filter = category => ({ type: SET_FILTER, category });
 
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
@@ -30,6 +32,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { projects: action.bounds });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
+    case SET_FILTER:
+      return Object.assign({}, state, { category: action.category });
     default:
       return state;
   }
@@ -55,10 +59,14 @@ export const setMapCenter = latlng => dispatch =>
 export const setCurrentProject = props => dispatch =>
   dispatch(set_current_project(props));
 
+export const setFilter = category => dispatch => {
+  dispatch(set_filter(category));
+};
+
 // get all projects within the boundaires of the current mapbox view
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
-    `https://arcgis.dvrpc.org/arcgis/rest/services/Transportation/PATIP/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=json`
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
   ).then(response =>
     response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
   );

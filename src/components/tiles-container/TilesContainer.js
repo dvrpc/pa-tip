@@ -5,6 +5,7 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
+import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
 
 class TilesContainer extends Component {
@@ -22,8 +23,7 @@ class TilesContainer extends Component {
     // soon keyword projects and bounds projects will have the exact same properties...
     // handle keyword and bounds projects concurrently
     let keywordProjects = this.props.keywordProjects || [];
-    let boundsProjects =
-      this.props.boundsProjects && this.props.boundsProjects.features
+    let boundsProjects = this.props.boundsProjects && this.props.boundsProjects.features
         ? this.props.boundsProjects.features
         : [];
 
@@ -70,10 +70,7 @@ class TilesContainer extends Component {
         </div>
         {projects ? (
           projects.map(feature => (
-            <Tile
-              data={feature}
-              key={feature.id || feature.attributes.OBJECTID}
-            />
+            <Tile data={feature} key={feature.id || feature.attributes.FID} />
           ))
         ) : (
           <img id="no-results" src={loading} alt="loading" />
@@ -91,4 +88,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(TilesContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    setFilter: category => dispatch(setFilter(category))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);

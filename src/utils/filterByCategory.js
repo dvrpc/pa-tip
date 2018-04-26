@@ -12,7 +12,7 @@ export const filterByCategory = (instance, e) => {
       categoryToFilter
     });
   }
-
+  instance.props.setFilter(categoryToFilter);
   // for later: update markers state with the selected filter (someway, somehow!)
 
   /* METHOD: 

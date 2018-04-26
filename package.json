@@ -24,7 +24,7 @@
     "inferno-router": "^5.0.4",
     "inferno-scripts": "^6.3.0",
     "inferno-vnode-flags": "^5.0.4",
-    "mapbox-gl": "^0.44.1",
+    "mapbox-gl": "^0.43.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
