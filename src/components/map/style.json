@@ -86,6 +86,10 @@
     "composite": {
       "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7",
       "type": "vector"
+    },
+    "pa-tip": {
+      "type": "vector",
+      "url": "https://a.michaelruane.com/data/dvrpc-tip.json"
     }
   },
   "sprite": "https://a.michaelruane.com/styles/dvrpc-streets/sprite",
@@ -6367,6 +6371,22 @@
           "stops": [[2, "rgba(255,255,255,0.75)"], [3, "hsl(0, 0%, 100%)"]]
         },
         "text-halo-width": 1.25
+      },
+      "interactive": true
+    },
+    {
+      "id": "pa-tip-projects",
+      "source": "pa-tip",
+      "source-layer": "patip_fy19",
+      "type": "symbol",
+      "layout": {
+        "icon-image": "{DESCRIPTIO}",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "icon-anchor": "bottom",
+        "icon-offset": [2, 8]
       },
       "interactive": true
     }

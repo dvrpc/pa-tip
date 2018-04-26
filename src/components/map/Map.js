@@ -68,26 +68,8 @@ class MapComponent extends Component {
     });
 
     this.map.on("load", () => {
-      this.map.addSource("pa-tip", {
-        type: "vector",
-        url: "https://a.michaelruane.com/data/dvrpc-tip.json"
-      });
-      this.map.addLayer({
-        id: "pa-tip-projects",
-        source: "pa-tip",
-        "source-layer": "patip_fy19",
-        type: "symbol",
-        layout: {
-          "icon-image": "{DESCRIPTIO}",
-          "icon-allow-overlap": true,
-          "icon-ignore-placement": true,
-          "text-allow-overlap": true,
-          "text-ignore-placement": true,
-          "icon-anchor": "bottom",
-          "icon-offset": [2, 8]
-        },
-        interactive: true
-      });
+      //map ready - get features
+      updateBounds(this);
 
       this.map.addSource("IPD", {
         type: "geojson",
@@ -228,9 +210,6 @@ class MapComponent extends Component {
     // handle user events to update map results
     this.map.on("zoomend", () => updateBounds(this));
     this.map.on("moveend", () => updateBounds(this));
-
-    // populate map on initial load && for navigating back to the page
-    updateBounds(this);
   }
 
   componentWillReceiveProps(nextProps) {
