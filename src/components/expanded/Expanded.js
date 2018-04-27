@@ -4,6 +4,7 @@ import { connect } from "inferno-redux";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 
+import { getFullTIP } from "../reducers/getTIPInfo";
 import { submitComment } from "../reducers/commentsReducer.js";
 import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -28,6 +29,7 @@ class Expanded extends Component {
   }
 
   componentDidMount() {
+    this.props.getFullTIP(this.props.match.params.id);
     // maintain color scheme on refresh
     const colorScheme = colors[this.props.details.category];
     if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
@@ -45,7 +47,10 @@ class Expanded extends Component {
   }
 
   render() {
-    const details = this.props.details || {};
+    const details = this.props.details;
+    //Render runs multiple times until the data is completely pulled in
+    //Message property means there was an error
+    if (!details || "Message" in details) return;
     const colorScheme = this.state.colorScheme;
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
@@ -100,7 +105,7 @@ class Expanded extends Component {
               </p>
               {details.limits.length && <div>{details.limits}</div>}
               <p>
-                {details.municipalities.length && (
+                {details.municipalities && (
                   <span>{details.municipalities}, </span>
                 )}
                 {details.county.length && <span>{details.county} County</span>}
@@ -274,9 +279,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitComment: comment => {
-      dispatch(submitComment(comment));
-    }
+    getFullTIP: id => dispatch(getFullTIP(id)),
+    submitComment: comment => dispatch(submitComment(comment))
   };
 };
 

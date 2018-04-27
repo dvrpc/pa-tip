@@ -1,10 +1,13 @@
 import Inferno, { Component } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
+import { withRouter } from "inferno-router";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
+import { setCurrentProject } from "../reducers/getTIPInfo";
+import { clickTile } from "../../utils/clickTile.js";
 import "./Map.css";
 import mapStyle from "./style.json";
 
@@ -54,6 +57,7 @@ class MapComponent extends Component {
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
   componentDidMount() {
+    const { history } = this.props;
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -168,43 +172,53 @@ class MapComponent extends Component {
       this.updateLayerVisibility(null);
     });
 
-    // handle mouse interaction with projects
-    this.map.on("click", "pa-tip-projects", e => {
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+      offset: {
+        top: [0, 0],
+        "top-left": [0, 0],
+        "top-right": [0, 0],
+        bottom: [0, -38],
+        "bottom-left": [0, -38],
+        "bottom-right": [0, -38],
+        left: [15, -26],
+        right: [-15, -26]
+      }
+    });
+
+    this.map.on("click", "pa-tip-projects", e =>
+      clickTile({
+        props: {
+          history,
+          setCurrentProject,
+          data: { id: e.features[0].properties.MPMS_ID }
+        }
+      })
+    );
+
+    // Change the cursor to a pointer when the mouse is over the projects layer.
+    this.map.on("mousemove", "pa-tip-projects", e => {
+      this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
       const category = e.features[0].properties.DESCRIPTIO;
       const mpms = e.features[0].properties.MPMS_ID;
       const name = e.features[0].properties.ROAD_NAME;
 
-      new mapboxgl.Popup({
-        offset: {
-          top: [0, 0],
-          "top-left": [0, 0],
-          "top-right": [0, 0],
-          bottom: [0, -38],
-          "bottom-left": [0, -38],
-          "bottom-right": [0, -38],
-          left: [15, -26],
-          right: [-15, -26]
-        }
-      })
+      popup
         .setLngLat(coordinates)
         .setHTML(
-          `<h2>${name}</h2>
-            <p style="border-bottom: 8px solid #${
-              colors[category].forMap
-            };">ID: ${mpms}</p>`
+          `<h2>${mpms}</h2><p style="border-bottom: 8px solid #${
+            colors[category].forMap
+          };">${name}</p>`
         )
         .addTo(this.map);
-    });
-
-    // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mouseenter", "pa-tip-projects", () => {
-      this.map.getCanvas().style.cursor = "pointer";
     });
 
     // Change it back to a pointer when it leaves.
     this.map.on("mouseleave", "pa-tip-projects", () => {
       this.map.getCanvas().style.cursor = "";
+      popup.remove();
     });
 
     // handle user events to update map results
@@ -296,4 +310,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+);
