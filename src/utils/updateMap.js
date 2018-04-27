@@ -16,17 +16,19 @@ export const keywordBounds = (mapReference, data) => {
   let latitude = "";
   let longitude = "";
 
-  for (var i = 0; i < data.features.length; i++) {
-    longitude = data.features[i].attributes.LNG;
-    latitude = data.features[i].attributes.LAT;
-    bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
-    bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
-    bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;
-    bounds.yMax = bounds.yMax > latitude ? bounds.yMax : latitude;
-  }
+  if (data.features && data.features.length) {
+    for (var i = 0; i < data.features.length; i++) {
+      longitude = data.features[i].attributes.LNG;
+      latitude = data.features[i].attributes.LAG;
+      bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
+      bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
+      bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;
+      bounds.yMax = bounds.yMax > latitude ? bounds.yMax : latitude;
+    }
 
-  mapReference.map.fitBounds([
-    [bounds.xMin, bounds.yMin],
-    [bounds.xMax, bounds.yMax]
-  ]);
+    mapReference.map.fitBounds([
+      [bounds.xMin, bounds.yMin],
+      [bounds.xMax, bounds.yMax]
+    ]);
+  }
 };

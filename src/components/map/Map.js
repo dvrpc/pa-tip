@@ -214,7 +214,10 @@ class MapComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     // limit only to keywordProjects exists? wish I could actually test this code
-    keywordBounds(this, nextProps.keywordProjects);
+
+    if (nextProps.keywordProjects !== this.props.keywordProjects)
+      keywordBounds(this, nextProps.keywordProjects);
+
     switch (nextProps.category) {
       case "All Categories":
         this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
