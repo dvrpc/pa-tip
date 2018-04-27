@@ -135,22 +135,13 @@
 
 /* Media Queries*/
 
-/* Special case for video  */
-@media only screen and (max-width: 1200px) {
-    .homepage-main{
-        height: 50vh;
-    }
-    #bgvid {
-        transform: translateX(-50%) translateY(-58%);
-    }
-    .homepage-radio-group, #homepage-search-bar{
-        font-size: 1.2rem;
-    }
-}
 
-/* Phones */
-@media only screen and (max-width : 599px) {
+/* Phones and tablets (portrait) */
+@media only screen and (max-width: 600px) {
     /* hide the video for smartphone users */
+    .homepage{
+        overflow: hidden;
+    }
     #bgvid {
         display: none;
     }
@@ -158,12 +149,39 @@
         background: url('http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg');
         background-size: stretch;
     }
-}
-
-/* Tablets (portrait) */
-@media only screen and (max-width: 600px) {
     .homgepage-main {
         height: 30vh;
+    }
+    .homepage-banner h1 {
+        font-size: 1rem !important;
+    }
+    .homepage-radio-group{
+        flex-direction: column;
+    }
+    .homepage-radio-group input[type="radio"], .homepage-radio-group label{
+        /*get button and label to be lined up, not stacked*/
+    }
+    .homepage-radio-group, #homepage-search-bar{
+        font-size: 0.8rem !important;
+    }
+    #homepage-search-bar{
+        padding: 7% 0 7% 15%;
+        text-overflow: wrap;
+    }
+    .tip-info-cluster{
+        justify-content: center;
+    }
+    .tip-info-paragraphs{
+        width: 100%;
+    }
+    .nav-links-box{
+        display: none;
+    }
+    #tip-info hr{
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
     }
 }
 
@@ -175,16 +193,35 @@
     #bgvid {
         transform: translateX(-50%) translateY(-67%);
     }
-    /*make banner width < 30vw and change form accordingly
-    also make h1 font-size smaller*/
     .homepage-banner h1 {
         font-size: 1.3rem;
     }
     #search-form {
-        margin: 5% 5% 0 calc(30vw + 100px + 2.5vw);
+        margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
     }
     #banner-logo, #banner-tip-logo{
         height: 12%;
         width: 12%;
+    }
+
+    .tip-info-paragraphs h2{
+        font-size: 1.3rem;
+    }
+    #tip-info p{
+        font-size: 1rem;
+    }
+
+}
+
+/* Special case for video  */
+@media only screen and (max-width: 1200px) {
+    .homepage-main{
+        height: 50vh;
+    }
+    #bgvid {
+        transform: translateX(-50%) translateY(-58%);
+    }
+    .homepage-radio-group, #homepage-search-bar{
+        font-size: 1.2rem;
     }
 }
