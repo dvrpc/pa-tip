@@ -198,7 +198,7 @@ class MapComponent extends Component {
     );
 
     // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mouseenter", "pa-tip-projects", e => {
+    this.map.on("mousemove", "pa-tip-projects", e => {
       this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
       const category = e.features[0].properties.DESCRIPTIO;
