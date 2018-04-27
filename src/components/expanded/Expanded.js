@@ -10,40 +10,60 @@ import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 
+const hydrateGeometry = id => {
+  return fetch(
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
+  ).then(response => response.json());
+};
+
 class Expanded extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      colorScheme: {
-        lightest: "white",
-        middle: "grey",
-        darkest: "black"
-      }
-    };
+  }
+
+  componentWillMount() {
+    this.props.getFullTIP(this.props.match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("what is next props ", nextProps);
     // apply color scheme on project load
     const colorScheme = colors[nextProps.details.category];
-    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
   }
 
   componentDidMount() {
-    this.props.getFullTIP(this.props.match.params.id);
-    // maintain color scheme on refresh
-    const colorScheme = colors[this.props.details.category];
-    if (this.state.colorScheme != colorScheme) this.setState({ colorScheme });
-
-    window.streetview = new window.google.maps.StreetViewPanorama(
-      this.streetview,
-      {
-        position: {
-          lat: this.props.info.attributes.LAG,
-          lng: this.props.info.attributes.LNG
-        },
-        zoom: 0
-      }
-    );
+    console.log("props at did mount ", this.props);
+    /*    this worked when I was making the fetch directly here because I could .then() off of it and
+      populate the project once it had arrived...
+      easy and shitty solution is to just create a util function that makes that call and returns a promise
+      so that I can .then off of it directly. Delete as reducs stuff 
+    ^ dit it. it works, it's an anti-pattern I guess but whatever. I'm so done with this project. 
+      */
+    if (!this.props.info) {
+      hydrateGeometry(this.props.details.id).then(geo => {
+        window.streetview = new window.google.maps.StreetViewPanorama(
+          this.streetview,
+          {
+            position: {
+              lat: geo.features[0].attributes.LAG,
+              lng: geo.features[0].attributes.LNG
+            },
+            zoom: 0
+          }
+        );
+      });
+    } else {
+      window.streetview = new window.google.maps.StreetViewPanorama(
+        this.streetview,
+        {
+          position: {
+            lat: this.props.info.attributes.LAG,
+            lng: this.props.info.attributes.LNG
+          },
+          zoom: 0
+        }
+      );
+    }
   }
 
   render() {
@@ -51,11 +71,10 @@ class Expanded extends Component {
     //Render runs multiple times until the data is completely pulled in
     //Message property means there was an error
     if (!details || "Message" in details) return;
-    const colorScheme = this.state.colorScheme;
+    const colorScheme = colors[this.props.details.category];
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
-
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />

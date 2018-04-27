@@ -39,6 +39,7 @@ export const search = (instance, e) => {
       }
     });
   } else {
+    instance.context.store.getState().getTIP.bounds = [];
     instance.props.getTIPByKeywords(input.address);
   }
 

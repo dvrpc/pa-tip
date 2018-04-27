@@ -31,21 +31,28 @@ class TilesContainer extends Component {
         ? this.props.boundsProjects.features
         : [];
 
+    projects = keywordProjects.length ? keywordProjects : boundsProjects;
+
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
-      projects = keywordProjects
+      /*projects = keywordProjects
         .concat(boundsProjects)
         .filter(
           project =>
             project.attributes.DESCRIPTIO === this.state.categoryToFilter
-        );
+        );*/
+
+      projects = projects.filter(
+        project => project.attributes.DESCRIPTIO === this.state.categoryToFilter
+      );
 
       // display all projects when no filter is selected
     } else {
-      projects = keywordProjects.concat(boundsProjects);
+      /*projects = keywordProjects.concat(boundsProjects);*/
     }
 
-    // TODO: once the keywords project filter is set up, customize a 'no results found' option (replace loading)
+    console.log("projects at tilesContainer is ", projects);
+
     return (
       <div className="tilesContainer">
         <div className="header">
