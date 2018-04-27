@@ -44,12 +44,9 @@ export const getTIPByKeywords = keyword => dispatch => {
     response => {
       response.json().then(projects => {
         // get geometry & rest of project information from the arcGIS server
-        let mpms_array = projects
-          .map(project => `MPMS_ID=${project.id} OR `)
-          .join("")
-          .slice(0, -4);
+        let mpms_array = projects.map(project => project.id).join(",");
         let params = {
-          where: mpms_array,
+          where: `MPMS_ID in (${mpms_array})`,
           srOut: 4326,
           f: "pjson",
           outFields: "FID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LAG,LNG",
