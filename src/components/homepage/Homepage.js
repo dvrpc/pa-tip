@@ -35,7 +35,7 @@ class Homepage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="homepage">
         <div className="landing">
           <div className="homepage-banner">
             <img id="banner-logo" src={logo} alt="dvrpc logo" />
@@ -126,22 +126,26 @@ class Homepage extends Component {
 
         <div id="tip-info">
           <div className="nav-links-box">
-            <p> Navigation </p>
+            <p> Long-Range Plan and TIP </p>
             <ul>
               <li>
-                <a href="#">test</a>
+                <a href="https://www.dvrpc.org/tip/">
+                  Transportation Improvement Program (TIP)
+                </a>
               </li>
               <li>
-                <a href="#">link</a>
+                <a href="https://www.dvrpc.org/Products/17065/">TIP Guide</a>
               </li>
               <li>
-                <a href="#">to</a>
+                <a href="https://www.dvrpc.org/TIP/PA/">FY2017 TIP for PA</a>
               </li>
               <li>
-                <a href="#">dvrpc pages </a>
+                <a href="https://www.dvrpc.org/TIP/NJ/">FY2018 TIP for NJ</a>
               </li>
               <li>
-                <a href="#">also pdfs?</a>
+                <a href="https://www.dvrpc.org/ProjectImplementation/">
+                  Project Implementation
+                </a>
               </li>
             </ul>
           </div>

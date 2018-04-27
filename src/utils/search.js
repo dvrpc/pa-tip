@@ -16,6 +16,8 @@ export const generateAutocomplete = (element, callback) => {
 export const search = (instance, e) => {
   e.preventDefault();
 
+  console.log("instance value ", instance.state.value);
+
   const input = {
     address: instance.state.value,
     // Hardcoded to the entire region

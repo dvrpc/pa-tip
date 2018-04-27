@@ -36,8 +36,8 @@ class Navbar extends Component {
     return (
       <nav className="navBar" style={this.props.backgroundGradient}>
         <a href="/">
-          <img src={TIP_logo} alt="TIP logo" />
-          <img src={logo} alt="DVRPC logo" />
+          <img className="navbar-logos" src={TIP_logo} alt="TIP logo" />
+          <img className="navbar-logos" src={logo} alt="DVRPC logo" />
         </a>
         <form id="nav-search-form" onSubmit={linkEvent(this, search)}>
           <input

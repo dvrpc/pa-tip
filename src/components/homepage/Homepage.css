@@ -19,10 +19,9 @@
 }
 .homepage-main{
     background: linear-gradient(to right, rgba(245, 181, 10, 0.6), rgba(0, 0, 0, 0.3) 50%);
-    height: 70vh;
+    height: 65vh;
     border: thin solid rgba(0, 0, 0, 0);
 }
-/*TODO: Make it responsive - video height shrinks on smaller viewports*/
 #bgvid{
     position: absolute;
     top: 50%;
@@ -111,7 +110,6 @@
 .nav-links-box{
     text-align: center;
     position: absolute;
-    display: fixed;
     width: 23%;
     padding: 2% 0 2% 0;
     background: #303030;
@@ -134,13 +132,41 @@
     border-top: 1px solid #ffffff;
 }
 
-/* Media Query to Replace Video w/Static Image on Mobile*/
-@media screen and (max-device-width: 800px) {
-    .landing{
-        background: url("https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/11/philadelphia-skyline-sean-pavone-900x600.jpg") no-repeat;
-        background-size: cover;
+
+/* Media Queries*/
+
+/* Special case for video  */
+@media only screen and (max-width: 1200px) {
+    .homepage-main{
+        height: 50vh;
     }
     #bgvid {
+        transform: translateX(-50%) translateY(-58%);
+    }
+}
+
+/* Phones */
+@media only screen and (max-width : 599px) {
+    /* hide the video for smartphone users */
+    #bgvid {
         display: none;
+    }
+    .landing {
+        background: url('http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg');
+        background-size: stretch;
+    }
+}
+
+/* Tablets (portrait) */
+@media only screen and (max-width: 600px) {
+    .homgepage-main {
+        height: 30vh;
+    }
+}
+
+/* Tablets (landscape)  */
+@media only screen and (max-width: 900px) {
+    .homepage-main {
+        height: 40vh;
     }
 }
