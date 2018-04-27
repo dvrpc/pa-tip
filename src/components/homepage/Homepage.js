@@ -125,12 +125,29 @@ class Homepage extends Component {
         </div>
 
         <div id="tip-info">
+          <div className="nav-links-box">
+            <p> Navigation </p>
+            <ul>
+              <li>
+                <a href="#">test</a>
+              </li>
+              <li>
+                <a href="#">link</a>
+              </li>
+              <li>
+                <a href="#">to</a>
+              </li>
+              <li>
+                <a href="#">dvrpc pages </a>
+              </li>
+              <li>
+                <a href="#">also pdfs?</a>
+              </li>
+            </ul>
+          </div>
           <div className="tip-info-cluster">
-            <div className="tip-info-headers">
-              <h2>About DVRPC</h2>
-              <h2>and the TIP</h2>
-            </div>
             <div className="tip-info-paragraphs">
+              <h2>About DVRPC and the TIP</h2>
               <p>
                 The Delaware Valley Regional Planning Commission is the
                 federally designated Metropolitan Planning Organization for a
@@ -159,11 +176,8 @@ class Homepage extends Component {
           <hr />
 
           <div className="tip-info-cluster">
-            <div className="tip-info-headers">
-              <h2>How to Use</h2>
-              <h2>this Application</h2>
-            </div>
             <div className="tip-info-paragraphs">
+              <h2>How to Use this Application</h2>
               <p>
                 The Delaware Valley Regional Planning Commission is the
                 federally designated Metropolitan Planning Organization for a
