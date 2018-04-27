@@ -7,21 +7,25 @@
 }
 .mapboxgl-popup {
   min-width: 100px;
-  max-width: 350px;
+  max-width: 250px;
   min-height: 100px;
 }
 .mapboxgl-popup:hover {
   cursor: pointer;
 }
 .mapboxgl-popup-content {
-  border: 4px solid #cccccc;
-  background: #ffffff;
-  color: #333333;
-  padding: 5%;
+  background: #fff;
+  padding: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   text-align: center;
 }
+.mapboxgl-popup-content h2 {
+  margin: 5% 5% 0;
+  border-bottom: 1px solid #ddd;
+}
 .mapboxgl-popup-content p {
-  padding: 3% 0 3% 0;
+  padding: 5%;
+  font-weight: bold;
 }
 .dropdown-nav {
   position: absolute;

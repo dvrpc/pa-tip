@@ -4,7 +4,7 @@ import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
-import { getFullTIP, setCurrentProject } from "../reducers/getTIPInfo";
+import { setCurrentProject } from "../reducers/getTIPInfo";
 import { clickTile } from "../../utils/clickTile.js";
 
 class Tile extends Component {
@@ -54,7 +54,6 @@ class Tile extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFullTIP: id => dispatch(getFullTIP(id)),
     setCurrentProject: props => dispatch(setCurrentProject(props))
   };
 };

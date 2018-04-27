@@ -1,10 +1,13 @@
 import Inferno, { Component } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
+import { withRouter } from "inferno-router";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
 import { updateBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
+import { setCurrentProject } from "../reducers/getTIPInfo";
+import { clickTile } from "../../utils/clickTile.js";
 import "./Map.css";
 import mapStyle from "./style.json";
 
@@ -54,6 +57,7 @@ class MapComponent extends Component {
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
   componentDidMount() {
+    const { history } = this.props;
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -175,7 +179,7 @@ class MapComponent extends Component {
       const mpms = e.features[0].properties.MPMS_ID;
       const name = e.features[0].properties.ROAD_NAME;
 
-      new mapboxgl.Popup({
+      const popup = new mapboxgl.Popup({
         offset: {
           top: [0, 0],
           "top-left": [0, 0],
@@ -189,12 +193,20 @@ class MapComponent extends Component {
       })
         .setLngLat(coordinates)
         .setHTML(
-          `<h2>${name}</h2>
-            <p style="border-bottom: 8px solid #${
-              colors[category].forMap
-            };">ID: ${mpms}</p>`
+          `<h2>${mpms}</h2><p style="border-bottom: 8px solid #${
+            colors[category].forMap
+          };">${name}</p>`
         )
         .addTo(this.map);
+      popup._content.addEventListener("click", () =>
+        clickTile({
+          props: {
+            history,
+            setCurrentProject,
+            data: { id: mpms }
+          }
+        })
+      );
     });
 
     // Change the cursor to a pointer when the mouse is over the projects layer.
@@ -291,4 +303,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+);
