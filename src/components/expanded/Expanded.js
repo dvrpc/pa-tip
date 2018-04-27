@@ -40,7 +40,7 @@ class Expanded extends Component {
     ^ dit it. it works, it's an anti-pattern I guess but whatever. I'm so done with this project. 
       */
     if (!this.props.info) {
-      hydrateGeometry(this.props.details.id).then(geo => {
+      hydrateGeometry(this.props.match.params.id).then(geo => {
         window.streetview = new window.google.maps.StreetViewPanorama(
           this.streetview,
           {
