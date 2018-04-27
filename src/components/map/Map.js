@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 
 import { getTIPByMapBounds } from "../reducers/getTIPInfo";
-import { updateBounds } from "../../utils/updateMap";
+import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import "./Map.css";
 import mapStyle from "./style.json";
@@ -213,6 +213,11 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // limit only to keywordProjects exists? wish I could actually test this code
+
+    if (nextProps.keywordProjects !== this.props.keywordProjects)
+      keywordBounds(this, nextProps.keywordProjects);
+
     switch (nextProps.category) {
       case "All Categories":
         this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
@@ -280,7 +285,7 @@ class MapComponent extends Component {
 const mapStateToProps = state => {
   return {
     center: state.getTIP.center,
-    projects: state.getTIP.projects,
+    keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category
   };
 };
