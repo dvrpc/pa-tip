@@ -43,7 +43,7 @@ class Navbar extends Component {
           <input
             id="navSearch"
             type="textarea"
-            placeholder="search by municipality, city, zip code, project, or fund"
+            placeholder="enter address, location, building, etc"
             value={this.state.value}
             onInput={this.handleChange}
             ref={i => {

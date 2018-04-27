@@ -17,10 +17,9 @@
     font-weight: 600;
     font-size: 1.9rem;
 }
-/*TODO: get the linear gradient from yellow to grey*/
 .homepage-main{
     background: linear-gradient(to right, rgba(245, 181, 10, 0.6), rgba(0, 0, 0, 0.3) 50%);
-    height: 75vh;
+    height: 70vh;
     border: thin solid rgba(0, 0, 0, 0);
 }
 /*TODO: Make it responsive - video height shrinks on smaller viewports*/
