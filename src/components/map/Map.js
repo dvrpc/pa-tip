@@ -172,25 +172,40 @@ class MapComponent extends Component {
       this.updateLayerVisibility(null);
     });
 
-    // handle mouse interaction with projects
-    this.map.on("click", "pa-tip-projects", e => {
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+      offset: {
+        top: [0, 0],
+        "top-left": [0, 0],
+        "top-right": [0, 0],
+        bottom: [0, -38],
+        "bottom-left": [0, -38],
+        "bottom-right": [0, -38],
+        left: [15, -26],
+        right: [-15, -26]
+      }
+    });
+
+    this.map.on("click", "pa-tip-projects", e =>
+      clickTile({
+        props: {
+          history,
+          setCurrentProject,
+          data: { id: e.features[0].properties.MPMS_ID }
+        }
+      })
+    );
+
+    // Change the cursor to a pointer when the mouse is over the projects layer.
+    this.map.on("mouseenter", "pa-tip-projects", e => {
+      this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
       const category = e.features[0].properties.DESCRIPTIO;
       const mpms = e.features[0].properties.MPMS_ID;
       const name = e.features[0].properties.ROAD_NAME;
 
-      const popup = new mapboxgl.Popup({
-        offset: {
-          top: [0, 0],
-          "top-left": [0, 0],
-          "top-right": [0, 0],
-          bottom: [0, -38],
-          "bottom-left": [0, -38],
-          "bottom-right": [0, -38],
-          left: [15, -26],
-          right: [-15, -26]
-        }
-      })
+      popup
         .setLngLat(coordinates)
         .setHTML(
           `<h2>${mpms}</h2><p style="border-bottom: 8px solid #${
@@ -198,25 +213,12 @@ class MapComponent extends Component {
           };">${name}</p>`
         )
         .addTo(this.map);
-      popup._content.addEventListener("click", () =>
-        clickTile({
-          props: {
-            history,
-            setCurrentProject,
-            data: { id: mpms }
-          }
-        })
-      );
-    });
-
-    // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mouseenter", "pa-tip-projects", () => {
-      this.map.getCanvas().style.cursor = "pointer";
     });
 
     // Change it back to a pointer when it leaves.
     this.map.on("mouseleave", "pa-tip-projects", () => {
       this.map.getCanvas().style.cursor = "";
+      popup.remove();
     });
 
     // handle user events to update map results
