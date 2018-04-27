@@ -48,8 +48,30 @@ export const getTIPByKeywords = keyword => dispatch => {
           .map(project => `MPMS_ID=${project.id} OR `)
           .join("")
           .slice(0, -4);
+        let params = {
+          where: mpms_array,
+          srOut: 4326,
+          f: "pjson",
+          outFields: "FID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LAG,LNG",
+          returnGeometry: false
+        };
+        //Encode the data
+        const request = Object.keys(params)
+          .map(key => {
+            return (
+              encodeURIComponent(key) + "=" + encodeURIComponent(params[key])
+            );
+          })
+          .join("&");
         fetch(
-          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=${mpms_array}&geometryType=esriGeometryPoint&inSR=4326&outFields=FID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LAG,LNG&returnGeometry=false&outSR=4326&f=json`
+          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query`,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+            method: "POST",
+            body: request
+          }
         ).then(response => {
           response
             .json()
