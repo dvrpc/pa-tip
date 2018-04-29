@@ -6,6 +6,7 @@ import "./Homepage.css";
 import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
+import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
@@ -118,13 +119,23 @@ class Homepage extends Component {
           </div>
 
           <div className="homepage-bottom-bar">
-            <a href="#tip-info">
+            <a
+              href="#tip-info"
+              onClick={e => {
+                scrollToElement(this, e, "tipInfo");
+              }}
+            >
               <img src={arrow} alt="down navigation arrow" />
             </a>
           </div>
         </div>
 
-        <div id="tip-info">
+        <div
+          id="tip-info"
+          ref={el => {
+            this.tipInfo = el;
+          }}
+        >
           <div className="nav-links-box">
             <p> Long-Range Plan and TIP </p>
             <ul>
