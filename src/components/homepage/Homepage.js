@@ -12,6 +12,7 @@ import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
+import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Homepage extends Component {
               autoplay
               muted
               loop
-              poster="http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg"
+              poster={firstFrame}
               id="bgvid"
             >
               <source src={philly} type="video/mp4" />

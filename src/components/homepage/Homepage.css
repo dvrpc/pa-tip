@@ -153,8 +153,8 @@
         display: none;
     }
     .landing {
-        background: url('http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg');
-        background-size: stretch;
+        background: url('./firstFrame.jpg') no-repeat;
+        background-size: cover;
     }
     .homgepage-main {
         height: 30vh;
