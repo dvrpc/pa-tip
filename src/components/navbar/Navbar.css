@@ -8,7 +8,6 @@
     align-items: center;
 }
 .navbar-logos{
-    align-items: center;
     height: 100%;
 }
 #nav-search-form{
@@ -53,6 +52,23 @@
 }
 
 /*TODO: add breakpoints to make the navbar readable on smaller screens*/
- @media screen and (max-width: 900px) {
-    
+ @media screen and (max-width: 850px) {
+    #nav-search-form{
+        font-size: 0.8rem;
+    }
+    #navBarButton{
+        padding: 2% 7% 2% 7%;
+    }
+    .navbar-logos{
+        height: 70%;
+        width: 40%;
+    }
+ }
+  @media screen and (max-width: 700px) {
+    #nav-search-form{
+        padding-right: 8%;
+    }
+    #navBarButton{
+        padding: 1% 5% 1% 5%;
+    }
  }
