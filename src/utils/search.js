@@ -22,7 +22,7 @@ export const search = (instance, e) => {
     bounds
   };
 
-  if (instance.state.selectedButton === "Place") {
+  if (instance.state.selectedButton === "Location") {
     // clear keyword projects from memory
     instance.context.store.getState().getTIP.keyword = [];
 

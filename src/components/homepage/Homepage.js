@@ -20,7 +20,7 @@ class Homepage extends Component {
 
     this.state = {
       value: "",
-      selectedButton: "Place"
+      selectedButton: "Location"
     };
 
     this.handleChange.bind(this);
@@ -77,12 +77,12 @@ class Homepage extends Component {
                 <input
                   type="radio"
                   name="searchType"
-                  id="Place"
-                  value="Place"
-                  checked={this.state.selectedButton === "Place"}
+                  id="Location"
+                  value="Location"
+                  checked={this.state.selectedButton === "Location"}
                   onChange={linkEvent(this, handleRadioChange)}
                 />
-                <label for="Place">Place</label>
+                <label for="Location">Location</label>
 
                 <input
                   type="radio"
