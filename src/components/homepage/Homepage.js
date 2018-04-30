@@ -186,7 +186,7 @@ class Homepage extends Component {
                 DVRPC strongly encourages the public to submit comments on the
                 Draft TIP by using the search and explore feature above.
               </p>
-              <h2>Public Information</h2>
+              <h2>Public Meeting</h2>
               <p>
                 There will be a public meeting held at the following location
                 for those who want to present their comments verbally on the
@@ -257,50 +257,80 @@ class Homepage extends Component {
                 <h2>Detailed Information</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="pdf/HighlightsNJ18.pdf">
-                      Highlights of the Draft FY2018 TIP for NJ
+                    <a href="/TIP/Draft/pdf/HighlightsPA19.pdf">
+                      Highlights of the Draft FY2019 TIP for PA
                     </a>{" "}
                     <span class="sm">[1.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/Chap1.pdf">General Overview of the TIP</a>{" "}
-                    <span class="sm">[0.4 MB pdf]</span>
+                    <a href="/TIP/Draft/pdf/volume1-draft.pdf">
+                      TIP Document Text (includes abbreviations and codes)
+                    </a>{" "}
+                    <span class="sm">[1.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/Chap2.pdf">Program Summaries</a>{" "}
-                    <span class="sm">[0.6 MB pdf]</span>
+                    <a href="/TIP/Draft/pdf/GenOverview.pdf">
+                      General Overview of the TIP
+                    </a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/Chap3.pdf">
+                    <a href="/TIP/Draft/pdf/ProgramSum.pdf">
+                      Program Summaries
+                    </a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/EJ_TitleVI.pdf">
+                      Responding to Environmental Justice (EJ) and Title VI
+                      Concerns
+                    </a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/PBPP.pdf">
+                      Performance-based Planning and Programming (PBPP)
+                    </a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/Public.pdf">
                       Public Involvement and Libraries Displaying the Draft TIP
                     </a>{" "}
-                    <span class="sm">[0.2 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/PublicNotice_FY18NJTIP.pdf">Public Notice</a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/flyer.pdf">Public Meeting Flyer</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
+                    <a href="/TIP/Draft/pdf/FY2019PATIP_Notice_Posting.pdf">
+                      Public Notice
+                    </a>{" "}
+                    <span class="sm">[0.3 MB pdf]</span>
                   </li>
+                  {/* <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/flyer.pdf">Public Meeting Flyer</a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
+                  </li> */}
                   <li class="list-group-item">
-                    <a href="pdf/Chap4.pdf">
+                    <a href="/TIP/Draft/pdf/MapAppListings.pdf">
                       Mapping Application and Listings Overview
                     </a>{" "}
-                    <span class="sm">[0.5 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/Chap5.pdf">Programs</a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
-                  <li class="list-group-heading">Helpful Correspondences</li>
                   <li class="list-group-item">
-                    <a href="pdf/NJ-CorresByTitle.pdf">By Title</a>{" "}
-                    <span class="sm">[0.2 MB pdf]</span>
+                    <a href="/TIP/Draft/pdf/PA-CorresByTitle.pdf">
+                      Project Index by Title
+                    </a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/NJ-CorresByDB.pdf">By DB #</a>{" "}
+                    <a href="/TIP/Draft/pdf/PA-CorresByMPMS.pdf">
+                      Project Index by MPMS#
+                    </a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/PA-CorresBySIMP.pdf">
+                      Project Index for Interstate Management Program (IMP)
+                    </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                 </ul>
@@ -310,54 +340,55 @@ class Homepage extends Component {
                 <h2>Program Lists and Maps</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="pdf/Chap6.pdf">All Projects in DVRPC NJ Region</a>{" "}
+                    <a href="/TIP/Draft/paprogram.pdf">All Projects</a>{" "}
                     <span class="sm">[2.0 MB pdf]</span>
                   </li>
-                  <li class="list-group-heading">
-                    DVRPC Regional Highway Program
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/buck19d.pdf">Bucks County</a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/bur18.pdf">Burlington County</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
+                    <a href="/TIP/Draft/ches19d.pdf">Chester County</a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/camd18.pdf">Camden County</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
+                    <a href="/TIP/Draft/dela19d.pdf">Delaware County</a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/glou18.pdf">Gloucester County</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
+                    <a href="/TIP/Draft/mont19d.pdf">Montgomery County</a>{" "}
+                    <span class="sm">[0.4 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/merc18.pdf">Mercer County</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/vcnj18.pdf">Various Counties</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li>
-                  <li class="list-group-heading">
-                    DVRPC Regional Transit Program
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/NJT18.pdf">NJ TRANSIT Projects</a>{" "}
+                    <a href="/TIP/Draft/phil19d.pdf">Philadelphia County</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/drpa18.pdf">DRPA/PATCO Projects</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li>
-                  <li class="list-group-heading">Other Programs</li>
-                  <li class="list-group-item">
-                    <a href="pdf/stwd18.pdf">NJDOT Statewide Program</a>{" "}
-                    <span class="sm">[0.6 MB pdf]</span>
+                    <a href="/TIP/Draft/vcpa19d.pdf">
+                      Projects in Various Counties
+                    </a>{" "}
+                    <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/SD18.pdf">Study and Development Program</a>{" "}
+                    <a href="/TIP/Draft/trpa19d.pdf">Transit Projects</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/Chap7.pdf">Major Project Status Report</a>{" "}
+                    <a href="/TIP/Draft/simp19d.pdf">
+                      Interstate Management Program Projects
+                    </a>{" "}
+                    <span class="sm">[0.4 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/PA-2019-Competitive-Programs.pdf">
+                      Competitive Programs
+                    </a>{" "}
+                    <span class="sm">[0.3 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/MajorStatus19.pdf">
+                      Status of Major Projects from Previous TIP!!
+                    </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                 </ul>
@@ -367,54 +398,58 @@ class Homepage extends Component {
                 <h2>Appendices</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="pdf/A.pdf">
-                      A - Acknowledgment of Board Resolutions
+                    <a href="/TIP/Draft/DVRPC-Board-Resolutions.pdf">
+                      A – Board Resolutions
                     </a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
+                    <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/B.pdf">
-                      B - Financial and Procedural Guidance, including the STIP
-                      Introduction
+                    <a href="/TIP/Draft/PA-2019-Financial-Guidance.pdf">
+                      B – Financial Guidance, including 2017 program update
+                      Investment Plan
                     </a>{" "}
-                    <span class="sm">[3.8 MB pdf]</span>
+                    <span class="sm">[3.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/C.pdf">
-                      C – Executive Summary of the Draft Documentation of the
-                      Conformity Finding
-                    </a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/D.pdf">
-                      D - Memorandum of Understanding on Procedures to Amend and
+                    <a href="/TIP/Draft/PATIPMOU-plusPennDOT-FHWA.pdf">
+                      C – Memorandum of Understanding on Procedures to Amend and
                       Modify the TIP
                     </a>{" "}
-                    <span class="sm">[0.8 MB pdf]</span>
+                    <span class="sm">[1.6 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/E.pdf">E - DVRPC Local Program</a>{" "}
-                    <span class="sm">[0.5 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/F.pdf">
-                      F - DVRPC TIP Project Benefit Criteria
+                    <a href="/TIP/Draft/DVRPC-TIP-Project-Benefit-Criteria-2019.pdf">
+                      D – DVRPC TIP Project Benefit Criteria
                     </a>{" "}
-                    <span class="sm">[0.4 MB pdf]</span>
+                    <span class="sm">[0.3 MB pdf]</span>
+                  </li>
+                  {/* <li class="list-group-item">
+                    <a href="/TIP/Draft/PA-2019-Procedural-Guidance.pdf">
+                      E – General and Procedural Guidance
+                    </a>{" "}
+                    <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="pdf/G.pdf">
-                      G – Acknowledgment of Summary of the TIP Public
-                      Involvement Process, Summary of Public Comments, Original
-                      Public Comments, Agency Responses, Public Comment Outreach
-                      Documentation, and List of Recommended Changes
+                    <a href="/TIP/Draft/PA-2019-SEPTA-Financial-Capacity-Analysis.pdf">
+                      F – SEPTA’s Financial Capacity Analysis
+                    </a>{" "}
+                    <span class="sm">[0.9 MB pdf]</span>
+                  </li> */}
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/Conformity-19TIP-ExecSum.pdf">
+                      G – Executive Summary of the Documentation of the
+                      Conformity Finding
+                    </a>{" "}
+                    <span class="sm">[0.9 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/Draft/AddendumPubInvolve19.pdf">
+                      H – Summary of the TIP Public Involvement Process, Summary
+                      of Public Comments, Original Public Comments, Agency
+                      Responses, List of Recommended Changes, and Supporting
+                      Documentation
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="pdf/H.pdf">H – NJDOT “Tier 2” Unfunded Projects</a>{" "}
-                    <span class="sm">[0.3 MB pdf]</span>
                   </li>
                 </ul>
               </div>
