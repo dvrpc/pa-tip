@@ -202,9 +202,8 @@ class Homepage extends Component {
                 fully complies with Title VI of the Civil Rights Act of 1964 and
                 related nondiscrimination statutes in all activities. For more
                 information, visit{" "}
-                <a href="www.dvrpc.org/GetInvolved/TitleVI">
-                  {" "}
-                  the DVRPC Title VI page{" "}
+                <a href="https://www.dvrpc.org/GetInvolved/TitleVI">
+                  the DVRPC Title VI page
                 </a>. The authors are solely responsible for the findings and
                 conclusions herein, which may not represent the official views
                 or policies of the funding agencies.

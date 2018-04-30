@@ -1,3 +1,9 @@
+.homepage a {
+    color: #E0E0FF;
+}
+.homepage a:hover{
+    color: #B3B3FF
+}
 .homepage-banner{
     display: flex;
     align-items: center;

@@ -1,4 +1,10 @@
 /* General Purpose Targetting */
+.expanded a{
+  color: #ffffff;
+}
+.expanded a:hover{
+  color: #c1c1c1;
+}
 .wrapper {
   overflow-x: none;
   display: flex;
