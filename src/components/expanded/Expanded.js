@@ -164,8 +164,12 @@ class Expanded extends Component {
                 </thead>
                 <tbody style={{ background: colorScheme.lightest }}>
                   <tr>
-                    <td style={{ background: "#666" }}>Phase</td>
-                    <td style={{ background: "#666" }}>Fund</td>
+                    <td style={{ background: "#666" }}>
+                      <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
+                    </td>
+                    <td style={{ background: "#666" }}>
+                      <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
+                    </td>
                     <td style={{ background: "#333" }}>2018</td>
                     <td style={{ background: "#333" }}>2019</td>
                     <td style={{ background: "#333" }}>2020</td>
