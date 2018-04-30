@@ -341,53 +341,53 @@ class Homepage extends Component {
                 <h2>Program Lists and Maps</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/paprogram.pdf">All Projects</a>{" "}
+                    <a href="/TIP/Draft/pdf/paprogram.pdf">All Projects</a>{" "}
                     <span class="sm">[2.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/buck19d.pdf">Bucks County</a>{" "}
+                    <a href="/TIP/Draft/pdf/buck19d.pdf">Bucks County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/ches19d.pdf">Chester County</a>{" "}
+                    <a href="/TIP/Draft/pdf/ches19d.pdf">Chester County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/dela19d.pdf">Delaware County</a>{" "}
+                    <a href="/TIP/Draft/pdf/dela19d.pdf">Delaware County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/mont19d.pdf">Montgomery County</a>{" "}
+                    <a href="/TIP/Draft/pdf/mont19d.pdf">Montgomery County</a>{" "}
                     <span class="sm">[0.4 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/phil19d.pdf">Philadelphia County</a>{" "}
+                    <a href="/TIP/Draft/pdf/phil19d.pdf">Philadelphia County</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/vcpa19d.pdf">
+                    <a href="/TIP/Draft/pdf/vcpa19d.pdf">
                       Projects in Various Counties
                     </a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/trpa19d.pdf">Transit Projects</a>{" "}
+                    <a href="/TIP/Draft/pdf/trpa19d.pdf">Transit Projects</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/simp19d.pdf">
+                    <a href="/TIP/Draft/pdf/simp19d.pdf">
                       Interstate Management Program Projects
                     </a>{" "}
                     <span class="sm">[0.4 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/PA-2019-Competitive-Programs.pdf">
+                    <a href="/TIP/Draft/pdf/PA-2019-Competitive-Programs.pdf">
                       Competitive Programs
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/MajorStatus19.pdf">
+                    <a href="/TIP/Draft/pdf/MajorStatus19.pdf">
                       Status of Major Projects from Previous TIP!!
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
@@ -399,52 +399,52 @@ class Homepage extends Component {
                 <h2>Appendices</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/DVRPC-Board-Resolutions.pdf">
+                    <a href="/TIP/Draft/pdf/DVRPC-Board-Resolutions.pdf">
                       A – Board Resolutions
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/PA-2019-Financial-Guidance.pdf">
+                    <a href="/TIP/Draft/pdf/PA-2019-Financial-Guidance.pdf">
                       B – Financial Guidance, including 2017 program update
                       Investment Plan
                     </a>{" "}
                     <span class="sm">[3.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/PATIPMOU-plusPennDOT-FHWA.pdf">
+                    <a href="/TIP/Draft/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
                       C – Memorandum of Understanding on Procedures to Amend and
                       Modify the TIP
                     </a>{" "}
                     <span class="sm">[1.6 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/DVRPC-TIP-Project-Benefit-Criteria-2019.pdf">
+                    <a href="/TIP/Draft/pdf/DVRPC-TIP-Project-Benefit-Criteria-2019.pdf">
                       D – DVRPC TIP Project Benefit Criteria
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   {/* <li class="list-group-item">
-                    <a href="/TIP/Draft/PA-2019-Procedural-Guidance.pdf">
+                    <a href="/TIP/Draft/pdf/PA-2019-Procedural-Guidance.pdf">
                       E – General and Procedural Guidance
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/PA-2019-SEPTA-Financial-Capacity-Analysis.pdf">
+                    <a href="/TIP/Draft/pdf/PA-2019-SEPTA-Financial-Capacity-Analysis.pdf">
                       F – SEPTA’s Financial Capacity Analysis
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li> */}
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/Conformity-19TIP-ExecSum.pdf">
+                    <a href="/TIP/Draft/pdf/Conformity-19TIP-ExecSum.pdf">
                       G – Executive Summary of the Documentation of the
                       Conformity Finding
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/AddendumPubInvolve19.pdf">
+                    <a href="/TIP/Draft/pdf/AddendumPubInvolve19.pdf">
                       H – Summary of the TIP Public Involvement Process, Summary
                       of Public Comments, Original Public Comments, Agency
                       Responses, List of Recommended Changes, and Supporting
