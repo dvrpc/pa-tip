@@ -5,7 +5,8 @@ import { withRouter } from "inferno-router";
 import {
   getTIPByKeywords,
   setMapCenter,
-  getTIPByMapBounds
+  getTIPByMapBounds,
+  setMapState
 } from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
@@ -72,7 +73,8 @@ class Navbar extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: address => dispatch(getTIPByKeywords(address)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng))
+    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
+    setMapState: position => dispatch(setMapState(position))
   };
 };
 

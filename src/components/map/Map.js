@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import { getTIPByMapBounds } from "../reducers/getTIPInfo";
+import { getTIPByMapBounds, setMapState } from "../reducers/getTIPInfo";
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { setCurrentProject } from "../reducers/getTIPInfo";
@@ -23,7 +23,9 @@ class MapComponent extends Component {
         "Freight Centers": false
       },
       toggleDropdown: false,
-      markerReference: {}
+      markerReference: {},
+      keyFilter: ["!=", "MPMS_ID", ""],
+      catFilter: ["!=", "DESCRIPTIO", ""]
     };
   }
 
@@ -56,8 +58,31 @@ class MapComponent extends Component {
   toggleDropdown = () =>
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
+  buildCategoryFilter = cat => {
+    switch (cat) {
+      case "All Categories":
+        this.state.catFilter = ["!=", "DESCRIPTIO", ""];
+        break;
+      default:
+        this.state.catFilter = ["==", "DESCRIPTIO", cat];
+    }
+  };
+
+  buildKeywordFilter = projects => {
+    let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
+    if (projects.features && projects.features.length) {
+      return ["in", "MPMS_ID"].concat(ids);
+    }
+    return ["!=", "MPMS_ID", ""];
+  };
+
   componentDidMount() {
     const { history } = this.props;
+    const position =
+      this.props.position && this.props.position.center
+        ? { center: this.props.position.center, zoom: this.props.position.zoom }
+        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
+
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -66,14 +91,30 @@ class MapComponent extends Component {
       style: mapStyle,
 
       // default to center city - flyTo new co-ordinates on search
-      center: this.props.center || [-75.1633, 39.9522],
-      zoom: 13,
+      center: position.center,
+      zoom: position.zoom,
       dragRotate: false
     });
 
     this.map.on("load", () => {
       //map ready - get features
       updateBounds(this);
+
+      // check for keyword search?
+      if (this.props.keywordProjects && this.props.keywordProjects.features) {
+        let mpms = this.buildKeywordFilter(this.props.keywordProjects);
+        this.state.keyFilter = mpms;
+      }
+
+      this.buildCategoryFilter(this.props.category);
+
+      this.map.setFilter("pa-tip-projects", [
+        "all",
+        this.state.catFilter,
+        this.state.keyFilter
+      ]);
+
+      this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
 
       this.map.addSource("IPD", {
         type: "geojson",
@@ -227,26 +268,26 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // limit only to keywordProjects exists? wish I could actually test this code
-
-    if (nextProps.keywordProjects !== this.props.keywordProjects)
-      keywordBounds(this, nextProps.keywordProjects);
-
-    switch (nextProps.category) {
-      case "All Categories":
-        this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
-        break;
-      default:
-        this.map.setFilter("pa-tip-projects", [
-          "==",
-          "DESCRIPTIO",
-          nextProps.category
-        ]);
+    // console.log('props received by map')
+    if (nextProps.keywordProjects !== this.props.keywordProjects) {
+      let ids = keywordBounds(this, nextProps.keywordProjects);
+      this.state.keyFilter = ids;
     }
+
+    this.buildCategoryFilter(nextProps.category);
+
+    this.map.setFilter("pa-tip-projects", [
+      "all",
+      this.state.catFilter,
+      this.state.keyFilter
+    ]);
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
-      this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
+      this.map.flyTo({
+        center: [nextProps.center.lng, nextProps.center.lat],
+        zoom: 13
+      });
   }
 
   componentDidUpdate() {}
@@ -300,13 +341,15 @@ const mapStateToProps = state => {
   return {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
-    category: state.getTIP.category
+    category: state.getTIP.category,
+    position: state.getTIP.position
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds))
+    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds)),
+    setMapState: position => dispatch(setMapState(position))
   };
 };
 
