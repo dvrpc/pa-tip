@@ -178,8 +178,8 @@ ol {
     display: none;
   }
   .landing {
-    background: url("./firstFrame.jpg");
-    background-size: stretch;
+    background: url("./firstFrame.jpg") no-repeat right;
+    background-size: cover;
   }
   .homgepage-main {
     height: 30vh;
