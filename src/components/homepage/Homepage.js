@@ -12,6 +12,7 @@ import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
 import arrow from "./arrow.png";
 import philly from "./philly.mp4";
+import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Homepage extends Component {
 
     this.state = {
       value: "",
-      selectedButton: "Place"
+      selectedButton: "Location"
     };
 
     this.handleChange.bind(this);
@@ -59,7 +60,7 @@ class Homepage extends Component {
               autoplay
               muted
               loop
-              poster="http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg"
+              poster={firstFrame}
               id="bgvid"
             >
               <source src={philly} type="video/mp4" />
@@ -78,12 +79,12 @@ class Homepage extends Component {
                 <input
                   type="radio"
                   name="searchType"
-                  id="Place"
-                  value="Place"
-                  checked={this.state.selectedButton === "Place"}
+                  id="Location"
+                  value="Location"
+                  checked={this.state.selectedButton === "Location"}
                   onChange={linkEvent(this, handleRadioChange)}
                 />
-                <label for="Place">Place</label>
+                <label for="Location">Location</label>
 
                 <input
                   type="radio"

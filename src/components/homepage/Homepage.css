@@ -6,7 +6,7 @@
   border-bottom: 15px solid white;
 }
 #banner-logo {
-  flex: 2;
+  padding-right: 30vw;
 }
 #banner-tip-logo {
   padding-right: 2vw;
@@ -178,7 +178,7 @@ ol {
     display: none;
   }
   .landing {
-    background: url("http://i0.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg");
+    background: url("./firstFrame.jpg");
     background-size: stretch;
   }
   .homgepage-main {
