@@ -3,6 +3,7 @@ const GET_TIP_KEYWORDS = "GET_TIP_KEYWORDS";
 const GET_TIP_BY_ADDRESS = "GET_TIP_BY_ADDRESS";
 const GET_FULL_TIP = "GET_FULL_TIP";
 const SET_MAP_CENTER = "SET_MAP_CENTER";
+const SET_MAP_STATE = "SET_MAP_STATE";
 const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 const SET_FILTER = "SET_FILTER";
@@ -11,6 +12,7 @@ const SET_FILTER = "SET_FILTER";
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
 const get_full_tip = id => ({ type: GET_FULL_TIP, id });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
+const set_map_state = position => ({ type: SET_MAP_STATE, position });
 const set_current_project = props => ({ type: SET_CURRENT_PROJECT, props });
 const get_tip_by_map_bounds = bounds => ({
   type: GET_TIP_BY_MAP_BOUNDS,
@@ -25,6 +27,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { keyword: action.keyword });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
+    case SET_MAP_STATE:
+      return Object.assign({}, state, { position: action.position });
     case SET_CURRENT_PROJECT:
       return Object.assign({}, state, { currentProject: action.props });
     case GET_TIP_BY_MAP_BOUNDS:
@@ -81,6 +85,9 @@ export const getTIPByKeywords = keyword => dispatch => {
 
 export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
+
+export const setMapState = position => dispatch =>
+  dispatch(set_map_state(position));
 
 export const setCurrentProject = props => dispatch =>
   dispatch(set_current_project(props));

@@ -1,6 +1,11 @@
 import mapboxgl from "mapbox-gl";
 
 export const updateBounds = mapReference => {
+  mapReference.props.setMapState({
+    center: mapReference.map.getCenter(),
+    zoom: mapReference.map.getZoom()
+  });
+
   if (
     mapReference.props.keywordProjects &&
     mapReference.props.keywordProjects.features

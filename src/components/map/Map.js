@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import { getTIPByMapBounds } from "../reducers/getTIPInfo";
+import { getTIPByMapBounds, setMapState } from "../reducers/getTIPInfo";
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { setCurrentProject } from "../reducers/getTIPInfo";
@@ -68,8 +68,21 @@ class MapComponent extends Component {
     }
   };
 
+  buildKeywordFilter = projects => {
+    let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
+    if (projects.features && projects.features.length) {
+      return ["in", "MPMS_ID"].concat(ids);
+    }
+    return ["!=", "MPMS_ID", ""];
+  };
+
   componentDidMount() {
     const { history } = this.props;
+    const position =
+      this.props.position && this.props.position.center
+        ? { center: this.props.position.center, zoom: this.props.position.zoom }
+        : { center: this.props.center || [-75.1633, 39.9522], zoom: 13 };
+
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -78,8 +91,8 @@ class MapComponent extends Component {
       style: mapStyle,
 
       // default to center city - flyTo new co-ordinates on search
-      center: this.props.center || [-75.1633, 39.9522],
-      zoom: 13,
+      center: position.center,
+      zoom: position.zoom,
       dragRotate: false
     });
 
@@ -89,7 +102,7 @@ class MapComponent extends Component {
 
       // check for keyword search?
       if (this.props.keywordProjects && this.props.keywordProjects.features) {
-        let mpms = keywordBounds(this);
+        let mpms = this.buildKeywordFilter(this.props.keywordProjects);
         this.state.keyFilter = mpms;
       }
 
@@ -323,13 +336,15 @@ const mapStateToProps = state => {
   return {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
-    category: state.getTIP.category
+    category: state.getTIP.category,
+    position: state.getTIP.position
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds))
+    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds)),
+    setMapState: position => dispatch(setMapState(position))
   };
 };
 
