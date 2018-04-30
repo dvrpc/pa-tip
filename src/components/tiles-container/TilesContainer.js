@@ -35,23 +35,10 @@ class TilesContainer extends Component {
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
-      /*projects = keywordProjects
-        .concat(boundsProjects)
-        .filter(
-          project =>
-            project.attributes.DESCRIPTIO === this.state.categoryToFilter
-        );*/
-
       projects = projects.filter(
         project => project.attributes.DESCRIPTIO === this.state.categoryToFilter
       );
-
-      // display all projects when no filter is selected
-    } else {
-      /*projects = keywordProjects.concat(boundsProjects);*/
     }
-
-    console.log("projects at tilesContainer is ", projects);
 
     return (
       <div className="tilesContainer">

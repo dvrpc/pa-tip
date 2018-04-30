@@ -4,17 +4,11 @@ import { connect } from "inferno-redux";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 
-import { getFullTIP } from "../reducers/getTIPInfo";
+import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { submitComment } from "../reducers/commentsReducer.js";
 import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
-
-const hydrateGeometry = id => {
-  return fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
-  ).then(response => response.json());
-};
 
 class Expanded extends Component {
   constructor(props) {
@@ -23,36 +17,29 @@ class Expanded extends Component {
 
   componentWillMount() {
     this.props.getFullTIP(this.props.match.params.id);
+    // get geometry if expanded is being linked from an external source
+    if (!this.props.info)
+      this.props.hydrateGeometry(this.props.match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("what is next props ", nextProps);
-    // apply color scheme on project load
-    const colorScheme = colors[nextProps.details.category];
+    // hydrate geometry from a URL & only do it once
+    if (!this.props.info && !window.streetview) {
+      window.streetview = new window.google.maps.StreetViewPanorama(
+        this.streetview,
+        {
+          position: {
+            lat: this.props.geometryBackup.features[0].attributes.LAG,
+            lng: this.props.geometryBackup.features[0].attributes.LNG
+          },
+          zoom: 0
+        }
+      );
+    }
   }
 
   componentDidMount() {
-    console.log("props at did mount ", this.props);
-    /*    this worked when I was making the fetch directly here because I could .then() off of it and
-      populate the project once it had arrived...
-      easy and shitty solution is to just create a util function that makes that call and returns a promise
-      so that I can .then off of it directly. Delete as reducs stuff 
-    ^ dit it. it works, it's an anti-pattern I guess but whatever. I'm so done with this project. 
-      */
-    if (!this.props.info) {
-      hydrateGeometry(this.props.match.params.id).then(geo => {
-        window.streetview = new window.google.maps.StreetViewPanorama(
-          this.streetview,
-          {
-            position: {
-              lat: geo.features[0].attributes.LAG,
-              lng: geo.features[0].attributes.LNG
-            },
-            zoom: 0
-          }
-        );
-      });
-    } else {
+    if (this.props.info) {
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
@@ -157,7 +144,6 @@ class Expanded extends Component {
             >
               <table className="funding-and-awards-table">
                 <thead>
-                  {/*primary header*/}
                   <tr>
                     <td colspan="2" style={{ background: "#666" }} />
                     <td colspan="4" style={{ background: "#333" }}>
@@ -167,7 +153,6 @@ class Expanded extends Component {
                   </tr>
                 </thead>
                 <tbody style={{ background: colorScheme.lightest }}>
-                  {/*secondary header*/}
                   <tr>
                     <td style={{ background: "#666" }}>Phase</td>
                     <td style={{ background: "#666" }}>Fund</td>
@@ -178,7 +163,6 @@ class Expanded extends Component {
                     <td style={{ background: "#666" }}>2022-2025</td>
                     <td style={{ background: "#666" }}>2026-2029</td>
                   </tr>
-                  {/*insert dynamic table information here: */}
                   {details.funding &&
                     details.funding.data.map(row => (
                       <tr className="table-data-rows">
@@ -211,7 +195,6 @@ class Expanded extends Component {
             >
               <table className="funding-and-awards-table">
                 <thead>
-                  {/*primary header*/}
                   <tr>
                     <th style={{ background: "#333" }}>
                       <h3>PHS Type</h3>
@@ -231,7 +214,6 @@ class Expanded extends Component {
                   </tr>
                 </thead>
                 <tbody style={{ background: colorScheme.lightest }}>
-                  {/*insert dynamic table information here: */}
                   {details.milestones &&
                     details.milestones.data.map(row => (
                       <tr className="table-data-rows">
@@ -292,14 +274,16 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    info: state.getTIP.currentProject
+    info: state.getTIP.currentProject,
+    geometryBackup: state.getTIP.geometry
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    submitComment: comment => dispatch(submitComment(comment))
+    submitComment: comment => dispatch(submitComment(comment)),
+    hydrateGeometry: id => dispatch(hydrateGeometry(id))
   };
 };
 
