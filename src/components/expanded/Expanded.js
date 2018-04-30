@@ -25,7 +25,7 @@ class Expanded extends Component {
 
   componentWillReceiveProps(nextProps) {
     // hydrate geometry from a URL & only do it once
-    if (!this.props.info && !window.streetview) {
+    if (!this.props.info && !window.streetview && this.props.geometryBackup) {
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
