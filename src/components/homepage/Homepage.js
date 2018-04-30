@@ -3,7 +3,11 @@ import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Homepage.css";
-import { getTIPByKeywords, setMapCenter } from "../reducers/getTIPInfo";
+import {
+  getTIPByKeywords,
+  setMapCenter,
+  setMapState
+} from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
 
@@ -213,6 +217,9 @@ const mapDispatchToProps = dispatch => {
     },
     setMapCenter: latlng => {
       dispatch(setMapCenter(latlng));
+    },
+    setMapState: position => {
+      dispatch(setMapState(position));
     }
   };
 };

@@ -81,7 +81,7 @@ class MapComponent extends Component {
     const position =
       this.props.position && this.props.position.center
         ? { center: this.props.position.center, zoom: this.props.position.zoom }
-        : { center: this.props.center || [-75.1633, 39.9522], zoom: 13 };
+        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
 
     //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
@@ -282,7 +282,10 @@ class MapComponent extends Component {
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
-      this.map.flyTo({ center: [nextProps.center.lng, nextProps.center.lat] });
+      this.map.flyTo({
+        center: [nextProps.center.lng, nextProps.center.lat],
+        zoom: 13
+      });
   }
 
   componentDidUpdate() {}

@@ -1,10 +1,7 @@
 import mapboxgl from "mapbox-gl";
 
 export const updateBounds = mapReference => {
-  mapReference.props.setMapState({
-    center: mapReference.map.getCenter(),
-    zoom: mapReference.map.getZoom()
-  });
+  updateMapPosition(mapReference);
 
   if (
     mapReference.props.keywordProjects &&
@@ -47,4 +44,11 @@ export const keywordBounds = (mapReference, data) => {
     return ["in", "MPMS_ID"].concat(ids);
   }
   return ["!=", "MPMS_ID", ""];
+};
+
+const updateMapPosition = instance => {
+  instance.props.setMapState({
+    center: instance.map.getCenter(),
+    zoom: instance.map.getZoom()
+  });
 };

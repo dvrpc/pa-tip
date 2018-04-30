@@ -18,6 +18,10 @@ export const search = (instance, e) => {
 
   // @TODO - not sure if this is the best place to reset category from homepage
   instance.context.store.getState().getTIP.category = "All Categories";
+  instance.props.setMapState({
+    center: { lng: -75.148, lat: 40.018 },
+    zoom: 9
+  });
 
   console.log("instance value ", instance.state.value);
 
