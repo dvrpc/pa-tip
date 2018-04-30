@@ -15,6 +15,7 @@ export const keywordBounds = (mapReference, data) => {
   var bounds = {};
   let latitude = "";
   let longitude = "";
+  let ids = data.features.map(feature => feature.attributes.MPMS_ID);
 
   if (data.features && data.features.length) {
     for (var i = 0; i < data.features.length; i++) {
@@ -26,9 +27,12 @@ export const keywordBounds = (mapReference, data) => {
       bounds.yMax = bounds.yMax > latitude ? bounds.yMax : latitude;
     }
 
-    mapReference.map.fitBounds([
-      [bounds.xMin, bounds.yMin],
-      [bounds.xMax, bounds.yMax]
-    ]);
+    mapReference.map.fitBounds(
+      [[bounds.xMin, bounds.yMin], [bounds.xMax, bounds.yMax]],
+      { padding: 20 }
+    );
+
+    return ["in", "MPMS_ID"].concat(ids);
   }
+  return ["!=", "MPMS_ID", ""];
 };

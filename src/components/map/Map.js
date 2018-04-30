@@ -23,7 +23,9 @@ class MapComponent extends Component {
         "Freight Centers": false
       },
       toggleDropdown: false,
-      markerReference: {}
+      markerReference: {},
+      keyFilter: ["!=", "MPMS_ID", ""],
+      catFilter: ["!=", "DESCRIPTIO", ""]
     };
   }
 
@@ -227,22 +229,25 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // limit only to keywordProjects exists? wish I could actually test this code
-
-    if (nextProps.keywordProjects !== this.props.keywordProjects)
-      keywordBounds(this, nextProps.keywordProjects);
+    if (nextProps.keywordProjects !== this.props.keywordProjects) {
+      console.log("fucker");
+      let ids = keywordBounds(this, nextProps.keywordProjects);
+      this.state.keyFilter = ids;
+    }
 
     switch (nextProps.category) {
       case "All Categories":
-        this.map.setFilter("pa-tip-projects", ["!=", "DESCRIPTIO", ""]);
+        this.state.catFilter = ["!=", "DESCRIPTIO", ""];
         break;
       default:
-        this.map.setFilter("pa-tip-projects", [
-          "==",
-          "DESCRIPTIO",
-          nextProps.category
-        ]);
+        this.state.catFilter = ["==", "DESCRIPTIO", nextProps.category];
     }
+
+    this.map.setFilter("pa-tip-projects", [
+      "all",
+      this.state.catFilter,
+      this.state.keyFilter
+    ]);
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
