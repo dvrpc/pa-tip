@@ -114,6 +114,8 @@ class MapComponent extends Component {
         this.state.keyFilter
       ]);
 
+      this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
+
       this.map.addSource("IPD", {
         type: "geojson",
         data:
