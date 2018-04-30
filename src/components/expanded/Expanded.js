@@ -9,6 +9,7 @@ import { submitComment } from "../reducers/commentsReducer.js";
 import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
+import { scrollToElement } from "../../utils/scrollToElement.js";
 
 class Expanded extends Component {
   constructor(props) {
@@ -77,7 +78,12 @@ class Expanded extends Component {
 
               <span class="divider">|</span>
 
-              <a href="#comments-anchor">
+              <a
+                href="#comments-anchor"
+                onClick={e => {
+                  scrollToElement(this, e, "comments");
+                }}
+              >
                 <p>
                   <em>comments</em>
                 </p>
@@ -228,7 +234,13 @@ class Expanded extends Component {
             </div>
           </section>
         </div>
-        <div className="comments" id="comments-anchor">
+        <div
+          className="comments"
+          id="comments-anchor"
+          ref={el => {
+            this.comments = el;
+          }}
+        >
           <h1>Leave a Comment for This Project</h1>
           <form
             className="comments-form"
