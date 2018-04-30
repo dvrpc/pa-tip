@@ -5,7 +5,6 @@ import { withRouter } from "inferno-router";
 import {
   getTIPByKeywords,
   setMapCenter,
-  getTIPByMapBounds,
   setMapState
 } from "../reducers/getTIPInfo";
 import { search, generateAutocomplete } from "../../utils/search.js";
