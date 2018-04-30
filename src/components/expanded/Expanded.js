@@ -89,7 +89,7 @@ class Expanded extends Component {
                 }}
               >
                 <p>
-                  <em>comments</em>
+                  <em>leave a comment</em>
                 </p>
               </a>
 
