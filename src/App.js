@@ -1,6 +1,6 @@
 import { Component } from "inferno";
 import "./registerServiceWorker";
-import { BrowserRouter, Route, Switch } from "inferno-router";
+import { BrowserRouter as Router, Route, Switch } from "inferno-router";
 
 /* app components */
 import "./App.css";
@@ -12,13 +12,13 @@ class App extends Component {
   render() {
     // TODO: create a catch page for broken links that says something like 'oops, page doesn't exist' and then redirects to the homepage
     return (
-      <BrowserRouter>
+      <Router basename={`${process.env.PUBLIC_URL}`}>
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/main" component={AppContainer} />
           <Route path="/expanded/:id" component={Expanded} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
