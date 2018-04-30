@@ -24,9 +24,9 @@ export const keywordBounds = (mapReference, data) => {
   var bounds = {};
   let latitude = "";
   let longitude = "";
-  let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
 
   if (projects.features && projects.features.length) {
+    let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
     for (var i = 0; i < projects.features.length; i++) {
       longitude = projects.features[i].attributes.LNG;
       latitude = projects.features[i].attributes.LAG;
