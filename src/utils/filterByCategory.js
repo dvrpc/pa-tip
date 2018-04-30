@@ -2,7 +2,7 @@ export const filterByCategory = (instance, e) => {
   // get a handle on the selected option
   const selector = instance.categorySelector;
   const categoryToFilter = selector.options[selector.selectedIndex].text;
-
+  const categoryValue = selector.options[selector.selectedIndex].val;
   // apply or remove filter depending on the selected option
   if (categoryToFilter === "All Categories") {
     instance.setState({ filtered: false });

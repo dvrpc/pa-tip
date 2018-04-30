@@ -16,6 +16,9 @@ export const generateAutocomplete = (element, callback) => {
 export const search = (instance, e) => {
   e.preventDefault();
 
+  // @TODO - not sure if this is the best place to reset category from homepage
+  instance.context.store.getState().getTIP.category = "All Categories";
+
   console.log("instance value ", instance.state.value);
 
   const input = {

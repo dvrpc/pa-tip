@@ -1,6 +1,12 @@
 import mapboxgl from "mapbox-gl";
 
 export const updateBounds = mapReference => {
+  if (
+    mapReference.props.keywordProjects &&
+    mapReference.props.keywordProjects.features
+  ) {
+    return;
+  }
   let bounds = mapReference.map.getBounds();
 
   const NEbounds = bounds.getNorthEast();
@@ -12,15 +18,16 @@ export const updateBounds = mapReference => {
 };
 
 export const keywordBounds = (mapReference, data) => {
+  const projects = data || mapReference.props.keywordProjects;
   var bounds = {};
   let latitude = "";
   let longitude = "";
-  let ids = data.features.map(feature => feature.attributes.MPMS_ID);
+  let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
 
-  if (data.features && data.features.length) {
-    for (var i = 0; i < data.features.length; i++) {
-      longitude = data.features[i].attributes.LNG;
-      latitude = data.features[i].attributes.LAG;
+  if (projects.features && projects.features.length) {
+    for (var i = 0; i < projects.features.length; i++) {
+      longitude = projects.features[i].attributes.LNG;
+      latitude = projects.features[i].attributes.LAG;
       bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
       bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
       bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;

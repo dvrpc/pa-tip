@@ -58,6 +58,16 @@ class MapComponent extends Component {
   toggleDropdown = () =>
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
+  buildCategoryFilter = cat => {
+    switch (cat) {
+      case "All Categories":
+        this.state.catFilter = ["!=", "DESCRIPTIO", ""];
+        break;
+      default:
+        this.state.catFilter = ["==", "DESCRIPTIO", cat];
+    }
+  };
+
   componentDidMount() {
     const { history } = this.props;
     //TODO: replace the accessToken with a process.ENV variable
@@ -76,6 +86,20 @@ class MapComponent extends Component {
     this.map.on("load", () => {
       //map ready - get features
       updateBounds(this);
+
+      // check for keyword search?
+      if (this.props.keywordProjects && this.props.keywordProjects.features) {
+        let mpms = keywordBounds(this);
+        this.state.keyFilter = mpms;
+      }
+
+      this.buildCategoryFilter(this.props.category);
+
+      this.map.setFilter("pa-tip-projects", [
+        "all",
+        this.state.catFilter,
+        this.state.keyFilter
+      ]);
 
       this.map.addSource("IPD", {
         type: "geojson",
@@ -229,19 +253,13 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log('props received by map')
     if (nextProps.keywordProjects !== this.props.keywordProjects) {
-      console.log("fucker");
       let ids = keywordBounds(this, nextProps.keywordProjects);
       this.state.keyFilter = ids;
     }
 
-    switch (nextProps.category) {
-      case "All Categories":
-        this.state.catFilter = ["!=", "DESCRIPTIO", ""];
-        break;
-      default:
-        this.state.catFilter = ["==", "DESCRIPTIO", nextProps.category];
-    }
+    this.buildCategoryFilter(nextProps.category);
 
     this.map.setFilter("pa-tip-projects", [
       "all",
