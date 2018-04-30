@@ -1,4 +1,10 @@
 /* General Purpose Targetting */
+.expanded a{
+  color: #ffffff;
+}
+.expanded a:hover{
+  color: #c1c1c1;
+}
 .wrapper {
   overflow-x: none;
   display: flex;
@@ -39,7 +45,6 @@
 #placeholder {
   width: 100%;
   height: 250px;
-  background: url("http://i.dailymail.co.uk/i/pix/2013/02/14/article-2278605-179228F1000005DC-472_634x519.jpg");
 }
 #expanded-project-title {
   min-height: 5vh;

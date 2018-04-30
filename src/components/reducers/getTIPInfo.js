@@ -7,6 +7,7 @@ const SET_MAP_STATE = "SET_MAP_STATE";
 const SET_CURRENT_PROJECT = "SET_CURRENT_PROJECT";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 const SET_FILTER = "SET_FILTER";
+const HYDRATE_GEOMETRY = "HYDRATE_GEOMETRY'";
 
 /*** ACTION_CREATORS ***/
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
@@ -19,6 +20,7 @@ const get_tip_by_map_bounds = bounds => ({
   bounds
 });
 const set_filter = category => ({ type: SET_FILTER, category });
+const hydrate_geometry = geometry => ({ type: HYDRATE_GEOMETRY, geometry });
 
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
@@ -37,6 +39,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { details: action.id });
     case SET_FILTER:
       return Object.assign({}, state, { category: action.category });
+    case HYDRATE_GEOMETRY:
+      return Object.assign({}, state, { geometry: action.geometry });
     default:
       return state;
   }
@@ -102,6 +106,15 @@ export const getTIPByMapBounds = bounds => dispatch => {
     `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
   ).then(response =>
     response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
+  );
+};
+
+// pull project information from URL for link sharing
+export const hydrateGeometry = id => dispatch => {
+  fetch(
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
+  ).then(response =>
+    response.json().then(geoPromise => dispatch(hydrate_geometry(geoPromise)))
   );
 };
 

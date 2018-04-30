@@ -23,15 +23,13 @@ export const search = (instance, e) => {
     zoom: 9
   });
 
-  console.log("instance value ", instance.state.value);
-
   const input = {
     address: instance.state.value,
     // Hardcoded to the entire region
     bounds
   };
 
-  if (instance.state.selectedButton === "Place") {
+  if (instance.state.selectedButton === "Location") {
     // clear keyword projects from memory
     instance.context.store.getState().getTIP.keyword = [];
 
