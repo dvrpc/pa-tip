@@ -32,9 +32,14 @@
 #content-mini-nav {
   height: 8vh;
   display: flex;
+  justify-content: left;
   align-items: center;
   padding-left: 2vw;
   margin-bottom: 1vh;
+}
+#content-mini-nav p{
+  font-size: 1rem;
+  margin: 0;
 }
 #content-mini-nav p:hover {
   cursor: pointer;
@@ -47,6 +52,7 @@
   height: 250px;
 }
 #expanded-project-title {
+  font-weight: 400;
   min-height: 5vh;
   background: #333333;
 }
@@ -56,6 +62,7 @@
   background: #666666;
 }
 #expanded-project-description p {
+  font-size: 1rem;
   margin-bottom: 1em;
 }
 
@@ -66,12 +73,12 @@
 }
 .tablinks {
   background: none;
-  padding: 0 3% 0 3%;
+  padding: 0 5% 0 5%;
   color: #ffffff;
   cursor: pointer;
   height: 100%;
   border: none;
-  font-size: 1.17rem;
+  font-size: 1rem;
 }
 .active {
   background: #333333;
@@ -96,9 +103,7 @@
   border-collapse: collapse;
   text-align: center;
 }
-.funding-and-awards-table td,
-.funding-and-awards-table td a,
-th {
+.funding-and-awards-table td, th {
   color: #ffffff;
 }
 .funding-and-awards-table td a:hover {
@@ -129,6 +134,7 @@ th {
   padding: 5% 2% 10% 2%;
 }
 .comments h1 {
+  font-weight: 400;
   color: #ffffff;
   text-align: center;
   padding-bottom: 6%;
@@ -140,6 +146,7 @@ th {
   height: 30vh;
 }
 .comments-form textarea {
+  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana, "lucida sans unicode", tahoma, sans-serif;
   font-size: 1.2rem;
   border-radius: 3px;
   width: 48%;
@@ -153,6 +160,8 @@ th {
   justify-content: space-between;
 }
 .comment-form-info {
+  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana, "lucida sans unicode", tahoma, sans-serif;
+  font-size: 1rem;
   padding: 3% 0 3% 0;
   border-radius: 3px;
   border-style: none;
@@ -160,6 +169,7 @@ th {
 }
 
 #submitCommentButton {
+  font-size: 1rem;
   width: 40%;
   margin: 0 auto;
   padding: 3% 0 3% 0;
@@ -180,9 +190,7 @@ th {
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
 }
 
-/* TODO: 
- 1)media query set right-column to flex-column so everything stacks on smaller viewports
- */
+/* Media queries set to a single column layout */
  @media screen and (max-width: 880px) {
   .wrapper{
     flex-direction: column;

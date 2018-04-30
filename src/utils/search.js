@@ -16,6 +16,13 @@ export const generateAutocomplete = (element, callback) => {
 export const search = (instance, e) => {
   e.preventDefault();
 
+  // @TODO - not sure if this is the best place to reset category from homepage
+  instance.context.store.getState().getTIP.category = "All Categories";
+  instance.props.setMapState({
+    center: { lng: -75.148, lat: 40.018 },
+    zoom: 9
+  });
+
   const input = {
     address: instance.state.value,
     // Hardcoded to the entire region

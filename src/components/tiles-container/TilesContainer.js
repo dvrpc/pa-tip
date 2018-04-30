@@ -17,6 +17,15 @@ class TilesContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.category !== "All Categories") {
+      this.setState({
+        filtered: true,
+        categoryToFilter: this.props.category
+      });
+    }
+  }
+
   render() {
     let projects;
 
@@ -49,17 +58,28 @@ class TilesContainer extends Component {
             name="category"
             onChange={linkEvent(this, filterByCategory)}
             ref={e => (this.categorySelector = e)}
+            value={this.props.category}
           >
-            <option value="false">All Categories</option>
-            <option value="1">Bicycle/Pedestrian Improvement</option>
-            <option value="2">Bridge Repair/Replacement</option>
-            <option value="3">Streetscape</option>
-            <option value="4">Transit Improvements</option>
-            <option value="5">Signal/ITS Improvements</option>
-            <option value="6">Roadway Rehabilitation</option>
-            <option value="7">Roadway New Capacity</option>
-            <option value="8">Intersection/Interchange Improvements</option>
-            <option value="9">Other</option>
+            <option value="All Categories">All Categories</option>
+            <option value="Bicycle/Pedestrian Improvement">
+              Bicycle/Pedestrian Improvement
+            </option>
+            <option value="Bridge Repair/Replacement">
+              Bridge Repair/Replacement
+            </option>
+            <option value="Streetscape">Streetscape</option>
+            <option value="Transit Improvements">Transit Improvements</option>
+            <option value="Signal/ITS Improvements">
+              Signal/ITS Improvements
+            </option>
+            <option value="Roadway Rehabilitation">
+              Roadway Rehabilitation
+            </option>
+            <option value="Roadway New Capacity">Roadway New Capacity</option>
+            <option value="Intersection/Interchange Improvements">
+              Intersection/Interchange Improvements
+            </option>
+            <option value="Other">Other</option>
           </select>
           <span className="vr" />
           <p>{projects ? projects.length : 0} results.</p>
@@ -80,7 +100,8 @@ class TilesContainer extends Component {
 const mapStateToProps = state => {
   return {
     keywordProjects: state.getTIP.keyword,
-    boundsProjects: state.getTIP.projects
+    boundsProjects: state.getTIP.projects,
+    category: state.getTIP.category
   };
 };
 

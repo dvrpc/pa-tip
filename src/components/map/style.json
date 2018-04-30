@@ -6388,6 +6388,9 @@
         "icon-anchor": "bottom",
         "icon-offset": [2, 8]
       },
+      "paint": {
+        "icon-opacity": 0
+      },
       "interactive": true
     }
   ],

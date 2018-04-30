@@ -210,21 +210,13 @@ class Expanded extends Component {
               <table className="funding-and-awards-table">
                 <thead>
                   <tr>
-                    <th style={{ background: "#333" }}>
-                      <h3>PHS Type</h3>
-                    </th>
+                    <th style={{ background: "#333" }}>PHS Type</th>
 
-                    <th style={{ background: "#333" }}>
-                      <h3>Milestone</h3>
-                    </th>
+                    <th style={{ background: "#333" }}>Milestone</th>
 
-                    <th style={{ background: "#333" }}>
-                      <h3>Estimated Date</h3>
-                    </th>
+                    <th style={{ background: "#333" }}>Estimated Date</th>
 
-                    <th style={{ background: "#333" }}>
-                      <h3>Actual Date</h3>
-                    </th>
+                    <th style={{ background: "#333" }}>Actual Date</th>
                   </tr>
                 </thead>
                 <tbody style={{ background: colorScheme.lightest }}>
