@@ -157,7 +157,7 @@ class Expanded extends Component {
                   <tr>
                     <td colspan="2" style={{ background: "#666" }} />
                     <td colspan="4" style={{ background: "#333" }}>
-                      <h3>TIP Program Years ($)</h3>
+                      <h3>TIP Program Years ($000)</h3>
                     </td>
                     <td colspan="2" style={{ background: "#666" }} />
                   </tr>
