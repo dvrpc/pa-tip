@@ -59,10 +59,14 @@ class Expanded extends Component {
     //Render runs multiple times until the data is completely pulled in
     //Message property means there was an error
     if (!details || "Message" in details) return;
-    const colorScheme = colors[this.props.details.category];
+    const colorScheme = details
+      ? colors[details.category]
+      : { lightest: "white", middle: "grey", darkest: "black" };
+
     const navBackground = `background: linear-gradient(to right, white 35%, ${
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
+
     return (
       <div className="expanded">
         <Navbar backgroundGradient={navBackground} />
@@ -111,18 +115,18 @@ class Expanded extends Component {
               className="left-column-padding"
             >
               <p>
-                {details.description.length
+                {details.description
                   ? details.description
                   : "Project Description"}
               </p>
-              {details.limits.length && <div>{details.limits}</div>}
+              {details.limits && <div>{details.limits}</div>}
               <p>
                 {details.municipalities && (
                   <span>{details.municipalities}, </span>
                 )}
-                {details.county.length && <span>{details.county} County</span>}
+                {details.county && <span>{details.county} County</span>}
               </p>
-              {details.aq_code.length && <p>AQ Code: {details.aq_code}</p>}
+              {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
             </div>
           </section>
           <section className="right-column">
