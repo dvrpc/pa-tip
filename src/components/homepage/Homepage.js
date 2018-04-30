@@ -211,6 +211,14 @@ class Homepage extends Component {
                 for web conferencing.
               </p>
               <h2>Submit Comments</h2>
+              <ul class="list-group">
+                <li>
+                  <a href="/TIP/Draft/pdf/GuideToCommenting_PA.pdf">
+                    Guide to Commenting
+                  </a>{" "}
+                  <span class="sm">[0.2 MB pdf]</span>
+                </li>
+              </ul>
               <p>
                 Written comments and questions must be submitted in one of four
                 ways listed below:
@@ -290,14 +298,12 @@ class Homepage extends Component {
                   </li>
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/PBPP.pdf">
-                      Performance-based Planning and Programming (PBPP)
+                      Performance-Based Planning and Programming (PBPP)
                     </a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/Public.pdf">
-                      Public Involvement and Libraries Displaying the Draft TIP
-                    </a>{" "}
+                    <a href="/TIP/Draft/pdf/Public.pdf">Public Involvement</a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
@@ -306,10 +312,6 @@ class Homepage extends Component {
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
-                  {/* <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/flyer.pdf">Public Meeting Flyer</a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li> */}
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/MapAppListings.pdf">
                       Mapping Application and Listings Overview
@@ -338,7 +340,7 @@ class Homepage extends Component {
               </div>
 
               <div class="card">
-                <h2>Program Lists and Maps</h2>
+                <h2>Program Lists</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/paprogram.pdf">All Projects</a>{" "}
@@ -386,12 +388,6 @@ class Homepage extends Component {
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
-                  <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/MajorStatus19.pdf">
-                      Status of Major Projects from Previous TIP!!
-                    </a>{" "}
-                    <span class="sm">[0.1 MB pdf]</span>
-                  </li>
                 </ul>
               </div>
 
@@ -412,8 +408,15 @@ class Homepage extends Component {
                     <span class="sm">[3.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/Conformity-19TIP-ExecSum.pdf">
+                      C – Executive Summary of the Documentation of the
+                      Conformity Finding
+                    </a>{" "}
+                    <span class="sm">[0.9 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
-                      C – Memorandum of Understanding on Procedures to Amend and
+                      E – Memorandum of Understanding on Procedures to Amend and
                       Modify the TIP
                     </a>{" "}
                     <span class="sm">[1.6 MB pdf]</span>
@@ -424,28 +427,9 @@ class Homepage extends Component {
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
-                  {/* <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-2019-Procedural-Guidance.pdf">
-                      E – General and Procedural Guidance
-                    </a>{" "}
-                    <span class="sm">[0.9 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-2019-SEPTA-Financial-Capacity-Analysis.pdf">
-                      F – SEPTA’s Financial Capacity Analysis
-                    </a>{" "}
-                    <span class="sm">[0.9 MB pdf]</span>
-                  </li> */}
-                  <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/Conformity-19TIP-ExecSum.pdf">
-                      G – Executive Summary of the Documentation of the
-                      Conformity Finding
-                    </a>{" "}
-                    <span class="sm">[0.9 MB pdf]</span>
-                  </li>
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/AddendumPubInvolve19.pdf">
-                      H – Summary of the TIP Public Involvement Process, Summary
+                      F – Summary of the TIP Public Involvement Process, Summary
                       of Public Comments, Original Public Comments, Agency
                       Responses, List of Recommended Changes, and Supporting
                       Documentation
