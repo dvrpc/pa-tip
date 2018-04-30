@@ -311,6 +311,12 @@ class Homepage extends Component {
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
+                    <a href="/TIP/Draft/pdf/TIP19Libraries.pdf">
+                      Libraries Displaying the Draft TIP
+                    </a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/FY2019PATIP_Notice_Posting.pdf">
                       Public Notice
                     </a>{" "}
@@ -406,8 +412,8 @@ class Homepage extends Component {
                   </li>
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/PA-2019-Financial-Guidance.pdf">
-                      B – Financial Guidance, including 2017 program update
-                      Investment Plan
+                      B – Financial, and General and Procedural Guidance,
+                      including SEPTA' and PART's Financial Capacity Analysis
                     </a>{" "}
                     <span class="sm">[3.0 MB pdf]</span>
                   </li>
