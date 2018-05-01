@@ -274,7 +274,7 @@ class Homepage extends Component {
                 Board meeting.
               </p>
 
-              <div class="card">
+              <div>
                 <h2>Detailed Information</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -357,7 +357,7 @@ class Homepage extends Component {
                 </ul>
               </div>
 
-              <div class="card">
+              <div>
                 <h2>Program Lists</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -409,7 +409,7 @@ class Homepage extends Component {
                 </ul>
               </div>
 
-              <div class="card">
+              <div>
                 <h2>Appendices</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -458,8 +458,8 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
+          <Comments title={"Leave a Public Comment"} />
         </div>
-        <Comments title={"Leave a Public Comment"} />
       </div>
     );
   }

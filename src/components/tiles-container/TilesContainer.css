@@ -39,9 +39,24 @@
     margin-right: 3%;
 }
 
+/* media queries */
  @media screen and (max-width: 880px) {
+    .header h2 {
+        font-size: 1rem;
+    }
   .tilesContainer{
     margin-left: 0;
     max-height: 50vh;
   }
+ }
+  @media screen and (max-width: 600px) {
+    .header h2, .header p {
+        font-size: 0.8rem;
+    }
+    #selectedCategory{
+        margin: 0 1% 0 1%;
+        width: 45%;
+        padding-right: 0px;
+        font-size: 0.7rem;
+    }
  }
