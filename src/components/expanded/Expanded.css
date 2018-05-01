@@ -1,8 +1,8 @@
 /* General Purpose Targetting */
-.expanded a{
+.expanded a {
   color: #ffffff;
 }
-.expanded a:hover{
+.expanded a:hover {
   color: #c1c1c1;
 }
 .wrapper {
@@ -37,7 +37,7 @@
   padding-left: 2vw;
   margin-bottom: 1vh;
 }
-#content-mini-nav p{
+#content-mini-nav p {
   font-size: 1rem;
   margin: 0;
 }
@@ -103,7 +103,8 @@
   border-collapse: collapse;
   text-align: center;
 }
-.funding-and-awards-table td, th {
+.funding-and-awards-table td,
+th {
   color: #ffffff;
 }
 .funding-and-awards-table td a:hover {
@@ -143,10 +144,10 @@
   display: flex;
   width: 90%;
   margin: 0 auto;
-  height: 30vh;
 }
 .comments-form textarea {
-  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana, "lucida sans unicode", tahoma, sans-serif;
+  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
+    "lucida sans unicode", tahoma, sans-serif;
   font-size: 1.2rem;
   border-radius: 3px;
   width: 48%;
@@ -158,16 +159,38 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: calc(15rem + 8px);
 }
 .comment-form-info {
-  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana, "lucida sans unicode", tahoma, sans-serif;
+  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
+    "lucida sans unicode", tahoma, sans-serif;
   font-size: 1rem;
-  padding: 3% 0 3% 0;
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  height: calc(2.25rem + 2px);
   border-radius: 3px;
   border-style: none;
-  text-align: center;
 }
-
+.custom-select {
+  font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
+    "lucida sans unicode", tahoma, sans-serif;
+  font-size: 1rem;
+  display: inline-block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #495057;
+  vertical-align: middle;
+  background: #fff
+    url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E")
+    no-repeat right 0.75rem center;
+  background-size: 8px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 #submitCommentButton {
   font-size: 1rem;
   width: 40%;
@@ -191,21 +214,22 @@
 }
 
 /* Media queries set to a single column layout */
- @media screen and (max-width: 880px) {
-  .wrapper{
+@media screen and (max-width: 880px) {
+  .wrapper {
     flex-direction: column;
     height: 100%;
   }
-  .left-column, .right-column {
+  .left-column,
+  .right-column {
     width: 100%;
   }
-  .right-column{
+  .right-column {
     padding: 0;
     margin: 1% 0 1% 0;
   }
- }
+}
 @media screen and (min-width: 1400px) {
-  #expanded-project-description{
+  #expanded-project-description {
     height: calc(100% - 22vh - 1.7em - 250px);
   }
 }

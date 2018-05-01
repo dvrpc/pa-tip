@@ -262,13 +262,14 @@ class Expanded extends Component {
                 placeholder="email"
                 required
               />
-              <input
-                className="comment-form-info"
-                type="text"
-                name="county"
-                placeholder="county of residence"
-                required
-              />
+              <select className="custom-select" name="county" required>
+                <option value="">county</option>
+                <option value="Bucks">Bucks County</option>
+                <option value="Chester">Chester County</option>
+                <option value="Delaware">Delaware County</option>
+                <option value="Philadelphia">Philadelphia County</option>
+                <option value="Montgomery">Montgomery County</option>
+              </select>
               <input
                 id="submitCommentButton"
                 type="submit"
