@@ -26,7 +26,6 @@ export const resetCommentBool = bool => dispatch =>
   dispatch(posted_comment_response(false));
 
 export const submitComment = comment => dispatch => {
-  console.log("comment is ", comment);
   // POST to the comment db
   fetch("https://www.dvrpc.org/data/tip/2019/comments", {
     method: "post",
@@ -35,7 +34,6 @@ export const submitComment = comment => dispatch => {
     },
     body: JSON.stringify(comment)
   }).then(response => {
-    console.log("submit comment api response is ", response);
     if (response.status === 200) {
       // dispatch a response to notify the user their comment was successfully submitted
       dispatch(posted_comment_response(true));

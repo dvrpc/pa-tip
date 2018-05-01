@@ -5,13 +5,10 @@ import swal from "sweetalert2";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 import Modal from "../modal/Modal.js";
+import Comments from "../comments/Comments.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
-import {
-  submitComment,
-  resetCommentBool
-} from "../reducers/commentsReducer.js";
-import { POSTComment } from "../../utils/POSTComment.js";
+import { resetCommentBool } from "../reducers/commentsReducer.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
@@ -72,7 +69,6 @@ class Expanded extends Component {
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
 
-    console.log("new expanded props ", this.props);
     return (
       <div className="expanded">
         {this.props.commentResponse ? (
@@ -243,51 +239,10 @@ class Expanded extends Component {
             </div>
           </section>
         </div>
-        <div
-          className="comments"
-          id="comments-anchor"
-          ref={el => {
-            this.comments = el;
-          }}
-        >
-          <h1>Leave a Public Comment for This Project</h1>
-          <form
-            className="comments-form"
-            onSubmit={linkEvent(this, POSTComment)}
-          >
-            <textarea placeholder="Submit a public comment for this project" />
-            <div className="input-fields">
-              <input
-                className="comment-form-info"
-                type="text"
-                name="name"
-                placeholder="full name"
-                required
-              />
-              <input
-                className="comment-form-info"
-                type="email"
-                name="email"
-                placeholder="email"
-                required
-              />
-              <select className="custom-select" name="county" required>
-                <option value="">county</option>
-                <option value="Bucks">Bucks County</option>
-                <option value="Chester">Chester County</option>
-                <option value="Delaware">Delaware County</option>
-                <option value="Philadelphia">Philadelphia County</option>
-                <option value="Montgomery">Montgomery County</option>
-              </select>
-              <input
-                id="submitCommentButton"
-                type="submit"
-                value="submit"
-                style={{ background: colorScheme.darkest }}
-              />
-            </div>
-          </form>
-        </div>
+        <Comments
+          colorScheme={colorScheme}
+          id={this.props.details ? this.props.details.id : null}
+        />
       </div>
     );
   }
@@ -305,7 +260,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    submitComment: comment => dispatch(submitComment(comment)),
     hydrateGeometry: id => dispatch(hydrateGeometry(id)),
     resetCommentBool: bool => dispatch(resetCommentBool(bool))
   };
