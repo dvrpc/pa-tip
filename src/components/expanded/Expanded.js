@@ -41,6 +41,7 @@ class Expanded extends Component {
 
   componentDidMount() {
     if (this.props.info) {
+      let lag = this.props.info.attributes || this.props.attributes;
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
@@ -89,7 +90,7 @@ class Expanded extends Component {
                 }}
               >
                 <p>
-                  <em>leave a comment</em>
+                  <em>submit a public comment</em>
                 </p>
               </a>
 
@@ -241,18 +242,18 @@ class Expanded extends Component {
             this.comments = el;
           }}
         >
-          <h1>Leave a Comment for This Project</h1>
+          <h1>Leave a Public Comment for This Project</h1>
           <form
             className="comments-form"
             onSubmit={linkEvent(this, POSTComment)}
           >
-            <textarea placeholder="Submit a comment for this project" />
+            <textarea placeholder="Submit a public comment for this project" />
             <div className="input-fields">
               <input
                 className="comment-form-info"
                 type="text"
                 name="name"
-                placeholder="name"
+                placeholder="full name"
                 required
               />
               <input
