@@ -41,7 +41,6 @@ class Expanded extends Component {
 
   componentDidMount() {
     if (this.props.info) {
-      let lag = this.props.info.attributes || this.props.attributes;
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
