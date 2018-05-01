@@ -10,3 +10,10 @@
 .footer a {
   color: unset;
 }
+
+/*media queries*/
+ @media screen and (max-width: 880px) {
+  .footer{
+    font-size: 0.8rem;
+  }
+ }

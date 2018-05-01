@@ -52,17 +52,19 @@ class Navbar extends Component {
             <option value="MPMS">MPMS ID</option>
             <option value="Keyword">Keyword</option>
           </select>
-          <input
-            id="navSearch"
-            type="textarea"
-            placeholder="enter address, location, building, etc"
-            value={this.state.value}
-            onInput={this.handleChange}
-            ref={i => {
-              this.input = i;
-            }}
-          />
-          <input id="navBarButton" type="submit" value="search" />
+          <div className="mini-input-stack">
+            <input
+              id="navSearch"
+              type="textarea"
+              placeholder="enter address, location, building, etc"
+              value={this.state.value}
+              onInput={this.handleChange}
+              ref={i => {
+                this.input = i;
+              }}
+            />
+            <input id="navBarButton" type="submit" value="search" />
+          </div>
         </form>
       </nav>
     );

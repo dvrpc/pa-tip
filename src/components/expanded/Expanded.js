@@ -238,9 +238,10 @@ class Expanded extends Component {
             </div>
           </section>
         </div>
+        <span ref={e => (this.comments = e)} />
         <Comments
           colorScheme={colorScheme}
-          id={this.props.details ? this.props.details.id : null}
+          projectId={this.props.details ? this.props.details.id : null}
           title={"Leave a Public Comment for This Project"}
         />
       </div>

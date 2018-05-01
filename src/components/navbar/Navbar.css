@@ -14,6 +14,10 @@
     display: flex;
     padding-right: 10%;
 }
+.mini-input-stack{
+    display: flex;
+    flex-direction: row;
+}
 #navbarSelector{
     margin: 0 6% 0 3%;
     border-radius: 5px;
@@ -52,23 +56,33 @@
 }
 
 /*TODO: add breakpoints to make the navbar readable on smaller screens*/
- @media screen and (max-width: 850px) {
+@media screen and (max-width: 850px) {
     #nav-search-form{
         font-size: 0.8rem;
     }
+    #navBarSelector {
+        margin: 0 3% 0 1.5%;
+    }
     #navBarButton{
-        padding: 2% 7% 2% 7%;
+        padding: 2% 5% 2% 5%;
     }
     .navbar-logos{
         height: 70%;
         width: 40%;
     }
  }
-  @media screen and (max-width: 700px) {
-    #nav-search-form{
-        padding-right: 8%;
+@media screen and (max-width: 700px) {
+    .mini-input-stack {
+        flex-direction: column;
     }
-    #navBarButton{
-        padding: 1% 5% 1% 5%;
+    #navSearch {
+        margin-right: 0;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        margin-bottom: 3%;
+    }
+    #navBarButton {
+        width: 60%;
+        margin: 0 auto;
     }
  }
