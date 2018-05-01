@@ -61,8 +61,8 @@ class Homepage extends Component {
               alt="Transportation Improvement Program logo"
             />
             <div className="stacked-headers">
-              <h1>Draft FY2019 Pennsylvania</h1>
-              <h1>Transportation Improvement Program</h1>
+              <h1>Draft FY2019 Transportation Improvement</h1>
+              <h1>Program for Pennsylvania (FY19-22)</h1>
             </div>
           </div>
 
@@ -181,7 +181,8 @@ class Homepage extends Component {
           <div className="tip-info-cluster">
             <div className="tip-info-paragraphs">
               <h2>
-                Draft FY2019 Pennsylvania Transportation Improvement Program
+                Draft FY2019 Transportation Improvement Program for Pennsylvania
+                (FY19-22)
               </h2>
               <p>
                 DVRPC invites the public to review and comment on the Draft
@@ -458,7 +459,7 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
-          <Comments title={"Leave a Public Comment"} />
+          <Comments title={"Submit a General Public Comment"} />
         </div>
       </div>
     );

@@ -40,10 +40,15 @@ class Comments extends Component {
             <select className="custom-select" name="county" required>
               <option value="">county</option>
               <option value="Bucks">Bucks County</option>
+              <option value="Burlington">Burlington County</option>
+              <option value="Camden">Camden County</option>
               <option value="Chester">Chester County</option>
               <option value="Delaware">Delaware County</option>
+              <option value="Gloucester">Gloucester County</option>
               <option value="Philadelphia">Philadelphia County</option>
+              <option value="Mercer">Mercer County</option>
               <option value="Montgomery">Montgomery County</option>
+              <option value="Other">Other</option>
             </select>
             <input
               id="submitCommentButton"
