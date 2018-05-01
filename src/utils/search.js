@@ -23,8 +23,12 @@ export const search = (instance, e) => {
     zoom: 9
   });
 
+  let test = instance.state.value.length ? instance.state.value : instance;
+
+  console.log("test ", test);
+
   const input = {
-    address: instance.state.value,
+    address: instance.state.value.target.value,
     // Hardcoded to the entire region
     bounds
   };

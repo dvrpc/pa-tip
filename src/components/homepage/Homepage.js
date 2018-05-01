@@ -37,13 +37,11 @@ class Homepage extends Component {
 
   componentDidMount() {
     generateAutocomplete(this.input, () => {
-      console.log("wut ", this.input);
-      this.handleChange({ target: { value: this.input.value } });
-      search(this, new Event(null));
+      if (this.input) this.handleChange(this.state.value);
     });
   }
 
-  handleChange = e => this.setState({ value: e.target.value });
+  handleChange = e => this.setState({ value: e });
 
   render() {
     console.log("state ", this.state);
@@ -83,7 +81,7 @@ class Homepage extends Component {
               role="search"
               id="search-form"
               method="get"
-              action={linkEvent(this, search)}
+              onSubmit={linkEvent(this, search)}
             >
               <div
                 className="homepage-radio-group"
@@ -126,7 +124,6 @@ class Homepage extends Component {
                 required
                 type="text"
                 placeholder="enter address, location, building, etc"
-                value={this.state.value}
                 onInput={this.handleChange}
                 ref={i => {
                   this.input = i;
