@@ -1,11 +1,16 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
+import swal from "sweetalert2";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+import Modal from "../modal/Modal.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
-import { submitComment } from "../reducers/commentsReducer.js";
+import {
+  submitComment,
+  resetCommentBool
+} from "../reducers/commentsReducer.js";
 import { POSTComment } from "../../utils/POSTComment.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
@@ -67,8 +72,12 @@ class Expanded extends Component {
       colorScheme.lightest
     } 65%, ${colorScheme.middle})`;
 
+    console.log("new expanded props ", this.props);
     return (
       <div className="expanded">
+        {this.props.commentResponse ? (
+          <Modal resetCommentBool={this.props.resetCommentBool} />
+        ) : null}
         <Navbar backgroundGradient={navBackground} />
         <div className="wrapper">
           <section className="left-column">
@@ -288,7 +297,8 @@ const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
     info: state.getTIP.currentProject,
-    geometryBackup: state.getTIP.geometry
+    geometryBackup: state.getTIP.geometry,
+    commentResponse: state.getComments.response
   };
 };
 
@@ -296,7 +306,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
     submitComment: comment => dispatch(submitComment(comment)),
-    hydrateGeometry: id => dispatch(hydrateGeometry(id))
+    hydrateGeometry: id => dispatch(hydrateGeometry(id)),
+    resetCommentBool: bool => dispatch(resetCommentBool(bool))
   };
 };
 

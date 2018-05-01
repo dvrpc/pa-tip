@@ -1,20 +1,30 @@
 /*** ACTIONS ***/
 const GET_COMMENTS = "GET_COMMENTS";
+const POSTED_COMMENT_RESPONSE = "POSTED_COMMENT_RESPONSE";
 
 /*** ACTION_CREATORS ***/
 const get_comments = comments => ({ type: GET_COMMENTS, comments });
+const posted_comment_response = response => ({
+  type: POSTED_COMMENT_RESPONSE,
+  response
+});
 
 /*** REDUCERS ***/
 export default function commentReducer(state = [], action) {
   switch (action.type) {
     case GET_COMMENTS:
       return Object.assign({}, state, { comment: action.comments });
+    case POSTED_COMMENT_RESPONSE:
+      return Object.assign({}, state, { response: action.response });
     default:
       return state;
   }
 }
 
 /*** DISPATCHERS ***/
+export const resetCommentBool = bool => dispatch =>
+  dispatch(posted_comment_response(false));
+
 export const submitComment = comment => dispatch => {
   console.log("comment is ", comment);
   // POST to the comment db
@@ -27,8 +37,8 @@ export const submitComment = comment => dispatch => {
   }).then(response => {
     console.log("submit comment api response is ", response);
     if (response.status === 200) {
-      // when the api is set up, dispatch a response that updates the comments form to let users know they successfully submitted a comment
-      console.log("commented successfully posted to database");
+      // dispatch a response to notify the user their comment was successfully submitted
+      dispatch(posted_comment_response(true));
     } else {
       console.log("failed to post comment to database");
     }

@@ -2,7 +2,6 @@ import Inferno, { Component } from "inferno";
 import "./Footer.css";
 
 class Footer extends Component {
-  //TODO: add props, lifecycle hooks, other stuff
   render() {
     return (
       <footer className="footer">
