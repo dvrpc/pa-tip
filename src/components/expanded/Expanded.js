@@ -1,6 +1,5 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
-import swal from "sweetalert2";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
@@ -242,6 +241,7 @@ class Expanded extends Component {
         <Comments
           colorScheme={colorScheme}
           id={this.props.details ? this.props.details.id : null}
+          title={"Leave a Public Comment for This Project"}
         />
       </div>
     );

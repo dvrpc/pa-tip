@@ -19,7 +19,7 @@ class Comments extends Component {
           this.comments = el;
         }}
       >
-        <h1>Leave a Public Comment for This Project</h1>
+        <h1>{this.props.title}</h1>
         <form className="comments-form" onSubmit={linkEvent(this, POSTComment)}>
           <textarea placeholder="Submit a public comment for this project" />
           <div className="input-fields">

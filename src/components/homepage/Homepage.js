@@ -3,11 +3,16 @@ import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Homepage.css";
+import Comments from "../comments/Comments.js";
+import Modal from "../modal/Modal.js";
+
 import {
   getTIPByKeywords,
   setMapCenter,
   setMapState
 } from "../reducers/getTIPInfo";
+import { resetCommentBool } from "../reducers/commentsReducer.js";
+
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
@@ -42,6 +47,9 @@ class Homepage extends Component {
   render() {
     return (
       <div className="homepage">
+        {this.props.commentResponse ? (
+          <Modal resetCommentBool={this.props.resetCommentBool} />
+        ) : null}
         <div className="landing">
           <div className="homepage-banner">
             <div id="banner-logo">
@@ -451,10 +459,17 @@ class Homepage extends Component {
             </div>
           </div>
         </div>
+        <Comments title={"Leave a Public Comment"} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    commentResponse: state.getComments.response
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -466,8 +481,11 @@ const mapDispatchToProps = dispatch => {
     },
     setMapState: position => {
       dispatch(setMapState(position));
-    }
+    },
+    resetCommentBool: bool => dispatch(resetCommentBool(bool))
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Homepage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Homepage)
+);
