@@ -46,7 +46,7 @@
     }
   .tilesContainer{
     margin-left: 0;
-    max-height: 50vh;
+    max-height: 70vh;
   }
  }
   @media screen and (max-width: 600px) {
