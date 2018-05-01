@@ -129,7 +129,12 @@ th {
 }
 
 /* Media queries set to a single column layout */
-@media screen and (max-width: 880px) {
+@media screen and (min-width: 1400px) {
+  #expanded-project-description {
+    height: calc(100% - 22vh - 1.7em - 250px);
+  }
+}
+@media screen and (max-width: 900px) {
   .wrapper {
     flex-direction: column;
     height: 100%;
@@ -143,8 +148,14 @@ th {
     margin: 1% 0 1% 0;
   }
 }
-@media screen and (min-width: 1400px) {
-  #expanded-project-description {
-    height: calc(100% - 22vh - 1.7em - 250px);
+@media screen and (max-width: 700px) {
+  #content-mini-nav p, #expanded-project-description p {
+    font-size: 0.8rem;
+  }
+  #expanded-project-title {
+    font-size: 1.2rem;
+  }
+  .funding-and-awards-table {
+    font-size: 0.8rem;
   }
 }

@@ -34,7 +34,7 @@
 .comment-form-info {
   font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
     "lucida sans unicode", tahoma, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
   height: calc(2.25rem + 2px);
   border-radius: 3px;
@@ -81,4 +81,14 @@
   -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+}
+
+/* media queries */
+@media screen and (max-width: 700px) {
+  .comments h1 {
+    font-size: 1.2rem;
+  }
+  .comments-form textarea, .comment-form-info, #submitCommentButton {
+    font-size: 1rem;
+  }
 }
