@@ -37,6 +37,7 @@ class Homepage extends Component {
 
   componentDidMount() {
     generateAutocomplete(this.input, () => {
+      console.log("wut ", this.input);
       this.handleChange({ target: { value: this.input.value } });
       search(this, new Event(null));
     });
@@ -45,6 +46,7 @@ class Homepage extends Component {
   handleChange = e => this.setState({ value: e.target.value });
 
   render() {
+    console.log("state ", this.state);
     return (
       <div className="homepage">
         {this.props.commentResponse ? (

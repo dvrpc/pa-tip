@@ -69,7 +69,7 @@ export const getTIPByKeywords = keyword => dispatch => {
           })
           .join("&");
         fetch(
-          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query`,
+          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/Draft_DVRPC_PATIP_FY2019_2022_points/FeatureServer/0/query`,
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
@@ -103,7 +103,7 @@ export const setFilter = category => dispatch => {
 // get all projects within the boundaires of the current mapbox view
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/Draft_DVRPC_PATIP_FY2019_2022_points/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
   ).then(response =>
     response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
   );
@@ -112,7 +112,7 @@ export const getTIPByMapBounds = bounds => dispatch => {
 // pull project information from URL for link sharing
 export const hydrateGeometry = id => dispatch => {
   fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/PATIP_FY19/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/Draft_DVRPC_PATIP_FY2019_2022_points/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
   ).then(response =>
     response.json().then(geoPromise => dispatch(hydrate_geometry(geoPromise)))
   );
