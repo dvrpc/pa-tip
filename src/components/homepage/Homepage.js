@@ -459,7 +459,7 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
-          <Comments title={"Leave a Public Comment"} />
+          <Comments title={"Submit a General Public Comment"} />
         </div>
       </div>
     );
