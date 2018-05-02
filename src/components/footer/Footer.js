@@ -15,7 +15,9 @@ class Footer extends Component {
         </div>
         <div>
           <p>
-            <a href="">Sign up for our email lists</a>
+            <a href="https://signup.e2ma.net/signup/1808352/1403728/">
+              Sign up for our email lists
+            </a>
           </p>
           <p>
             <a href="/Policies/">Policies</a>
