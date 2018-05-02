@@ -19,20 +19,17 @@ class Expanded extends Component {
 
   componentWillMount() {
     this.props.getFullTIP(this.props.match.params.id);
-    // get geometry if expanded is being linked from an external source
-    if (!this.props.info)
-      this.props.hydrateGeometry(this.props.match.params.id);
+    this.props.hydrateGeometry(this.props.match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
-    // hydrate geometry from a URL & only do it once
-    if (!this.props.info && !window.streetview && this.props.geometryBackup) {
+    if (nextProps.geometryBackup !== this.props.geometryBackup) {
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
           position: {
-            lat: this.props.geometryBackup.features[0].attributes.LAG,
-            lng: this.props.geometryBackup.features[0].attributes.LNG
+            lat: nextProps.geometryBackup.features[0].attributes.LAG,
+            lng: nextProps.geometryBackup.features[0].attributes.LNG
           },
           zoom: 0
         }
@@ -41,13 +38,13 @@ class Expanded extends Component {
   }
 
   componentDidMount() {
-    if (this.props.info) {
+    if (this.props.geometryBackup) {
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
           position: {
-            lat: this.props.info.attributes.LAG,
-            lng: this.props.info.attributes.LNG
+            lat: this.props.geometryBackup.features[0].attributes.LAG,
+            lng: this.props.geometryBackup.features[0].attributes.LNG
           },
           zoom: 0
         }
@@ -252,7 +249,7 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    info: state.getTIP.currentProject,
+    test: state.getTIP.currentProject,
     geometryBackup: state.getTIP.geometry,
     commentResponse: state.getComments.response
   };

@@ -6,7 +6,6 @@ import { withRouter } from "inferno-router";
 import { getTIPByMapBounds, setMapState } from "../reducers/getTIPInfo";
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
-import { setCurrentProject } from "../reducers/getTIPInfo";
 import { clickTile } from "../../utils/clickTile.js";
 import "./Map.css";
 import mapStyle from "./style.json";
@@ -89,8 +88,6 @@ class MapComponent extends Component {
     this.map = new mapboxgl.Map({
       container: this.tipMap,
       style: mapStyle,
-
-      // default to center city - flyTo new co-ordinates on search
       center: position.center,
       zoom: position.zoom,
       dragRotate: false
@@ -100,7 +97,7 @@ class MapComponent extends Component {
       //map ready - get features
       updateBounds(this);
 
-      // check for keyword search?
+      // check for keyword search
       if (this.props.keywordProjects && this.props.keywordProjects.features) {
         let mpms = this.buildKeywordFilter(this.props.keywordProjects);
         this.state.keyFilter = mpms;
@@ -228,15 +225,14 @@ class MapComponent extends Component {
       }
     });
 
-    this.map.on("click", "pa-tip-projects", e =>
+    this.map.on("click", "pa-tip-projects", e => {
       clickTile({
         props: {
           history,
-          setCurrentProject,
           data: { id: e.features[0].properties.MPMS_ID }
         }
-      })
-    );
+      });
+    });
 
     // Change the cursor to a pointer when the mouse is over the projects layer.
     this.map.on("mousemove", "pa-tip-projects", e => {
@@ -268,7 +264,6 @@ class MapComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('props received by map')
     if (nextProps.keywordProjects !== this.props.keywordProjects) {
       let ids = keywordBounds(this, nextProps.keywordProjects);
       this.state.keyFilter = ids;
@@ -289,8 +284,6 @@ class MapComponent extends Component {
         zoom: 13
       });
   }
-
-  componentDidUpdate() {}
 
   componentWillUnmount() {
     this.map.remove();

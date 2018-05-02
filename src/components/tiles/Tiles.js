@@ -1,10 +1,8 @@
 import Inferno, { Component, linkEvent } from "inferno";
-import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
-import { setCurrentProject } from "../reducers/getTIPInfo";
 import { clickTile } from "../../utils/clickTile.js";
 
 class Tile extends Component {
@@ -52,10 +50,4 @@ class Tile extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setCurrentProject: props => dispatch(setCurrentProject(props))
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(Tile));
+export default withRouter(Tile);
