@@ -121,7 +121,7 @@ class Homepage extends Component {
               <input
                 id="homepage-search-bar"
                 required
-                type="textarea"
+                type="text"
                 placeholder="enter address, location, building, etc"
                 onInput={this.handleChange}
                 ref={i => {
