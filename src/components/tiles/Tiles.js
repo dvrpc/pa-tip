@@ -14,14 +14,11 @@ class Tile extends Component {
   }
 
   componentDidMount() {
-    const details = tileDetails(
+    tileDetails(
       this.props.data,
       this.tileRef.clientWidth,
       this.tileRef.clientHeight
-    );
-    this.setState({
-      details: details
-    });
+    ).then(details => this.setState({ details }));
   }
 
   render() {
