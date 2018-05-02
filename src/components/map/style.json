@@ -90,6 +90,10 @@
     "pa-tip": {
       "type": "vector",
       "url": "https://a.michaelruane.com/data/dvrpc-tip.json"
+    },
+    "boundary": {
+      "type": "vector",
+      "url": "https://dvrpc-freight.michaelruane.com/dvrpc_boundaries.json"
     }
   },
   "sprite": "https://a.michaelruane.com/styles/dvrpc-streets/sprite",
@@ -3008,6 +3012,80 @@
       },
       "paint": {},
       "interactive": true
+    },
+    {
+      "id": "muni",
+      "type": "fill",
+      "source": "boundary",
+      "source-layer": "municipalities",
+      "minzoom": 10,
+      "maxzoom": 18,
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "fill-color": "rgba(178, 139, 132, 1)",
+        "fill-outline-color": "rgba(255, 255, 255, 0)",
+        "fill-opacity": 0.1
+      }
+    },
+    {
+      "id": "muni-lines",
+      "type": "line",
+      "source": "boundary",
+      "source-layer": "municipalities",
+      "minzoom": 11,
+      "maxzoom": 18,
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(170, 170, 170, 1)",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              12,
+              1.5
+            ],
+            [
+              13,
+              2
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          5
+        ],
+        "line-gap-width": 0,
+        "line-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "county",
+      "type": "line",
+      "source": "boundary",
+      "source-layer": "county",
+      "minzoom": 9,
+      "maxzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "DVRPC_REG",
+          "Yes"
+        ]
+      ],
+      "paint": {
+        "line-color": "rgba(170, 170, 170, 1)",
+        "line-width": 1.25,
+        "line-opacity": 1
+      }
     },
     {
       "id": "bridge-path-bg",
