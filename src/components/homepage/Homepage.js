@@ -87,35 +87,41 @@ class Homepage extends Component {
                 ref={e => (this.radioGroup = e)}
               >
                 <p> Search by: </p>
-                <input
-                  type="radio"
-                  name="searchType"
-                  id="Location"
-                  value="Location"
-                  checked={this.state.selectedButton === "Location"}
-                  onChange={linkEvent(this, handleRadioChange)}
-                />
-                <label for="Location">Location</label>
+                <div className="radio-group-cluster">
+                  <input
+                    type="radio"
+                    name="searchType"
+                    id="Location"
+                    value="Location"
+                    checked={this.state.selectedButton === "Location"}
+                    onChange={linkEvent(this, handleRadioChange)}
+                  />
+                  <label for="Location">Location</label>
+                </div>
 
-                <input
-                  type="radio"
-                  name="searchType"
-                  id="MPMS"
-                  value="MPMS"
-                  checked={this.state.selectedButton === "MPMS"}
-                  onChange={linkEvent(this, handleRadioChange)}
-                />
-                <label for="MPMS">MPMS ID</label>
+                <div className="radio-group-cluster">
+                  <input
+                    type="radio"
+                    name="searchType"
+                    id="MPMS"
+                    value="MPMS"
+                    checked={this.state.selectedButton === "MPMS"}
+                    onChange={linkEvent(this, handleRadioChange)}
+                  />
+                  <label for="MPMS">MPMS ID</label>
+                </div>
 
-                <input
-                  type="radio"
-                  name="searchType"
-                  id="Keyword"
-                  value="Keyword"
-                  checked={this.state.selectedButton === "Keyword"}
-                  onChange={linkEvent(this, handleRadioChange)}
-                />
-                <label for="Keyword">Keyword</label>
+                <div className="radio-group-cluster">
+                  <input
+                    type="radio"
+                    name="searchType"
+                    id="Keyword"
+                    value="Keyword"
+                    checked={this.state.selectedButton === "Keyword"}
+                    onChange={linkEvent(this, handleRadioChange)}
+                  />
+                  <label for="Keyword">Keyword</label>
+                </div>
               </div>
 
               <input
