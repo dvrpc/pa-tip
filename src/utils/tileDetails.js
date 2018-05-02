@@ -17,6 +17,7 @@ export const tileDetails = (propsProject, width, height) => {
 
     // Get a background image for the project according to its type (function needs coords & category)
     const path = geometryColorType(project);
+
     background = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${width}x${height}&maptype=satellite${path}`;
 
     // based on the project type, assign the gradient value for the caption text

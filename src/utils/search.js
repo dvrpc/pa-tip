@@ -23,12 +23,14 @@ export const search = (instance, e) => {
     zoom: 9
   });
 
-  let test = instance.state.value.length ? instance.state.value : instance;
-
-  console.log("test ", test);
+  // handle input format from homepage or navbar component
+  let query =
+    instance.state.value.type === "input"
+      ? instance.state.value.target.value
+      : instance.state.value;
 
   const input = {
-    address: instance.state.value.target.value,
+    address: query,
     // Hardcoded to the entire region
     bounds
   };

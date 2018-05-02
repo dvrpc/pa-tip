@@ -44,7 +44,6 @@ class Homepage extends Component {
   handleChange = e => this.setState({ value: e });
 
   render() {
-    console.log("state ", this.state);
     return (
       <div className="homepage">
         {this.props.commentResponse ? (
@@ -122,7 +121,7 @@ class Homepage extends Component {
               <input
                 id="homepage-search-bar"
                 required
-                type="text"
+                type="textarea"
                 placeholder="enter address, location, building, etc"
                 onInput={this.handleChange}
                 ref={i => {
