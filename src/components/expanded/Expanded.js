@@ -62,8 +62,8 @@ class Expanded extends Component {
       : { lightest: "white", middle: "grey", darkest: "black" };
 
     const navBackground = `background: linear-gradient(to right, white 35%, ${
-      colorScheme.lightest
-    } 65%, ${colorScheme.middle})`;
+      colorScheme.middle
+    } 65%, ${colorScheme.darkest})`;
 
     return (
       <div className="expanded">
@@ -183,16 +183,36 @@ class Expanded extends Component {
                       <tr className="table-data-rows">
                         <td>{row[0]}</td>
                         <td>{row[1]}</td>
-                        <td style={{ background: colorScheme.middle }}>
+                        <td
+                          style={{
+                            background: colorScheme.middle,
+                            fontWeight: "700"
+                          }}
+                        >
                           {row[2]}
                         </td>
-                        <td style={{ background: colorScheme.middle }}>
+                        <td
+                          style={{
+                            background: colorScheme.middle,
+                            fontWeight: "700"
+                          }}
+                        >
                           {row[3]}
                         </td>
-                        <td style={{ background: colorScheme.middle }}>
+                        <td
+                          style={{
+                            background: colorScheme.middle,
+                            fontWeight: "700"
+                          }}
+                        >
                           {row[4]}
                         </td>
-                        <td style={{ background: colorScheme.middle }}>
+                        <td
+                          style={{
+                            background: colorScheme.middle,
+                            fontWeight: "700"
+                          }}
+                        >
                           {row[5]}
                         </td>
                         <td>{row[6]}</td>

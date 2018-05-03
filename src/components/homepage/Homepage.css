@@ -15,7 +15,7 @@
   line-height: 1.1;
   color: #303030;
   font-weight: 600;
-  font-size: 1.9rem;
+  font-size: 1.6rem;
 }
 .homepage-main {
   background: linear-gradient(
@@ -52,8 +52,16 @@
   border-top-right-radius: 10px;
   background: rgba(238, 238, 238, 0.9);
   display: flex;
-  align-items: center;
+  flex-direction: row;
   padding: 3%;
+  text-align: center;
+  align-items: center;
+}
+.radio-group-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
 }
 .homepage-radio-group input[type="radio"],
 #MPMS,
@@ -173,11 +181,15 @@
   .homepage {
     overflow: hidden;
   }
+  #banner-logo img {
+    width: 100px;
+  }
   #bgvid {
     display: none;
   }
   .landing {
-    background: url("./firstFrame.jpg") no-repeat right;
+    background: url("./firstFrame.jpg") no-repeat;
+    background-position: center;
     background-size: cover;
   }
   .homgepage-main {
@@ -186,12 +198,10 @@
   .homepage-banner h1 {
     font-size: 1rem !important;
   }
-  .homepage-radio-group {
-    flex-direction: column;
-  }
-  .homepage-radio-group input[type="radio"],
-  .homepage-radio-group label {
-    /*get button and label to be lined up, not stacked*/
+  #search-form{
+    width: 94%;
+    margin: 0 auto !important;
+    margin-top: 15vh !important;
   }
   .homepage-radio-group,
   #homepage-search-bar {
@@ -199,7 +209,6 @@
   }
   #homepage-search-bar {
     padding: 7% 0 7% 15%;
-    text-overflow: wrap;
   }
   .tip-info-cluster {
     justify-content: center;
@@ -229,8 +238,14 @@
   .homepage-banner h1 {
     font-size: 1.3rem;
   }
+  .radio-group-cluster {
+    flex-direction: column;
+  }
   #search-form {
     margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
+  }
+  #homepage-search-bar {
+    text-overflow: wrap;
   }
   #banner-logo,
   #banner-tip-logo {

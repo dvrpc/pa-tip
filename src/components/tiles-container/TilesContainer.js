@@ -27,9 +27,10 @@ class TilesContainer extends Component {
   }
 
   render() {
+    console.log("tile container props at render ", this.props);
     let projects;
 
-    // handle keyword and bounds projects concurrently
+    // handle keyword and bounds projects
     let keywordProjects =
       this.props.keywordProjects && this.props.keywordProjects.features
         ? this.props.keywordProjects.features

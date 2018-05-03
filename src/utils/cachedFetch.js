@@ -58,5 +58,4 @@ cachedFetch("https://httpbin.org/image/png")
     let img = document.querySelector("img");
     img.src = URL.createObjectURL(imageblob);
     console.log("Image is " + imageblob.size + " bytes");
-  });
-*/
+  });*/
