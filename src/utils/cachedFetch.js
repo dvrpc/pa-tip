@@ -1,60 +1,32 @@
 //https://www.sitepoint.com/cache-fetched-ajax-requests/
+//This code only works for binary blobs
 const cachedFetch = (url, options) => {
-  // Use the URL as the cache key to sessionStorage
-  let cacheKey = url;
-  let cached = localStorage.getItem(cacheKey);
-  if (cached !== null) {
-    let ct = localStorage.getItem(cacheKey + ":ct");
-    let blob;
-    if (ct && !(ct.match(/application\/json/i) || ct.match(/text\//i))) {
-      console.log(cached);
-      blob = dataURItoBlob(cached);
-    } else {
-      blob = new Blob([cached]);
-    }
-    let response = new Response(blob);
-    return Promise.resolve(response);
-  }
-
-  return fetch(url, options).then(response => {
-    // let's only store in cache if the content-type is
-    // JSON or something non-binary
-    if (response.status) {
-      let ct = response.headers.get("Content-Type");
-      if (ct && (ct.match(/application\/json/i) || ct.match(/text\//i))) {
-        // There is a .json() instead of .text() but
-        // we're going to store it in sessionStorage as
-        // string anyway.
-        // If we don't clone the response, it will be
-        // consumed by the time it's returned. This
-        // way we're being un-intrusive.
-        response
-          .clone()
-          .text()
-          .then(content => {
-            localStorage.setItem(cacheKey, content);
-            localStorage.setItem(cacheKey + ":ct", ct);
-          });
-      } else if (ct) {
-        response
-          .clone()
-          .blob()
-          .then(blob => {
-            let reader = new window.FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => {
-              localStorage.setItem(cacheKey, reader.result);
-              localStorage.setItem(cacheKey + ":ct", blob.type);
-            };
-          });
-      }
-    }
-    return response;
-  });
+  const cache = localStorage.getItem(url);
+  return cache !== null
+    ? Promise.resolve(new Response(new Blob([cache])))
+    : fetch(url, options).then(response => {
+        if (response.status === 200) {
+          response
+            .clone()
+            .blob()
+            .then(blob => {
+              const reader = new window.FileReader();
+              reader.readAsDataURL(blob);
+              reader.onloadend = () => {
+                try {
+                  localStorage.setItem(url, reader.result);
+                } catch (e) {
+                  console.warn("localStorage failed (usually quota exceeded)");
+                }
+              };
+            });
+        }
+        return response;
+      });
 };
 
 // Thank you https://gist.github.com/fupslot/5015897#gistcomment-1580216
-function dataURItoBlob(dataURI, callback) {
+const dataURItoBlob = (dataURI, callback) => {
   // convert base64 to raw binary data held in a string
   // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
   var byteString = atob(dataURI.split(",")[1]);
@@ -75,7 +47,7 @@ function dataURItoBlob(dataURI, callback) {
   // write the ArrayBuffer to a blob, and you're done
   var bb = new Blob([ab]);
   return bb;
-}
+};
 
 export default cachedFetch;
 
