@@ -49,6 +49,8 @@ class TilesContainer extends Component {
       );
     }
 
+    console.log("this in tiles container before render ", this);
+
     return (
       <div className="tilesContainer">
         <div className="header">
