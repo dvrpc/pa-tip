@@ -93,7 +93,7 @@
     },
     "boundary": {
       "type": "vector",
-      "url": "https://dvrpc-freight.michaelruane.com/dvrpc_boundaries.json"
+      "url": "https://a.michaelruane.com/data/dvrpc-municipal.json"
     }
   },
   "sprite": "https://a.michaelruane.com/styles/dvrpc-streets/sprite",
@@ -3018,6 +3018,7 @@
       "type": "line",
       "source": "boundary",
       "source-layer": "municipalities",
+      "filter": ["all", ["==", "state", "PA"]],
       "minzoom": 11,
       "maxzoom": 18,
       "layout": {
@@ -3027,13 +3028,13 @@
       "paint": {
         "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
-          "stops": [[10, 0.5], [12, 1], [13, 1.25]]
+          "stops": [[10, 0.75], [12, 1.25], [13, 1.5]]
         },
         "line-dasharray": [2, 5],
         "line-gap-width": 0,
         "line-translate-anchor": "map",
         "line-opacity": {
-          "stops": [[10, 0.2], [10.5, 0.4], [11, 0.6], [12, 0.8], [13, 1]]
+          "stops": [[10, 0.5], [11, 0.6], [12, 0.8], [13, 1]]
         }
       }
     },
@@ -3042,21 +3043,14 @@
       "type": "line",
       "source": "boundary",
       "source-layer": "county",
-      "filter": ["all", ["==", "DVRPC_REG", "Yes"]],
+      "filter": ["all", ["==", "state", "PA"], ["==", "dvrpc", "Yes"]],
       "paint": {
         "line-color": "#9699A6",
         "line-width": {
           "stops": [[7, 0.75], [10, 1], [12, 1.5]]
         },
         "line-opacity": {
-          "stops": [
-            [8, 0.4],
-            [9, 0.6],
-            [10, 0.8],
-            [11, 0.7],
-            [11.5, 0.6],
-            [12.5, 0.33]
-          ]
+          "stops": [[9, 1], [10, 0.8], [11, 0.7], [11.5, 0.6], [12.5, 0.33]]
         }
       },
       "minzoom": 8,
