@@ -7,7 +7,7 @@ const cachedFetch = (url, options) => {
     let ct = localStorage.getItem(cacheKey + ":ct");
     let blob;
     if (ct && !(ct.match(/application\/json/i) || ct.match(/text\//i))) {
-      console.log(cached);
+      // console.log(cached);
       blob = dataURItoBlob(cached);
     } else {
       blob = new Blob([cached]);
@@ -86,5 +86,4 @@ cachedFetch("https://httpbin.org/image/png")
     let img = document.querySelector("img");
     img.src = URL.createObjectURL(imageblob);
     console.log("Image is " + imageblob.size + " bytes");
-  });
-*/
+  });*/
