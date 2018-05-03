@@ -27,7 +27,6 @@ class TilesContainer extends Component {
   }
 
   render() {
-    console.log("tile container props at render ", this.props);
     let projects;
 
     // handle keyword and bounds projects
