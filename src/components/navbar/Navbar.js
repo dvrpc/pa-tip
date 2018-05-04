@@ -39,20 +39,25 @@ class Navbar extends Component {
       <nav className="navBar" style={this.props.backgroundGradient}>
         <a href="/TIP/Draft/">
           <img className="navbar-logos" src={TIP_logo} alt="TIP logo" />
-          <img className="navbar-logos" src={logo} alt="DVRPC logo" />
+          <img
+            className="navbar-logos"
+            id="dvrpcLogo"
+            src={logo}
+            alt="DVRPC logo"
+          />
         </a>
         <form id="nav-search-form" onSubmit={linkEvent(this, search)}>
-          <select
-            id="navbarSelector"
-            name="navbarSearch"
-            onChange={linkEvent(this, handleRadioChange)}
-          >
-            <option value="false">Search Type...</option>
-            <option value="Location">Location</option>
-            <option value="MPMS">MPMS ID</option>
-            <option value="Keyword">Keyword</option>
-          </select>
           <div className="mini-input-stack">
+            <select
+              id="navbarSelector"
+              name="navbarSearch"
+              onChange={linkEvent(this, handleRadioChange)}
+            >
+              <option value="false">Search Type...</option>
+              <option value="Location">Location</option>
+              <option value="MPMS">MPMS ID</option>
+              <option value="Keyword">Keyword</option>
+            </select>
             <input
               id="navSearch"
               type="textarea"
@@ -63,8 +68,8 @@ class Navbar extends Component {
                 this.input = i;
               }}
             />
-            <input id="navBarButton" type="submit" value="search" />
           </div>
+          <input id="navBarButton" type="submit" value="search" />
         </form>
       </nav>
     );
