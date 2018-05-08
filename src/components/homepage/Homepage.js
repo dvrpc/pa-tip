@@ -204,6 +204,22 @@ class Homepage extends Component {
                 DVRPC strongly encourages the public to submit comments on the
                 Draft TIP by using the search and explore feature above.
               </p>
+
+              <h2>Recorded Information Session</h2>
+              <p>
+                To learn more about the Public Comment Period for the Draft
+                FY2019 TIP for Pennsylvania and its related Draft Transportation
+                Conformity Demonstration, listen to this recorded{" "}
+                <a
+                  rel="external"
+                  target="_blank"
+                  href=" https://dvrpc.webex.com/dvrpc/lsr.php?RCID=02518aad674a4ff9a909a0a69985454e"
+                >
+                  webinar from May 1, 2018.
+                </a>{" "}
+                <span class="sm"> [26 min 15 sec]</span>
+              </p>
+
               <h2>Public Meeting</h2>
               <p>
                 There will be a public meeting held at the following location
