@@ -38,13 +38,18 @@ class Navbar extends Component {
     return (
       <nav className="navBar" style={this.props.backgroundGradient}>
         <a href="/TIP/Draft/">
-          <img className="navbar-logos" src={TIP_logo} alt="TIP logo" />
           <img
+            id="TIPlogo"
             className="navbar-logos"
-            id="dvrpcLogo"
-            src={logo}
-            alt="DVRPC logo"
+            src={TIP_logo}
+            alt="TIP logo"
           />
+          <div class="nav-stack">
+            <img className="navbar-logos" src={logo} alt="DVRPC logo" />
+            <h2>
+              <strong>Draft FY2019 TIP for PA</strong>
+            </h2>
+          </div>
         </a>
         <form id="nav-search-form" onSubmit={linkEvent(this, search)}>
           <div className="mini-input-stack">
