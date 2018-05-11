@@ -46,7 +46,7 @@ class Navbar extends Component {
           />
           <div class="nav-stack">
             <img className="navbar-logos" src={logo} alt="DVRPC logo" />
-            <h2>
+            <h2 id="draft-text">
               <strong>Draft FY2019 TIP for PA</strong>
             </h2>
           </div>
