@@ -82,7 +82,6 @@ class MapComponent extends Component {
         ? { center: this.props.position.center, zoom: this.props.position.zoom }
         : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
 
-    //TODO: replace the accessToken with a process.ENV variable
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
     this.map = new mapboxgl.Map({

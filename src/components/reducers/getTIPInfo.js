@@ -44,9 +44,11 @@ export default function tipReducer(state = [], action) {
 
 /*** DISPATCHERS ***/
 export const getTIPByKeywords = keyword => dispatch => {
+  let keywordProjects;
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
     response => {
       response.json().then(projects => {
+        keywordProjects = projects;
         // get geometry & rest of project information from the arcGIS server
         let mpms_array = projects.map(project => project.id).join(",");
         let params = {
@@ -73,10 +75,51 @@ export const getTIPByKeywords = keyword => dispatch => {
             method: "POST",
             body: request
           }
-        ).then(response => {
-          response
-            .json()
-            .then(projects => dispatch(get_tip_keywords(projects)));
+        ).then(arcGISResponse => {
+          arcGISResponse.json().then(arcGISProjects => {
+            // handle case of projects that do not have geometry (arcGIS return isnt the same as keyword return)
+            if (
+              arcGISProjects.features &&
+              arcGISProjects.features.length !== keywordProjects.length
+            ) {
+              // get a reference to arcGIS projects by roadName and  index
+              let arcClone = {};
+              arcGISProjects.features.forEach(
+                (project, index) =>
+                  (arcClone[project.attributes.ROAD_NAME] = index)
+              );
+
+              keywordProjects.forEach(project => {
+                // format & add all the missing keyword projects IF they aren't already in the array
+                if (
+                  arcClone[project.road_name] !== 0 &&
+                  !arcClone[project.road_name]
+                ) {
+                  const formattedKeywordObject = {
+                    attributes: {
+                      // sham FID to act as a key for the tile
+                      FID: project.id + project.road_name,
+                      CTY: project.county,
+                      DESCRIPTIO: project.category,
+                      MPMS_ID: project.id,
+                      ROAD_NAME: project.road_name,
+                      LAG: 40.018,
+                      LNG: -75.148
+                    }
+                  };
+
+                  // if the keyword is an MPMS ID, make it the first result
+                  if (project.id == keyword) {
+                    arcGISProjects.features.unshift(formattedKeywordObject);
+                  } else {
+                    arcGISProjects.features.push(formattedKeywordObject);
+                  }
+                }
+              });
+            }
+
+            dispatch(get_tip_keywords(arcGISProjects));
+          });
         });
       });
     }

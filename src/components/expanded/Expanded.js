@@ -24,31 +24,40 @@ class Expanded extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.geometryBackup !== this.props.geometryBackup) {
-      window.streetview = new window.google.maps.StreetViewPanorama(
-        this.streetview,
-        {
-          position: {
-            lat: nextProps.geometryBackup.features[0].attributes.LAG,
-            lng: nextProps.geometryBackup.features[0].attributes.LNG
-          },
-          zoom: 0
-        }
-      );
+      // handle case of un-mapped keyword projects
+      if (nextProps.geometryBackup.features.length) {
+        window.streetview = new window.google.maps.StreetViewPanorama(
+          this.streetview,
+          {
+            position: {
+              lat: nextProps.geometryBackup.features[0].attributes.LAG,
+              lng: nextProps.geometryBackup.features[0].attributes.LNG
+            },
+            zoom: 0
+          }
+        );
+      } else {
+        // TODO: some kind of image that says 'no street view available for this project'
+      }
     }
   }
 
   componentDidMount() {
     if (this.props.geometryBackup) {
-      window.streetview = new window.google.maps.StreetViewPanorama(
-        this.streetview,
-        {
-          position: {
-            lat: this.props.geometryBackup.features[0].attributes.LAG,
-            lng: this.props.geometryBackup.features[0].attributes.LNG
-          },
-          zoom: 0
-        }
-      );
+      if (this.props.geometryBackup.features.length) {
+        window.streetview = new window.google.maps.StreetViewPanorama(
+          this.streetview,
+          {
+            position: {
+              lat: this.props.geometryBackup.features[0].attributes.LAG,
+              lng: this.props.geometryBackup.features[0].attributes.LNG
+            },
+            zoom: 0
+          }
+        );
+      } else {
+        // TODO: some kind of image that says 'no street view available for this project'
+      }
     }
   }
 

@@ -1,8 +1,7 @@
-//TODO for deployment: change the localStorage.getItem URL to the live site
 export default class StateLoader {
   loadState() {
     try {
-      let serializedState = localStorage.getItem("http://localhost:3000:state");
+      let serializedState = localStorage.getItem("state");
 
       if (serializedState === null) {
         return this.initializeState();
@@ -17,8 +16,12 @@ export default class StateLoader {
   saveState(state) {
     try {
       let serializedState = JSON.stringify(state);
-      localStorage.setItem("http://localhost:3000:state", serializedState);
+      localStorage.setItem("state", serializedState);
     } catch (err) {}
+  }
+
+  clearState(state) {
+    localStorage.setItem("state", {});
   }
 
   initializeState() {
