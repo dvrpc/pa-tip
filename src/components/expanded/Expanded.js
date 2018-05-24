@@ -180,12 +180,12 @@ class Expanded extends Component {
                     <td style={{ background: "#666" }}>
                       <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
                     </td>
-                    <td style={{ background: "#333" }}>2018</td>
                     <td style={{ background: "#333" }}>2019</td>
                     <td style={{ background: "#333" }}>2020</td>
                     <td style={{ background: "#333" }}>2021</td>
-                    <td style={{ background: "#666" }}>2022-2025</td>
-                    <td style={{ background: "#666" }}>2026-2029</td>
+                    <td style={{ background: "#333" }}>2022</td>
+                    <td style={{ background: "#666" }}>2023-2026</td>
+                    <td style={{ background: "#666" }}>2027-2030</td>
                   </tr>
                   {details.funding &&
                     details.funding.data.map(row => (
