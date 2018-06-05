@@ -3,11 +3,8 @@ import { connect } from "inferno-redux";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
-import Modal from "../modal/Modal.js";
-import Comments from "../comments/Comments.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
-import { resetCommentBool } from "../reducers/commentsReducer.js";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
@@ -76,9 +73,6 @@ class Expanded extends Component {
 
     return (
       <div className="expanded">
-        {this.props.commentResponse ? (
-          <Modal resetCommentBool={this.props.resetCommentBool} />
-        ) : null}
         <Navbar backgroundGradient={navBackground} />
         <div className="wrapper">
           <section className="left-column">
@@ -88,25 +82,6 @@ class Expanded extends Component {
             >
               <p onClick={this.props.history.goBack}>
                 <em>back to results</em>
-              </p>
-
-              <span class="divider">|</span>
-
-              <a
-                href="#comments-anchor"
-                onClick={e => {
-                  scrollToElement(this, e, "comments");
-                }}
-              >
-                <p>
-                  <em>submit a public comment</em>
-                </p>
-              </a>
-
-              <span class="divider">|</span>
-
-              <p>
-                <em>print page</em>
               </p>
             </div>
 
@@ -264,12 +239,6 @@ class Expanded extends Component {
             </div>
           </section>
         </div>
-        <span ref={e => (this.comments = e)} />
-        <Comments
-          colorScheme={colorScheme}
-          projectId={this.props.details ? this.props.details.id : null}
-          title={"Submit a Public Comment for This Project"}
-        />
       </div>
     );
   }
@@ -279,16 +248,14 @@ const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
     test: state.getTIP.currentProject,
-    geometryBackup: state.getTIP.geometry,
-    commentResponse: state.getComments.response
+    geometryBackup: state.getTIP.geometry
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    hydrateGeometry: id => dispatch(hydrateGeometry(id)),
-    resetCommentBool: bool => dispatch(resetCommentBool(bool))
+    hydrateGeometry: id => dispatch(hydrateGeometry(id))
   };
 };
 

@@ -3,15 +3,12 @@ import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Homepage.css";
-import Comments from "../comments/Comments.js";
-import Modal from "../modal/Modal.js";
 
 import {
   getTIPByKeywords,
   setMapCenter,
   setMapState
 } from "../reducers/getTIPInfo";
-import { resetCommentBool } from "../reducers/commentsReducer.js";
 
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
@@ -46,9 +43,6 @@ class Homepage extends Component {
   render() {
     return (
       <div className="homepage">
-        {this.props.commentResponse ? (
-          <Modal resetCommentBool={this.props.resetCommentBool} />
-        ) : null}
         <div className="landing">
           <div className="homepage-banner">
             <div id="banner-logo">
@@ -189,20 +183,25 @@ class Homepage extends Component {
                 (FY19-22)
               </h2>
               <p>
-                DVRPC invites the public to review and comment on the Draft
-                FY2019 TIP for the Pennsylvania counties in the DVRPC region.
-                This TIP was developed in cooperation with PennDOT, SEPTA, PART
-                and DVRPC's member counties and cities and represents the
-                transportation priorities for the region. We have opened a
-                comment period (ending 5:00 p.m. Eastern time on Sunday, June 3,
-                2018) to allow the public an opportunity to comment on the Draft
-                Program. In addition to the Draft TIP, DVRPC will be seeking
-                public comment on the Draft Transportation Conformity Finding
-                (Public Comment Period opens Thursday, May 10, 2018).
+                <strong>
+                  DVRPC is no longer accepting public comments on the Draft
+                  DVRPC FY2019 TIP for PA because the comment period has closed.
+                  Subsequent to Board adoption, you may view comments that were
+                  submitted during the public comment period by using our
+                  interactive web map app. After consideration of the public
+                  comments, the DVRPC Board may adopt the Draft TIP with any
+                  recommended changes at the June 28, 2018 Board meeting.
+                </strong>
               </p>
               <p>
-                DVRPC strongly encourages the public to submit comments on the
-                Draft TIP by using the search and explore feature above.
+                This TIP was developed in cooperation with PennDOT, SEPTA, PART
+                and DVRPC's member counties and cities and represents the
+                transportation priorities for the region. At 5:00 p.m. Eastern
+                time on June 3, 2018, DVRPC closed the public comment period on
+                the Draft FY2019 TIP for the Pennsylvania counties in the DVRPC
+                region. Subsequent to Board adoption, comments submitted on the
+                Draft DVRPC FY2019 TIP for PA can be viewed online via the
+                interactive map web app.
               </p>
 
               <h2>Recorded Information Session</h2>
@@ -218,81 +217,6 @@ class Homepage extends Component {
                   webinar from May 1, 2018.
                 </a>{" "}
                 <span class="sm"> [26 min 15 sec]</span>
-              </p>
-
-              <h2>Public Meeting</h2>
-              <p>
-                There will be a public meeting held at the following location
-                for those who want to present their comments verbally on the
-                Draft FY2019 TIP (note that comments must still be submitted in
-                writing):
-              </p>
-              <p>
-                Thursday, May 24, 2018
-                <br />4:00 p.m.–6:00 p.m.
-                <br />DVRPC Conference Room
-                <br />190 N. Independence Mall West, 8th Floor
-                <br />Philadelphia, PA 19106
-              </p>
-              <p>Web conferencing is available.</p>
-              <p>
-                Please register by May 23, 2018 via phone at (215) 592-1800 or
-                email at{" "}
-                <a href="mailto:public_affairs@dvrpc.org">
-                  public_affairs@dvrpc.org
-                </a>{" "}
-                for web conferencing.
-              </p>
-              <h2>Submit Comments</h2>
-              <ul class="list-group">
-                <li>
-                  <a href="/TIP/Draft/pdf/GuideToCommenting_PA.pdf">
-                    Guide to Commenting
-                  </a>{" "}
-                  <span class="sm">[0.2 MB pdf]</span>
-                </li>
-              </ul>
-              <p>
-                Written comments and questions must be submitted in one of four
-                ways listed below:
-              </p>
-              <ul>
-                <li>
-                  Electronically through a web application available at:
-                  www.dvrpc.org/TIP/Draft
-                </li>
-                <li>
-                  By Email: <a href="mailto:TIP@dvrpc.org">TIP@dvrpc.org</a>
-                </li>
-                <li>
-                  By Mail:
-                  <br />PA TIP Comments
-                  <br />c/o DVRPC Office of Communications and Engagement
-                  <br />190 N. Independence Mall West, 8th Fl.
-                  <br />Philadelphia, PA 19106-1520
-                </li>
-                <li>Or by Fax: 215-592-9125.</li>
-              </ul>
-              <p>
-                Questions and comments must be submitted in writing. If you need
-                assistance in providing a written comment, please contact the
-                DVRPC Office of Communications and Engagement at 215-592-1800 or{" "}
-                <a href="mailto:public_affairs@dvrpc.org">
-                  public_affairs@dvrpc.org
-                </a>.
-              </p>
-              <p>
-                Comments for this document must be received electronically no
-                later than 5:00 PM (local time) on June 3, 2018. Comments
-                received via mail must be postmarked by June 2, 2018. Responses
-                will not be provided unless comments are submitted in writing
-                during the public comment period.
-              </p>
-              <p>
-                After consideration of the public comments, the Draft DVRPC
-                FY2019 TIP for Pennsylvania with any recommended changes will be
-                presented to the DVRPC Board for adoption at the June 28, 2018
-                Board meeting.
               </p>
 
               <div>
@@ -479,18 +403,11 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
-          <Comments title={"Submit a General Public Comment"} />
         </div>
       </div>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    commentResponse: state.getComments.response
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -502,11 +419,8 @@ const mapDispatchToProps = dispatch => {
     },
     setMapState: position => {
       dispatch(setMapState(position));
-    },
-    resetCommentBool: bool => dispatch(resetCommentBool(bool))
+    }
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Homepage)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Homepage));
