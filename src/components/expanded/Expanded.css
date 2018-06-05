@@ -57,7 +57,7 @@
   background: #333333;
 }
 #expanded-project-description {
-  height: calc(100% - 22vh - 2em - 250px);
+  height: calc(100% - 22vh - 2em - 210px);
   overflow-y: auto;
   background: #666666;
 }
@@ -92,7 +92,7 @@
 
 /* Funding and Milestones Tables */
 .table-wrapper {
-  height: calc(100% - 9vh);
+  height: calc(100% - 7vh);
   overflow-x: auto;
   overflow-y: auto;
 }
@@ -127,6 +127,43 @@ th {
 .funding-and-awards-table th:first-child {
   border-left: none;
 }
+
+/*Loading Styles */
+@keyframes animateLoading {
+  0% {
+    color: red;
+  }
+
+  25% {
+    color: green;
+  }
+
+  50% {
+    color: blue;
+  }
+
+  75% {
+    color: orange;
+  }
+
+  100% {
+    color: black;
+  }
+
+}
+#loadingExpanded {
+  text-align: center;
+  margin-top: 20%;
+  animation-name: animateLoading;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#loadingBackground {
+  height: 100vh;
+  background: linear-gradient(to bottom, white 2%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0.2));
+}
+
 
 /* Media queries set to a single column layout */
 @media screen and (min-width: 1400px) {

@@ -22,7 +22,10 @@ class Expanded extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.geometryBackup !== this.props.geometryBackup) {
       // handle case of un-mapped keyword projects
-      if (nextProps.geometryBackup.features.length) {
+      if (
+        nextProps.geometryBackup.features &&
+        nextProps.geometryBackup.features.length
+      ) {
         window.streetview = new window.google.maps.StreetViewPanorama(
           this.streetview,
           {
@@ -59,188 +62,201 @@ class Expanded extends Component {
   }
 
   render() {
-    const details = this.props.details;
-    //Render runs multiple times until the data is completely pulled in
-    //Message property means there was an error
-    if (!details || "Message" in details) return;
-    const colorScheme = details
-      ? colors[details.category]
-      : { lightest: "white", middle: "grey", darkest: "black" };
+    let details;
+    let colorScheme;
+    let navBackground;
+    let toReturn;
 
-    const navBackground = `background: linear-gradient(to right, white 35%, ${
-      colorScheme.middle
-    } 65%, ${colorScheme.darkest})`;
+    console.log("in the success condition with props as ", this.props.details);
+    this.props.details && this.props.details.length
+      ? ((details = this.props.details),
+        (colorScheme = colors[details.category]),
+        (navBackground = `background: linear-gradient(to right, white 35%, ${
+          colorScheme.middle
+        } 65%, ${colorScheme.darkest})`),
+        (toReturn = (
+          <div className="expanded">
+            <Navbar backgroundGradient={navBackground} />
+            <div className="wrapper">
+              <section className="left-column">
+                <div
+                  id="content-mini-nav"
+                  style={{ background: colorScheme.darkest }}
+                >
+                  <p onClick={this.props.history.goBack}>
+                    <em>back to results</em>
+                  </p>
+                </div>
 
-    return (
-      <div className="expanded">
-        <Navbar backgroundGradient={navBackground} />
-        <div className="wrapper">
-          <section className="left-column">
-            <div
-              id="content-mini-nav"
-              style={{ background: colorScheme.darkest }}
-            >
-              <p onClick={this.props.history.goBack}>
-                <em>back to results</em>
-              </p>
-            </div>
+                <figure>
+                  <div id="placeholder" ref={x => (this.streetview = x)} />
+                </figure>
 
-            <figure>
-              <div id="placeholder" ref={x => (this.streetview = x)} />
-            </figure>
+                <h1 id="expanded-project-title" className="left-column-padding">
+                  {details.id
+                    ? details.id + ": " + details.road_name
+                    : "Project Title"}
+                </h1>
 
-            <h1 id="expanded-project-title" className="left-column-padding">
-              {details.id
-                ? details.id + ": " + details.road_name
-                : "Project Title"}
-            </h1>
+                <div
+                  id="expanded-project-description"
+                  className="left-column-padding"
+                >
+                  <p>
+                    {details.description
+                      ? details.description
+                      : "Project Description"}
+                  </p>
+                  {details.limits && <div>{details.limits}</div>}
+                  <p>
+                    {details.municipalities && (
+                      <span>{details.municipalities}, </span>
+                    )}
+                    {details.county && <span>{details.county} County</span>}
+                  </p>
+                  {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
+                </div>
+              </section>
+              <section className="right-column">
+                <div
+                  className="tabs"
+                  style={{ background: colorScheme.darkest }}
+                >
+                  <button
+                    class="tablinks active"
+                    onClick={linkEvent(this, switchTabs)}
+                    ref={e => (this.fundingButton = e)}
+                  >
+                    Funding
+                  </button>
+                  <button
+                    class="tablinks"
+                    onClick={linkEvent(this, switchTabs)}
+                    ref={e => (this.milestonesButton = e)}
+                  >
+                    Milestones
+                  </button>
+                </div>
 
-            <div
-              id="expanded-project-description"
-              className="left-column-padding"
-            >
-              <p>
-                {details.description
-                  ? details.description
-                  : "Project Description"}
-              </p>
-              {details.limits && <div>{details.limits}</div>}
-              <p>
-                {details.municipalities && (
-                  <span>{details.municipalities}, </span>
-                )}
-                {details.county && <span>{details.county} County</span>}
-              </p>
-              {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
-            </div>
-          </section>
-          <section className="right-column">
-            <div className="tabs" style={{ background: colorScheme.darkest }}>
-              <button
-                class="tablinks active"
-                onClick={linkEvent(this, switchTabs)}
-                ref={e => (this.fundingButton = e)}
-              >
-                Funding
-              </button>
-              <button
-                class="tablinks"
-                onClick={linkEvent(this, switchTabs)}
-                ref={e => (this.milestonesButton = e)}
-              >
-                Milestones
-              </button>
-            </div>
-
-            <div
-              id="Funding"
-              class="table-wrapper"
-              ref={e => (this.funding = e)}
-            >
-              <table className="funding-and-awards-table">
-                <thead>
-                  <tr>
-                    <td colspan="2" style={{ background: "#666" }} />
-                    <td colspan="4" style={{ background: "#333" }}>
-                      <h3>TIP Program Years ($000)</h3>
-                    </td>
-                    <td colspan="2" style={{ background: "#666" }} />
-                  </tr>
-                </thead>
-                <tbody style={{ background: colorScheme.lightest }}>
-                  <tr>
-                    <td style={{ background: "#666" }}>
-                      <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
-                    </td>
-                    <td style={{ background: "#666" }}>
-                      <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
-                    </td>
-                    <td style={{ background: "#333" }}>2019</td>
-                    <td style={{ background: "#333" }}>2020</td>
-                    <td style={{ background: "#333" }}>2021</td>
-                    <td style={{ background: "#333" }}>2022</td>
-                    <td style={{ background: "#666" }}>2023-2026</td>
-                    <td style={{ background: "#666" }}>2027-2030</td>
-                  </tr>
-                  {details.funding &&
-                    details.funding.data.map(row => (
-                      <tr className="table-data-rows">
-                        <td>{row[0]}</td>
-                        <td>{row[1]}</td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {row[2]}
+                <div
+                  id="Funding"
+                  class="table-wrapper"
+                  ref={e => (this.funding = e)}
+                >
+                  <table className="funding-and-awards-table">
+                    <thead>
+                      <tr>
+                        <td colspan="2" style={{ background: "#666" }} />
+                        <td colspan="4" style={{ background: "#333" }}>
+                          <h3>TIP Program Years ($000)</h3>
                         </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {row[3]}
-                        </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {row[4]}
-                        </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {row[5]}
-                        </td>
-                        <td>{row[6]}</td>
-                        <td>{row[7]}</td>
+                        <td colspan="2" style={{ background: "#666" }} />
                       </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div
-              id="Milestones"
-              class="table-wrapper hidden"
-              ref={e => (this.milestones = e)}
-            >
-              <table className="funding-and-awards-table">
-                <thead>
-                  <tr>
-                    <th style={{ background: "#333" }}>PHS Type</th>
-
-                    <th style={{ background: "#333" }}>Milestone</th>
-
-                    <th style={{ background: "#333" }}>Estimated Date</th>
-
-                    <th style={{ background: "#333" }}>Actual Date</th>
-                  </tr>
-                </thead>
-                <tbody style={{ background: colorScheme.lightest }}>
-                  {details.milestones &&
-                    details.milestones.data.map(row => (
-                      <tr className="table-data-rows">
-                        <td>{row[0]}</td>
-                        <td>{row[1]}</td>
-                        <td>{row[2]}</td>
-                        <td>{row[3]}</td>
+                    </thead>
+                    <tbody style={{ background: colorScheme.lightest }}>
+                      <tr>
+                        <td style={{ background: "#666" }}>
+                          <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
+                        </td>
+                        <td style={{ background: "#666" }}>
+                          <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
+                        </td>
+                        <td style={{ background: "#333" }}>2019</td>
+                        <td style={{ background: "#333" }}>2020</td>
+                        <td style={{ background: "#333" }}>2021</td>
+                        <td style={{ background: "#333" }}>2022</td>
+                        <td style={{ background: "#666" }}>2023-2026</td>
+                        <td style={{ background: "#666" }}>2027-2030</td>
                       </tr>
-                    ))}
-                </tbody>
-              </table>
+                      {details.funding &&
+                        details.funding.data.map(row => (
+                          <tr className="table-data-rows">
+                            <td>{row[0]}</td>
+                            <td>{row[1]}</td>
+                            <td
+                              style={{
+                                background: colorScheme.middle,
+                                fontWeight: "700"
+                              }}
+                            >
+                              {row[2]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.middle,
+                                fontWeight: "700"
+                              }}
+                            >
+                              {row[3]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.middle,
+                                fontWeight: "700"
+                              }}
+                            >
+                              {row[4]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.middle,
+                                fontWeight: "700"
+                              }}
+                            >
+                              {row[5]}
+                            </td>
+                            <td>{row[6]}</td>
+                            <td>{row[7]}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div
+                  id="Milestones"
+                  class="table-wrapper hidden"
+                  ref={e => (this.milestones = e)}
+                >
+                  <table className="funding-and-awards-table">
+                    <thead>
+                      <tr>
+                        <th style={{ background: "#333" }}>PHS Type</th>
+
+                        <th style={{ background: "#333" }}>Milestone</th>
+
+                        <th style={{ background: "#333" }}>Estimated Date</th>
+
+                        <th style={{ background: "#333" }}>Actual Date</th>
+                      </tr>
+                    </thead>
+                    <tbody style={{ background: colorScheme.lightest }}>
+                      {details.milestones &&
+                        details.milestones.data.map(row => (
+                          <tr className="table-data-rows">
+                            <td>{row[0]}</td>
+                            <td>{row[1]}</td>
+                            <td>{row[2]}</td>
+                            <td>{row[3]}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
             </div>
-          </section>
-        </div>
-      </div>
-    );
+          </div>
+        )))
+      : (toReturn = (
+          <div id="loadingBackground">
+            <Navbar
+              backgroundGradient={`background: linear-gradient(to right, white 35%, grey 65%, black)`}
+            />
+            <h1 id="loadingExpanded"> Loading...</h1>
+          </div>
+        ));
+
+    return toReturn;
   }
 }
 
