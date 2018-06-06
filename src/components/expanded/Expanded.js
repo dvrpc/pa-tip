@@ -9,6 +9,7 @@ import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 import cat from "./cat.gif";
+import noStreetview from "./noStreetview.jpg";
 
 class Expanded extends Component {
   constructor(props) {
@@ -65,6 +66,10 @@ class Expanded extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.geometryBackup = {};
+  }
+
   render() {
     let details;
     let colorScheme;
@@ -91,7 +96,15 @@ class Expanded extends Component {
                 </div>
 
                 <figure>
-                  <div id="placeholder" ref={x => (this.streetview = x)} />
+                  <div
+                    id="placeholder"
+                    ref={x => (this.streetview = x)}
+                    style={{
+                      background: `url(${noStreetview})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center"
+                    }}
+                  />
                 </figure>
 
                 <h1 id="expanded-project-title" className="left-column-padding">
