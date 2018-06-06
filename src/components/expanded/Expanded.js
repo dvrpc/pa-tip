@@ -38,8 +38,6 @@ class Expanded extends Component {
             zoom: 0
           }
         );
-      } else {
-        // TODO: some kind of image that says 'no street view available for this project'
       }
     }
   }
@@ -60,8 +58,6 @@ class Expanded extends Component {
             zoom: 0
           }
         );
-      } else {
-        // TODO: some kind of image that says 'no street view available for this project'
       }
     }
   }
