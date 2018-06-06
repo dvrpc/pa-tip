@@ -92,7 +92,7 @@
 
 /* Funding and Milestones Tables */
 .table-wrapper {
-  height: calc(100% - 7vh);
+  height: calc(100% - 5vh);
   overflow-x: auto;
   overflow-y: auto;
 }
@@ -128,38 +128,31 @@ th {
   border-left: none;
 }
 
+
 /*Loading Styles */
-@keyframes animateLoading {
+/*@keyframes animateLoading {
   0% {
-    color: red;
-  }
-
-  25% {
-    color: green;
-  }
-
-  50% {
-    color: blue;
-  }
-
-  75% {
-    color: orange;
+    color: black;
+    font-size: 1.5rem;
   }
 
   100% {
-    color: black;
+    color: blue;
+    font-size: 2.3rem;
   }
 
-}
+}*/
 #loadingExpanded {
-  text-align: center;
+  display: block;
+  margin: 0 auto;
   margin-top: 20%;
-  animation-name: animateLoading;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
+/*  animation-name: animateLoading;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;*/
+/*  animation-direction: alternate;
+*/}
 #loadingBackground {
+  text-align: center;
   height: 100vh;
   background: linear-gradient(to bottom, white 2%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0.2));
 }

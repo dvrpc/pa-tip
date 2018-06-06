@@ -8,6 +8,7 @@ import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
+import cat from "./cat.gif";
 
 class Expanded extends Component {
   constructor(props) {
@@ -44,7 +45,10 @@ class Expanded extends Component {
 
   componentDidMount() {
     if (this.props.geometryBackup) {
-      if (this.props.geometryBackup.features.length) {
+      if (
+        this.props.geometryBackup.features &&
+        this.props.geometryBackup.features.length
+      ) {
         window.streetview = new window.google.maps.StreetViewPanorama(
           this.streetview,
           {
@@ -66,9 +70,7 @@ class Expanded extends Component {
     let colorScheme;
     let navBackground;
     let toReturn;
-
-    console.log("in the success condition with props as ", this.props.details);
-    this.props.details && this.props.details.length
+    this.props.details
       ? ((details = this.props.details),
         (colorScheme = colors[details.category]),
         (navBackground = `background: linear-gradient(to right, white 35%, ${
@@ -252,7 +254,8 @@ class Expanded extends Component {
             <Navbar
               backgroundGradient={`background: linear-gradient(to right, white 35%, grey 65%, black)`}
             />
-            <h1 id="loadingExpanded"> Loading...</h1>
+            <img id="loadingExpanded" src={cat} alt="loading gif" />
+            <h2>Loading...</h2>
           </div>
         ));
 

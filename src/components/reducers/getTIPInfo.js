@@ -149,16 +149,24 @@ export const getTIPByMapBounds = bounds => dispatch => {
 export const hydrateGeometry = id => dispatch => {
   fetch(
     `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/Draft_DVRPC_PATIP_FY2019_2022_points/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LAG,LNG&returnGeometry=false&outSR=4326&f=json`
-  ).then(response =>
-    response.json().then(geoPromise => dispatch(hydrate_geometry(geoPromise)))
-  );
+  )
+    .then(response => {
+      if (response.ok)
+        response
+          .json()
+          .then(geoPromise => dispatch(hydrate_geometry(geoPromise)));
+    })
+    .catch(error => console.error(error));
 };
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
-  fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`).then(response =>
-    response
-      .json()
-      .then(projectDetails => dispatch(get_full_tip(projectDetails)))
-  );
+  fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`)
+    .then(response => {
+      if (response.ok)
+        response
+          .json()
+          .then(projectDetails => dispatch(get_full_tip(projectDetails)));
+    })
+    .catch(error => console.error(error));
 };
