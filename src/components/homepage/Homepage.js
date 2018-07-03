@@ -2,6 +2,8 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
+import ReadOnlyComments from "../comments/ReadOnlyComments";
+
 import "./Homepage.css";
 
 import {
@@ -9,6 +11,7 @@ import {
   setMapCenter,
   setMapState
 } from "../reducers/getTIPInfo";
+import { getGeneralComments } from "../reducers/commentsReducer.js";
 
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
@@ -41,6 +44,7 @@ class Homepage extends Component {
   handleChange = e => this.setState({ value: e });
 
   render() {
+    console.log(this.state, this.props);
     return (
       <div className="homepage">
         <div className="landing">
@@ -403,6 +407,10 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
+          <ReadOnlyComments
+            comments={[]}
+            title={"General Comments and Responses"}
+          />
         </div>
       </div>
     );
@@ -411,6 +419,9 @@ class Homepage extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getGeneralComments: () => {
+      dispatch(getGeneralComments());
+    },
     getTIPByKeywords: keywords => {
       dispatch(getTIPByKeywords(keywords));
     },

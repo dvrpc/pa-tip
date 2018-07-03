@@ -42,3 +42,12 @@ export const submitComment = comment => dispatch => {
     }
   });
 };
+
+export const getGeneralComments = () => dispatch => {
+  fetch("https://www.dvrpc.org/data/tip/2019/comments/null")
+    .then(response => response.json())
+    .then(response => {
+      console.log({ response });
+      dispatch(get_comments(response));
+    });
+};
