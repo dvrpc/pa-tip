@@ -419,7 +419,7 @@ class Homepage extends Component {
 }
 
 const mapStateToProps = state => ({
-  comments: state.getComments.comment
+  comments: state.getComments.comments
 });
 
 const mapDispatchToProps = dispatch => {
