@@ -181,13 +181,10 @@ th {
   }
 }
 @media screen and (max-width: 700px) {
-  #content-mini-nav p, #expanded-project-description p {
-    font-size: 0.8rem;
+  #content-mini-nav p, #expanded-project-description p, .funding-and-awards-table {
+    font-size: 1rem;
   }
   #expanded-project-title {
     font-size: 1.2rem;
-  }
-  .funding-and-awards-table {
-    font-size: 0.8rem;
   }
 }
