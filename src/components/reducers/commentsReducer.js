@@ -13,7 +13,7 @@ const posted_comment_response = response => ({
 export default function commentReducer(state = [], action) {
   switch (action.type) {
     case GET_COMMENTS:
-      return Object.assign({}, state, { comment: action.comments });
+      return Object.assign({}, state, { comments: action.comments });
     case POSTED_COMMENT_RESPONSE:
       return Object.assign({}, state, { response: action.response });
     default:
@@ -43,11 +43,7 @@ export const submitComment = comment => dispatch => {
   });
 };
 
-export const getGeneralComments = () => dispatch => {
+export const getGeneralComments = () => dispatch =>
   fetch("https://www.dvrpc.org/data/tip/2019/comments/null")
     .then(response => response.json())
-    .then(response => {
-      console.log({ response });
-      dispatch(get_comments(response));
-    });
-};
+    .then(response => dispatch(get_comments(response)));

@@ -36,6 +36,8 @@ class Homepage extends Component {
   }
 
   componentDidMount() {
+    this.props.getGeneralComments();
+
     generateAutocomplete(this.input, () => {
       if (this.input) this.handleChange(this.state.value);
     });
@@ -44,7 +46,6 @@ class Homepage extends Component {
   handleChange = e => this.setState({ value: e });
 
   render() {
-    console.log(this.state, this.props);
     return (
       <div className="homepage">
         <div className="landing">
@@ -408,7 +409,7 @@ class Homepage extends Component {
             </div>
           </div>
           <ReadOnlyComments
-            comments={[]}
+            comments={this.props.comments || []}
             title={"General Comments and Responses"}
           />
         </div>
@@ -417,21 +418,19 @@ class Homepage extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  comments: state.getComments.comment
+});
+
 const mapDispatchToProps = dispatch => {
   return {
-    getGeneralComments: () => {
-      dispatch(getGeneralComments());
-    },
-    getTIPByKeywords: keywords => {
-      dispatch(getTIPByKeywords(keywords));
-    },
-    setMapCenter: latlng => {
-      dispatch(setMapCenter(latlng));
-    },
-    setMapState: position => {
-      dispatch(setMapState(position));
-    }
+    getGeneralComments: () => dispatch(getGeneralComments()),
+    getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
+    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
+    setMapState: position => dispatch(setMapState(position))
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Homepage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Homepage)
+);

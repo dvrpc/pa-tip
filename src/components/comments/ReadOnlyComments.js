@@ -23,7 +23,7 @@ class ReadOnlyComments extends Component {
                 <b>{comment.name}</b>
                 <p style={{ whiteSpace: "pre-line" }}>{comment.comment_text}</p>
                 {comment.responses.length && (
-                  <ul class="list-group" style={{ overflow: "visible" }}>
+                  <ul class="list-group">
                     {comment.responses.map(response => (
                       <li
                         class="list-group-item"
