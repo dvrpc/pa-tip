@@ -5,7 +5,7 @@
   "homepage": "https://www.dvrpc.org/TIP/Draft/",
   "scripts": {
     "start": "inferno-scripts start",
-    "build": "inferno-scripts build",
+    "build": "inferno-scripts build && npm version patch",
     "test": "inferno-scripts test --env=jsdom",
     "eject": "inferno-scripts eject",
     "precommit": "lint-staged"
