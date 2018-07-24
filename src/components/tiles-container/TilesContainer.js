@@ -86,7 +86,7 @@ class TilesContainer extends Component {
         </div>
         {projects ? (
           projects.map(feature => (
-            <Tile data={feature} key={feature.attributes.FID} />
+            <Tile data={feature} key={feature.attributes.OBJECTID} />
           ))
         ) : (
           <img id="no-results" src={loading} alt="loading" />

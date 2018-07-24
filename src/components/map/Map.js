@@ -173,7 +173,7 @@ class MapComponent extends Component {
       this.map.addSource("Connections", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/75a9bee3b74e44c791388a2cd775f3b7_0.geojson"
+          "https://opendata.arcgis.com/datasets/24b5bbdfdf6d4930ad34c23012e7fb2a_0.geojson"
       });
       this.map.addLayer(
         {
