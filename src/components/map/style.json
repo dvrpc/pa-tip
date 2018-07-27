@@ -89,14 +89,14 @@
     },
     "pa-tip": {
       "type": "vector",
-      "url": "https://a.michaelruane.com/data/dvrpc-tip.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-tip.json"
     },
     "boundary": {
       "type": "vector",
-      "url": "https://a.michaelruane.com/data/dvrpc-municipal.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-municipal.json"
     }
   },
-  "sprite": "https://a.michaelruane.com/styles/dvrpc-streets/sprite",
+  "sprite": "https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   "layers": [
     {
