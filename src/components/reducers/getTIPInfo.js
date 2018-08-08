@@ -55,7 +55,8 @@ export const getTIPByKeywords = keyword => dispatch => {
           where: `MPMS_ID in (${mpms_array})`,
           srOut: 4326,
           f: "pjson",
-          outFields: "OBJECTID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LAG,LNG",
+          outFields:
+            "OBJECTID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LATITUDE,LONGITUDE",
           returnGeometry: false
         };
         //Encode the data
@@ -103,8 +104,8 @@ export const getTIPByKeywords = keyword => dispatch => {
                       DESCRIPTIO: project.category,
                       MPMS_ID: project.id,
                       ROAD_NAME: project.road_name,
-                      LAG: 40.018,
-                      LNG: -75.148
+                      LATITUDE: 40.018,
+                      LONGITUDE: -75.148
                     }
                   };
 

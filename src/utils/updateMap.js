@@ -28,8 +28,8 @@ export const keywordBounds = (mapReference, data) => {
   if (projects.features && projects.features.length) {
     let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
     for (var i = 0; i < projects.features.length; i++) {
-      longitude = projects.features[i].attributes.LNG;
-      latitude = projects.features[i].attributes.LAG;
+      longitude = projects.features[i].attributes.LONGITUDE;
+      latitude = projects.features[i].attributes.LATITUDE;
       bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
       bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
       bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;

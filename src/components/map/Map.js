@@ -63,7 +63,7 @@ class MapComponent extends Component {
         this.state.catFilter = ["!=", "DESCRIPTIO", ""];
         break;
       default:
-        this.state.catFilter = ["==", "DESCRIPTIO", cat];
+        this.state.catFilter = ["==", "DESCRIPTIO", cat || ""];
     }
   };
 

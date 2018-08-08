@@ -18,6 +18,9 @@ class TilesContainer extends Component {
   }
 
   componentDidMount() {
+    if (typeof (this.props.category == "undefined"))
+      this.props.category = "All Categories";
+
     if (this.props.category !== "All Categories") {
       this.setState({
         filtered: true,
