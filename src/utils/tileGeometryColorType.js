@@ -59,7 +59,7 @@ export const colors = {
 
 export const geometryColorType = project => {
   // TODO: map more than just points...
-  const formattedLatLng = `${project.LAG},${project.LNG}` + "";
+  const formattedLatLng = `${project.LATITUDE},${project.LONGITUDE}` + "";
 
   // get the Category (streestcape, transit improvement, etc., of a project)
   const category = project.category || project.DESCRIPTIO;

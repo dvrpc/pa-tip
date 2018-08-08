@@ -33,8 +33,8 @@ class Expanded extends Component {
           this.streetview,
           {
             position: {
-              lat: nextProps.geometryBackup.features[0].attributes.LAG,
-              lng: nextProps.geometryBackup.features[0].attributes.LNG
+              lat: nextProps.geometryBackup.features[0].attributes.LATITUDE,
+              lng: nextProps.geometryBackup.features[0].attributes.LONGITUDE
             },
             zoom: 0
           }
@@ -53,8 +53,8 @@ class Expanded extends Component {
           this.streetview,
           {
             position: {
-              lat: this.props.geometryBackup.features[0].attributes.LAG,
-              lng: this.props.geometryBackup.features[0].attributes.LNG
+              lat: this.props.geometryBackup.features[0].attributes.LATITUDE,
+              lng: this.props.geometryBackup.features[0].attributes.LONGITUDE
             },
             zoom: 0
           }
