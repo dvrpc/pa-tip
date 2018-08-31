@@ -17,23 +17,27 @@
     ]
   },
   "dependencies": {
-    "@mapbox/polyline": "^0.2.0",
-    "eslint": "^4.18.1",
-    "inferno": "^5.0.4",
-    "inferno-redux": "^5.0.4",
-    "inferno-router": "^5.0.4",
+    "@mapbox/polyline": "^1.0.0",
+    "eslint": "^5.5.0",
+    "inferno": "^5.5.0",
+    "inferno-clone-vnode": "^5.5.0",
+    "inferno-compat": "^5.5.0",
+    "inferno-create-class": "^5.5.0",
+    "inferno-create-element": "^5.5.0",
+    "inferno-redux": "^5.5.0",
+    "inferno-router": "^5.5.0",
     "inferno-scripts": "^6.3.0",
-    "mapbox-gl": "^0.43.0",
+    "mapbox-gl": "^0.48.0",
     "modal": "^1.2.0",
-    "redux": "^3.7.2",
+    "react-autosuggest": "^9.4.0",
+    "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
-    "sweetalert2": "^7.19.2"
+    "sweetalert2": "^7.26.22"
   },
   "devDependencies": {
     "husky": "^0.15.0-rc.8",
-    "inferno-devtools": "^4.0.4",
+    "inferno-devtools": "^5.5.0",
     "lint-staged": "^7.0.0",
-    "prettier": "^1.10.2",
-    "webpack": "^3.11.0"
+    "prettier": "^1.10.2"
   }
 }

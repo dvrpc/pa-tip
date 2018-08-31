@@ -14,7 +14,10 @@ class App extends Component {
       <Router basename={`${process.env.PUBLIC_URL}`}>
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="/main" component={AppContainer} />
+          <Route
+            path="/:type(location|keyword)/:value"
+            component={AppContainer}
+          />
           <Route path="/expanded/:id" component={Expanded} />
         </Switch>
       </Router>
