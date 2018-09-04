@@ -1,7 +1,7 @@
 .tilesContainer{
     background: #666666;
     overflow-x: hidden;
-	width: 100%;
+	width: 40%;
 	display: flex;
     flex-wrap: wrap;
 	overflow-y: scroll;
@@ -44,10 +44,11 @@
     .header h2 {
         font-size: 1rem;
     }
-  .tilesContainer{
-    margin-left: 0;
-    max-height: 70vh;
-  }
+   .tilesContainer{
+        margin-left: 0;
+        max-height: 50vh;
+        width: 100%;
+   }
  }
   @media screen and (max-width: 600px) {
     .header h2, .header p {
