@@ -59,7 +59,7 @@ class Homepage extends Component {
               alt="Transportation Improvement Program logo"
             />
             <div className="stacked-headers">
-              <h1>Draft FY2019 Transportation Improvement</h1>
+              <h1>FY2019 Transportation Improvement</h1>
               <h1>Program for Pennsylvania (FY19-22)</h1>
             </div>
           </div>
@@ -163,7 +163,7 @@ class Homepage extends Component {
             </p>
             <ul>
               <li>
-                <b>Draft FY2019 TIP for PA</b>
+                <b>FY2019 TIP for PA</b>
               </li>
               <li>
                 <a href="https://www.dvrpc.org/Products/17065/">TIP Guide</a>
@@ -184,7 +184,7 @@ class Homepage extends Component {
           <div className="tip-info-cluster">
             <div className="tip-info-paragraphs">
               <h2>
-                Draft FY2019 Transportation Improvement Program for Pennsylvania
+                FY2019 Transportation Improvement Program for Pennsylvania
                 (FY19-22)
               </h2>
               <p>
@@ -229,7 +229,7 @@ class Homepage extends Component {
                 <ul class="list-group">
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/HighlightsPA19.pdf">
-                      Highlights of the Draft FY2019 TIP for PA
+                      Highlights of the FY2019 TIP for PA
                     </a>{" "}
                     <span class="sm">[1.1 MB pdf]</span>
                   </li>
@@ -270,7 +270,7 @@ class Homepage extends Component {
                   </li>
                   <li class="list-group-item">
                     <a href="/TIP/Draft/pdf/TIP19Libraries.pdf">
-                      Libraries Displaying the Draft TIP
+                      Libraries Displaying the TIP
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
