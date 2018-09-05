@@ -2,8 +2,6 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import ReadOnlyComments from "../comments/ReadOnlyComments";
-
 import "./Homepage.css";
 
 import {
@@ -11,7 +9,6 @@ import {
   setMapCenter,
   setMapState
 } from "../reducers/getTIPInfo";
-import { getGeneralComments } from "../reducers/commentsReducer.js";
 
 import { search, generateAutocomplete } from "../../utils/search.js";
 import { handleRadioChange } from "../../utils/handleRadioChange.js";
@@ -36,8 +33,6 @@ class Homepage extends Component {
   }
 
   componentDidMount() {
-    this.props.getGeneralComments();
-
     generateAutocomplete(this.input, () => {
       if (this.input) this.handleChange(this.state.value);
     });
@@ -408,29 +403,18 @@ class Homepage extends Component {
               </div>
             </div>
           </div>
-          <ReadOnlyComments
-            comments={this.props.comments || []}
-            title={"General Comments and Responses"}
-          />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  comments: state.getComments.comments
-});
-
 const mapDispatchToProps = dispatch => {
   return {
-    getGeneralComments: () => dispatch(getGeneralComments()),
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     setMapCenter: latlng => dispatch(setMapCenter(latlng)),
     setMapState: position => dispatch(setMapState(position))
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Homepage)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Homepage));
