@@ -3,7 +3,6 @@ import { connect } from "inferno-redux";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
-import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -257,11 +256,6 @@ class Expanded extends Component {
                 </div>
               </section>
             </div>
-            <ReadOnlyComments
-              colorScheme={colorScheme}
-              comments={this.props.details ? this.props.details.comments : []}
-              title={"Comments and Responses"}
-            />
           </div>
         )))
       : (toReturn = (
