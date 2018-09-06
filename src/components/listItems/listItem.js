@@ -33,7 +33,7 @@ class ListItem extends Component {
             {projectName} MPMS ID: {project.MPMS_ID}
           </h2>
 
-          <h3>County/Operator | Total Funding first 4 years</h3>
+          <h3>{project.CTY} County | Total Funding first 4 years</h3>
         </div>
       </div>
     );
