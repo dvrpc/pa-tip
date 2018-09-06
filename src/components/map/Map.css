@@ -1,5 +1,5 @@
 .map {
-  width: 100% !important;
+  width: 60%;
   height: 100%;
 }
 .marker:hover {
@@ -110,7 +110,7 @@
 /*just guessing here...*/
  @media screen and (max-width: 880px) {
   .map{
-    height: 36.5vh;
+    height: 50vh;
     width: 100%;
   }
  }

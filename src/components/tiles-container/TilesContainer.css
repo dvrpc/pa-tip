@@ -1,7 +1,7 @@
 .tilesContainer{
     background: #666666;
     overflow-x: hidden;
-	width: 100%;
+	width: 40%;
 	display: flex;
     flex-wrap: wrap;
 	overflow-y: scroll;
@@ -18,7 +18,7 @@
     height: 12%;
 }
 .header h2{
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 400;
 }
 #no-results{
@@ -27,8 +27,8 @@
     max-width: 8%;
 }
 #selectedCategory{
-    margin: 0 6% 0 3%;
-    padding: 8px;
+    margin: 0 3%;
+    padding: 8px 0;
     border-radius: 5px;
     border: none;
     font-size: 1em;
@@ -44,10 +44,11 @@
     .header h2 {
         font-size: 1rem;
     }
-  .tilesContainer{
-    margin-left: 0;
-    max-height: 70vh;
-  }
+   .tilesContainer{
+        margin-left: 0;
+        max-height: 50vh;
+        width: 100%;
+   }
  }
   @media screen and (max-width: 600px) {
     .header h2, .header p {
