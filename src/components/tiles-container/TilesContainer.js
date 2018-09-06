@@ -3,6 +3,7 @@ import { connect } from "inferno-redux";
 
 import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
+import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
@@ -89,7 +90,8 @@ class TilesContainer extends Component {
         </div>
         {projects ? (
           projects.map(feature => (
-            <Tile data={feature} key={feature.attributes.OBJECTID} />
+            //<Tile data={feature} key={feature.attributes.OBJECTID} />
+            <ListItem data={feature} key={feature.attributes.OBJECTID} />
           ))
         ) : (
           <img id="no-results" src={loading} alt="loading" />

@@ -1,0 +1,10 @@
+.list-item{
+    display: flex;
+    color: #f7f7f7;
+    padding: 2%;
+    border-bottom: 1px solid #f7f7f7;
+}
+.list-text{
+    display: flex;
+    flex-direction: column;
+}
