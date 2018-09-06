@@ -18,20 +18,19 @@ class ListItem extends Component {
   }
 
   render() {
-    /*
-            @TODO: category thumbnail on the left
-                   title | MPMS Id (top)
-                   County/Operator | Total funding for first 4 years**
-        */
     const project = this.props.data.attributes;
-    console.log("project is ", project);
+
+    // temporary - replace w/utils function later
+    let projectName = project.ROAD_NAME;
+    if (projectName.length > 40) projectName = projectName.slice(0, 36) + "...";
+
     return (
       <div className="list-item" onClick={linkEvent(this, clickTile)}>
         <img className="list-category-thumbnail" />
 
         <div className="list-text">
           <h2>
-            {project.ROAD_NAME} | MPMS ID: {project.MPMS_ID}
+            {projectName} MPMS ID: {project.MPMS_ID}
           </h2>
 
           <h3>County/Operator | Total Funding first 4 years</h3>
