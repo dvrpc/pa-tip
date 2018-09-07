@@ -15,6 +15,27 @@ workflow:
 class ListItem extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      coords: ""
+    };
+  }
+
+  componentWillMount() {
+    console.log(this.props.data.attributes);
+    let category = this.props.data.attributes.DESCRIPTIO;
+
+    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json").then(
+      response => {
+        response.json().then(body => {
+          // the big json resopnse, of which I just need to get the co-ordinates for the real stuff. We could just hard code the x/y values...
+          let imgLocation = `-${body[category].x}px -${body[category].y}px`;
+          console.log("img location is ", imgLocation);
+          this.setState({
+            coords: imgLocation
+          });
+        });
+      }
+    );
   }
 
   render() {
@@ -24,9 +45,21 @@ class ListItem extends Component {
     let projectName = project.ROAD_NAME;
     if (projectName.length > 40) projectName = projectName.slice(0, 36) + "...";
 
+    // set the category thumbnail
+    let imgStyle = {
+      width: "50px",
+      height: "42px",
+      objectFit: "none",
+      objectPosition: this.state.coords
+    };
+
     return (
       <div className="list-item" onClick={linkEvent(this, clickTile)}>
-        <img className="list-category-thumbnail" />
+        <img
+          src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
+          className="list-category-thumbnail"
+          style={imgStyle}
+        />
 
         <div className="list-text">
           <h2>
