@@ -56,7 +56,7 @@ class TilesContainer extends Component {
     return (
       <div className="tilesContainer">
         <div className="header">
-          <h2>filter results...</h2>
+          {/*<h2>filter results...</h2>*/}
           <select
             id="selectedCategory"
             name="category"
@@ -85,8 +85,12 @@ class TilesContainer extends Component {
             </option>
             <option value="Other">Other</option>
           </select>
+
           <span className="vr" />
+
           <p>{projects ? projects.length : 0} results.</p>
+
+          <span className="vr" />
         </div>
         {projects ? (
           projects.map(feature => (

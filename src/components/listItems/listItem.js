@@ -21,15 +21,13 @@ class ListItem extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.data.attributes);
     let category = this.props.data.attributes.DESCRIPTIO;
 
     fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json").then(
       response => {
         response.json().then(body => {
-          // the big json resopnse, of which I just need to get the co-ordinates for the real stuff. We could just hard code the x/y values...
           let imgLocation = `-${body[category].x}px -${body[category].y}px`;
-          console.log("img location is ", imgLocation);
+
           this.setState({
             coords: imgLocation
           });
@@ -41,13 +39,9 @@ class ListItem extends Component {
   render() {
     const project = this.props.data.attributes;
 
-    // temporary - replace w/utils function later
-    let projectName = project.ROAD_NAME;
-    if (projectName.length > 40) projectName = projectName.slice(0, 36) + "...";
-
     // set the category thumbnail
     let imgStyle = {
-      width: "50px",
+      width: "46px",
       height: "42px",
       objectFit: "none",
       objectPosition: this.state.coords
@@ -63,7 +57,7 @@ class ListItem extends Component {
 
         <div className="list-text">
           <h2>
-            {projectName} MPMS ID: {project.MPMS_ID}
+            {project.ROAD_NAME} | MPMS ID: {project.MPMS_ID}
           </h2>
 
           <h3>{project.CTY} County | Total Funding first 4 years</h3>
