@@ -152,13 +152,13 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "water-shadow"
+        "water shadow"
       );
 
       this.map.addSource("CMP", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/80cc2057a84f4b63b3745eaa46417507_1.geojson"
+          "https://opendata.arcgis.com/datasets/dc69d509dc194cffa7c5270d54b59d58_0.geojson"
       });
       this.map.addLayer(
         {
@@ -166,13 +166,12 @@ class MapComponent extends Component {
           type: "fill",
           source: "CMP",
           paint: {
-            "fill-color": "#0078ae",
-            "fill-opacity": 0.5
+            "fill-color": ["get", "WEB_COLOR"],
+            "fill-opacity": 0.8
           }
         },
-        "water-shadow"
+        "water shadow"
       );
-
       this.map.addSource("Connections", {
         type: "geojson",
         data:
@@ -188,7 +187,7 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "water-shadow"
+        "water shadow"
       );
 
       this.map.addSource("Freight", {
@@ -206,7 +205,7 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "water-shadow"
+        "water shadow"
       );
 
       this.updateLayerVisibility(null);
