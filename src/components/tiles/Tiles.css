@@ -1,8 +1,8 @@
 .tile{
     background: #ffffff;
     position: relative;
-    height: 35%;
-    width: 46%;
+    height: 30%;
+    width: 29%;
     margin: 2%;
     overflow: hidden;
     border-radius: 10px 10px 5px 5px;
@@ -28,7 +28,7 @@
     margin: 1% 0 2% 2%;
 }
 .tile-caption h2 {
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 .tile-caption p {
     padding-top: 1%;
