@@ -32,3 +32,9 @@
     /*color: #bbd4d4;*/
     font-weight: 500;
 }
+
+@media screen and (max-width: 880px) {
+    .list-text h2, .list-text h3 {
+        font-size: 0.9rem;
+    }
+ }
