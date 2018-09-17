@@ -33,6 +33,15 @@
     border: none;
     font-size: 1em;
 }
+.results-toggle{
+    display: flex;
+}
+.results-toggle:hover{
+    cursor: pointer;
+}
+.results-toggle h2{
+    margin: 0 10%;
+}
 .vr{
     height: 45%;
     border: thin solid #ffffff;

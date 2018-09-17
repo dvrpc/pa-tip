@@ -5,6 +5,7 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
+//import ToggleResults from '../toggle/Toggle.js'
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
@@ -14,7 +15,8 @@ class TilesContainer extends Component {
     super(props);
     this.state = {
       filtered: false,
-      categoryToFilter: ""
+      categoryToFilter: "",
+      showList: true
     };
   }
 
@@ -29,6 +31,10 @@ class TilesContainer extends Component {
       });
     }
   }
+
+  showList = () => this.setState({ showList: true });
+
+  showTiles = () => this.setState({ showList: false });
 
   render() {
     let projects;
@@ -91,12 +97,23 @@ class TilesContainer extends Component {
           <p>{projects ? projects.length : 0} results.</p>
 
           <span className="vr" />
+
+          <span className="results-toggle">
+            <h2 onClick={this.showList}>List</h2>/<h2 onClick={this.showTiles}>
+              Tiles
+            </h2>
+          </span>
         </div>
         {projects ? (
-          projects.map(feature => (
-            //<Tile data={feature} key={feature.attributes.OBJECTID} />
-            <ListItem data={feature} key={feature.attributes.OBJECTID} />
-          ))
+          this.state.showList ? (
+            projects.map(feature => (
+              <ListItem data={feature} key={feature.attributes.OBJECTID} />
+            ))
+          ) : (
+            projects.map(feature => (
+              <Tile data={feature} key={feature.attributes.OBJECTID} />
+            ))
+          )
         ) : (
           <img id="no-results" src={loading} alt="loading" />
         )}
