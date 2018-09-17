@@ -42,6 +42,9 @@
 .results-toggle h2{
     margin: 0 10%;
 }
+.active-toggle{
+    text-decoration: underline;
+}
 .vr{
     height: 45%;
     border: thin solid #ffffff;

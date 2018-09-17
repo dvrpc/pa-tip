@@ -32,9 +32,23 @@ class TilesContainer extends Component {
     }
   }
 
-  showList = () => this.setState({ showList: true });
+  showList = e => {
+    // flip the bool to show tiles
+    this.setState({ showList: true });
 
-  showTiles = () => this.setState({ showList: false });
+    // update active-toggle class
+    e.target.classList.toggle("active-toggle");
+    e.target.nextElementSibling.classList.toggle("active-toggle");
+  };
+
+  showTiles = e => {
+    // flip the bool to show tiles
+    this.setState({ showList: false });
+
+    // update active-toggle class
+    e.target.classList.toggle("active-toggle");
+    e.target.previousElementSibling.classList.toggle("active-toggle");
+  };
 
   render() {
     let projects;
@@ -99,9 +113,9 @@ class TilesContainer extends Component {
           <span className="vr" />
 
           <span className="results-toggle">
-            <h2 onClick={this.showList}>List</h2>/<h2 onClick={this.showTiles}>
-              Tiles
-            </h2>
+            <h2 onClick={this.showList} className="active-toggle">
+              List
+            </h2>/<h2 onClick={this.showTiles}>Tiles</h2>
           </span>
         </div>
         {projects ? (
