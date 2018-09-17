@@ -76,7 +76,6 @@ class TilesContainer extends Component {
     return (
       <div className="tilesContainer">
         <div className="header">
-          {/*<h2>filter results...</h2>*/}
           <select
             id="selectedCategory"
             name="category"
@@ -108,7 +107,9 @@ class TilesContainer extends Component {
 
           <span className="vr" />
 
-          <p>{projects ? projects.length : 0} results.</p>
+          <h2 className="numOfResults">
+            {projects ? projects.length : 0} results.
+          </h2>
 
           <span className="vr" />
 

@@ -27,14 +27,18 @@
     max-width: 8%;
 }
 #selectedCategory{
-    /*margin: 0 3%;*/
     padding: 8px 0;
     border-radius: 5px;
     border: none;
     font-size: 1em;
+    width: 50%;
+}
+.numOfResults{
+    width: 15%;
 }
 .results-toggle{
     display: flex;
+    width: 15%;
 }
 .results-toggle:hover{
     cursor: pointer;
