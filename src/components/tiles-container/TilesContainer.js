@@ -3,7 +3,9 @@ import { connect } from "inferno-redux";
 
 import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
+import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
+//import ToggleResults from '../toggle/Toggle.js'
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
@@ -13,7 +15,8 @@ class TilesContainer extends Component {
     super(props);
     this.state = {
       filtered: false,
-      categoryToFilter: ""
+      categoryToFilter: "",
+      showList: true
     };
   }
 
@@ -28,6 +31,24 @@ class TilesContainer extends Component {
       });
     }
   }
+
+  showList = e => {
+    // flip the bool to show tiles
+    this.setState({ showList: true });
+
+    // update active-toggle class
+    e.target.classList.toggle("active-toggle");
+    e.target.nextElementSibling.classList.toggle("active-toggle");
+  };
+
+  showTiles = e => {
+    // flip the bool to show tiles
+    this.setState({ showList: false });
+
+    // update active-toggle class
+    e.target.classList.toggle("active-toggle");
+    e.target.previousElementSibling.classList.toggle("active-toggle");
+  };
 
   render() {
     let projects;
@@ -55,7 +76,6 @@ class TilesContainer extends Component {
     return (
       <div className="tilesContainer">
         <div className="header">
-          <h2>filter results...</h2>
           <select
             id="selectedCategory"
             name="category"
@@ -84,13 +104,31 @@ class TilesContainer extends Component {
             </option>
             <option value="Other">Other</option>
           </select>
+
           <span className="vr" />
-          <p>{projects ? projects.length : 0} results.</p>
+
+          <h2 className="numOfResults">
+            {projects ? projects.length : 0} results.
+          </h2>
+
+          <span className="vr" />
+
+          <span className="results-toggle">
+            <h2 onClick={this.showList} className="active-toggle">
+              List
+            </h2>/<h2 onClick={this.showTiles}>Tiles</h2>
+          </span>
         </div>
         {projects ? (
-          projects.map(feature => (
-            <Tile data={feature} key={feature.attributes.OBJECTID} />
-          ))
+          this.state.showList ? (
+            projects.map(feature => (
+              <ListItem data={feature} key={feature.attributes.OBJECTID} />
+            ))
+          ) : (
+            projects.map(feature => (
+              <Tile data={feature} key={feature.attributes.OBJECTID} />
+            ))
+          )
         ) : (
           <img id="no-results" src={loading} alt="loading" />
         )}
