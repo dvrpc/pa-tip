@@ -3,7 +3,11 @@ import { withRouter } from "inferno-router";
 import Autosuggest from "react-autosuggest";
 
 import { connect } from "inferno-redux";
-import { fetchTIPByKeywords } from "../reducers/getTIPInfo";
+import {
+  fetchTIPByKeywords,
+  getFullTIP,
+  hydrateGeometry
+} from "../reducers/getTIPInfo";
 
 import "./search.css";
 
@@ -63,7 +67,6 @@ class Search extends Component {
     });
 
   loadKeywordSuggestions = input => {
-    console.log({ input });
     this.props.fetchTIPByKeywords(input);
   };
 
@@ -72,17 +75,24 @@ class Search extends Component {
   };
 
   onSelect = (event, { suggestion }) => {
-    console.log({ ...suggestion });
+    let oldPath = this.props.history.location.pathname.split("/")[1];
+    let newPath = suggestion.type;
+
     this.props.history.push(
       `/${suggestion.type}/${suggestion.id.replace(/\s/g, "_")}`
     );
+
+    if (oldPath === "expanded" && newPath === "expanded") {
+      let id = this.props.history.location.pathname.split("/")[2];
+      this.props.getFullTIP(id);
+      this.props.hydrateGeometry(id);
+    }
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.loadKeywordSuggestions(value);
     this.loadLocationSuggestions(value).then(locations => {
       if (locations !== null) {
-        console.log("update locations");
         this.setState({ locations });
       }
     });
@@ -101,13 +111,11 @@ class Search extends Component {
       keywordProjects.features.length !==
         this.state.keywordProjects.features.length
     ) {
-      console.log("new state", keywordProjects);
       this.setState({ keywordProjects });
     }
   }
 
   render() {
-    console.log("render", this.state.keywordProjects, this.state.locations);
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
     const keywords = transformKeywordSuggestions(this.state.keywordProjects);
@@ -155,12 +163,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTIPByKeywords: keywords => dispatch(fetchTIPByKeywords(keywords))
+  fetchTIPByKeywords: keywords => dispatch(fetchTIPByKeywords(keywords)),
+  getFullTIP: id => dispatch(getFullTIP(id)),
+  hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

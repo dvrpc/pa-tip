@@ -13,16 +13,4 @@ export const filterByCategory = (instance, e) => {
     });
   }
   instance.props.setFilter(categoryToFilter);
-  // for later: update markers state with the selected filter (someway, somehow!)
-
-  /* METHOD: 
-    1) Pass a bool (or a string, like above) (markerFilter) to the store
-    A) do the logic at the reducer - check for the bool after response and filter accordingly
-    
-    2) have Map.js listen for that bool on the store
-      a) before calling updateMarkers in the didUpdate() hook, check if(markerFilter)
-        b) true: 
-          ba) filter state and call updateMarkers()?
-        c) false: call updateMarkers as usual
-  */
 };

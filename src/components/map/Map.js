@@ -67,11 +67,16 @@ class MapComponent extends Component {
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
   buildCategoryFilter = cat => {
+    console.log("hitting filter function with cat as: ", cat);
     switch (cat) {
       case "All Categories":
         this.setState({ catFilter: ["!=", "DESCRIPTIO", ""] });
         break;
       default:
+        // cat here is actually the correct infromation so how in the actual fuck is it setting
+        // state to the previous version of cat?
+        // this function is called both in componentDidMount and componentWillMount, but each one passes the correct thing.
+
         this.setState({ catFilter: ["==", "DESCRIPTIO", cat || ""] });
     }
   };
@@ -295,6 +300,7 @@ class MapComponent extends Component {
       this.setState({ keyFilter });
     }
 
+    console.log("next props category ", nextProps.category);
     this.buildCategoryFilter(nextProps.category);
 
     this.map.setFilter("pa-tip-projects", [
@@ -375,8 +381,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MapComponent)
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
 );

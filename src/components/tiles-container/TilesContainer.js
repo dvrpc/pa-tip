@@ -37,8 +37,10 @@ class TilesContainer extends Component {
     this.setState({ showList: true });
 
     // update active-toggle class
-    e.target.classList.toggle("active-toggle");
-    e.target.nextElementSibling.classList.toggle("active-toggle");
+    if (!e.target.classList.contains("active-toggle")) {
+      e.target.classList.toggle("active-toggle");
+      e.target.nextElementSibling.classList.toggle("active-toggle");
+    }
   };
 
   showTiles = e => {
@@ -46,8 +48,10 @@ class TilesContainer extends Component {
     this.setState({ showList: false });
 
     // update active-toggle class
-    e.target.classList.toggle("active-toggle");
-    e.target.previousElementSibling.classList.toggle("active-toggle");
+    if (!e.target.classList.contains("active-toggle")) {
+      e.target.classList.toggle("active-toggle");
+      e.target.previousElementSibling.classList.toggle("active-toggle");
+    }
   };
 
   render() {
