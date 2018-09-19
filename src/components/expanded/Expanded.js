@@ -103,11 +103,11 @@ class Expanded extends Component {
                   />
                 </figure>
 
-                <h1 id="expanded-project-title" className="left-column-padding">
+                <h2 id="expanded-project-title" className="left-column-padding">
                   {details.id
                     ? details.id + ": " + details.road_name
                     : "Project Title"}
-                </h1>
+                </h2>
 
                 <div
                   id="expanded-project-description"

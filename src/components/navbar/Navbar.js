@@ -26,20 +26,23 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navBar" style={this.props.backgroundGradient}>
-        <a href="/TIP/Draft/">
+        <a className="navbar-link-to-home" href="/TIP/Draft/">
           <img
             id="TIPlogo"
-            className="navbar-logos"
+            className="navbar-logo"
             src={TIP_logo}
             alt="TIP logo"
           />
-          <div class="nav-stack">
-            <img className="navbar-logos" src={logo} alt="DVRPC logo" />
+
+          <div class="nav-text">
+            <img src={logo} alt="DVRPC logo" />
+
             <h2 id="draft-text">
               <strong>FY2019 TIP for PA</strong>
             </h2>
           </div>
         </a>
+
         <div id="nav-search-form">
           <Search />
         </div>

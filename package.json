@@ -28,11 +28,9 @@
     "inferno-router": "^5.5.0",
     "inferno-scripts": "^6.3.0",
     "mapbox-gl": "^0.48.0",
-    "modal": "^1.2.0",
     "react-autosuggest": "^9.4.0",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0",
-    "sweetalert2": "^7.26.22"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "husky": "^0.15.0-rc.8",
