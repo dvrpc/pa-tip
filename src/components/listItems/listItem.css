@@ -1,7 +1,6 @@
 .list-item{
     width: 100%;
     display: flex;
-    align-items: center;
     padding: 4% 2%;
     border-bottom: 1px solid #f7f7f7;
 }
@@ -23,13 +22,11 @@
     font-weight: 600;
 }
 .mpms{
-    /*color: #f7ca18 !important;*/
     color: #f4d03f !important;
 }
 .list-text h3{
     font-size: 1rem;
     color: #add8e6;
-    /*color: #bbd4d4;*/
     font-weight: 500;
 }
 

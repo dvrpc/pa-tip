@@ -6,7 +6,7 @@
     flex-wrap: wrap;
 	overflow-y: scroll;
 	justify-content: flex-start;
-    margin-left: 1%;
+    margin-left: 1vh;
 }
 .header{
     padding: 3%;

@@ -1,4 +1,5 @@
 /*** ACTIONS ***/
+const FETCH_TIP_KEYWORDS = "FETCH_TIP_KEYWORDS";
 const GET_TIP_KEYWORDS = "GET_TIP_KEYWORDS";
 const GET_TIP_BY_ADDRESS = "GET_TIP_BY_ADDRESS";
 const GET_FULL_TIP = "GET_FULL_TIP";
@@ -9,6 +10,10 @@ const SET_FILTER = "SET_FILTER";
 const HYDRATE_GEOMETRY = "HYDRATE_GEOMETRY'";
 
 /*** ACTION_CREATORS ***/
+const fetch_tip_keywords = fetchedKeywords => ({
+  type: FETCH_TIP_KEYWORDS,
+  fetchedKeywords
+});
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
 const get_full_tip = id => ({ type: GET_FULL_TIP, id });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
@@ -23,6 +28,10 @@ const hydrate_geometry = geometry => ({ type: HYDRATE_GEOMETRY, geometry });
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
   switch (action.type) {
+    case FETCH_TIP_KEYWORDS:
+      return Object.assign({}, state, {
+        fetchedKeywords: action.fetchedKeywords
+      });
     case GET_TIP_KEYWORDS:
       return Object.assign({}, state, { keyword: action.keyword });
     case SET_MAP_CENTER:
@@ -42,12 +51,12 @@ export default function tipReducer(state = [], action) {
   }
 }
 
-/*** DISPATCHERS ***/
-export const getTIPByKeywords = keyword => dispatch => {
-  let keywordProjects;
-  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
-    response => {
-      response.json().then(projects => {
+const keywordRequest = keyword =>
+  new Promise(resolve => {
+    let keywordProjects;
+    fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
+      .then(response => response.json())
+      .then(projects => {
         keywordProjects = projects;
         // get geometry & rest of project information from the arcGIS server
         let mpms_array = projects.map(project => project.id).join(",");
@@ -61,11 +70,10 @@ export const getTIPByKeywords = keyword => dispatch => {
         };
         //Encode the data
         const request = Object.keys(params)
-          .map(key => {
-            return (
-              encodeURIComponent(key) + "=" + encodeURIComponent(params[key])
-            );
-          })
+          .map(
+            key =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+          )
           .join("&");
         fetch(
           `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_(TIP)_2019-2022/FeatureServer/0/query`,
@@ -76,8 +84,9 @@ export const getTIPByKeywords = keyword => dispatch => {
             method: "POST",
             body: request
           }
-        ).then(arcGISResponse => {
-          arcGISResponse.json().then(arcGISProjects => {
+        )
+          .then(arcGISResponse => arcGISResponse.json())
+          .then(arcGISProjects => {
             // handle case of projects that do not have geometry (arcGIS return isnt the same as keyword return)
             if (
               arcGISProjects.features &&
@@ -117,13 +126,28 @@ export const getTIPByKeywords = keyword => dispatch => {
                   }
                 }
               });
+              resolve(arcGISProjects);
             }
-
-            dispatch(get_tip_keywords(arcGISProjects));
           });
-        });
       });
-    }
+  });
+
+/*** DISPATCHERS ***/
+export const getTIPByKeywords = keyword => (dispatch, getState) => {
+  //use already returned projects from search
+  if (getState().getTIP.fetchdKeywords !== undefined) {
+    dispatch(get_tip_keywords(getState().getTIP.fetchedKeywords));
+  } else {
+    keywordRequest(keyword).then(arcGISProjects =>
+      dispatch(get_tip_keywords(arcGISProjects))
+    );
+  }
+};
+
+//get search results without updating the entire app
+export const fetchTIPByKeywords = keyword => dispatch => {
+  keywordRequest(keyword).then(arcGISProjects =>
+    dispatch(fetch_tip_keywords(arcGISProjects))
   );
 };
 
@@ -141,9 +165,9 @@ export const setFilter = category => dispatch => {
 export const getTIPByMapBounds = bounds => dispatch => {
   fetch(
     `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_(TIP)_2019-2022/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
-  ).then(response =>
-    response.json().then(projects => dispatch(get_tip_by_map_bounds(projects)))
-  );
+  )
+    .then(response => response.json())
+    .then(projects => dispatch(get_tip_by_map_bounds(projects)));
 };
 
 // pull project information from URL for link sharing

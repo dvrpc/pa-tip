@@ -5,7 +5,6 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
-//import ToggleResults from '../toggle/Toggle.js'
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
@@ -37,8 +36,10 @@ class TilesContainer extends Component {
     this.setState({ showList: true });
 
     // update active-toggle class
-    e.target.classList.toggle("active-toggle");
-    e.target.nextElementSibling.classList.toggle("active-toggle");
+    if (!e.target.classList.contains("active-toggle")) {
+      e.target.classList.toggle("active-toggle");
+      e.target.nextElementSibling.classList.toggle("active-toggle");
+    }
   };
 
   showTiles = e => {
@@ -46,8 +47,10 @@ class TilesContainer extends Component {
     this.setState({ showList: false });
 
     // update active-toggle class
-    e.target.classList.toggle("active-toggle");
-    e.target.previousElementSibling.classList.toggle("active-toggle");
+    if (!e.target.classList.contains("active-toggle")) {
+      e.target.classList.toggle("active-toggle");
+      e.target.previousElementSibling.classList.toggle("active-toggle");
+    }
   };
 
   render() {
@@ -122,7 +125,11 @@ class TilesContainer extends Component {
         {projects ? (
           this.state.showList ? (
             projects.map(feature => (
-              <ListItem data={feature} key={feature.attributes.OBJECTID} />
+              <ListItem
+                data={feature}
+                key={feature.attributes.OBJECTID}
+                length={projects.length}
+              />
             ))
           ) : (
             projects.map(feature => (

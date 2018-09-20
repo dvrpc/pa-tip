@@ -1,4 +1,7 @@
 /* General Purpose Targetting */
+.expanded{
+  overflow-x: hidden;
+}
 .expanded a{
   color: #ffffff;
 }
@@ -6,9 +9,7 @@
   color: #c1c1c1;
 }
 .wrapper {
-  overflow-x: none;
   display: flex;
-  height: 85vh;
 }
 .left-column {
   width: 50%;
@@ -16,9 +17,8 @@
   color: #ffffff;
 }
 .right-column {
-  width: 50%;
-  padding-left: 1%;
-  height: 97%;
+  width: calc(50% - 1vh);
+  padding-left: 1vh;
 }
 .hidden {
   position: absolute;
@@ -58,8 +58,6 @@
   background: #333333;
 }
 #expanded-project-description {
-  /*height: calc(100% - 22vh - 2em - 210px);*/
-  height: 41%;
   overflow-y: auto;
   background: #666666;
 }
@@ -94,7 +92,6 @@
 
 /* Funding and Milestones Tables */
 .table-wrapper {
-  height: calc(100% - 5vh);
   overflow-x: auto;
   overflow-y: auto;
 }
@@ -132,27 +129,11 @@ th {
 
 
 /*Loading Styles */
-/*@keyframes animateLoading {
-  0% {
-    color: black;
-    font-size: 1.5rem;
-  }
-
-  100% {
-    color: blue;
-    font-size: 2.3rem;
-  }
-
-}*/
 #loadingExpanded {
   display: block;
   margin: 0 auto;
   margin-top: 20%;
-/*  animation-name: animateLoading;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;*/
-/*  animation-direction: alternate;
-*/}
+}
 #loadingBackground {
   text-align: center;
   height: 100vh;
@@ -161,11 +142,6 @@ th {
 
 
 /* Media queries set to a single column layout */
-@media screen and (min-width: 1400px) {
-  #expanded-project-description {
-    height: calc(100% - 22vh - 1.7em - 250px);
-  }
-}
 @media screen and (max-width: 900px) {
   .wrapper {
     flex-direction: column;
@@ -177,7 +153,10 @@ th {
   }
   .right-column {
     padding: 0;
-    margin: 1% 0 1% 0;
+    margin-top: 1vh;
+  }
+  .tabs{
+    margin-bottom: 0;
   }
 }
 @media screen and (max-width: 700px) {

@@ -2,16 +2,10 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
+import Search from "../search/Search.js";
+
 import "./Homepage.css";
 
-import {
-  getTIPByKeywords,
-  setMapCenter,
-  setMapState
-} from "../reducers/getTIPInfo";
-
-import { search, generateAutocomplete } from "../../utils/search.js";
-import { handleRadioChange } from "../../utils/handleRadioChange.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
@@ -21,25 +15,6 @@ import philly from "./philly.mp4";
 import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: "",
-      selectedButton: "Location"
-    };
-
-    this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    generateAutocomplete(this.input, () => {
-      if (this.input) this.handleChange(this.state.value);
-    });
-  }
-
-  handleChange = e => this.setState({ value: e });
-
   render() {
     return (
       <div className="homepage">
@@ -70,65 +45,9 @@ class Homepage extends Component {
             >
               <source src={philly} type="video/mp4" />
             </video>
-            <form
-              role="search"
-              id="search-form"
-              method="get"
-              onSubmit={linkEvent(this, search)}
-            >
-              <div
-                className="homepage-radio-group"
-                ref={e => (this.radioGroup = e)}
-              >
-                <p> Search by: </p>
-                <div className="radio-group-cluster">
-                  <input
-                    type="radio"
-                    name="searchType"
-                    id="Location"
-                    value="Location"
-                    checked={this.state.selectedButton === "Location"}
-                    onChange={linkEvent(this, handleRadioChange)}
-                  />
-                  <label for="Location">Location</label>
-                </div>
-
-                <div className="radio-group-cluster">
-                  <input
-                    type="radio"
-                    name="searchType"
-                    id="MPMS"
-                    value="MPMS"
-                    checked={this.state.selectedButton === "MPMS"}
-                    onChange={linkEvent(this, handleRadioChange)}
-                  />
-                  <label for="MPMS">MPMS ID</label>
-                </div>
-
-                <div className="radio-group-cluster">
-                  <input
-                    type="radio"
-                    name="searchType"
-                    id="Keyword"
-                    value="Keyword"
-                    checked={this.state.selectedButton === "Keyword"}
-                    onChange={linkEvent(this, handleRadioChange)}
-                  />
-                  <label for="Keyword">Keyword</label>
-                </div>
-              </div>
-
-              <input
-                id="homepage-search-bar"
-                required
-                type="text"
-                placeholder="enter address, location, building, etc"
-                onInput={this.handleChange}
-                ref={i => {
-                  this.input = i;
-                }}
-              />
-            </form>
+            <div id="search-form">
+              <Search />
+            </div>
           </div>
 
           <div className="homepage-bottom-bar">
@@ -409,12 +328,4 @@ class Homepage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
-    setMapState: position => dispatch(setMapState(position))
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(Homepage));
+export default withRouter(Homepage);

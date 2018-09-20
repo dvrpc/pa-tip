@@ -3,7 +3,12 @@ import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
-import { getTIPByMapBounds, setMapState } from "../reducers/getTIPInfo";
+import {
+  getTIPByKeywords,
+  getTIPByMapBounds,
+  setMapCenter,
+  setMapState
+} from "../reducers/getTIPInfo";
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { clickTile } from "../../utils/clickTile.js";
@@ -26,6 +31,10 @@ class MapComponent extends Component {
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""]
     };
+
+    this.Places = new window.google.maps.places.PlacesService(
+      document.createElement("div")
+    );
   }
 
   updateLayerVisibility = selectedLayer => {
@@ -60,10 +69,10 @@ class MapComponent extends Component {
   buildCategoryFilter = cat => {
     switch (cat) {
       case "All Categories":
-        this.state.catFilter = ["!=", "DESCRIPTIO", ""];
+        this.setState({ catFilter: ["!=", "DESCRIPTIO", ""] });
         break;
       default:
-        this.state.catFilter = ["==", "DESCRIPTIO", cat || ""];
+        this.setState({ catFilter: ["==", "DESCRIPTIO", cat || ""] });
     }
   };
 
@@ -98,17 +107,11 @@ class MapComponent extends Component {
 
       // check for keyword search
       if (this.props.keywordProjects && this.props.keywordProjects.features) {
-        let mpms = this.buildKeywordFilter(this.props.keywordProjects);
-        this.state.keyFilter = mpms;
+        let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
+        this.setState({ keyFilter });
       }
 
       this.buildCategoryFilter(this.props.category);
-
-      this.map.setFilter("pa-tip-projects", [
-        "all",
-        this.state.catFilter,
-        this.state.keyFilter
-      ]);
 
       this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
 
@@ -260,21 +263,33 @@ class MapComponent extends Component {
     // handle user events to update map results
     this.map.on("zoomend", () => updateBounds(this));
     this.map.on("moveend", () => updateBounds(this));
+
+    const { type, value } = this.props.match.params;
+
+    if (type === "location") {
+      this.context.store.getState().getTIP.keyword = [];
+      this.Places.getDetails(
+        { placeId: value, fields: ["geometry.location"] },
+        results => {
+          this.props.setMapCenter({
+            lng: results.geometry.location.lng(),
+            lat: results.geometry.location.lat()
+          });
+        }
+      );
+    } else {
+      this.context.store.getState().getTIP.bounds = [];
+      this.props.getTIPByKeywords(value);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.keywordProjects !== this.props.keywordProjects) {
-      let ids = keywordBounds(this, nextProps.keywordProjects);
-      this.state.keyFilter = ids;
+      let keyFilter = keywordBounds(this, nextProps.keywordProjects);
+      this.setState({ keyFilter });
     }
 
     this.buildCategoryFilter(nextProps.category);
-
-    this.map.setFilter("pa-tip-projects", [
-      "all",
-      this.state.catFilter,
-      this.state.keyFilter
-    ]);
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
@@ -289,6 +304,17 @@ class MapComponent extends Component {
   }
 
   render() {
+    // the filter wasn't working because this.map.setFilter was being called immediately after setting category state,
+    // which is async, and so there was a disconnect between what category state was and what map.setFilter was pulling from
+    // moving setFilter to the render method ensures it will always be filtering the correct state
+    if (this.map) {
+      this.map.setFilter("pa-tip-projects", [
+        "all",
+        this.state.catFilter,
+        this.state.keyFilter
+      ]);
+    }
+
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
         <nav className="dropdown-nav">
@@ -340,7 +366,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds)),
+    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
     setMapState: position => dispatch(setMapState(position))
   };
 };
