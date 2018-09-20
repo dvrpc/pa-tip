@@ -67,16 +67,11 @@ class MapComponent extends Component {
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
 
   buildCategoryFilter = cat => {
-    console.log("hitting filter function with cat as: ", cat);
     switch (cat) {
       case "All Categories":
         this.setState({ catFilter: ["!=", "DESCRIPTIO", ""] });
         break;
       default:
-        // cat here is actually the correct infromation so how in the actual fuck is it setting
-        // state to the previous version of cat?
-        // this function is called both in componentDidMount and componentWillMount, but each one passes the correct thing.
-
         this.setState({ catFilter: ["==", "DESCRIPTIO", cat || ""] });
     }
   };
@@ -117,12 +112,6 @@ class MapComponent extends Component {
       }
 
       this.buildCategoryFilter(this.props.category);
-
-      this.map.setFilter("pa-tip-projects", [
-        "all",
-        this.state.catFilter,
-        this.state.keyFilter
-      ]);
 
       this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
 
@@ -300,14 +289,7 @@ class MapComponent extends Component {
       this.setState({ keyFilter });
     }
 
-    console.log("next props category ", nextProps.category);
     this.buildCategoryFilter(nextProps.category);
-
-    this.map.setFilter("pa-tip-projects", [
-      "all",
-      this.state.catFilter,
-      this.state.keyFilter
-    ]);
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
@@ -322,6 +304,17 @@ class MapComponent extends Component {
   }
 
   render() {
+    // the filter wasn't working because this.map.setFilter was being called immediately after setting category state,
+    // which is async, and so there was a disconnect between what category state was and what map.setFilter was pulling from
+    // moving setFilter to the render method ensures it will always be filtering the correct state
+    if (this.map) {
+      this.map.setFilter("pa-tip-projects", [
+        "all",
+        this.state.catFilter,
+        this.state.keyFilter
+      ]);
+    }
+
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
         <nav className="dropdown-nav">

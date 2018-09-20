@@ -10,6 +10,7 @@
 }
 .list-category-thumbnail{
     width: 25%;
+    align-self: center;
 }
 .list-text{
     display: flex;

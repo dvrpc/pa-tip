@@ -14,7 +14,21 @@ import noStreetview from "./noStreetview.jpg";
 class Expanded extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      initialVisit: -1
+    };
   }
+
+  // function to iterate through history until it goes back to either a location or keyword result (if none, it goes back to the homepage)
+  // once this function is done move it into utils and wrap the onClick in a linkEvent
+  // issue: no way of knowing the previous pathnames or how many editions of expanded were rendered before
+  // need to get a reference to every time the page has re-rendered, and use that number to hit history.go(num)
+  // SOLUTION: pass the fragment from results to the state of expanded, push to that state
+  // will push back to home if they link directly from home so that's fine.
+  // could build in a case wehre if the fragment is / or "", push to location/philadelphia or something
+  backToResults = () => {
+    this.props.history.goBack();
+  };
 
   componentWillMount() {
     this.props.getFullTIP(this.props.match.params.id);
@@ -86,7 +100,7 @@ class Expanded extends Component {
                   id="content-mini-nav"
                   style={{ background: colorScheme.darkest }}
                 >
-                  <p onClick={this.props.history.goBack}>
+                  <p onClick={this.backToResults}>
                     <em>back to results</em>
                   </p>
                 </div>
