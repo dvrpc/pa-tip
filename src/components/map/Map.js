@@ -204,7 +204,7 @@ class MapComponent extends Component {
       this.map.addSource("Freight", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/ca3d5b2b76514ca29a038714f0fa6136_0.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson"
       });
       this.map.addLayer(
         {
@@ -212,7 +212,20 @@ class MapComponent extends Component {
           type: "fill",
           source: "Freight",
           paint: {
-            "fill-color": "#0078ae",
+            "fill-color": [
+              "case",
+              ["==", ["get", "TYPES"], "International Gateway"],
+              "#f4bd48",
+              ["==", ["get", "TYPES"], "Heavy Industrial"],
+              "#ef7e51",
+              ["==", ["get", "TYPES"], "Distribution and Logistics"],
+              "#ca4b66",
+              ["==", ["get", "TYPES"], "High Tech Manufacturing"],
+              "#883272",
+              ["==", ["get", "TYPES"], "Local Manufacturing and Distribution"],
+              "#312867",
+              "#cccccc"
+            ],
             "fill-opacity": 0.5
           }
         },
