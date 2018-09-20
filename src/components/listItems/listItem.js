@@ -58,8 +58,8 @@ class ListItem extends Component {
 
         <div className="list-text">
           <h2>{project.ROAD_NAME}</h2>
-          <h2 className="mpms">MPMS ID: {project.MPMS_ID}</h2>
           <h3>{project.CTY} County | Total Funding first 4 years</h3>
+          <h2 className="mpms">MPMS ID: {project.MPMS_ID}</h2>
         </div>
       </div>
     );

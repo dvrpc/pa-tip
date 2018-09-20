@@ -67,6 +67,8 @@ class TilesContainer extends Component {
         ? this.props.boundsProjects.features
         : [];
 
+    console.log("bounds projects ", boundsProjects);
+
     projects = keywordProjects.length ? keywordProjects : boundsProjects;
 
     // determine whether to display all projects, or filtered projects
