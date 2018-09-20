@@ -31,13 +31,20 @@ class ListItem extends Component {
 
   render() {
     const project = this.props.data.attributes;
+    let thumbnailAlign;
+
+    // formatting
+    this.props.length < 3
+      ? (thumbnailAlign = "baseline")
+      : (thumbnailAlign = "center");
 
     // set the category thumbnail
     let imgStyle = {
       width: "46px",
       height: "42px",
       objectFit: "none",
-      objectPosition: this.state.coords
+      objectPosition: this.state.coords,
+      alignSelf: thumbnailAlign
     };
 
     return (
