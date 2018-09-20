@@ -24,7 +24,8 @@ class MapComponent extends Component {
         "Indicators of Potential Disadvantage": false,
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
-        "Freight Centers": false
+        "Freight Centers": false,
+        "DVRPC Land Use (2015)": false
       },
       toggleDropdown: false,
       markerReference: {},
@@ -199,7 +200,19 @@ class MapComponent extends Component {
               "#9d1d20",
               "#cccccc"
             ],
-            "fill-opacity": 0.33
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
           }
         },
         "admin-3-4-boundaries-bg"
@@ -229,10 +242,22 @@ class MapComponent extends Component {
               "#312867",
               "#cccccc"
             ],
-            "fill-opacity": 0.5
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
           }
         },
-        "water shadow"
+        "admin-3-4-boundaries-bg"
       );
 
       this.updateLayerVisibility(null);
