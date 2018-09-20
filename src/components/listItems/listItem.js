@@ -53,6 +53,7 @@ class ListItem extends Component {
           src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
           className="list-category-thumbnail"
           style={imgStyle}
+          alt={`icon for ${project.DESCRIPTIO} projects`}
         />
 
         <div className="list-text">
