@@ -24,7 +24,8 @@ class MapComponent extends Component {
         "Indicators of Potential Disadvantage": false,
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
-        "Freight Centers": false
+        "Freight Centers": false,
+        "DVRPC Land Use (2015)": false
       },
       toggleDropdown: false,
       markerReference: {},
@@ -152,13 +153,13 @@ class MapComponent extends Component {
             "fill-opacity": 0.5
           }
         },
-        "water-shadow"
+        "water shadow"
       );
 
       this.map.addSource("CMP", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/80cc2057a84f4b63b3745eaa46417507_1.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson"
       });
       this.map.addLayer(
         {
@@ -166,17 +167,16 @@ class MapComponent extends Component {
           type: "fill",
           source: "CMP",
           paint: {
-            "fill-color": "#0078ae",
-            "fill-opacity": 0.5
+            "fill-color": ["get", "WEB_COLOR"],
+            "fill-opacity": 0.8
           }
         },
-        "water-shadow"
+        "water shadow"
       );
-
       this.map.addSource("Connections", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/24b5bbdfdf6d4930ad34c23012e7fb2a_0.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=1%3D1&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson"
       });
       this.map.addLayer(
         {
@@ -184,17 +184,43 @@ class MapComponent extends Component {
           type: "fill",
           source: "Connections",
           paint: {
-            "fill-color": "#0078ae",
-            "fill-opacity": 0.5
+            "fill-color": [
+              "case",
+              ["==", ["get", "LUP_TYPE"], "Metropolitan Center"],
+              "#f26522",
+              ["==", ["get", "LUP_TYPE"], "Metropolitan Subcenter"],
+              "#223860",
+              ["==", ["get", "LUP_TYPE"], "Suburban Center"],
+              "#0b6d32",
+              ["==", ["get", "LUP_TYPE"], "Town Center"],
+              "#729faa",
+              ["==", ["get", "LUP_TYPE"], "Rural Center"],
+              "#ed1c24",
+              ["==", ["get", "LUP_TYPE"], "Planned Town Center"],
+              "#9d1d20",
+              "#cccccc"
+            ],
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
           }
         },
-        "water-shadow"
+        "admin-3-4-boundaries-bg"
       );
-
       this.map.addSource("Freight", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/ca3d5b2b76514ca29a038714f0fa6136_0.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson"
       });
       this.map.addLayer(
         {
@@ -202,11 +228,93 @@ class MapComponent extends Component {
           type: "fill",
           source: "Freight",
           paint: {
-            "fill-color": "#0078ae",
-            "fill-opacity": 0.5
+            "fill-color": [
+              "case",
+              ["==", ["get", "TYPES"], "International Gateway"],
+              "#f4bd48",
+              ["==", ["get", "TYPES"], "Heavy Industrial"],
+              "#ef7e51",
+              ["==", ["get", "TYPES"], "Distribution and Logistics"],
+              "#ca4b66",
+              ["==", ["get", "TYPES"], "High Tech Manufacturing"],
+              "#883272",
+              ["==", ["get", "TYPES"], "Local Manufacturing and Distribution"],
+              "#312867",
+              "#cccccc"
+            ],
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
           }
         },
-        "water-shadow"
+        "admin-3-4-boundaries-bg"
+      );
+      this.map.addSource("LandUse", {
+        type: "vector",
+        url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json"
+      });
+      this.map.addLayer(
+        {
+          id: "DVRPC Land Use (2015)",
+          type: "fill",
+          source: "LandUse",
+          "source-layer": "lu2015",
+          paint: {
+            "fill-color": [
+              "step",
+              ["to-number", ["get", "lu15sub"]],
+              "rgb(255, 255, 0)",
+              3000,
+              "rgb(194,158,215)",
+              4000,
+              "rgb(104,104,104)",
+              5000,
+              "rgb(255,190,190)",
+              6000,
+              "rgb(255,0,0)",
+              7000,
+              "rgb(190,232,255)",
+              8000,
+              "rgb(0,132,168)",
+              9000,
+              "rgb(230,230,0)",
+              10000,
+              "rgb(215,215,158)",
+              11000,
+              "rgb(168,0,0)",
+              12000,
+              "rgb(76,230,0)",
+              13000,
+              "rgb(0,197,255)",
+              14000,
+              "rgb(165,245,122)"
+            ],
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
+          }
+        },
+        "water shadow"
       );
 
       this.updateLayerVisibility(null);
@@ -360,7 +468,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    position: state.getTIP.position
+    position: state.getTIP.positionloc
   };
 };
 
@@ -374,5 +482,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MapComponent)
 );

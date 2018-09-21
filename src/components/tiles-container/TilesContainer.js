@@ -5,6 +5,7 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
+//import ToggleResults from '../toggle/Toggle.js'
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";
@@ -121,7 +122,8 @@ class TilesContainer extends Component {
           <span className="results-toggle">
             <h2 onClick={this.showList} className="active-toggle">
               List
-            </h2>/<h2 onClick={this.showTiles}>Tiles</h2>
+            </h2>
+            /<h2 onClick={this.showTiles}>Tiles</h2>
           </span>
         </div>
         {projects ? (
@@ -161,4 +163,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TilesContainer);
