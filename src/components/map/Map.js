@@ -158,7 +158,7 @@ class MapComponent extends Component {
       this.map.addSource("CMP", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/dc69d509dc194cffa7c5270d54b59d58_0.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson"
       });
       this.map.addLayer(
         {
@@ -183,13 +183,27 @@ class MapComponent extends Component {
           type: "fill",
           source: "Connections",
           paint: {
-            "fill-color": "#0078ae",
-            "fill-opacity": 0.5
+            "fill-color": [
+              "case",
+              ["==", ["get", "LUP_TYPE"], "Metropolitan Center"],
+              "#f26522",
+              ["==", ["get", "LUP_TYPE"], "Metropolitan Subcenter"],
+              "#223860",
+              ["==", ["get", "LUP_TYPE"], "Suburban Center"],
+              "#0b6d32",
+              ["==", ["get", "LUP_TYPE"], "Town Center"],
+              "#729faa",
+              ["==", ["get", "LUP_TYPE"], "Rural Center"],
+              "#ed1c24",
+              ["==", ["get", "LUP_TYPE"], "Planned Town Center"],
+              "#9d1d20",
+              "#cccccc"
+            ],
+            "fill-opacity": 0.33
           }
         },
-        "water shadow"
+        "admin-3-4-boundaries-bg"
       );
-
       this.map.addSource("Freight", {
         type: "geojson",
         data:
@@ -373,5 +387,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MapComponent)
 );
