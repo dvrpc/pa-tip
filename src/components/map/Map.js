@@ -177,7 +177,7 @@ class MapComponent extends Component {
       this.map.addSource("Connections", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/24b5bbdfdf6d4930ad34c23012e7fb2a_0.geojson"
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=1%3D1&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson"
       });
       this.map.addLayer(
         {
