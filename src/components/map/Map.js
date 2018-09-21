@@ -17,6 +17,7 @@ import mapStyle from "./style.json";
 
 class MapComponent extends Component {
   constructor(props) {
+    console.log("props, ", props);
     super(props);
 
     this.state = {
@@ -259,6 +260,63 @@ class MapComponent extends Component {
         },
         "admin-3-4-boundaries-bg"
       );
+      this.map.addSource("LandUse", {
+        type: "vector",
+        url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json"
+      });
+      this.map.addLayer(
+        {
+          id: "DVRPC Land Use (2015)",
+          type: "fill",
+          source: "LandUse",
+          "source-layer": "lu2015",
+          paint: {
+            "fill-color": [
+              "step",
+              ["to-number", ["get", "lu15sub"]],
+              "rgb(255, 255, 0)",
+              3000,
+              "rgb(194,158,215)",
+              4000,
+              "rgb(104,104,104)",
+              5000,
+              "rgb(255,190,190)",
+              6000,
+              "rgb(255,0,0)",
+              7000,
+              "rgb(190,232,255)",
+              8000,
+              "rgb(0,132,168)",
+              9000,
+              "rgb(230,230,0)",
+              10000,
+              "rgb(215,215,158)",
+              11000,
+              "rgb(168,0,0)",
+              12000,
+              "rgb(76,230,0)",
+              13000,
+              "rgb(0,197,255)",
+              14000,
+              "rgb(165,245,122)"
+            ],
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              0,
+              1,
+              7,
+              0.75,
+              9,
+              0.5,
+              11,
+              0.25
+            ]
+          }
+        },
+        "water shadow"
+      );
 
       this.updateLayerVisibility(null);
     });
@@ -411,7 +469,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    position: state.getTIP.position
+    position: state.getTIP.positionloc
   };
 };
 
