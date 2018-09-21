@@ -17,7 +17,6 @@ import mapStyle from "./style.json";
 
 class MapComponent extends Component {
   constructor(props) {
-    console.log("props, ", props);
     super(props);
 
     this.state = {
