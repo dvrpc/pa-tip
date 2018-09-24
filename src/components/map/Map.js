@@ -28,7 +28,6 @@ class MapComponent extends Component {
         "DVRPC Land Use (2015)": false
       },
       toggleDropdown: false,
-      markerReference: {},
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""]
     };
@@ -38,34 +37,63 @@ class MapComponent extends Component {
     );
   }
 
+  /*
+    REMINDER: commenting out this entire function *still* results in the hard refresh on initial selection of a dropdown menu item.
+    That means the hard refresh is being cause by something else. Might need an e.preventDefault...holy shit...
+  */
   updateLayerVisibility = selectedLayer => {
     let { layers } = this.state;
 
     //toggle selected layer state
-    if (selectedLayer !== null) {
-      layers = {
-        ...this.state.layers,
-        [selectedLayer]: !this.state.layers[selectedLayer]
-      };
-    }
-
     Object.keys(layers).forEach(layer => {
-      //set other layer states to false
-      if (layer !== selectedLayer) layers[layer] = false;
+      let isVisible = this.map.getLayoutProperty(layer, "visibility");
 
-      //update layers
-      this.map.setLayoutProperty(
-        layer,
-        "visibility",
-        layers[layer] ? "visible" : "none"
-      );
+      // set other layer states to false
+      if (layer !== selectedLayer) {
+        layers[layer] = false;
+
+        if (isVisible) {
+          this.map.setLayoutProperty(layer, "visibility", "none");
+        }
+      } else {
+        // set currently active layer to true or false depending on its current state
+        layers[layer] ? (layers[layer] = false) : (layers[layer] = true);
+
+        this.map.setLayoutProperty(
+          layer,
+          "visibility",
+          layers[layer] ? "visible" : "none"
+        );
+      }
     });
 
     this.setState({ layers });
+
+    /*    
+      OLD WAY - might be running too many setLayoutProperty. New way doesn't fix the bug but it might be slightly more efficient
+      //toggle selected layer state
+      Object.keys(layers).forEach(layer => {
+
+        // set other layer states to false
+        if (layer !== selectedLayer) layers[layer] = false
+
+        // set currently active layer to true or false depending on its current state
+        else layers[layer] ? layers[layer] = false : layers[layer] = true
+
+        //update layers
+        this.map.setLayoutProperty(
+          layer,
+          "visibility",
+          layers[layer] ? "visible" : "none"
+        );
+      });
+    */
   };
 
-  toggleDropdown = () =>
+  toggleDropdown = e => {
+    e.preventDefault();
     this.setState({ toggleDropdown: !this.state.toggleDropdown });
+  };
 
   buildCategoryFilter = cat => {
     switch (cat) {
@@ -84,6 +112,10 @@ class MapComponent extends Component {
     }
     return ["!=", "MPMS_ID", ""];
   };
+
+  componentWillMount() {
+    if (this.props.category) this.buildCategoryFilter(this.props.category);
+  }
 
   componentDidMount() {
     const { history } = this.props;
@@ -112,8 +144,6 @@ class MapComponent extends Component {
         this.setState({ keyFilter });
       }
 
-      this.buildCategoryFilter(this.props.category);
-
       this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
 
       this.map.addSource("IPD", {
@@ -121,11 +151,35 @@ class MapComponent extends Component {
         data:
           "https://opendata.arcgis.com/datasets/ab586640e7ab40e58c0615f9355cb35a_0.geojson"
       });
+      this.map.addSource("CMP", {
+        type: "geojson",
+        data:
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson"
+      });
+      this.map.addSource("Connections", {
+        type: "geojson",
+        data:
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=1%3D1&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson"
+      });
+      this.map.addSource("Freight", {
+        type: "geojson",
+        data:
+          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson"
+      });
+      this.map.addSource("LandUse", {
+        type: "vector",
+        url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json"
+      });
+
+      // add layers and set initial visibility for each one to 'none'
       this.map.addLayer(
         {
           id: "Indicators of Potential Disadvantage",
           type: "fill",
           source: "IPD",
+          layout: {
+            visibility: "none"
+          },
           paint: {
             "fill-color": [
               "interpolate",
@@ -155,17 +209,14 @@ class MapComponent extends Component {
         },
         "water shadow"
       );
-
-      this.map.addSource("CMP", {
-        type: "geojson",
-        data:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson"
-      });
       this.map.addLayer(
         {
           id: "CMP Corridors",
           type: "fill",
           source: "CMP",
+          layout: {
+            visibility: "none"
+          },
           paint: {
             "fill-color": ["get", "WEB_COLOR"],
             "fill-opacity": 0.8
@@ -173,16 +224,14 @@ class MapComponent extends Component {
         },
         "water shadow"
       );
-      this.map.addSource("Connections", {
-        type: "geojson",
-        data:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=1%3D1&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson"
-      });
       this.map.addLayer(
         {
           id: "Connections 2045 Centers",
           type: "fill",
           source: "Connections",
+          layout: {
+            visibility: "none"
+          },
           paint: {
             "fill-color": [
               "case",
@@ -217,16 +266,14 @@ class MapComponent extends Component {
         },
         "admin-3-4-boundaries-bg"
       );
-      this.map.addSource("Freight", {
-        type: "geojson",
-        data:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson"
-      });
       this.map.addLayer(
         {
           id: "Freight Centers",
           type: "fill",
           source: "Freight",
+          layout: {
+            visibility: "none"
+          },
           paint: {
             "fill-color": [
               "case",
@@ -259,15 +306,14 @@ class MapComponent extends Component {
         },
         "admin-3-4-boundaries-bg"
       );
-      this.map.addSource("LandUse", {
-        type: "vector",
-        url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json"
-      });
       this.map.addLayer(
         {
           id: "DVRPC Land Use (2015)",
           type: "fill",
           source: "LandUse",
+          layout: {
+            visibility: "none"
+          },
           "source-layer": "lu2015",
           paint: {
             "fill-color": [
@@ -316,8 +362,6 @@ class MapComponent extends Component {
         },
         "water shadow"
       );
-
-      this.updateLayerVisibility(null);
     });
 
     const popup = new mapboxgl.Popup({
@@ -397,7 +441,7 @@ class MapComponent extends Component {
       this.setState({ keyFilter });
     }
 
-    this.buildCategoryFilter(nextProps.category);
+    if (nextProps.category) this.buildCategoryFilter(nextProps.category);
 
     // check if center has been updated by the search bar and flyTo if so
     if (nextProps.center !== this.props.center)
@@ -412,10 +456,7 @@ class MapComponent extends Component {
   }
 
   render() {
-    // the filter wasn't working because this.map.setFilter was being called immediately after setting category state,
-    // which is async, and so there was a disconnect between what category state was and what map.setFilter was pulling from
-    // moving setFilter to the render method ensures it will always be filtering the correct state
-    if (this.map) {
+    if (this.map && this.state.catFilter && this.state.keyFilter) {
       this.map.setFilter("pa-tip-projects", [
         "all",
         this.state.catFilter,
@@ -444,8 +485,7 @@ class MapComponent extends Component {
           >
             {Object.keys(this.state.layers).map(layer => {
               return (
-                <a
-                  href="#"
+                <p
                   className={
                     "dropdown-item " +
                     (this.state.layers[layer] ? "selected" : "")
@@ -453,7 +493,7 @@ class MapComponent extends Component {
                   onClick={() => this.updateLayerVisibility(layer)}
                 >
                   {layer}
-                </a>
+                </p>
               );
             })}
           </div>
@@ -468,7 +508,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    position: state.getTIP.positionloc
+    position: state.getTIP.position
   };
 };
 
@@ -482,8 +522,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MapComponent)
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
 );

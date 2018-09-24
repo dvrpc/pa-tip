@@ -68,8 +68,6 @@ class TilesContainer extends Component {
         ? this.props.boundsProjects.features
         : [];
 
-    console.log("bounds projects ", boundsProjects);
-
     projects = keywordProjects.length ? keywordProjects : boundsProjects;
 
     // determine whether to display all projects, or filtered projects
@@ -89,7 +87,9 @@ class TilesContainer extends Component {
             ref={e => (this.categorySelector = e)}
             value={this.props.category}
           >
-            <option value="All Categories">All Categories</option>
+            <option selected value="All Categories">
+              All Categories
+            </option>
             <option value="Bicycle/Pedestrian Improvement">
               Bicycle/Pedestrian Improvement
             </option>
@@ -163,7 +163,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TilesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
