@@ -114,6 +114,10 @@ class MapComponent extends Component {
 
       this.buildCategoryFilter(this.props.category);
 
+      // add zoom controls
+      let zoom = new mapboxgl.NavigationControl();
+      this.map.addControl(zoom, "bottom-left");
+
       this.map.addSource("IPD", {
         type: "geojson",
         data:
