@@ -114,8 +114,6 @@ class MapComponent extends Component {
 
       this.buildCategoryFilter(this.props.category);
 
-      this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
-
       this.map.addSource("IPD", {
         type: "geojson",
         data:
@@ -335,7 +333,7 @@ class MapComponent extends Component {
       }
     });
 
-    this.map.on("click", "pa-tip-projects", e => {
+    this.map.on("click", "pa-tip-points", e => {
       clickTile({
         props: {
           history,
@@ -345,7 +343,7 @@ class MapComponent extends Component {
     });
 
     // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mousemove", "pa-tip-projects", e => {
+    this.map.on("mousemove", "pa-tip-points", e => {
       this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
       const category = e.features[0].properties.DESCRIPTIO;
@@ -363,7 +361,7 @@ class MapComponent extends Component {
     });
 
     // Change it back to a pointer when it leaves.
-    this.map.on("mouseleave", "pa-tip-projects", () => {
+    this.map.on("mouseleave", "pa-tip-points", () => {
       this.map.getCanvas().style.cursor = "";
       popup.remove();
     });
@@ -416,11 +414,13 @@ class MapComponent extends Component {
     // which is async, and so there was a disconnect between what category state was and what map.setFilter was pulling from
     // moving setFilter to the render method ensures it will always be filtering the correct state
     if (this.map) {
-      this.map.setFilter("pa-tip-projects", [
-        "all",
-        this.state.catFilter,
-        this.state.keyFilter
-      ]);
+      ["pa-tip-points", "pa-tip-lines"].forEach(layer => {
+        this.map.setFilter(layer, [
+          "all",
+          this.state.catFilter,
+          this.state.keyFilter
+        ]);
+      });
     }
 
     return (
