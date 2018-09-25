@@ -1,6 +1,34 @@
 import Inferno, { Component } from "inferno";
+import PrintTemplate from "react-print";
 
-import "./PrintPage.css";
+const printMain = {
+  position: "absolute",
+  height: "100%",
+  top: "1%",
+  padding: "2% 3%",
+  color: "#333"
+};
+const printTable = {
+  width: "100%",
+  padding: "2% 0",
+  textAlign: "center"
+};
+const printSubheadersWrap = {
+  padding: "2% 0",
+  display: "flex",
+  justifyContent: "space-around",
+  alignContent: "center"
+};
+const header = {
+  fontSize: "1.3rem",
+  textAlign: "center"
+};
+const subHeaders = {
+  fontSize: "1rem",
+  textAlign: "left",
+  paddingTop: "5%",
+  borderBottom: "1px solid black"
+};
 
 class PrintPage extends Component {
   constructor(props) {
@@ -8,40 +36,51 @@ class PrintPage extends Component {
   }
 
   render() {
-    console.log("props at render ", this.props);
     return (
-      <div className="print-page" style={this.props.show}>
-        <h1>{this.props.details.road_name}</h1>
+      <PrintTemplate style={printMain}>
+        <h1 style={header}>{this.props.details.road_name}</h1>
 
-        <h2>MPMS ID: {this.props.details.id}</h2>
+        <div style={printSubheadersWrap}>
+          <h2 style={{ fontSize: "1rem" }}>MPMS ID: {this.props.details.id}</h2>
 
-        <p>{this.props.details.description}</p>
+          <h2 style={{ fontSize: "1rem" }}>{this.props.details.county}</h2>
 
-        <table className="print-table">
+          <h2 style={{ fontSize: "1rem" }}>
+            AQ Code: {this.props.details.aq_code}
+          </h2>
+        </div>
+
+        <p style={{ paddingTop: "2%" }}>{this.props.details.description}</p>
+
+        <h1 style={subHeaders}>Project Funding:</h1>
+        <table style={printTable}>
           <thead>
             <tr>
-              <td colspan="2" style={{ background: "#666" }} />
-              <td colspan="4" style={{ background: "#333" }}>
-                <h3>TIP Program Years ($000)</h3>
+              <td colspan="2" />
+              <td
+                colspan="4"
+                style={{ fontWeight: "700", textAlign: "center" }}
+              >
+                TIP Program Years ($000)
               </td>
-              <td colspan="2" style={{ background: "#666" }} />
+              <td colspan="2" />
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td style={{ background: "#666" }}>
+            <tr style={{ color: "#f7f7f7" }}>
+              <td>
                 <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
               </td>
-              <td style={{ background: "#666" }}>
+              <td>
                 <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
               </td>
-              <td style={{ background: "#333" }}>2019</td>
-              <td style={{ background: "#333" }}>2020</td>
-              <td style={{ background: "#333" }}>2021</td>
-              <td style={{ background: "#333" }}>2022</td>
-              <td style={{ background: "#666" }}>2023-2026</td>
-              <td style={{ background: "#666" }}>2027-2030</td>
+              <td style={{ fontWeight: "700" }}>2019</td>
+              <td style={{ fontWeight: "700" }}>2020</td>
+              <td style={{ fontWeight: "700" }}>2021</td>
+              <td style={{ fontWeight: "700" }}>2022</td>
+              <td>2023-2026</td>
+              <td>2027-2030</td>
             </tr>
 
             {this.props.details.funding.data.map(row => (
@@ -66,16 +105,17 @@ class PrintPage extends Component {
           </tbody>
         </table>
 
-        <table className="print-table">
+        <h1 style={subHeaders}>Project Milestones:</h1>
+        <table style={printTable}>
           <thead>
             <tr>
-              <th style={{ background: "#333" }}>PHS Type</th>
+              <th>PHS Type</th>
 
-              <th style={{ background: "#333" }}>Milestone</th>
+              <th>Milestone</th>
 
-              <th style={{ background: "#333" }}>Estimated Date</th>
+              <th>Estimated Date</th>
 
-              <th style={{ background: "#333" }}>Actual Date</th>
+              <th>Actual Date</th>
             </tr>
           </thead>
 
@@ -90,7 +130,7 @@ class PrintPage extends Component {
             ))}
           </tbody>
         </table>
-      </div>
+      </PrintTemplate>
     );
   }
 }
