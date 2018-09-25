@@ -1,8 +1,10 @@
 import Inferno, { Component, linkEvent } from "inferno";
 import { connect } from "inferno-redux";
+import ReactToPrint from "react-to-print";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+import PrintPage from "../printPage/PrintPage.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -103,6 +105,21 @@ class Expanded extends Component {
                   <p onClick={this.backToResults}>
                     <em>back to results</em>
                   </p>
+                  <ReactToPrint
+                    trigger={() => (
+                      <p>
+                        <em>print</em>
+                      </p>
+                    )}
+                    content={() => this.printRef}
+                    copyStyles={false}
+                    closeAfterPrint={true}
+                  />
+                  <PrintPage
+                    details={details}
+                    show={"top: 0, left: 0"}
+                    ref={el => (this.printRef = el)}
+                  />
                 </div>
 
                 <figure>

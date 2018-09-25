@@ -33,9 +33,9 @@
 #content-mini-nav {
   height: 8vh;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
-  padding-left: 2vw;
+  padding: 0 2vw;
   margin-bottom: 1vh;
 }
 #content-mini-nav p {

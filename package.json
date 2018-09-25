@@ -29,6 +29,7 @@
     "inferno-scripts": "^6.3.0",
     "mapbox-gl": "^0.48.0",
     "react-autosuggest": "^9.4.0",
+    "react-to-print": "^2.0.0-alpha-3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0"
   },
