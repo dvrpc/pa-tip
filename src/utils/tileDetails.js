@@ -9,15 +9,13 @@ export const tileDetails = async (propsProject, width, height) => {
   let projectType;
   let borderBottom;
 
-  let project = propsProject.attributes;
-
-  if (project) {
+  if (propsProject) {
     // limit project names to 80 characters
-    projectName = project.ROAD_NAME;
+    projectName = propsProject.name;
     if (projectName.length > 40) projectName = projectName.slice(0, 36) + "...";
 
     // Get a background image for the project according to its type (function needs coords & category)
-    const path = geometryColorType(project);
+    const path = geometryColorType(propsProject);
 
     background = await cachedFetch(
       `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvK54P-Pb3skEYDLFVoRnSTLtRyG5GJ6U&size=${width}x${height}&maptype=satellite${path}`
@@ -26,7 +24,7 @@ export const tileDetails = async (propsProject, width, height) => {
       .then(b => URL.createObjectURL(b));
 
     // based on the project type, assign the gradient value for the caption text
-    projectType = project.DESCRIPTIO;
+    projectType = propsProject.category;
 
     borderBottom = `border-bottom: 10px solid ${colors[projectType].darkest}`;
 

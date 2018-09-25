@@ -56,13 +56,11 @@ class TilesContainer extends Component {
 
   render() {
     let projects;
-
     // handle keyword and bounds projects
     let keywordProjects =
       this.props.keywordProjects && this.props.keywordProjects.features
         ? this.props.keywordProjects.features
         : [];
-
     let boundsProjects =
       this.props.boundsProjects && this.props.boundsProjects.features
         ? this.props.boundsProjects.features
@@ -73,10 +71,9 @@ class TilesContainer extends Component {
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
       projects = projects.filter(
-        project => project.attributes.DESCRIPTIO === this.state.categoryToFilter
+        project => project.category === this.state.categoryToFilter
       );
     }
-
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -131,14 +128,12 @@ class TilesContainer extends Component {
             projects.map(feature => (
               <ListItem
                 data={feature}
-                key={feature.attributes.OBJECTID}
+                key={feature.mpms}
                 length={projects.length}
               />
             ))
           ) : (
-            projects.map(feature => (
-              <Tile data={feature} key={feature.attributes.OBJECTID} />
-            ))
+            projects.map(feature => <Tile data={feature} key={feature.mpms} />)
           )
         ) : (
           <img id="no-results" src={loading} alt="loading" />
@@ -163,4 +158,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TilesContainer);

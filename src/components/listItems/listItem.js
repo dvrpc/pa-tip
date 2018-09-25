@@ -14,7 +14,7 @@ class ListItem extends Component {
   }
 
   componentWillMount() {
-    let category = this.props.data.attributes.DESCRIPTIO;
+    let category = this.props.data.category;
 
     fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json").then(
       response => {
@@ -30,7 +30,7 @@ class ListItem extends Component {
   }
 
   render() {
-    const project = this.props.data.attributes;
+    const project = this.props.data;
     let thumbnailAlign;
 
     // formatting
@@ -53,13 +53,13 @@ class ListItem extends Component {
           src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
           className="list-category-thumbnail"
           style={imgStyle}
-          alt={`icon for ${project.DESCRIPTIO} projects`}
+          alt={`icon for ${project.category} projects`}
         />
 
         <div className="list-text">
-          <h2>{project.ROAD_NAME}</h2>
-          <h3>{project.CTY} County | Total Funding first 4 years</h3>
-          <h2 className="mpms">MPMS ID: {project.MPMS_ID}</h2>
+          <h2>{project.name}</h2>
+          <h3>{project.cnty} County | Total Funding first 4 years</h3>
+          <h2 className="mpms">MPMS ID: {project.mpms}</h2>
         </div>
       </div>
     );

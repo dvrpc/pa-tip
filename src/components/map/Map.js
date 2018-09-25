@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import Inferno, { Component, render } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
@@ -526,7 +526,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
-    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds)),
+    getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
     setMapCenter: latlng => dispatch(setMapCenter(latlng)),
     setMapState: position => dispatch(setMapState(position))
   };

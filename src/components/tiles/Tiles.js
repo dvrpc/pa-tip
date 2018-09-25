@@ -40,7 +40,7 @@ class Tile extends Component {
 
   render() {
     const calculatedProjectInfo = this.state.details;
-    const project = this.props.data.attributes;
+    const project = this.props.data;
     return (
       <div
         className="tile"
@@ -56,7 +56,7 @@ class Tile extends Component {
             {calculatedProjectInfo.projectName}
           </h2>
           <p className="tile-caption-text">
-            {project.CTY} County | {project.MPMS_ID}
+            {project.cnty} County | {project.mpms}
           </p>
         </div>
       </div>

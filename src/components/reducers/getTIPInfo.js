@@ -18,9 +18,9 @@ const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
 const get_full_tip = id => ({ type: GET_FULL_TIP, id });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
 const set_map_state = position => ({ type: SET_MAP_STATE, position });
-const get_tip_by_map_bounds = bounds => ({
+const get_tip_by_map_bounds = features => ({
   type: GET_TIP_BY_MAP_BOUNDS,
-  bounds
+  features
 });
 const set_filter = category => ({ type: SET_FILTER, category });
 const hydrate_geometry = geometry => ({ type: HYDRATE_GEOMETRY, geometry });
@@ -39,7 +39,7 @@ export default function tipReducer(state = [], action) {
     case SET_MAP_STATE:
       return Object.assign({}, state, { position: action.position });
     case GET_TIP_BY_MAP_BOUNDS:
-      return Object.assign({}, state, { projects: action.bounds });
+      return Object.assign({}, state, { projects: action.features });
     case GET_FULL_TIP:
       return Object.assign({}, state, { details: action.id });
     case SET_FILTER:
@@ -162,12 +162,8 @@ export const setFilter = category => dispatch => {
 };
 
 // get all projects within the boundaires of the current mapbox view
-export const getTIPByMapBounds = bounds => dispatch => {
-  fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_(TIP)_2019-2022/FeatureServer/0/query?geometry=${bounds}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&outSR=4326&f=json`
-  )
-    .then(response => response.json())
-    .then(projects => dispatch(get_tip_by_map_bounds(projects)));
+export const getTIPByMapBounds = features => dispatch => {
+  dispatch(get_tip_by_map_bounds(features));
 };
 
 // pull project information from URL for link sharing
