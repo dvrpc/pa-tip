@@ -3307,6 +3307,67 @@
       }
     },
     {
+      "id": "pa-tip-lines",
+      "source": "pa-tip",
+      "source-layer": "patip_line",
+      "type": "line",
+      "paint": {
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          1,
+          1,
+          7,
+          1.5,
+          8,
+          1.75,
+          9,
+          2,
+          10,
+          3,
+          11,
+          3.5
+        ],
+        "line-color": [
+          "match",
+          ["get", "DESCRIPTIO"],
+          "Bicycle/Pedestrian Improvement",
+          "#f26522",
+          "Bridge Repair/Replacement",
+          "#223860",
+          "Streetscape",
+          "#0b6d32",
+          "Transit Improvements",
+          "#729faa",
+          "Signal/ITS Improvements",
+          "#ed1c24",
+          "Roadway Rehabilitation",
+          "#511851",
+          "Roadway New Capacity",
+          "#9d1d20",
+          "Intersection/Interchange Improvements",
+          "#ffc10e",
+          "#5abf41"
+        ],
+        "line-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          1,
+          0.1,
+          7,
+          0.25,
+          8,
+          0.33,
+          9,
+          0.66,
+          10,
+          0.75
+        ]
+      }
+    },
+    {
       "id": "bridge-motorway-2",
       "type": "line",
       "metadata": {
@@ -4841,21 +4902,43 @@
       "source-layer": "country_label"
     },
     {
-      "id": "pa-tip-projects",
+      "id": "pa-tip-points",
       "source": "pa-tip",
       "source-layer": "patip_fy19",
-      "type": "symbol",
-      "layout": {
-        "icon-image": "{DESCRIPTIO}",
-        "icon-allow-overlap": true,
-        "icon-ignore-placement": true,
-        "text-allow-overlap": true,
-        "text-ignore-placement": true,
-        "icon-anchor": "bottom",
-        "icon-offset": [2, 8]
-      },
+      "type": "circle",
       "paint": {
-        "icon-opacity": 0
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 6],
+        "circle-color": "#666",
+        "circle-stroke-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          7,
+          1.5,
+          12,
+          6
+        ],
+        "circle-stroke-color": [
+          "match",
+          ["get", "DESCRIPTIO"],
+          "Bicycle/Pedestrian Improvement",
+          "#f26522",
+          "Bridge Repair/Replacement",
+          "#223860",
+          "Streetscape",
+          "#0b6d32",
+          "Transit Improvements",
+          "#729faa",
+          "Signal/ITS Improvements",
+          "#ed1c24",
+          "Roadway Rehabilitation",
+          "#511851",
+          "Roadway New Capacity",
+          "#9d1d20",
+          "Intersection/Interchange Improvements",
+          "#ffc10e",
+          "#5abf41"
+        ]
       },
       "interactive": true
     }
