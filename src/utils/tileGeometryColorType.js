@@ -58,7 +58,6 @@ export const colors = {
 };
 
 export const geometryColorType = project => {
-  console.log({ project });
   // TODO: map more than just points...
   const formattedLatLng = `${project.lat},${project.long}` + "";
 
