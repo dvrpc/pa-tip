@@ -3,6 +3,7 @@ import { connect } from "inferno-redux";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
+import PrintPage from "../printPage/PrintPage.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -19,13 +20,7 @@ class Expanded extends Component {
     };
   }
 
-  // function to iterate through history until it goes back to either a location or keyword result (if none, it goes back to the homepage)
-  // once this function is done move it into utils and wrap the onClick in a linkEvent
-  // issue: no way of knowing the previous pathnames or how many editions of expanded were rendered before
-  // need to get a reference to every time the page has re-rendered, and use that number to hit history.go(num)
-  // SOLUTION: pass the fragment from results to the state of expanded, push to that state
-  // will push back to home if they link directly from home so that's fine.
-  // could build in a case wehre if the fragment is / or "", push to location/philadelphia or something
+  // @TODO: function that does more than just history.goBack()
   backToResults = () => {
     this.props.history.goBack();
   };
@@ -92,183 +87,192 @@ class Expanded extends Component {
           colorScheme.middle
         } 65%, ${colorScheme.darkest})`),
         (toReturn = (
-          <div className="expanded">
-            <Navbar backgroundGradient={navBackground} />
-            <div className="wrapper">
-              <section className="left-column">
-                <div
-                  id="content-mini-nav"
-                  style={{ background: colorScheme.darkest }}
-                >
-                  <p onClick={this.backToResults}>
-                    <em>back to results</em>
-                  </p>
-                </div>
-
-                <figure>
+          <div>
+            <PrintPage details={details} id="print-mount" />
+            <div className="expanded" id="react-no-print">
+              <Navbar backgroundGradient={navBackground} id="expandedNav" />
+              <div className="wrapper">
+                <section className="left-column">
                   <div
-                    id="placeholder"
-                    ref={x => (this.streetview = x)}
-                    style={{
-                      background: `url(${noStreetview})`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center"
-                    }}
-                  />
-                </figure>
-
-                <h2 id="expanded-project-title" className="left-column-padding">
-                  {details.id
-                    ? details.id + ": " + details.road_name
-                    : "Project Title"}
-                </h2>
-
-                <div
-                  id="expanded-project-description"
-                  className="left-column-padding"
-                >
-                  <p>
-                    {details.description
-                      ? details.description
-                      : "Project Description"}
-                  </p>
-                  {details.limits && <div>{details.limits}</div>}
-                  <p>
-                    {details.municipalities && (
-                      <span>{details.municipalities}, </span>
-                    )}
-                    {details.county && <span>{details.county} County</span>}
-                  </p>
-                  {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
-                </div>
-              </section>
-              <section className="right-column">
-                <div
-                  className="tabs"
-                  style={{ background: colorScheme.darkest }}
-                >
-                  <button
-                    class="tablinks active"
-                    onClick={linkEvent(this, switchTabs)}
-                    ref={e => (this.fundingButton = e)}
+                    id="content-mini-nav"
+                    style={{ background: colorScheme.darkest }}
                   >
-                    Funding
-                  </button>
-                  <button
-                    class="tablinks"
-                    onClick={linkEvent(this, switchTabs)}
-                    ref={e => (this.milestonesButton = e)}
+                    <p onClick={this.backToResults}>
+                      <em>back to results</em>
+                    </p>
+                    <p onClick={window.print}>
+                      <em>print</em>
+                    </p>
+                  </div>
+
+                  <figure>
+                    <div
+                      id="placeholder"
+                      ref={x => (this.streetview = x)}
+                      style={{
+                        background: `url(${noStreetview})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center"
+                      }}
+                    />
+                  </figure>
+
+                  <h2
+                    id="expanded-project-title"
+                    className="left-column-padding"
                   >
-                    Milestones
-                  </button>
-                </div>
+                    {details.id
+                      ? details.id + ": " + details.road_name
+                      : "Project Title"}
+                  </h2>
 
-                <div
-                  id="Funding"
-                  class="table-wrapper"
-                  ref={e => (this.funding = e)}
-                >
-                  <table className="funding-and-awards-table">
-                    <thead>
-                      <tr>
-                        <td colspan="2" style={{ background: "#666" }} />
-                        <td colspan="4" style={{ background: "#333" }}>
-                          <h3>TIP Program Years ($000)</h3>
-                        </td>
-                        <td colspan="2" style={{ background: "#666" }} />
-                      </tr>
-                    </thead>
-                    <tbody style={{ background: colorScheme.lightest }}>
-                      <tr>
-                        <td style={{ background: "#666" }}>
-                          <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
-                        </td>
-                        <td style={{ background: "#666" }}>
-                          <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
-                        </td>
-                        <td style={{ background: "#333" }}>2019</td>
-                        <td style={{ background: "#333" }}>2020</td>
-                        <td style={{ background: "#333" }}>2021</td>
-                        <td style={{ background: "#333" }}>2022</td>
-                        <td style={{ background: "#666" }}>2023-2026</td>
-                        <td style={{ background: "#666" }}>2027-2030</td>
-                      </tr>
-                      {details.funding &&
-                        details.funding.data.map(row => (
-                          <tr className="table-data-rows">
-                            <td>{row[0]}</td>
-                            <td>{row[1]}</td>
-                            <td
-                              style={{
-                                background: colorScheme.middle,
-                                fontWeight: "700"
-                              }}
-                            >
-                              {row[2]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.middle,
-                                fontWeight: "700"
-                              }}
-                            >
-                              {row[3]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.middle,
-                                fontWeight: "700"
-                              }}
-                            >
-                              {row[4]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.middle,
-                                fontWeight: "700"
-                              }}
-                            >
-                              {row[5]}
-                            </td>
-                            <td>{row[6]}</td>
-                            <td>{row[7]}</td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
+                  <div
+                    id="expanded-project-description"
+                    className="left-column-padding"
+                  >
+                    <p>
+                      {details.description
+                        ? details.description
+                        : "Project Description"}
+                    </p>
+                    {details.limits && <div>{details.limits}</div>}
+                    <p>
+                      {details.municipalities && (
+                        <span>{details.municipalities}, </span>
+                      )}
+                      {details.county && <span>{details.county} County</span>}
+                    </p>
+                    {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
+                  </div>
+                </section>
+                <section className="right-column">
+                  <div
+                    className="tabs"
+                    style={{ background: colorScheme.darkest }}
+                  >
+                    <button
+                      class="tablinks active"
+                      onClick={linkEvent(this, switchTabs)}
+                      ref={e => (this.fundingButton = e)}
+                    >
+                      Funding
+                    </button>
+                    <button
+                      class="tablinks"
+                      onClick={linkEvent(this, switchTabs)}
+                      ref={e => (this.milestonesButton = e)}
+                    >
+                      Milestones
+                    </button>
+                  </div>
 
-                <div
-                  id="Milestones"
-                  class="table-wrapper hidden"
-                  ref={e => (this.milestones = e)}
-                >
-                  <table className="funding-and-awards-table">
-                    <thead>
-                      <tr>
-                        <th style={{ background: "#333" }}>PHS Type</th>
+                  <div
+                    id="Funding"
+                    class="table-wrapper"
+                    ref={e => (this.funding = e)}
+                  >
+                    <table className="funding-and-awards-table">
+                      <thead>
+                        <tr>
+                          <td colspan="2" style={{ background: "#666" }} />
+                          <td colspan="4" style={{ background: "#333" }}>
+                            <h3>TIP Program Years ($000)</h3>
+                          </td>
+                          <td colspan="2" style={{ background: "#666" }} />
+                        </tr>
+                      </thead>
+                      <tbody style={{ background: colorScheme.lightest }}>
+                        <tr>
+                          <td style={{ background: "#666" }}>
+                            <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
+                          </td>
+                          <td style={{ background: "#666" }}>
+                            <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
+                          </td>
+                          <td style={{ background: "#333" }}>2019</td>
+                          <td style={{ background: "#333" }}>2020</td>
+                          <td style={{ background: "#333" }}>2021</td>
+                          <td style={{ background: "#333" }}>2022</td>
+                          <td style={{ background: "#666" }}>2023-2026</td>
+                          <td style={{ background: "#666" }}>2027-2030</td>
+                        </tr>
+                        {details.funding &&
+                          details.funding.data.map(row => (
+                            <tr className="table-data-rows">
+                              <td>{row[0]}</td>
+                              <td>{row[1]}</td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                {row[2]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                {row[3]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                {row[4]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                {row[5]}
+                              </td>
+                              <td>{row[6]}</td>
+                              <td>{row[7]}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
 
-                        <th style={{ background: "#333" }}>Milestone</th>
+                  <div
+                    id="Milestones"
+                    class="table-wrapper hidden"
+                    ref={e => (this.milestones = e)}
+                  >
+                    <table className="funding-and-awards-table">
+                      <thead>
+                        <tr>
+                          <th style={{ background: "#333" }}>PHS Type</th>
 
-                        <th style={{ background: "#333" }}>Estimated Date</th>
+                          <th style={{ background: "#333" }}>Milestone</th>
 
-                        <th style={{ background: "#333" }}>Actual Date</th>
-                      </tr>
-                    </thead>
-                    <tbody style={{ background: colorScheme.lightest }}>
-                      {details.milestones &&
-                        details.milestones.data.map(row => (
-                          <tr className="table-data-rows">
-                            <td>{row[0]}</td>
-                            <td>{row[1]}</td>
-                            <td>{row[2]}</td>
-                            <td>{row[3]}</td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
+                          <th style={{ background: "#333" }}>Estimated Date</th>
+
+                          <th style={{ background: "#333" }}>Actual Date</th>
+                        </tr>
+                      </thead>
+                      <tbody style={{ background: colorScheme.lightest }}>
+                        {details.milestones &&
+                          details.milestones.data.map(row => (
+                            <tr className="table-data-rows">
+                              <td>{row[0]}</td>
+                              <td>{row[1]}</td>
+                              <td>{row[2]}</td>
+                              <td>{row[3]}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
         )))
