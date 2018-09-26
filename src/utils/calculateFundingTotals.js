@@ -15,7 +15,7 @@ export const getTotals = info => {
     totalFunding += row[6] + row[7];
   });
 
-  programYearsFunding = y2Funding + y2Funding + y3Funding + y4Funding;
+  programYearsFunding = y1Funding + y2Funding + y3Funding + y4Funding;
   totalFunding += programYearsFunding;
 
   return [
