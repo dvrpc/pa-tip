@@ -31,7 +31,6 @@ export const updateBounds = mapReference => {
       });
     }
   });
-  console.log({ renderedProjects });
   mapReference.props.getTIPByMapBounds(renderedProjects);
 };
 
