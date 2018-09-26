@@ -101,26 +101,20 @@ class Homepage extends Component {
                 FY2019 Transportation Improvement Program for Pennsylvania
                 (FY19-22)
               </h2>
+
               <p>
-                <strong>
-                  DVRPC is no longer accepting public comments on the Draft
-                  DVRPC FY2019 TIP for PA because the comment period has closed.
-                  Subsequent to Board adoption, you may view comments that were
-                  submitted during the public comment period by using our
-                  interactive web map app. After consideration of the public
-                  comments, the DVRPC Board may adopt the Draft TIP with any
-                  recommended changes at the June 28, 2018 Board meeting.
-                </strong>
-              </p>
-              <p>
-                This TIP was developed in cooperation with PennDOT, SEPTA, PART
-                and DVRPC's member counties and cities and represents the
-                transportation priorities for the region. At 5:00 p.m. Eastern
-                time on June 3, 2018, DVRPC closed the public comment period on
-                the Draft FY2019 TIP for the Pennsylvania counties in the DVRPC
-                region. Subsequent to Board adoption, comments submitted on the
-                Draft DVRPC FY2019 TIP for PA can be viewed online via the
-                interactive map web app.
+                Following a 30+ day public comment period, the DVRPC Board
+                adopted the DVRPC FY2019 TIP (FY19-22) for the Pennsylvania
+                portion of the region with Recommended Changes (see below) as
+                the priority program of transportation projects on June 28,
+                2018. The regional TIP is included in the Pennsylvania Statewide
+                Transportation Improvement Program (STIP), and was developed in
+                cooperation with PennDOT, SEPTA, Pottstown Area Rapid Transit
+                (PART), and DVRPC's member cities and counties. The TIP has been
+                approved by the federal review agencies (FHWA, FTA, and EPA) and
+                became the official DVRPC FY2019 TIP for PA on October 1, 2018.
+                Program lists (below) are updated on a regular basis as DVRPC
+                amends or modifies the program.
               </p>
 
               <h2>Recorded Information Session</h2>
@@ -148,7 +142,7 @@ class Homepage extends Component {
                     <span class="sm">[1.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/volume1-draft.pdf">
+                    <a href="/TIP/Draft/pdf/volume1-final.pdf">
                       TIP Document Text (includes abbreviations and codes)
                     </a>{" "}
                     <span class="sm">[1.0 MB pdf]</span>
