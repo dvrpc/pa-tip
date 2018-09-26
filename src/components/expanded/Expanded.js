@@ -9,15 +9,13 @@ import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
+import { getTotals } from "../../utils/calculateFundingTotals.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";
 
 class Expanded extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      initialVisit: -1
-    };
   }
 
   // @TODO: function that does more than just history.goBack()
@@ -80,15 +78,17 @@ class Expanded extends Component {
     let colorScheme;
     let navBackground;
     let toReturn;
+    let funding;
     this.props.details
       ? ((details = this.props.details),
+        (funding = getTotals(this.props.details.funding.data)),
         (colorScheme = colors[details.category]),
         (navBackground = `background: linear-gradient(to right, white 35%, ${
           colorScheme.middle
         } 65%, ${colorScheme.darkest})`),
         (toReturn = (
           <div>
-            <PrintPage details={details} id="print-mount" />
+            <PrintPage details={details} totals={funding} id="print-mount" />
             <div className="expanded" id="react-no-print">
               <Navbar backgroundGradient={navBackground} id="expandedNav" />
               <div className="wrapper">
@@ -237,6 +237,54 @@ class Expanded extends Component {
                               <td>{row[7]}</td>
                             </tr>
                           ))}
+                        <tr>
+                          <td
+                            colspan="2"
+                            style={{ fontWeight: "700", color: "#333" }}
+                          >
+                            Program Year Totals:
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            {funding[0]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            {funding[1]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            {funding[2]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            {funding[3]}
+                          </td>
+                          <td />
+                          <td />
+                        </tr>
+                        <tr style={{ background: "#666" }}>
+                          <td colspan="3">Total FY2019 - 2022 Cost:</td>
+                          <td style={{ fontWeight: "700" }}>{funding[4]}</td>
+                          <td colspan="3">Total FY2019 - 2030 Cost:</td>
+                          <td style={{ fontWeight: "700" }}>{funding[5]}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
