@@ -101,26 +101,20 @@ class Homepage extends Component {
                 FY2019 Transportation Improvement Program for Pennsylvania
                 (FY19-22)
               </h2>
+
               <p>
-                <strong>
-                  DVRPC is no longer accepting public comments on the Draft
-                  DVRPC FY2019 TIP for PA because the comment period has closed.
-                  Subsequent to Board adoption, you may view comments that were
-                  submitted during the public comment period by using our
-                  interactive web map app. After consideration of the public
-                  comments, the DVRPC Board may adopt the Draft TIP with any
-                  recommended changes at the June 28, 2018 Board meeting.
-                </strong>
-              </p>
-              <p>
-                This TIP was developed in cooperation with PennDOT, SEPTA, PART
-                and DVRPC's member counties and cities and represents the
-                transportation priorities for the region. At 5:00 p.m. Eastern
-                time on June 3, 2018, DVRPC closed the public comment period on
-                the Draft FY2019 TIP for the Pennsylvania counties in the DVRPC
-                region. Subsequent to Board adoption, comments submitted on the
-                Draft DVRPC FY2019 TIP for PA can be viewed online via the
-                interactive map web app.
+                Following a 30+ day public comment period, the DVRPC Board
+                adopted the DVRPC FY2019 TIP (FY19-22) for the Pennsylvania
+                portion of the region with Recommended Changes (see below) as
+                the priority program of transportation projects on June 28,
+                2018. The regional TIP is included in the Pennsylvania Statewide
+                Transportation Improvement Program (STIP), and was developed in
+                cooperation with PennDOT, SEPTA, Pottstown Area Rapid Transit
+                (PART), and DVRPC's member cities and counties. The TIP has been
+                approved by the federal review agencies (FHWA, FTA, and EPA) and
+                became the official DVRPC FY2019 TIP for PA on October 1, 2018.
+                Program lists (below) are updated on a regular basis as DVRPC
+                amends or modifies the program.
               </p>
 
               <h2>Recorded Information Session</h2>
@@ -142,78 +136,76 @@ class Homepage extends Component {
                 <h2>Detailed Information</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/HighlightsPA19.pdf">
+                    <a href="/TIP/PA/pdf/HighlightsPA19.pdf">
                       Highlights of the FY2019 TIP for PA
                     </a>{" "}
                     <span class="sm">[1.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/volume1-draft.pdf">
+                    <a href="/TIP/PA/pdf/volume1-final.pdf">
                       TIP Document Text (includes abbreviations and codes)
                     </a>{" "}
                     <span class="sm">[1.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/GenOverview.pdf">
+                    <a href="/TIP/PA/pdf/GenOverview.pdf">
                       General Overview of the TIP
                     </a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/ProgramSum.pdf">
-                      Program Summaries
-                    </a>{" "}
+                    <a href="/TIP/PA/pdf/ProgramSum.pdf">Program Summaries</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/EJ_TitleVI.pdf">
+                    <a href="/TIP/PA/pdf/EJ_TitleVI.pdf">
                       Responding to Environmental Justice (EJ) and Title VI
                       Concerns
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PBPP.pdf">
+                    <a href="/TIP/PA/pdf/PBPP.pdf">
                       Performance-Based Planning and Programming (PBPP)
                     </a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/Public.pdf">Public Involvement</a>{" "}
+                    <a href="/TIP/PA/pdf/Public.pdf">Public Involvement</a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/TIP19Libraries.pdf">
+                    <a href="/TIP/PA/pdf/TIP19Libraries.pdf">
                       Libraries Displaying the TIP
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/FY2019PATIP_Notice_Posting.pdf">
+                    <a href="/TIP/PA/pdf/FY2019PATIP_Notice_Posting.pdf">
                       Public Notice
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/MapAppListings.pdf">
+                    <a href="/TIP/PA/pdf/MapAppListings.pdf">
                       Mapping Application and Listings Overview
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-CorresByTitle.pdf">
+                    <a href="/TIP/PA/pdf/PA-CorresByTitle.pdf">
                       Project Index by Title
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-CorresByMPMS.pdf">
+                    <a href="/TIP/PA/pdf/PA-CorresByMPMS.pdf">
                       Project Index by MPMS#
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-CorresBySIMP.pdf">
+                    <a href="/TIP/PA/pdf/PA-CorresBySIMP.pdf">
                       Project Index for Interstate Management Program (IMP)
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
@@ -225,47 +217,47 @@ class Homepage extends Component {
                 <h2>Program Lists</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/paprogram.pdf">All Projects</a>{" "}
+                    <a href="/TIP/PA/pdf/paprogram.pdf">All Projects</a>{" "}
                     <span class="sm">[2.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/buck19d.pdf">Bucks County</a>{" "}
+                    <a href="/TIP/PA/pdf/buck19f.pdf">Bucks County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/ches19d.pdf">Chester County</a>{" "}
+                    <a href="/TIP/PA/pdf/ches19f.pdf">Chester County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/dela19d.pdf">Delaware County</a>{" "}
+                    <a href="/TIP/PA/pdf/dela19f.pdf">Delaware County</a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/mont19d.pdf">Montgomery County</a>{" "}
+                    <a href="/TIP/PA/pdf/mont19f.pdf">Montgomery County</a>{" "}
                     <span class="sm">[0.4 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/phil19d.pdf">Philadelphia County</a>{" "}
+                    <a href="/TIP/PA/pdf/phil19f.pdf">Philadelphia County</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/vcpa19d.pdf">
+                    <a href="/TIP/PA/pdf/vcpa19f.pdf">
                       Projects in Various Counties
                     </a>{" "}
                     <span class="sm">[0.2 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/trpa19d.pdf">Transit Projects</a>{" "}
+                    <a href="/TIP/PA/pdf/trpa19f.pdf">Transit Projects</a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/simp19d.pdf">
+                    <a href="/TIP/PA/pdf/simp19f.pdf">
                       Interstate Management Program Projects
                     </a>{" "}
                     <span class="sm">[0.4 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-2019-Competitive-Programs.pdf">
+                    <a href="/TIP/PA/pdf/PA-2019-Competitive-Programs.pdf">
                       Competitive Programs
                     </a>{" "}
                     <span class="sm">[0.3 MB pdf]</span>
@@ -277,40 +269,40 @@ class Homepage extends Component {
                 <h2>Appendices</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/DVRPC-Board-Resolutions.pdf">
+                    <a href="/TIP/PA/pdf/DVRPC-Board-Resolutions.pdf">
                       A – Board Resolutions
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PA-2019-Financial-Guidance.pdf">
+                    <a href="/TIP/PA/pdf/PA-2019-Financial-Guidance.pdf">
                       B – Financial, and General and Procedural Guidance,
                       including SEPTA' and PART's Financial Capacity Analysis
                     </a>{" "}
                     <span class="sm">[3.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/Conformity-19TIP-ExecSum.pdf">
+                    <a href="/TIP/PA/pdf/Conformity-19TIP-ExecSum.pdf">
                       C – Executive Summary of the Documentation of the
                       Conformity Finding
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
+                    <a href="/TIP/PA/pdf/DVRPC-TIP-Project-Benefit-Criteria-2019.pdf">
+                      D – DVRPC TIP Project Benefit Criteria
+                    </a>{" "}
+                    <span class="sm">[0.3 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/PA/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
                       E – Memorandum of Understanding on Procedures to Amend and
                       Modify the TIP
                     </a>{" "}
                     <span class="sm">[1.6 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/DVRPC-TIP-Project-Benefit-Criteria-2019.pdf">
-                      D – DVRPC TIP Project Benefit Criteria
-                    </a>{" "}
-                    <span class="sm">[0.3 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="/TIP/Draft/pdf/AddendumPubInvolve19.pdf">
+                    <a href="/TIP/PA/pdf/PA-2017-SEPTA-Financial-Capacity-Analysis.pdf">
                       F – Summary of the TIP Public Involvement Process, Summary
                       of Public Comments, Original Public Comments, Agency
                       Responses, List of Recommended Changes, and Supporting
