@@ -117,21 +117,6 @@ class Homepage extends Component {
                 amends or modifies the program.
               </p>
 
-              <h2>Recorded Information Session</h2>
-              <p>
-                To learn more about the Public Comment Period for the Draft
-                FY2019 TIP for Pennsylvania and its related Draft Transportation
-                Conformity Demonstration, listen to this recorded{" "}
-                <a
-                  rel="external"
-                  target="_blank"
-                  href=" https://dvrpc.webex.com/dvrpc/lsr.php?RCID=02518aad674a4ff9a909a0a69985454e"
-                >
-                  webinar from May 1, 2018.
-                </a>{" "}
-                <span class="sm"> [26 min 15 sec]</span>
-              </p>
-
               <div>
                 <h2>Detailed Information</h2>
                 <ul class="list-group">
@@ -276,15 +261,14 @@ class Homepage extends Component {
                   </li>
                   <li class="list-group-item">
                     <a href="/TIP/PA/pdf/PA-2019-Financial-Guidance.pdf">
-                      B – Financial, and General and Procedural Guidance,
-                      including SEPTA' and PART's Financial Capacity Analysis
+                      B – State DOT Financial Guidance
                     </a>{" "}
                     <span class="sm">[3.0 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/PA/pdf/Conformity-19TIP-ExecSum.pdf">
-                      C – Executive Summary of the Documentation of the
-                      Conformity Finding
+                    <a href="/TIP/PA/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
+                      C – Memorandum of Understanding on Procedures to Amend and
+                      Modify the TIP
                     </a>{" "}
                     <span class="sm">[0.9 MB pdf]</span>
                   </li>
@@ -295,20 +279,32 @@ class Homepage extends Component {
                     <span class="sm">[0.3 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
-                    <a href="/TIP/PA/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
-                      E – Memorandum of Understanding on Procedures to Amend and
-                      Modify the TIP
+                    <a href="/TIP/PA/pdf/PA-2019-Procedural-Guidance.pdf">
+                      E – State DOT General and Procedural Guidance
                     </a>{" "}
                     <span class="sm">[1.6 MB pdf]</span>
                   </li>
                   <li class="list-group-item">
                     <a href="/TIP/PA/pdf/PA-2017-SEPTA-Financial-Capacity-Analysis.pdf">
-                      F – Summary of the TIP Public Involvement Process, Summary
-                      of Public Comments, Original Public Comments, Agency
-                      Responses, List of Recommended Changes, and Supporting
-                      Documentation
+                      F – SEPTA’s and PART’s Financial Capacity Analysis
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/PA/pdf/Conformity-19TIP-ExecSum.pdf">
+                      G - Executive Summary of the Documentation of the
+                      Conformity Finding
+                    </a>{" "}
+                    <span class="sm">[0.4 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/PA/pdf/AddendumPubInvolve19.pdf">
+                      H - Summary of the TIP Public Involvement Process; Summary
+                      of Public Comments; Original Public Comments; Agency
+                      responses; List of Recommended Changes; and Supporting
+                      Documentation
+                    </a>{" "}
+                    <span class="sm">[29 MB pdf]</span>
                   </li>
                 </ul>
               </div>

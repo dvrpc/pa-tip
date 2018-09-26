@@ -26,7 +26,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navBar" style={this.props.backgroundGradient}>
-        <a className="navbar-link-to-home" href="/TIP/Draft/">
+        <a className="navbar-link-to-home" href="/TIP/PA/">
           <img
             id="TIPlogo"
             className="navbar-logo"

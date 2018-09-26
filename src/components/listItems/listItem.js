@@ -2,6 +2,7 @@ import Inferno, { Component, linkEvent } from "inferno";
 import { withRouter } from "inferno-router";
 
 import { clickTile } from "../../utils/clickTile.js";
+import { showMarker } from "../../utils/hoverResultsShowMarker.js";
 
 import "./listItem.css";
 
@@ -48,7 +49,11 @@ class ListItem extends Component {
     };
 
     return (
-      <div className="list-item" onClick={linkEvent(this, clickTile)}>
+      <div
+        className="list-item"
+        onClick={linkEvent(this, clickTile)}
+        onMouseOver={linkEvent(this, showMarker)}
+      >
         <img
           src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
           className="list-category-thumbnail"

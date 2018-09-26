@@ -13,20 +13,6 @@ class Tile extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    /*    console.log('this props at will receive ', this.props.data)
-    console.log('next props at will receive ', nextProps.data)
-
-    // paint again if a new project comes into view
-    if(!Object.is(nextProps.data.attributes, this.props.data.attributes)) {
-      tileDetails(
-        nextProps.data,
-        this.tileRef.clientWidth,
-        this.tileRef.clientHeight
-      ).then(details => this.setState({ details }));
-    }*/
-  }
-
   componentDidMount() {
     // get extra tile info only if it doesn't aleady exist
     if (!this.state.details.length) {
