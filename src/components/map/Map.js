@@ -68,26 +68,6 @@ class MapComponent extends Component {
     });
 
     this.setState({ layers });
-
-    /*    
-      OLD WAY - might be running too many setLayoutProperty. New way doesn't fix the bug but it might be slightly more efficient
-      //toggle selected layer state
-      Object.keys(layers).forEach(layer => {
-
-        // set other layer states to false
-        if (layer !== selectedLayer) layers[layer] = false
-
-        // set currently active layer to true or false depending on its current state
-        else layers[layer] ? layers[layer] = false : layers[layer] = true
-
-        //update layers
-        this.map.setLayoutProperty(
-          layer,
-          "visibility",
-          layers[layer] ? "visible" : "none"
-        );
-      });
-    */
   };
 
   toggleDropdown = e => {
@@ -150,6 +130,7 @@ class MapComponent extends Component {
       let zoom = new mapboxgl.NavigationControl();
       this.map.addControl(zoom, "bottom-left");
 
+      // TODO: re-write this whole section. DRY shit
       this.map.addSource("IPD", {
         type: "geojson",
         data:

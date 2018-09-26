@@ -128,12 +128,14 @@ class TilesContainer extends Component {
             projects.map(feature => (
               <ListItem
                 data={feature}
-                key={feature.mpms}
+                key={feature.mapbox_id}
                 length={projects.length}
               />
             ))
           ) : (
-            projects.map(feature => <Tile data={feature} key={feature.mpms} />)
+            projects.map(feature => (
+              <Tile data={feature} key={feature.mapbox_id} />
+            ))
           )
         ) : (
           <img id="no-results" src={loading} alt="loading" />

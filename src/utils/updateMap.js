@@ -24,10 +24,14 @@ export const updateBounds = mapReference => {
         long:
           item.layer.id == "pa-tip-points"
             ? item.geometry.coordinates[0]
-            : item.geometry.coordinates[1][0]
+            : item.geometry.coordinates[1][0],
+        mapbox_id: `${item.properties.MPMS_ID}_${
+          item._vectorTileFeature._geometry
+        }`
       });
     }
   });
+  console.log({ renderedProjects });
   mapReference.props.getTIPByMapBounds(renderedProjects);
 };
 
