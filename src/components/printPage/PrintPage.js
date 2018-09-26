@@ -89,21 +89,40 @@ class PrintPage extends Component {
 
                 <td>{row[1]}</td>
 
-                <td style={{ fontWeight: "700" }}>{row[2]}</td>
+                <td>{row[2]}</td>
 
-                <td style={{ fontWeight: "700" }}>{row[3]}</td>
+                <td>{row[3]}</td>
 
-                <td style={{ fontWeight: "700" }}>{row[4]}</td>
+                <td>{row[4]}</td>
 
-                <td style={{ fontWeight: "700" }}>{row[5]}</td>
+                <td>{row[5]}</td>
 
                 <td>{row[6]}</td>
 
                 <td>{row[7]}</td>
               </tr>
             ))}
+            <tr>
+              <td colspan="2" style={{ fontWeight: "700", color: "#333" }}>
+                Program Year Totals:
+              </td>
+              <td style={{ fontWeight: "700" }}>{this.props.totals[0]}</td>
+              <td style={{ fontWeight: "700" }}>{this.props.totals[1]}</td>
+              <td style={{ fontWeight: "700" }}>{this.props.totals[2]}</td>
+              <td style={{ fontWeight: "700" }}>{this.props.totals[3]}</td>
+              <td />
+              <td />
+            </tr>
           </tbody>
         </table>
+
+        <p style={{ marginLeft: "2%" }}>
+          Total FY2019 - 2022 Cost: <strong>${this.props.totals[4]}</strong>
+        </p>
+
+        <p style={{ marginLeft: "2%" }}>
+          Total FY2019 - 2030 Cost: <strong>${this.props.totals[5]}</strong>
+        </p>
 
         <h1 style={subHeaders}>Project Milestones:</h1>
         <table style={printTable}>

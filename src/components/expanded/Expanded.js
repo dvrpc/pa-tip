@@ -88,7 +88,7 @@ class Expanded extends Component {
         } 65%, ${colorScheme.darkest})`),
         (toReturn = (
           <div>
-            <PrintPage details={details} id="print-mount" />
+            <PrintPage details={details} totals={funding} id="print-mount" />
             <div className="expanded" id="react-no-print">
               <Navbar backgroundGradient={navBackground} id="expandedNav" />
               <div className="wrapper">
