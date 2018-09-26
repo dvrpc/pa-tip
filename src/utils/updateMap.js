@@ -2,21 +2,37 @@ import mapboxgl from "mapbox-gl";
 
 export const updateBounds = mapReference => {
   updateMapPosition(mapReference);
-
-  if (
-    mapReference.props.keywordProjects &&
-    mapReference.props.keywordProjects.features
-  ) {
-    return;
-  }
-  let bounds = mapReference.map.getBounds();
-
-  const NEbounds = bounds.getNorthEast();
-  const SWbounds = bounds.getSouthWest();
-
-  bounds = [NEbounds.lng, NEbounds.lat, SWbounds.lng, SWbounds.lat];
-
-  mapReference.props.getTIPByMapBounds(bounds);
+  let renderedProjects = {
+    allMPMS: [],
+    features: []
+  };
+  let rendered = mapReference.map.queryRenderedFeatures({
+    layers: ["pa-tip-points", "pa-tip-lines"]
+  });
+  rendered.forEach(item => {
+    if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) == -1) {
+      renderedProjects.allMPMS.push(item.properties.MPMS_ID);
+      renderedProjects.features.push({
+        cnty: "Montgomery", // REPLACE ONCE VT GETS UPDATED W/ COUNTIES
+        mpms: item.properties.MPMS_ID,
+        category: item.properties.DESCRIPTIO,
+        name: item.properties.ROAD_NAME,
+        lat:
+          item.layer.id == "pa-tip-points"
+            ? item.geometry.coordinates[1]
+            : item.geometry.coordinates[0][1],
+        long:
+          item.layer.id == "pa-tip-points"
+            ? item.geometry.coordinates[0]
+            : item.geometry.coordinates[1][0],
+        mapbox_id: `${item.properties.MPMS_ID}_${
+          item._vectorTileFeature._geometry
+        }`
+      });
+    }
+  });
+  console.log({ renderedProjects });
+  mapReference.props.getTIPByMapBounds(renderedProjects);
 };
 
 export const keywordBounds = (mapReference, data) => {

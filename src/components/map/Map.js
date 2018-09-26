@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import Inferno, { Component, render } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
@@ -37,10 +37,6 @@ class MapComponent extends Component {
     );
   }
 
-  /*
-    REMINDER: commenting out this entire function *still* results in the hard refresh on initial selection of a dropdown menu item.
-    That means the hard refresh is being cause by something else. Might need an e.preventDefault...holy shit...
-  */
   updateLayerVisibility = selectedLayer => {
     let { layers } = this.state;
 
@@ -68,26 +64,6 @@ class MapComponent extends Component {
     });
 
     this.setState({ layers });
-
-    /*    
-      OLD WAY - might be running too many setLayoutProperty. New way doesn't fix the bug but it might be slightly more efficient
-      //toggle selected layer state
-      Object.keys(layers).forEach(layer => {
-
-        // set other layer states to false
-        if (layer !== selectedLayer) layers[layer] = false
-
-        // set currently active layer to true or false depending on its current state
-        else layers[layer] ? layers[layer] = false : layers[layer] = true
-
-        //update layers
-        this.map.setLayoutProperty(
-          layer,
-          "visibility",
-          layers[layer] ? "visible" : "none"
-        );
-      });
-    */
   };
 
   toggleDropdown = e => {
@@ -144,8 +120,13 @@ class MapComponent extends Component {
         this.setState({ keyFilter });
       }
 
-      this.map.setPaintProperty("pa-tip-projects", "icon-opacity", 1.0);
+      //this.buildCategoryFilter(this.props.category);
 
+      // add zoom controls
+      let zoom = new mapboxgl.NavigationControl();
+      this.map.addControl(zoom, "bottom-left");
+
+      // TODO: re-write this whole section. DRY shit
       this.map.addSource("IPD", {
         type: "geojson",
         data:
@@ -379,7 +360,7 @@ class MapComponent extends Component {
       }
     });
 
-    this.map.on("click", "pa-tip-projects", e => {
+    this.map.on("click", "pa-tip-points", e => {
       clickTile({
         props: {
           history,
@@ -389,7 +370,7 @@ class MapComponent extends Component {
     });
 
     // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mousemove", "pa-tip-projects", e => {
+    this.map.on("mousemove", "pa-tip-points", e => {
       this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
       const category = e.features[0].properties.DESCRIPTIO;
@@ -407,7 +388,7 @@ class MapComponent extends Component {
     });
 
     // Change it back to a pointer when it leaves.
-    this.map.on("mouseleave", "pa-tip-projects", () => {
+    this.map.on("mouseleave", "pa-tip-points", () => {
       this.map.getCanvas().style.cursor = "";
       popup.remove();
     });
@@ -456,12 +437,19 @@ class MapComponent extends Component {
   }
 
   render() {
-    if (this.map && this.state.catFilter && this.state.keyFilter) {
-      this.map.setFilter("pa-tip-projects", [
-        "all",
-        this.state.catFilter,
-        this.state.keyFilter
-      ]);
+    if (this.map) {
+      let lines = this.map.getLayer("pa-tip-lines");
+      let points = this.map.getLayer("pa-tip-points");
+
+      if (points && lines) {
+        ["pa-tip-points", "pa-tip-lines"].forEach(layer => {
+          this.map.setFilter(layer, [
+            "all",
+            this.state.catFilter,
+            this.state.keyFilter
+          ]);
+        });
+      }
     }
 
     return (
@@ -515,7 +503,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
-    getTIPByMapBounds: bounds => dispatch(getTIPByMapBounds(bounds)),
+    getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
     setMapCenter: latlng => dispatch(setMapCenter(latlng)),
     setMapState: position => dispatch(setMapState(position))
   };
