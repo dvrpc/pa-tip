@@ -237,6 +237,68 @@ class Expanded extends Component {
                               <td>{row[7]}</td>
                             </tr>
                           ))}
+                        <tr>
+                          <td
+                            colspan="2"
+                            style={{ fontWeight: "700", color: "#333" }}
+                          >
+                            Fiscal Year Totals:
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            0
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            300
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            0
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            11000
+                          </td>
+                          <td />
+                          <td />
+                        </tr>
+                        <tr style={{ background: "#666" }}>
+                          <td />
+                          <td />
+                          <td colspan="3">Total FY2019 - 2022 Cost:</td>
+                          <td>
+                            <strong>14000</strong>
+                          </td>
+                          <td />
+                          <td />
+                        </tr>
+                        <tr style={{ background: "#666" }}>
+                          <td />
+                          <td />
+                          <td colspan="3">Total FY2019 - 2030 Cost:</td>
+                          <td>
+                            <strong>14000</strong>
+                          </td>
+                          <td />
+                          <td />
+                        </tr>
                       </tbody>
                     </table>
                   </div>
