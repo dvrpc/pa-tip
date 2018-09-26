@@ -144,7 +144,7 @@ class MapComponent extends Component {
         this.setState({ keyFilter });
       }
 
-      this.buildCategoryFilter(this.props.category);
+      //this.buildCategoryFilter(this.props.category);
 
       // add zoom controls
       let zoom = new mapboxgl.NavigationControl();
@@ -460,19 +460,19 @@ class MapComponent extends Component {
   }
 
   render() {
-    // the filter wasn't working because this.map.setFilter was being called immediately after setting category state,
-    // which is async, and so there was a disconnect between what category state was and what map.setFilter was pulling from
-    // moving setFilter to the render method ensures it will always be filtering the correct state
     if (this.map) {
-      ["pa-tip-points", "pa-tip-lines"].forEach(layer => {
-        if (this.map && this.state.catFilter && this.state.keyFilter) {
+      let lines = this.map.getLayer("pa-tip-lines");
+      let points = this.map.getLayer("pa-tip-points");
+
+      if (points && lines) {
+        ["pa-tip-points", "pa-tip-lines"].forEach(layer => {
           this.map.setFilter(layer, [
             "all",
             this.state.catFilter,
             this.state.keyFilter
           ]);
-        }
-      });
+        });
+      }
     }
 
     return (
@@ -533,8 +533,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MapComponent)
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
 );
