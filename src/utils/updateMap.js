@@ -1,4 +1,5 @@
 import mapboxgl from "mapbox-gl";
+import { colors } from "./tileGeometryColorType.js";
 
 export const updateBounds = mapReference => {
   updateMapPosition(mapReference);
@@ -66,4 +67,32 @@ const updateMapPosition = instance => {
     center: instance.map.getCenter(),
     zoom: instance.map.getZoom()
   });
+};
+
+export const showPopup = (marker, map) => {
+  let tilePopup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+    offset: {
+      top: [0, 0],
+      "top-left": [0, 0],
+      "top-right": [0, 0],
+      bottom: [0, -25],
+      "bottom-left": [0, -25],
+      "bottom-right": [0, -25],
+      left: [15, -26],
+      right: [-15, -26]
+    }
+  });
+
+  tilePopup
+    .setLngLat([marker.long, marker.lat])
+    .setHTML(
+      `<h2>${marker.mpms}</h2><p style="border-bottom: 8px solid #${
+        colors[marker.category].forMap
+      };">${marker.name}</p>`
+    )
+    .addTo(map);
+
+  return tilePopup;
 };

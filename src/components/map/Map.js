@@ -9,8 +9,7 @@ import {
   setMapCenter,
   setMapState
 } from "../reducers/getTIPInfo";
-import { updateBounds, keywordBounds } from "../../utils/updateMap";
-import { colors } from "../../utils/tileGeometryColorType.js";
+import { updateBounds, keywordBounds, showPopup } from "../../utils/updateMap";
 import { clickTile } from "../../utils/clickTile.js";
 
 import "./Map.css";
@@ -345,21 +344,6 @@ class MapComponent extends Component {
       );
     });
 
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false,
-      offset: {
-        top: [0, 0],
-        "top-left": [0, 0],
-        "top-right": [0, 0],
-        bottom: [0, -25],
-        "bottom-left": [0, -25],
-        "bottom-right": [0, -25],
-        left: [15, -26],
-        right: [-15, -26]
-      }
-    });
-
     this.map.on("click", "pa-tip-points", e => {
       clickTile({
         props: {
@@ -369,25 +353,23 @@ class MapComponent extends Component {
       });
     });
 
-    // Change the cursor to a pointer when the mouse is over the projects layer.
-    this.map.on("mousemove", "pa-tip-points", e => {
+    let popup;
+
+    // show popup when a user hovers over a marker.
+    this.map.on("mouseenter", "pa-tip-points", e => {
       this.map.getCanvas().style.cursor = "pointer";
       const coordinates = e.features[0].geometry.coordinates.slice();
+      const long = coordinates[0];
+      const lat = coordinates[1];
       const category = e.features[0].properties.DESCRIPTIO;
       const mpms = e.features[0].properties.MPMS_ID;
       const name = e.features[0].properties.ROAD_NAME;
 
-      popup
-        .setLngLat(coordinates)
-        .setHTML(
-          `<h2>${mpms}</h2><p style="border-bottom: 8px solid #${
-            colors[category].forMap
-          };">${name}</p>`
-        )
-        .addTo(this.map);
+      const marker = { long, lat, mpms, category, name };
+      popup = showPopup(marker, this.map);
     });
 
-    // Change it back to a pointer when it leaves.
+    // remove popup when the user leaves
     this.map.on("mouseleave", "pa-tip-points", () => {
       this.map.getCanvas().style.cursor = "";
       popup.remove();
@@ -431,38 +413,9 @@ class MapComponent extends Component {
         zoom: 13
       });
 
-    // refactor popup logic to update map function.
-    //two funcitons:
-    //set popup (expect params, sets the jawn)
-    //remove popup (pass a popup, remove it)
-
     if (nextProps.markerFromTiles) {
-      let tilePopup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false,
-        offset: {
-          top: [0, 0],
-          "top-left": [0, 0],
-          "top-right": [0, 0],
-          bottom: [0, -25],
-          "bottom-left": [0, -25],
-          "bottom-right": [0, -25],
-          left: [15, -26],
-          right: [-15, -26]
-        }
-      });
-
-      let marker = nextProps.markerFromTiles;
-
-      tilePopup
-        .setLngLat([marker.long, marker.lat])
-        .setHTML(
-          `<h2>${marker.mpms}</h2><p style="border-bottom: 8px solid #${
-            colors[marker.category].forMap
-          };">${marker.name}</p>`
-        )
-        .addTo(this.map);
-
+      const marker = nextProps.markerFromTiles;
+      const tilePopup = showPopup(marker, this.map);
       this.setState({ tilePopup });
     }
 
