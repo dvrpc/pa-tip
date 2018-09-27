@@ -77,11 +77,11 @@ export const showPopup = (marker, map) => {
       top: [0, 0],
       "top-left": [0, 0],
       "top-right": [0, 0],
-      bottom: [0, -20],
-      "bottom-left": [0, -20],
-      "bottom-right": [0, -20],
-      left: [15, -25],
-      right: [-15, -25]
+      bottom: [0, -15],
+      "bottom-left": [0, -15],
+      "bottom-right": [0, -15],
+      left: [15, -5],
+      right: [-15, -5]
     }
   });
 
