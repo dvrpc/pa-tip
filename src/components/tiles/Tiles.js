@@ -13,20 +13,6 @@ class Tile extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    /*    console.log('this props at will receive ', this.props.data)
-    console.log('next props at will receive ', nextProps.data)
-
-    // paint again if a new project comes into view
-    if(!Object.is(nextProps.data.attributes, this.props.data.attributes)) {
-      tileDetails(
-        nextProps.data,
-        this.tileRef.clientWidth,
-        this.tileRef.clientHeight
-      ).then(details => this.setState({ details }));
-    }*/
-  }
-
   componentDidMount() {
     // get extra tile info only if it doesn't aleady exist
     if (!this.state.details.length) {
@@ -40,7 +26,7 @@ class Tile extends Component {
 
   render() {
     const calculatedProjectInfo = this.state.details;
-    const project = this.props.data.attributes;
+    const project = this.props.data;
     return (
       <div
         className="tile"
@@ -56,7 +42,7 @@ class Tile extends Component {
             {calculatedProjectInfo.projectName}
           </h2>
           <p className="tile-caption-text">
-            {project.CTY} County | {project.MPMS_ID}
+            {project.cnty} County | {project.mpms}
           </p>
         </div>
       </div>
