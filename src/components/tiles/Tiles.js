@@ -1,9 +1,11 @@
 import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
 import { clickTile } from "../../utils/clickTile.js";
+import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
 
 class Tile extends Component {
   constructor(props) {
@@ -31,6 +33,8 @@ class Tile extends Component {
       <div
         className="tile"
         onClick={linkEvent(this, clickTile)}
+        onMouseEnter={linkEvent(project, this.props.getMarkerInfo)}
+        onMouseLeave={linkEvent(null, this.props.getMarkerInfo)}
         style={`background: url(${calculatedProjectInfo.background})`}
         ref={tile => (this.tileRef = tile)}
       >
@@ -50,4 +54,10 @@ class Tile extends Component {
   }
 }
 
-export default withRouter(Tile);
+const mapDispatchToProps = dispatch => {
+  return {
+    getMarkerInfo: tile => dispatch(getMarkerInfo(tile))
+  };
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Tile));
