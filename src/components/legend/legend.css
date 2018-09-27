@@ -1,0 +1,15 @@
+.legendItem-container{
+    display: none;
+  }
+  .legendItem-container.show{
+    display: block;
+  }
+  .legendItem-title{
+    color: #666;
+    text-align: center;
+    margin: 1rem 0;  
+  }
+  #legendContent-ipd{
+    width: 80%;
+    height: 20%;
+  }

@@ -13,7 +13,7 @@ export const updateBounds = mapReference => {
     if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) == -1) {
       renderedProjects.allMPMS.push(item.properties.MPMS_ID);
       renderedProjects.features.push({
-        cnty: "Montgomery", // REPLACE ONCE VT GETS UPDATED W/ COUNTIES
+        cnty: item.properties.CTY,
         mpms: item.properties.MPMS_ID,
         category: item.properties.DESCRIPTIO,
         name: item.properties.ROAD_NAME,

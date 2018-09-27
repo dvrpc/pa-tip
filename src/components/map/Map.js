@@ -14,6 +14,7 @@ import { colors } from "../../utils/tileGeometryColorType.js";
 import { clickTile } from "../../utils/clickTile.js";
 import "./Map.css";
 import mapStyle from "./style.json";
+import Legend from "../legend/legend.js";
 
 class MapComponent extends Component {
   constructor(props) {
@@ -21,13 +22,14 @@ class MapComponent extends Component {
 
     this.state = {
       layers: {
-        "Indicators of Potential Disadvantage": false,
-        "CMP Corridors": false,
-        "Connections 2045 Centers": false,
-        "Freight Centers": false,
-        "DVRPC Land Use (2015)": false
+        "Indicators of Potential Disadvantage": { show: false, short: "IPD" },
+        "CMP Corridors": { show: false, short: "CMP" },
+        "Connections 2045 Centers": { show: false, short: "LRP" },
+        "Freight Centers": { show: false, short: "Freight" },
+        "DVRPC Land Use (2015)": { show: false, short: "Land Use" }
       },
-      toggleDropdown: false,
+      toggleLayerList: false,
+      toggleLegendList: false,
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""]
     };
@@ -46,19 +48,21 @@ class MapComponent extends Component {
 
       // set other layer states to false
       if (layer !== selectedLayer) {
-        layers[layer] = false;
+        layers[layer].show = false;
 
         if (isVisible) {
           this.map.setLayoutProperty(layer, "visibility", "none");
         }
       } else {
         // set currently active layer to true or false depending on its current state
-        layers[layer] ? (layers[layer] = false) : (layers[layer] = true);
+        layers[layer].show
+          ? (layers[layer].show = false)
+          : (layers[layer].show = true);
 
         this.map.setLayoutProperty(
           layer,
           "visibility",
-          layers[layer] ? "visible" : "none"
+          layers[layer].show ? "visible" : "none"
         );
       }
     });
@@ -66,9 +70,21 @@ class MapComponent extends Component {
     this.setState({ layers });
   };
 
+  updateLegendVisibility = selectedLayer => {
+    let legends = document.querySelectorAll(".legendItem-container");
+    let short = this.state.layers[selectedLayer].short;
+    legends.forEach(legend => {
+      legend.id != `legendItem-${short}`
+        ? legend.classList.remove("show")
+        : legend.classList.add("show");
+    });
+  };
+
   toggleDropdown = e => {
     e.preventDefault();
-    this.setState({ toggleDropdown: !this.state.toggleDropdown });
+    e.target.id == "layerMenuButton"
+      ? this.setState({ toggleLayerList: !this.state.toggleLayerList })
+      : this.setState({ toggleLegendList: !this.state.toggleLegendList });
   };
 
   buildCategoryFilter = cat => {
@@ -453,35 +469,80 @@ class MapComponent extends Component {
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
         <nav className="dropdown-nav">
-          <button
-            className="btn dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded={this.state.toggleDropdown}
-            onClick={this.toggleDropdown}
-          >
-            Layers
-          </button>
-          <div
-            className={
-              "layer-menu " + (this.state.toggleDropdown ? "show" : "")
-            }
-          >
-            {Object.keys(this.state.layers).map(layer => {
-              return (
-                <p
-                  className={
-                    "dropdown-item " +
-                    (this.state.layers[layer] ? "selected" : "")
-                  }
-                  onClick={() => this.updateLayerVisibility(layer)}
-                >
-                  {layer}
-                </p>
-              );
-            })}
+          <div class="dropdown-layers">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              id="layerMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded={this.state.toggleLayerList}
+              onClick={this.toggleDropdown}
+            >
+              Layers
+            </button>
+            <div
+              className={
+                "layer-menu " + (this.state.toggleLayerList ? "show" : "")
+              }
+            >
+              {Object.keys(this.state.layers).map(layer => {
+                return (
+                  <p
+                    className={
+                      "dropdown-item " +
+                      (this.state.layers[layer].show ? "selected" : "")
+                    }
+                    onClick={() => this.updateLayerVisibility(layer)}
+                  >
+                    {layer}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div class="dropdown-legend">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              id="legendMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded={this.state.toggleLegendList}
+              onClick={this.toggleDropdown}
+            >
+              Legend
+            </button>
+            <div
+              className={
+                "legend-menu " + (this.state.toggleLegendList ? "show" : "")
+              }
+            >
+              <ul className="legend-links">
+                <li className="dropdown-item selected" id="legend-tip">
+                  TIP
+                </li>
+                {Object.keys(this.state.layers).map(layer => {
+                  return (
+                    <li
+                      className={
+                        "dropdown-item " +
+                        (this.state.layers[layer].show ? "selected" : "")
+                      }
+                      id={`legend-${this.state.layers[layer].short}`}
+                      onClick={() => this.updateLegendVisibility(layer)}
+                    >
+                      {this.state.layers[layer].short}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div class="legend-content">
+                {Object.keys(this.state.layers).map(layer => {
+                  return <Legend data={layer} />;
+                })}
+              </div>
+            </div>
           </div>
         </nav>
       </div>

@@ -3307,6 +3307,36 @@
       }
     },
     {
+      "id": "bridge-motorway-2",
+      "type": "line",
+      "metadata": {
+        "mapbox:group": "1444855799204.86"
+      },
+      "source": "composite",
+      "source-layer": "road",
+      "filter": [
+        "all",
+        ["==", "$type", "LineString"],
+        [
+          "all",
+          ["==", "class", "motorway"],
+          ["==", "structure", "bridge"],
+          [">=", "layer", 2]
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-width": {
+          "base": 1.5,
+          "stops": [[5, 0.75], [18, 32]]
+        },
+        "line-color": "#fff"
+      }
+    },
+    {
       "id": "pa-tip-lines",
       "source": "pa-tip",
       "source-layer": "patip_line",
@@ -3365,37 +3395,8 @@
           10,
           0.75
         ]
-      }
-    },
-    {
-      "id": "bridge-motorway-2",
-      "type": "line",
-      "metadata": {
-        "mapbox:group": "1444855799204.86"
       },
-      "source": "composite",
-      "source-layer": "road",
-      "filter": [
-        "all",
-        ["==", "$type", "LineString"],
-        [
-          "all",
-          ["==", "class", "motorway"],
-          ["==", "structure", "bridge"],
-          [">=", "layer", 2]
-        ]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round"
-      },
-      "paint": {
-        "line-width": {
-          "base": 1.5,
-          "stops": [[5, 0.75], [18, 32]]
-        },
-        "line-color": "#fff"
-      }
+      "interactive": true
     },
     {
       "id": "admin-3-4-boundaries-bg",
@@ -4907,16 +4908,21 @@
       "source-layer": "patip_fy19",
       "type": "circle",
       "paint": {
+<<<<<<< HEAD
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 6],
         "circle-color": "#f7f7f7",
+=======
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 1, 12, 3],
+        "circle-color": "#fff",
+>>>>>>> kind of started building the component
         "circle-stroke-width": [
           "interpolate",
           ["linear"],
           ["zoom"],
           7,
-          1.5,
+          2,
           12,
-          6
+          4
         ],
         "circle-stroke-color": [
           "match",
