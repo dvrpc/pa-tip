@@ -415,6 +415,7 @@ class MapComponent extends Component {
 
     if (nextProps.markerFromTiles) {
       const marker = nextProps.markerFromTiles;
+      console.log("marker at props ", marker);
       const tilePopup = showPopup(marker, this.map);
       this.setState({ tilePopup });
     }
