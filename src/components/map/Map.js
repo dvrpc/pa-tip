@@ -12,6 +12,7 @@ import {
 import { updateBounds, keywordBounds } from "../../utils/updateMap";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { clickTile } from "../../utils/clickTile.js";
+
 import "./Map.css";
 import mapStyle from "./style.json";
 
@@ -29,7 +30,8 @@ class MapComponent extends Component {
       },
       toggleDropdown: false,
       keyFilter: ["!=", "MPMS_ID", ""],
-      catFilter: ["!=", "DESCRIPTIO", ""]
+      catFilter: ["!=", "DESCRIPTIO", ""],
+      tilePopup: {}
     };
 
     this.Places = new window.google.maps.places.PlacesService(
@@ -350,9 +352,9 @@ class MapComponent extends Component {
         top: [0, 0],
         "top-left": [0, 0],
         "top-right": [0, 0],
-        bottom: [0, -38],
-        "bottom-left": [0, -38],
-        "bottom-right": [0, -38],
+        bottom: [0, -25],
+        "bottom-left": [0, -25],
+        "bottom-right": [0, -25],
         left: [15, -26],
         right: [-15, -26]
       }
@@ -428,6 +430,47 @@ class MapComponent extends Component {
         center: [nextProps.center.lng, nextProps.center.lat],
         zoom: 13
       });
+
+    // refactor popup logic to update map function.
+    //two funcitons:
+    //set popup (expect params, sets the jawn)
+    //remove popup (pass a popup, remove it)
+
+    if (nextProps.markerFromTiles) {
+      let tilePopup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: {
+          top: [0, 0],
+          "top-left": [0, 0],
+          "top-right": [0, 0],
+          bottom: [0, -25],
+          "bottom-left": [0, -25],
+          "bottom-right": [0, -25],
+          left: [15, -26],
+          right: [-15, -26]
+        }
+      });
+
+      let marker = nextProps.markerFromTiles;
+
+      tilePopup
+        .setLngLat([marker.long, marker.lat])
+        .setHTML(
+          `<h2>${marker.mpms}</h2><p style="border-bottom: 8px solid #${
+            colors[marker.category].forMap
+          };">${marker.name}</p>`
+        )
+        .addTo(this.map);
+
+      this.setState({ tilePopup });
+    }
+
+    // remove any existing popups from hover
+    if (Object.keys(this.state.tilePopup).length) {
+      this.state.tilePopup.remove();
+      this.setState({ tilePopup: {} });
+    }
   }
 
   componentWillUnmount() {
@@ -494,7 +537,8 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    position: state.getTIP.position
+    position: state.getTIP.position,
+    markerFromTiles: state.connectTilesToMap.markerInfo
   };
 };
 

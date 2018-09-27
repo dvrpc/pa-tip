@@ -1,8 +1,9 @@
 import Inferno, { Component, linkEvent } from "inferno";
+import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import { clickTile } from "../../utils/clickTile.js";
-import { showMarker } from "../../utils/hoverResultsShowMarker.js";
+import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
 
 import "./listItem.css";
 
@@ -52,7 +53,8 @@ class ListItem extends Component {
       <div
         className="list-item"
         onClick={linkEvent(this, clickTile)}
-        onMouseOver={linkEvent(this, showMarker)}
+        onMouseEnter={linkEvent(this.props.data, this.props.getMarkerInfo)}
+        onMouseLeave={linkEvent(null, this.props.getMarkerInfo)}
       >
         <img
           src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
@@ -71,4 +73,10 @@ class ListItem extends Component {
   }
 }
 
-export default withRouter(ListItem);
+const mapDispatchToProps = dispatch => {
+  return {
+    getMarkerInfo: tile => dispatch(getMarkerInfo(tile))
+  };
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(ListItem));
