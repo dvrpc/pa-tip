@@ -24,9 +24,9 @@ class MapComponent extends Component {
       layers: {
         "Indicators of Potential Disadvantage": { show: false, short: "IPD" },
         "CMP Corridors": { show: false, short: "CMP" },
-        "Connections 2045 Centers": { show: false, short: "LRP" },
+        "Planning Centers": { show: false, short: "LRP" },
         "Freight Centers": { show: false, short: "Freight" },
-        "DVRPC Land Use (2015)": { show: false, short: "Land Use" }
+        "Land Use": { show: false, short: "LU" }
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -222,7 +222,7 @@ class MapComponent extends Component {
       );
       this.map.addLayer(
         {
-          id: "Connections 2045 Centers",
+          id: "Planning Centers",
           type: "fill",
           source: "Connections",
           layout: {
@@ -304,7 +304,7 @@ class MapComponent extends Component {
       );
       this.map.addLayer(
         {
-          id: "DVRPC Land Use (2015)",
+          id: "Land Use",
           type: "fill",
           source: "LandUse",
           layout: {

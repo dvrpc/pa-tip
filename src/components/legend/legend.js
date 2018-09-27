@@ -7,117 +7,159 @@ class Legend extends Component {
     super(props);
     this.state = {
       "Transportation Improvement Projects": {
-        show: true,
-        classifications: new Array(),
+        classifications: [
+          ["Streetscape", "#0b6d32"],
+          ["Bicycle/Pedestrian Improvement", "#f26522"],
+          ["Bridge Repair/Replacement", "#223860"],
+          ["Transit Improvements", "#729faa"],
+          ["Roadway Rehabilitation", "#511851"],
+          ["Roadway New Capacity", "#9d1d20"],
+          ["Intersection/Interchange Improvements", "#ffc10e"],
+          ["Other", "#5abf41"]
+        ],
         short: "TIP",
-        sub: "FY2019–FY2022",
-        source:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_(TIP)_2019-2022/FeatureServer/0",
-        queryFields: ["DESCRPTIO"]
+        sub: "FY2019–FY2022"
       },
       "Indicators of Potential Disadvantage": {
-        show: false,
-        classifications: new Array(),
+        classifications: [
+          [9, "#ffffd9"],
+          [13, "#edf8b1"],
+          [15, "#c7e9b4"],
+          [17, "#7fcdbb"],
+          [19, "#41b6c4"],
+          [21, "#1d91c0"],
+          [24, "#225ea8"],
+          [27, "#253494"],
+          [30, "#081d58"]
+        ],
         short: "IPD",
-        sub: "Composite Score",
-        source:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/IPD_2016/FeatureServer/0",
-        queryFields: ["IPD_SCORE"]
+        sub: "Composite Score"
       },
       "CMP Corridors": {
-        show: false,
-        classifications: new Array(),
+        classifications: [
+          ["PA 611 & PA 309", "#80AEDD"],
+          ["US 202, 322, 30, PA 100", "#82D4F2"],
+          ["I-276 (PA Turnpike)", "#92D3C8"],
+          ["Ridge-Lincoln-Cheltenham", "#9DCB3B"],
+          ["PA 3 & Center City", "#B57DB6"],
+          ["US 13/MacDade Blvd/PA 291", "#C7E6DC"],
+          ["US 30", "#D7C19E"],
+          ["PA 332", "#D7D79E"],
+          ["US 422", "#DABEDB"],
+          ["PA 132_63, Co. Line Rd", "#DB7DB3"],
+          ["I-476", "#F37D80"],
+          ["PA 113 area", "#FAF078"],
+          ["I-95", "#F9BDBF"],
+          ["I-76 & I-676", "#FBF7C0"],
+          ["US 1", "#FFD380"],
+          ["PA 100", "#FFEBBE"]
+        ],
         short: "CMP",
-        sub: "Pennsylvania, 2015 (DVRPC)",
-        source:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_CMP_2015/FeatureServer/1",
-        queryFields: ["NAME", "WEB_COLOR"]
+        sub: "Pennsylvania, 2015 (DVRPC)"
       },
       "Planning Centers": {
-        show: false,
-        classifications: new Array(),
+        classifications: [
+          ["Metropolitan Center", "#f26522"],
+          ["Metropolitan Subcenter", "#223860"],
+          ["Suburban Center", "#0b6d32"],
+          ["Town Center", "#729faa"],
+          ["Rural Center", "#ed1c24"],
+          ["Planned Town Center", "#9d1d20"]
+        ],
         short: "LRP",
-        sub: "Connections 2045 Long-Range Plan",
-        source:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0",
-        queryFields: ["LUP_TYPE"]
+        sub: "DVRPC Connections 2045 Long-Range Plan"
       },
       "Freight Centers": {
-        show: false,
-        classifications: new Array(),
+        classifications: [
+          ["International Gateway", "#f4bd48"],
+          ["Heavy Industrial", "#ef7e51"],
+          ["Distribution and Logistics", "#ca4b66"],
+          ["High Tech Manufacturing", "#883272"],
+          ["Local Manufacturing and Distribution", "#312867"]
+        ],
         short: "Freight",
-        sub: null,
-        source:
-          "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0",
-        queryFields: ["TYPES"]
+        sub: "DVRPC Connections 2045 Long-Range Plan"
+      },
+      "Land Use": {
+        classifications: [
+          ["Residential", "rgb(255,255,0)"],
+          ["Industrial", "rgb(194,158,215)"],
+          ["Transportation", "rgb(104,104,104)"],
+          ["Utility", "rgb(255,190,190)"],
+          ["Commercial", "rgb(255,0,0)"],
+          ["Institutional", "rgb(190,232,255)"],
+          ["Military", "rgb(0,132,168)"],
+          ["Recreation", "rgb(230,230,230)"],
+          ["Agriculture", "rgb(215,215,158)"],
+          ["Mining", "rgb(168,0,0)"],
+          ["Wooded", "rgb(76,230,0)"],
+          ["Water", "rgb(0,197,255)"],
+          ["Undeveloped", "rgb(165,245,122)"]
+        ],
+        short: "LU",
+        sub: "DVRPC (2015)"
       }
     };
   }
 
-  GetClassBreaks = layer => {
-    if (layer) {
-      if (layer.queryFields.length != 1) {
-        let fieldString = "";
-        layer.queryFields.map((field, index) => {
-          index == 0 ? (fieldString += field + ", ") : (fieldString += field);
-        });
-        fetch(
-          layer.source +
-            `/query?where=1%3D1&outFields=${escape(
-              fieldString
-            )}&returnGeometry=false&returnDistinctValues=true&f=pjson`
-        )
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then(jawn => {
-            jawn.features.map((feat, index) => {
-              layer.classifications.push([
-                feat.attributes.NAME,
-                feat.attributes.WEB_COLOR
-              ]);
-            });
-          });
-      } else {
-        fetch(
-          layer.source +
-            `/query?where=1%3D1&outFields=${
-              layer.queryFields[0]
-            }&returnGeometry=false&returnDistinctValues=true&f=pjson`
-        )
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            }
-          })
-          .then(jawn => {
-            let field = jawn.fields[0].name;
-            jawn.features.map((feat, index) => {
-              layer.classifications.push(feat.attributes[field]);
-            });
-          });
-      }
+  LegendBuilder = shit => {
+    let contentContainer = document.querySelector(`#legendTable-${shit.short}`);
+    let tipContainer = document.querySelector("#legendTable-TIP");
+    //   if (tipContainer == null){
+    //     return (
+    //         <div
+    //           className={"legendItem-container"}
+    //           id={`legendItem-TIP`}
+    //         >
+    //           <h2 className={"legendItem-title"}>{"Transportation Improvement Projects"}</h2>
+    //           <h4 className={"legendItem-subtitle"}>{this.state["Transportation Improvement Projects"].sub}</h4>
+    //           <table
+    //             className={"legendItem-content"}
+    //             id={`legendTable-${this.state["Transportation Improvement Projects"].short}`}
+    //           />
+    //           {this.state['Transportation Improvement Projects'].classifications.forEach((key,index)=>{
+    //               let rowStyle = {
+    //                   width: '25px',
+    //                   backgroundColor: key[1]
+    //               }
+    //             return (
+    //                 <tr id={`tipLegend-tr${index}`}>
+    //                     <td style={rowStyle}></td>
+    //                     <td>{key[0]}</td>
+    //                 </tr>
+    //             )  })}
+    //         </div>
+    //     )
+    //   }
+    if (contentContainer != null && contentContainer.childElementCount == 0) {
+      shit.classifications.map((key, index) => {
+        let row = document.createElement("tr");
+        let classColor = document.createElement("TD");
+        classColor.style = `width: 25px; background-color: ${
+          shit.classifications[index][1]
+        }`;
+        let className = document.createElement("TD");
+        className.innerText = shit.classifications[index][0];
+        row.innerHTML = classColor.outerHTML + className.outerHTML;
+        contentContainer.appendChild(row);
+      });
     }
   };
 
-  componentWillMount() {
-    let layer = this.state[this.props.data];
-    this.GetClassBreaks(layer);
-  }
   render() {
     const layer = this.state[this.props.data];
     if (layer) {
+      let legendContent = this.LegendBuilder(layer);
       return (
         <div
           className={"legendItem-container"}
           id={`legendItem-${layer.short}`}
         >
           <h2 className={"legendItem-title"}>{this.props.data}</h2>
+          <h4 className={"legendItem-subtitle"}>{layer.sub}</h4>
           <table
             className={"legendItem-content"}
-            id={`legendItem-${layer.short}`}
+            id={`legendTable-${layer.short}`}
           />
         </div>
       );
@@ -126,90 +168,3 @@ class Legend extends Component {
 }
 
 export default withRouter(Legend);
-
-/*
-  buildLegend = layer =>{
-    let classifications = {
-      "Indicators of Potential Disadvantage": {
-        colors: ['ffffd9', 'edf8b1', 'c7e9b4', '7fcdbb', '41b6c4', '1d91c0', '225ea8', '253494', '081d58']
-      },
-      "CMP Corridors": [],
-      "Connections 2045 Centers":[
-        ["Metropolitan Center", "#f26522"],
-        ["Metropolitan Subcenter", "#223860"],
-        ["Suburban Center", "#0b6d32"],
-        ["Town Center", "#729faa"],
-        ["Rural Center", "#ed1c24"],
-        ["Planned Center", "#9d1d20"]
-      ]
-    }
-    switch(layer){
-      case "Indicators of Potential Disadvantage":
-        return (
-          <div className={"legendItem-container"} id={"legendItem-"+this.state.layers[layer].short}>
-            <h2 className="legendItem-title">{layer}</h2>
-            <table className="legendItem-content" id="legendContent-ipd">
-              <tr>
-                {classifications[layer].colors.map((color, index)=>{
-                  let allColors = classifications[layer].colors
-                  let length = allColors.length
-                  let w = 100/classifications[layer].colors.length
-                  switch(index){
-                    case 0:
-                      return <td style={"width: "+(w)+"%; color: #"+(allColors[length-1])+"; background-color: #"+(color)}>0</td>
-                      break;
-                    case length-1:
-                      return <td style={"width: "+(w)+"%; color: #"+(allColors[0])+"; background-color: #"+(color)}>36</td>
-                      break;
-                    default:
-                        return <td style={"width: "+(w)+"%; background-color: #"+(color)}></td>
-                        break;
-                  }
-                })}              
-              </tr>
-            </table>
-          </div>
-        )
-        break;
-      case "CMP Corridors":
-        // get all PA CMP classifications and build ref object to pull correct names/colors
-        fetch('https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3d1&returnGeometry=false&outFields=WEB_COLOR%2C+NAME&returnDistinctValues=true&f=pjson&')
-        .then(rawJawn=>{
-          if (rawJawn.ok){ return rawJawn.json()}
-        })
-        .then(colorJawn=>{
-          colorJawn.features.forEach(feat=>{
-            classifications[layer].push([feat.attributes.WEB_COLOR, feat.attributes.NAME])
-          })
-        })
-        return (
-          <div className={"legendItem-container"} id={"legendItem-"+(this.state.layers[layer].short)}>
-            <h2 className="legendItem-title">{layer}</h2>
-            <table className="legendItem-content" id="legendContent-cmp">
-              {}
-            </table>
-          </div>
-        )
-        break;
-      case "Connections 2045 Centers":
-        return(
-          <div className={"legendItem-container"} id={"legendItem-"+(this.state.layers[layer].short)}>
-            <h2 className="legendItem-title">{layer}</h2>
-            <table className="legendItem-content" id="legendContent-lrp">
-                {classifications[layer].map((key, index)=>{
-                  return (
-                  <tr>
-                    <td style={{backgroundColor: key[1], width: '2rem'}}></td>
-                    <td>{key[0]}</td>
-                  </tr>
-                  )
-                })}
-            </table>
-          </div>
-        )
-        break;
-      default:
-        return <h3 style="display: none;">butts</h3>
-    }
-  }
-*/
