@@ -82,19 +82,19 @@ class Legend extends Component {
       },
       "Land Use": {
         classifications: [
-          ["Residential", "rgb(255,255,0)"],
-          ["Industrial", "rgb(194,158,215)"],
-          ["Transportation", "rgb(104,104,104)"],
-          ["Utility", "rgb(255,190,190)"],
-          ["Commercial", "rgb(255,0,0)"],
-          ["Institutional", "rgb(190,232,255)"],
-          ["Military", "rgb(0,132,168)"],
-          ["Recreation", "rgb(230,230,230)"],
           ["Agriculture", "rgb(215,215,158)"],
+          ["Commercial", "rgb(255,0,0)"],
+          ["Industrial", "rgb(194,158,215)"],
+          ["Institutional", "rgb(190,232,255)"],
+          ["Residential", "rgb(255,255,0)"],
+          ["Military", "rgb(0,132,168)"],
           ["Mining", "rgb(168,0,0)"],
+          ["Recreation", "rgb(230,230,230)"],
+          ["Transportation", "rgb(104,104,104)"],
+          ["Undeveloped", "rgb(165,245,122)"],
+          ["Utility", "rgb(255,190,190)"],
           ["Wooded", "rgb(76,230,0)"],
-          ["Water", "rgb(0,197,255)"],
-          ["Undeveloped", "rgb(165,245,122)"]
+          ["Water", "rgb(0,197,255)"]
         ],
         short: "LU",
         sub: "DVRPC (2015)"
@@ -102,45 +102,57 @@ class Legend extends Component {
     };
   }
 
-  LegendBuilder = shit => {
-    let contentContainer = document.querySelector(`#legendTable-${shit.short}`);
+  LegendBuilder = layer => {
+    let contentContainer = document.querySelector(
+      `#legendTable-${layer.short}`
+    );
     let tipContainer = document.querySelector("#legendTable-TIP");
-    //   if (tipContainer == null){
-    //     return (
-    //         <div
-    //           className={"legendItem-container"}
-    //           id={`legendItem-TIP`}
-    //         >
-    //           <h2 className={"legendItem-title"}>{"Transportation Improvement Projects"}</h2>
-    //           <h4 className={"legendItem-subtitle"}>{this.state["Transportation Improvement Projects"].sub}</h4>
-    //           <table
-    //             className={"legendItem-content"}
-    //             id={`legendTable-${this.state["Transportation Improvement Projects"].short}`}
-    //           />
-    //           {this.state['Transportation Improvement Projects'].classifications.forEach((key,index)=>{
-    //               let rowStyle = {
-    //                   width: '25px',
-    //                   backgroundColor: key[1]
-    //               }
-    //             return (
-    //                 <tr id={`tipLegend-tr${index}`}>
-    //                     <td style={rowStyle}></td>
-    //                     <td>{key[0]}</td>
-    //                 </tr>
-    //             )  })}
-    //         </div>
-    //     )
-    //   }
+    if (tipContainer == null) {
+      let legendContainer = document.querySelector(".legend-content");
+      if (legendContainer != null) {
+        let tipContainer = document.createElement("div");
+        tipContainer.className = "legendItem-container";
+        tipContainer.id = "legendItem-TIP";
+        let tipLegendInfo = `<h2 class="legendItem-title">Transportation Improvement Projects</h2><h4 class="legendItem-subtitle">${
+          this.state["Transportation Improvement Projects"].sub
+        }</h4>`;
+        tipContainer.innerHTML = tipLegendInfo;
+        legendContainer.appendChild(tipContainer);
+        let tipTable = document.createElement("table");
+        this.state[
+          "Transportation Improvement Projects"
+        ].classifications.forEach((key, index) => {
+          let legendAdd = `<tr id="tipLegend-tr${index}><td style="width: 25px; height: 25px; background-color: ${
+            key[1]
+          }"></td><td>${key[0]}</td></tr>`;
+          tipTable.innerHTML += legendAdd;
+        });
+        tipContainer.appendChild(tipTable);
+      }
+    }
     if (contentContainer != null && contentContainer.childElementCount == 0) {
-      shit.classifications.map((key, index) => {
+      layer.classifications.map((key, index) => {
         let row = document.createElement("tr");
         let classColor = document.createElement("TD");
-        classColor.style = `width: 25px; background-color: ${
-          shit.classifications[index][1]
+        classColor.style = `height: 25px; width: 25px; background-color: ${
+          layer.classifications[index][1]
         }`;
-        let className = document.createElement("TD");
-        className.innerText = shit.classifications[index][0];
-        row.innerHTML = classColor.outerHTML + className.outerHTML;
+        if (layer.short != "IPD") {
+          let className = document.createElement("TD");
+          className.innerText = layer.classifications[index][0];
+          row.innerHTML = classColor.outerHTML + className.outerHTML;
+        } else if (index == 0 || index == layer.classifications.length - 1) {
+          index == 0
+            ? (classColor.innerText = "0")
+            : (classColor.innerText = "36");
+          index == 0
+            ? (classColor.style.color =
+                layer.classifications[layer.classifications.length - 1][1])
+            : (classColor.style.color = layer.classifications[0][1]);
+          row.innerHTML = classColor.outerHTML;
+        } else {
+          row.innerHTML = classColor.outerHTML;
+        }
         contentContainer.appendChild(row);
       });
     }
