@@ -33,6 +33,7 @@ class ListItem extends Component {
 
   render() {
     const project = this.props.data;
+    console.log("project is ", project);
     let thumbnailAlign;
 
     // formatting
@@ -42,7 +43,7 @@ class ListItem extends Component {
 
     // set the category thumbnail
     let imgStyle = {
-      width: "46px",
+      width: "44px",
       height: "42px",
       objectFit: "none",
       objectPosition: this.state.coords,
@@ -64,8 +65,10 @@ class ListItem extends Component {
         />
 
         <div className="list-text">
-          <h2>{project.name}</h2>
-          <h3>{project.cnty} County | Total Funding first 4 years</h3>
+          <h2 className="name">{project.name}</h2>
+          <h2 className="county-and-funding">
+            <em>{project.cnty} County</em>
+          </h2>
           <h2 className="mpms">MPMS ID: {project.mpms}</h2>
         </div>
       </div>

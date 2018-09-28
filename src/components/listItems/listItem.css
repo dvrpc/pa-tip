@@ -21,13 +21,12 @@
     color: #fefefe;
     font-weight: 600;
 }
+
+.county-and-funding{
+    font-weight: 500 !important;
+}
 .mpms{
     color: #f4d03f !important;
-}
-.list-text h3{
-    font-size: 1rem;
-    color: #add8e6;
-    font-weight: 500;
 }
 
 @media screen and (max-width: 880px) {
