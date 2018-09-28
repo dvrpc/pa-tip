@@ -73,6 +73,12 @@ class MapComponent extends Component {
   updateLegendVisibility = selectedLayer => {
     let legends = document.querySelectorAll(".legendItem-container");
     let short = this.state.layers[selectedLayer].short;
+    let links = document.querySelectorAll(`.legendLink`);
+    links.forEach(link => {
+      link.id != `legendLink-${short}`
+        ? link.classList.remove("active")
+        : link.classList.add("active");
+    });
     legends.forEach(legend => {
       legend.id != `legendItem-${short}`
         ? legend.classList.remove("show")
@@ -519,17 +525,14 @@ class MapComponent extends Component {
               }
             >
               <ul className="legend-links">
-                <li className="dropdown-item selected" id="legend-tip">
-                  TIP
-                </li>
                 {Object.keys(this.state.layers).map(layer => {
                   return (
                     <li
                       className={
-                        "dropdown-item " +
-                        (this.state.layers[layer].show ? "selected" : "")
+                        "legendLink " +
+                        (this.state.layers[layer].show ? "active" : "")
                       }
-                      id={`legend-${this.state.layers[layer].short}`}
+                      id={`legendLink-${this.state.layers[layer].short}`}
                       onClick={() => this.updateLegendVisibility(layer)}
                     >
                       {this.state.layers[layer].short}
