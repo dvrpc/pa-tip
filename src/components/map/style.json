@@ -4908,7 +4908,11 @@
       "source-layer": "patip_fy19",
       "type": "circle",
       "paint": {
+<<<<<<< HEAD
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 1, 12, 3],
+=======
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 6],
+>>>>>>> merge conflict on rebase
         "circle-color": "#f7f7f7",
         "circle-stroke-width": [
           "interpolate",
