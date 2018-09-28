@@ -126,7 +126,6 @@ class MapComponent extends Component {
       let zoom = new mapboxgl.NavigationControl();
       this.map.addControl(zoom, "bottom-left");
 
-      // TODO: re-write this whole section. DRY shit
       this.map.addSource("IPD", {
         type: "geojson",
         data:

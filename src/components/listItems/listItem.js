@@ -33,7 +33,6 @@ class ListItem extends Component {
 
   render() {
     const project = this.props.data;
-    console.log("project is ", project);
     let thumbnailAlign;
 
     // formatting
