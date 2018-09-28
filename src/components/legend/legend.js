@@ -100,28 +100,18 @@ const layers = {
 class Legend extends Component {
   constructor(props) {
     super(props);
-    // @ TODO: refactor these to external objects. The layers aren't really state - just references. Can
-    // be pulled out of component
     this.state = {
       selected: ""
     };
   }
-  // listen to see if layer is turned on, and if show make sure that the legend is visible
-  LinkListener = event => {
-    let target = event.target;
-    if (target.classList.contains("selected")) {
-      Object.keys(this.state).forEach(key => {
-        if (target.innerText == key) {
-          let links = document.querySelectorAll(".legendItem-container");
-          links.forEach(link => {
-            // console.log({link})
-            link.id == `legendItem-${this.state[key].short}`
-              ? link.classList.add("show")
-              : link.classList.remove("show");
-          });
-        }
-      });
-    }
+
+  toggleActiveLayer = (parent, clickedItem) => {
+    parent.childNodes.forEach(layer => {
+      const layerID = layer.id.split("-")[1];
+      layerID === clickedItem
+        ? layer.classList.add("active")
+        : layer.classList.remove("active");
+    });
   };
 
   // take advantage of event bubbling by putting the listener on the ul and getting li from that
@@ -129,21 +119,19 @@ class Legend extends Component {
     const legendItem = e.target.id.split("-")[1];
 
     // call function to make active and deactivate the others
+    this.toggleActiveLayer(e.target.parentNode, legendItem);
 
     // flip selected & set up the jawns
     this.setState({ selected: legendItem });
   };
 
   render() {
-    if (this.state.selected)
-      console.log(layers[this.state.selected].classifications);
     return (
       <div
         className={`legend-menu ${this.props.show}`}
         ref={el => (this.legend = el)}
       >
         <ul className="legend-links" onClick={this.updateLegendVisibility}>
-          {/*@ todo: add back in the visibility function (legendLink + active or just legendLink) */}
           <li className="legendLink" id="legendLink-TIP">
             TIP
           </li>
@@ -164,7 +152,6 @@ class Legend extends Component {
           </li>
         </ul>
 
-        {/*the legend content itself*/}
         {this.state.selected ? (
           <div
             className={"legendItem-container"}
@@ -184,9 +171,12 @@ class Legend extends Component {
                 return (
                   <tr>
                     <td
-                      style={`height: 25px; width: 25px; background-color: ${
-                        row[1]
-                      }`}
+                      style={{
+                        height: "25px",
+                        width: "25px",
+                        backgroundColor: `${row[1]}`,
+                        borderRadius: "3px"
+                      }}
                     />
                     <td>{row[0]}</td>
                   </tr>

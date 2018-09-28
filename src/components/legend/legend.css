@@ -36,3 +36,6 @@
 .legendItem-content>tr>td{
   height: 25px
 }
+.active{
+  background-color: #fff;
+}
