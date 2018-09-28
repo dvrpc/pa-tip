@@ -1,38 +1,38 @@
 .legendItem-container{
-    display: none;
-  }
-  .legendItem-container.show{
-    display: flex;
-    flex-flow: column;
-    max-height: 20vh;
-    width: 100%;
-    overflow-y: scroll;
-  }
-  .legendItem-title{
-    color: #666;
-    text-align: center;
-    margin: 1rem 0 0;  
-  }
-  .legendItem-subtitle{
-      text-align: center;
-      color: #aaa;
-      margin: 5px;
-      line-height: 1rem;
-      max-width: 75%;
-      align-self: center;    
-  }
-  .legendItem-content{
-      display: flex;
-      flex-flow: column;
-      margin: 5px;
-  }
-  #legendTable-IPD{
-      flex-flow: row;
-      justify-content: center;
-      text-align: center;
-      border-spacing: 0;
-      font-weight: 700;
-  }
-  .legendItem-content>tr>td{
-      height: 25px
-  }
+  display: flex;
+  flex-flow: column;
+  max-height: 25vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+.legendLink:hover{
+  cursor: pointer;
+}
+.legendItem-title{
+  color: #666;
+  text-align: center;
+  margin: 1rem 0 0;  
+}
+.legendItem-subtitle{
+  text-align: center;
+  color: #aaa;
+  margin: 5px;
+  line-height: 1rem;
+  max-width: 75%;
+  align-self: center;    
+}
+.legendItem-content{
+  display: flex;
+  flex-flow: column;
+  margin: 5px;
+}
+#legendTable-IPD{
+  flex-flow: row;
+  justify-content: center;
+  text-align: center;
+  border-spacing: 0;
+  font-weight: 700;
+}
+.legendItem-content>tr>td{
+  height: 25px
+}

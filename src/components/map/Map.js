@@ -72,22 +72,6 @@ class MapComponent extends Component {
     this.setState({ layers });
   };
 
-  updateLegendVisibility = selectedLayer => {
-    let legends = document.querySelectorAll(".legendItem-container");
-    let short = this.state.layers[selectedLayer].short;
-    let links = document.querySelectorAll(`.legendLink`);
-    links.forEach(link => {
-      link.id != `legendLink-${short}`
-        ? link.classList.remove("active")
-        : link.classList.add("active");
-    });
-    legends.forEach(legend => {
-      legend.id != `legendItem-${short}`
-        ? legend.classList.remove("show")
-        : legend.classList.add("show");
-    });
-  };
-
   toggleDropdown = e => {
     e.preventDefault();
     e.target.id == "layerMenuButton"
@@ -330,33 +314,7 @@ class MapComponent extends Component {
             >
               Legend
             </button>
-            <div
-              className={
-                "legend-menu " + (this.state.toggleLegendList ? "show" : "")
-              }
-            >
-              <ul className="legend-links">
-                {Object.keys(this.state.layers).map(layer => {
-                  return (
-                    <li
-                      className={
-                        "legendLink " +
-                        (this.state.layers[layer].show ? "active" : "")
-                      }
-                      id={`legendLink-${this.state.layers[layer].short}`}
-                      onClick={() => this.updateLegendVisibility(layer)}
-                    >
-                      {this.state.layers[layer].short}
-                    </li>
-                  );
-                })}
-              </ul>
-              <div class="legend-content">
-                {Object.keys(this.state.layers).map(layer => {
-                  return <Legend data={layer} />;
-                })}
-              </div>
-            </div>
+            {this.state.toggleLegendList ? <Legend show={"show"} /> : null}
           </div>
         </nav>
       </div>
