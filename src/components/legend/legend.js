@@ -101,13 +101,31 @@ class Legend extends Component {
       }
     };
   }
-
+  // listen to see if layer is turned on, and if show make sure that the legend is visible
+  LinkListener = event => {
+    let target = event.target;
+    if (target.classList.contains("selected")) {
+      Object.keys(this.state).forEach(key => {
+        if (target.innerText == key) {
+          let links = document.querySelectorAll(".legendItem-container");
+          links.forEach(link => {
+            // console.log({link})
+            link.id == `legendItem-${this.state[key].short}`
+              ? link.classList.add("show")
+              : link.classList.remove("show");
+          });
+        }
+      });
+    }
+  };
+  // @TODO: Refactor this jawn. It's working, but this is a sizeable chunk of code that can be made more efficient.
   LegendBuilder = layer => {
     let contentContainer = document.querySelector(
       `#legendTable-${layer.short}`
     );
-    let tipContainer = document.querySelector("#legendTable-TIP");
+    /*let tipContainer = document.querySelector("#legendTable-TIP");
     if (tipContainer == null) {
+      console.log('tip does not exist')
       let legendContainer = document.querySelector(".legend-content");
       if (legendContainer != null) {
         let tipContainer = document.createElement("div");
@@ -115,7 +133,7 @@ class Legend extends Component {
         tipContainer.id = "legendItem-TIP";
         let tipLegendInfo = `<h2 class="legendItem-title">Transportation Improvement Projects</h2><h4 class="legendItem-subtitle">${
           this.state["Transportation Improvement Projects"].sub
-        }</h4>`;
+          }</h4>`;
         tipContainer.innerHTML = tipLegendInfo;
         legendContainer.appendChild(tipContainer);
         let tipTable = document.createElement("table");
@@ -124,12 +142,13 @@ class Legend extends Component {
         ].classifications.forEach((key, index) => {
           let legendAdd = `<tr id="tipLegend-tr${index}><td style="width: 25px; height: 25px; background-color: ${
             key[1]
-          }"></td><td>${key[0]}</td></tr>`;
+            }"></td><td>${key[0]}</td></tr>`;
           tipTable.innerHTML += legendAdd;
         });
         tipContainer.appendChild(tipTable);
       }
     }
+    else {}*/
     if (contentContainer != null && contentContainer.childElementCount == 0) {
       layer.classifications.map((key, index) => {
         let row = document.createElement("tr");
@@ -159,6 +178,9 @@ class Legend extends Component {
   };
 
   render() {
+    document.addEventListener("click", e => {
+      this.LinkListener(e);
+    });
     const layer = this.state[this.props.data];
     if (layer) {
       let legendContent = this.LegendBuilder(layer);
