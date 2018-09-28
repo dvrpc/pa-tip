@@ -4908,13 +4908,8 @@
       "source-layer": "patip_fy19",
       "type": "circle",
       "paint": {
-<<<<<<< HEAD
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 6],
         "circle-color": "#f7f7f7",
-=======
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 1, 12, 3],
-        "circle-color": "#fff",
->>>>>>> kind of started building the component
         "circle-stroke-width": [
           "interpolate",
           ["linear"],
