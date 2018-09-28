@@ -23,11 +23,11 @@ class MapComponent extends Component {
 
     this.state = {
       layers: {
-        "Indicators of Potential Disadvantage": { show: false, short: "IPD" },
-        "CMP Corridors": { show: false, short: "CMP" },
-        "Planning Centers": { show: false, short: "LRP" },
-        "Freight Centers": { show: false, short: "Freight" },
-        "Land Use": { show: false, short: "LU" }
+        "Indicators of Potential Disadvantage": false,
+        "CMP Corridors": false,
+        "Planning Centers": false,
+        "Freight Centers": false,
+        "Land Use": false
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -50,21 +50,19 @@ class MapComponent extends Component {
 
       // set other layer states to false
       if (layer !== selectedLayer) {
-        layers[layer].show = false;
+        layers[layer] = false;
 
         if (isVisible) {
           this.map.setLayoutProperty(layer, "visibility", "none");
         }
       } else {
         // set currently active layer to true or false depending on its current state
-        layers[layer].show
-          ? (layers[layer].show = false)
-          : (layers[layer].show = true);
+        layers[layer] ? (layers[layer] = false) : (layers[layer] = true);
 
         this.map.setLayoutProperty(
           layer,
           "visibility",
-          layers[layer].show ? "visible" : "none"
+          layers[layer] ? "visible" : "none"
         );
       }
     });
