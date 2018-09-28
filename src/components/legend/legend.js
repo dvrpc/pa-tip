@@ -6,7 +6,7 @@ class Legend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: ""
+      selected: "TIP"
     };
   }
 
@@ -34,7 +34,7 @@ class Legend extends Component {
     return (
       <div className={`legend-menu ${this.props.show}`}>
         <ul className="legend-links" onClick={this.updateLegendVisibility}>
-          <li className="legendLink" id="legendLink-TIP">
+          <li className="legendLink active" id="legendLink-TIP">
             TIP
           </li>
           <li className="legendLink" id="legendLink-IPD">

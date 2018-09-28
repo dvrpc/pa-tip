@@ -25,9 +25,9 @@ class MapComponent extends Component {
       layers: {
         "Indicators of Potential Disadvantage": false,
         "CMP Corridors": false,
-        "Planning Centers": false,
+        "Connections 2045 Centers": false,
         "Freight Centers": false,
-        "Land Use": false
+        "DVRPC Land Use (2015)": false
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -72,7 +72,7 @@ class MapComponent extends Component {
 
   toggleDropdown = e => {
     e.preventDefault();
-    e.target.id == "layerMenuButton"
+    e.target.id === "layerMenuButton"
       ? this.setState({ toggleLayerList: !this.state.toggleLayerList })
       : this.setState({ toggleLegendList: !this.state.toggleLegendList });
   };
