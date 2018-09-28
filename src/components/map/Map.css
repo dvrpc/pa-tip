@@ -29,10 +29,11 @@
 }
 .dropdown-nav {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: white;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: 'Open Sans', tahoma, Arial, Helvetica, sans-serif;
 }
 .btn {
   user-select: none;
@@ -44,7 +45,7 @@
     background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: box-shadow, transform;
-  background-color: transparent;
+  background-color: white;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -63,7 +64,7 @@
   border-bottom: 0;
   border-left: 0.3em solid transparent;
 }
-.layer-menu {
+.layer-menu, .legend-menu {
   display: none;
   border: 0;
   opacity: 0;
@@ -74,10 +75,9 @@
     opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: absolute;
   top: 100%;
-  left: 0;
   z-index: 1;
   min-width: 10rem;
-  padding: 0.25rem 0;
+  max-width: 20rem;
   margin: 0.125rem 0 0;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -85,16 +85,31 @@
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
-.layer-menu.show {
+.layer-menu.show{
   display: block;
   opacity: 1;
   transform: scale(1);
+  left: 0;
 }
-.dropdown-item {
+.legend-menu.show{
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+  right: 0;
+}
+.legend-links{
+  display: flex;
+  padding-inline-start: 0;
+  border-bottom: 2px solid #333;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #ddd;
+}
+.dropdown-item, .legendLink {
   display: flex;
   align-items: center;
   min-height: 2.25rem;
-  padding: 0 1rem;
+  padding: 0 .5rem;
   overflow: hidden;
   line-height: 1;
   text-overflow: ellipsis;
@@ -105,11 +120,18 @@
 }
 .dropdown-item:hover {
   cursor: pointer;
-}
-.selected {
   background-color: #ddd;
+  color: #000;
 }
-
+.selected, .legendLink.active {
+  color: white;
+  background-color: #333;
+}
+.legend-content{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
 /*just guessing here...*/
  @media screen and (max-width: 880px) {
   .map{

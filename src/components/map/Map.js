@@ -15,6 +15,7 @@ import { clickTile } from "../../utils/clickTile.js";
 import "./Map.css";
 import layers from "./layers.js";
 import mapStyle from "./style.json";
+import Legend from "../legend/legend.js";
 
 class MapComponent extends Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class MapComponent extends Component {
         "Freight Centers": false,
         "DVRPC Land Use (2015)": false
       },
-      toggleDropdown: false,
+      toggleLayerList: false,
+      toggleLegendList: false,
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""],
       tilePopup: {}
@@ -70,7 +72,9 @@ class MapComponent extends Component {
 
   toggleDropdown = e => {
     e.preventDefault();
-    this.setState({ toggleDropdown: !this.state.toggleDropdown });
+    e.target.id === "layerMenuButton"
+      ? this.setState({ toggleLayerList: !this.state.toggleLayerList })
+      : this.setState({ toggleLegendList: !this.state.toggleLegendList });
   };
 
   buildCategoryFilter = cat => {
@@ -264,35 +268,51 @@ class MapComponent extends Component {
     return (
       <div className="map" ref={e => (this.tipMap = e)}>
         <nav className="dropdown-nav">
-          <button
-            className="btn dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded={this.state.toggleDropdown}
-            onClick={this.toggleDropdown}
-          >
-            Layers
-          </button>
-          <div
-            className={
-              "layer-menu " + (this.state.toggleDropdown ? "show" : "")
-            }
-          >
-            {Object.keys(this.state.layers).map(layer => {
-              return (
-                <p
-                  className={
-                    "dropdown-item " +
-                    (this.state.layers[layer] ? "selected" : "")
-                  }
-                  onClick={() => this.updateLayerVisibility(layer)}
-                >
-                  {layer}
-                </p>
-              );
-            })}
+          <div class="dropdown-layers">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              id="layerMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded={this.state.toggleLayerList}
+              onClick={this.toggleDropdown}
+            >
+              Layers
+            </button>
+            <div
+              className={
+                "layer-menu " + (this.state.toggleLayerList ? "show" : "")
+              }
+            >
+              {Object.keys(this.state.layers).map(layer => {
+                return (
+                  <p
+                    className={
+                      "dropdown-item " +
+                      (this.state.layers[layer].show ? "selected" : "")
+                    }
+                    onClick={() => this.updateLayerVisibility(layer)}
+                  >
+                    {layer}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div class="dropdown-legend">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              id="legendMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded={this.state.toggleLegendList}
+              onClick={this.toggleDropdown}
+            >
+              Legend
+            </button>
+            {this.state.toggleLegendList ? <Legend show={"show"} /> : null}
           </div>
         </nav>
       </div>
