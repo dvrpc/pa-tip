@@ -11,6 +11,7 @@ class Legend extends Component {
   }
 
   toggleActiveLayer = (parent, clickedItem) => {
+    if (clickedItem === parent) return;
     parent.childNodes.forEach(layer => {
       const layerID = layer.id.split("-")[1];
       layerID === clickedItem
@@ -23,11 +24,13 @@ class Legend extends Component {
   updateLegendVisibility = e => {
     const legendItem = e.target.id.split("-")[1];
 
-    // call function to make active and deactivate the others
-    this.toggleActiveLayer(e.target.parentNode, legendItem);
+    // call function to make active and deactivate the others (exclude edge case where users click the UL itself i.e. edges)
+    if (legendItem) {
+      this.toggleActiveLayer(e.target.parentNode, legendItem);
 
-    // flip selected & set up the jawns
-    this.setState({ selected: legendItem });
+      // flip selected & set up the jawns
+      this.setState({ selected: legendItem });
+    }
   };
 
   render() {
