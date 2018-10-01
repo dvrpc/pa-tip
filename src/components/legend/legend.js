@@ -11,7 +11,6 @@ class Legend extends Component {
   }
 
   toggleActiveLayer = (parent, clickedItem) => {
-    if (clickedItem === parent) return;
     parent.childNodes.forEach(layer => {
       const layerID = layer.id.split("-")[1];
       layerID === clickedItem
