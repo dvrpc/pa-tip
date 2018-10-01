@@ -75,19 +75,19 @@ export const layers = {
   },
   LU: {
     classifications: [
-      ["Agriculture", "rgb(215,215,158)"],
-      ["Commercial", "rgb(255,0,0)"],
-      ["Industrial", "rgb(194,158,215)"],
-      ["Institutional", "rgb(190,232,255)"],
-      ["Residential", "rgb(255,255,0)"],
-      ["Military", "rgb(0,132,168)"],
-      ["Mining", "rgb(168,0,0)"],
-      ["Recreation", "rgb(230,230,230)"],
-      ["Transportation", "rgb(104,104,104)"],
-      ["Undeveloped", "rgb(165,245,122)"],
-      ["Utility", "rgb(255,190,190)"],
-      ["Wooded", "rgb(76,230,0)"],
-      ["Water", "rgb(0,197,255)"]
+      ["Agriculture", "rgba(215,215,158, 0.5)"],
+      ["Commercial", "rgba(255,0,0, 0.5)"],
+      ["Industrial", "rgba(194,158,215, 0.5)"],
+      ["Institutional", "rgba(190,232,255, 0.5)"],
+      ["Residential", "rgba(255,255,0, 0.5)"],
+      ["Military", "rgba(0,132,168, 0.5)"],
+      ["Mining", "rgba(168,0,0, 0.5)"],
+      ["Recreation", "rgba(230,230,230, 0.5)"],
+      ["Transportation", "rgba(104,104,104, 0.5)"],
+      ["Undeveloped", "rgba(165,245,122, 0.5)"],
+      ["Utility", "rgba(255,190,190, 0.5)"],
+      ["Wooded", "rgba(76,230,0, 0.5)"],
+      ["Water", "rgba(0,197,255, 0.5)"]
     ],
     full: "Land Use",
     sub: "DVRPC (2015)"

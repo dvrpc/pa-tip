@@ -32,7 +32,8 @@
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 20px);
+  margin: 10px 10px 0 10px;
   font-family: 'Open Sans', tahoma, Arial, Helvetica, sans-serif;
 }
 .btn {

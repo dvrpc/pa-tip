@@ -297,7 +297,7 @@ class Expanded extends Component {
                     <table className="funding-and-awards-table">
                       <thead>
                         <tr>
-                          <th style={{ background: "#333" }}>PHS Type</th>
+                          <th style={{ background: "#333" }}>Phase</th>
 
                           <th style={{ background: "#333" }}>Milestone</th>
 
