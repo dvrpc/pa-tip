@@ -98,7 +98,7 @@ class Expanded extends Component {
                     style={{ background: colorScheme.darkest }}
                   >
                     <p onClick={this.backToResults}>
-                      <em>back to results</em>
+                      <em>back</em>
                     </p>
                     <p onClick={window.print}>
                       <em>print</em>
@@ -242,7 +242,7 @@ class Expanded extends Component {
                             colspan="2"
                             style={{ fontWeight: "700", color: "#333" }}
                           >
-                            Program Year Totals:
+                            Program Year Totals ($000):
                           </td>
                           <td
                             style={{

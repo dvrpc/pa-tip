@@ -32,7 +32,7 @@ const transformLocationSuggestions = data => ({
 
 const transformKeywordSuggestions = data => ({
   title: "TIP Projects",
-  results: data.features.slice(0, 3).map(project => ({
+  results: data.features.slice(0, 5).map(project => ({
     name: `${project.attributes.MPMS_ID}: ${project.attributes.ROAD_NAME}`,
     id: `${project.attributes.MPMS_ID}`,
     type: "expanded"
@@ -130,9 +130,13 @@ class Search extends Component {
       ]
     };
 
-    if (locations.results.length) suggestions.push(locations);
-    if (keywords.results.length) suggestions.push(keywords);
     suggestions.push(search);
+    if (keywords.results.length) suggestions.push(keywords);
+    if (locations.results.length) {
+      // because google wont let you limit results to > 5
+      locations.results = locations.results.slice(0, 2);
+      suggestions.push(locations);
+    }
 
     const inputProps = {
       placeholder: "Search by address or project keywords",

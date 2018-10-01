@@ -104,7 +104,7 @@ class PrintPage extends Component {
             ))}
             <tr>
               <td colspan="2" style={{ fontWeight: "700", color: "#333" }}>
-                Program Year Totals:
+                Program Year Totals ($000):
               </td>
               <td style={{ fontWeight: "700" }}>{this.props.totals[0]}</td>
               <td style={{ fontWeight: "700" }}>{this.props.totals[1]}</td>
@@ -117,11 +117,11 @@ class PrintPage extends Component {
         </table>
 
         <p style={{ marginLeft: "2%" }}>
-          Total FY2019 - 2022 Cost: <strong>${this.props.totals[4]}</strong>
+          Total FY2019 - 2022 Cost: <strong>{this.props.totals[4]}</strong>
         </p>
 
         <p style={{ marginLeft: "2%" }}>
-          Total FY2019 - 2030 Cost: <strong>${this.props.totals[5]}</strong>
+          Total FY2019 - 2030 Cost: <strong>{this.props.totals[5]}</strong>
         </p>
 
         <h1 style={subHeaders}>Project Milestones:</h1>
