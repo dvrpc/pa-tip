@@ -8,20 +8,28 @@
   justify-content: space-between;
 }
 .navbar-link-to-home {
+  padding-left: 10px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-logo{
+  padding-right: 5%;
+}
+.nav-text{
+  border-left: 2px solid #666;
+  padding-left: 5%;
+  width: 100%;
 }
 #draft-text {
   color: #333333;
 }
-.nav-text {
-  text-align: center;
-}
 #nav-search-form {
+  margin-right: 10px;
   width: 40%;
   border-top-left-radius: 10px;
   background: rgba(238, 238, 238, 0.7);
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 850px) {
@@ -35,7 +43,8 @@
     font-size: 1rem;
   }
   .nav-text {
-    font-size: 0.4rem;
+    font-size: 0.5rem;
+    border-left: none;
   }
   .nav-text img {
     width: 50%;
