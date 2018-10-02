@@ -11,7 +11,7 @@ export const tileDetails = async (propsProject, width, height) => {
 
   if (propsProject) {
     // limit project names to 80 characters
-    projectName = propsProject.name;
+    projectName = propsProject.ROAD_NAME;
     if (projectName.length > 40) projectName = projectName.slice(0, 36) + "...";
 
     // Get a background image for the project according to its type (function needs coords & category)
@@ -24,7 +24,7 @@ export const tileDetails = async (propsProject, width, height) => {
       .then(b => URL.createObjectURL(b));
 
     // based on the project type, assign the gradient value for the caption text
-    projectType = propsProject.category;
+    projectType = propsProject.DESCRIPTIO;
 
     borderBottom = `border-bottom: 10px solid ${colors[projectType].darkest}`;
 

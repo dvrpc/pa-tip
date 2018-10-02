@@ -177,14 +177,12 @@ class MapComponent extends Component {
     // show popup when a user hovers over a marker.
     this.map.on("mouseenter", "pa-tip-points", e => {
       this.map.getCanvas().style.cursor = "pointer";
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const long = coordinates[0];
-      const lat = coordinates[1];
-      const category = e.features[0].properties.DESCRIPTIO;
-      const mpms = e.features[0].properties.MPMS_ID;
-      const name = e.features[0].properties.ROAD_NAME;
 
-      const marker = { long, lat, mpms, category, name };
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const LONGITUDE = coordinates[0];
+      const LATITUDE = coordinates[1];
+
+      const marker = { ...e.features[0].properties, LONGITUDE, LATITUDE };
       popup = showPopup(marker, this.map);
     });
 

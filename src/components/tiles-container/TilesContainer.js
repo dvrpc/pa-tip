@@ -127,14 +127,17 @@ class TilesContainer extends Component {
           this.state.showList ? (
             projects.map(feature => (
               <ListItem
-                data={feature}
+                data={feature.properties || feature}
                 key={feature.mapbox_id}
                 length={projects.length}
               />
             ))
           ) : (
             projects.map(feature => (
-              <Tile data={feature} key={feature.mapbox_id} />
+              <Tile
+                data={feature.properties || feature}
+                key={feature.mapbox_id}
+              />
             ))
           )
         ) : (
@@ -160,7 +163,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TilesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);

@@ -30,6 +30,7 @@ class Tile extends Component {
   render() {
     const calculatedProjectInfo = this.state.details;
     const project = this.props.data;
+
     return (
       <div
         className="tile"
@@ -47,9 +48,8 @@ class Tile extends Component {
             {calculatedProjectInfo.projectName}
           </h2>
           <p className="tile-caption-text">
-            {project.cnty}{" "}
-            {counties.indexOf(project.cnty) > -1 ? " County" : ""} |{" "}
-            {project.mpms}
+            {project.CTY} {counties.indexOf(project.CTY) > -1 ? " County" : ""}{" "}
+            | {project.MPMS_ID}
           </p>
         </div>
       </div>
@@ -63,9 +63,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(Tile)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Tile));

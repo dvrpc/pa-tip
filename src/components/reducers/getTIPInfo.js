@@ -150,7 +150,9 @@ export const hydrateGeometry = id => dispatch => {
       if (response.ok)
         response
           .json()
-          .then(geoPromise => dispatch(hydrate_geometry(geoPromise)));
+          .then(geoPromise =>
+            dispatch(hydrate_geometry(geoPromise.features[0].attributes))
+          );
     })
     .catch(error => console.error(error));
 };

@@ -24,54 +24,29 @@ class Expanded extends Component {
     this.props.history.goBack();
   };
 
-  componentWillMount() {
-    this.props.getFullTIP(this.props.match.params.id);
-    this.props.hydrateGeometry(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.geometryBackup !== this.props.geometryBackup) {
-      // handle case of un-mapped keyword projects
-      if (
-        nextProps.geometryBackup.features &&
-        nextProps.geometryBackup.features.length
-      ) {
-        window.streetview = new window.google.maps.StreetViewPanorama(
-          this.streetview,
-          {
-            position: {
-              lat: nextProps.geometryBackup.features[0].attributes.LATITUDE,
-              lng: nextProps.geometryBackup.features[0].attributes.LONGITUDE
-            },
-            zoom: 0
-          }
-        );
-      }
+  generateStreetview = props => {
+    if (Object.keys(props).length > 0 && props.constructor === Object) {
+      window.streetview = new window.google.maps.StreetViewPanorama(
+        this.streetview,
+        {
+          position: {
+            lat: props.LATITUDE,
+            lng: props.LONGITUDE
+          },
+          zoom: 0
+        }
+      );
     }
-  }
+  };
 
   componentDidMount() {
-    if (this.props.geometryBackup) {
-      if (
-        this.props.geometryBackup.features &&
-        this.props.geometryBackup.features.length
-      ) {
-        window.streetview = new window.google.maps.StreetViewPanorama(
-          this.streetview,
-          {
-            position: {
-              lat: this.props.geometryBackup.features[0].attributes.LATITUDE,
-              lng: this.props.geometryBackup.features[0].attributes.LONGITUDE
-            },
-            zoom: 0
-          }
-        );
-      }
-    }
+    this.props.hydrateGeometry(this.props.match.params.id);
+    this.props.getFullTIP(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
-    this.props.geometryBackup = {};
+  componentDidUpdate(prevProps) {
+    if (prevProps.geometryBackup != this.props.geometryBackup)
+      this.generateStreetview(this.props.geometryBackup);
   }
 
   render() {
@@ -80,6 +55,7 @@ class Expanded extends Component {
     let navBackground;
     let toReturn;
     let funding;
+
     this.props.details
       ? ((details = this.props.details),
         (funding = getTotals(this.props.details.funding.data)),
@@ -184,7 +160,7 @@ class Expanded extends Component {
                         <tr>
                           <td colspan="2" style={{ background: "#666" }} />
                           <td colspan="4" style={{ background: "#333" }}>
-                            <h3>TIP Program Years ($000)</h3>
+                            <h3>FY19 TIP Program Years ($000)</h3>
                           </td>
                           <td colspan="2" style={{ background: "#666" }} />
                         </tr>
@@ -197,12 +173,12 @@ class Expanded extends Component {
                           <td style={{ background: "#666" }}>
                             <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
                           </td>
-                          <td style={{ background: "#333" }}>2019</td>
-                          <td style={{ background: "#333" }}>2020</td>
-                          <td style={{ background: "#333" }}>2021</td>
-                          <td style={{ background: "#333" }}>2022</td>
-                          <td style={{ background: "#666" }}>2023-2026</td>
-                          <td style={{ background: "#666" }}>2027-2030</td>
+                          <td style={{ background: "#333" }}>FY19</td>
+                          <td style={{ background: "#333" }}>FY20</td>
+                          <td style={{ background: "#333" }}>FY21</td>
+                          <td style={{ background: "#333" }}>FY22</td>
+                          <td style={{ background: "#666" }}>FY23-26</td>
+                          <td style={{ background: "#666" }}>FY27-30</td>
                         </tr>
                         {details.funding &&
                           details.funding.data.map(row => (
@@ -288,9 +264,9 @@ class Expanded extends Component {
                           <td />
                         </tr>
                         <tr style={{ background: "#666" }}>
-                          <td colspan="3">Total FY2019 - 2022 Cost:</td>
+                          <td colspan="2">Total FY19-22 Cost:</td>
                           <td style={{ fontWeight: "700" }}>{funding[4]}</td>
-                          <td colspan="3">Total FY2019 - 2030 Cost:</td>
+                          <td colspan="2">Total FY219-30 Cost:</td>
                           <td style={{ fontWeight: "700" }}>{funding[5]}</td>
                         </tr>
                       </tbody>
@@ -349,7 +325,6 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    test: state.getTIP.currentProject,
     geometryBackup: state.getTIP.geometry
   };
 };
@@ -361,7 +336,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Expanded);
+export default connect(mapStateToProps, mapDispatchToProps)(Expanded);

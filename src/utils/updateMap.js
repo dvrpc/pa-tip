@@ -15,15 +15,15 @@ export const updateBounds = mapReference => {
       renderedProjects.allMPMS.push(item.properties.MPMS_ID);
 
       renderedProjects.features.push({
-        cnty: item.properties.CTY,
-        mpms: item.properties.MPMS_ID,
-        category: item.properties.DESCRIPTIO,
-        name: item.properties.ROAD_NAME,
-        lat:
+        CTY: item.properties.CTY,
+        MPMS_ID: item.properties.MPMS_ID,
+        DESCRIPTIO: item.properties.DESCRIPTIO,
+        ROAD_NAME: item.properties.ROAD_NAME,
+        LATITUDE:
           item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[1]
             : item.geometry.coordinates[0][1],
-        long:
+        LONGITUDE:
           item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[0]
             : item.geometry.coordinates[1][0],
@@ -71,6 +71,8 @@ const updateMapPosition = instance => {
 };
 
 export const showPopup = (marker, map) => {
+  let details = marker.properties || marker;
+
   let tilePopup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
@@ -87,17 +89,17 @@ export const showPopup = (marker, map) => {
   });
 
   // handle edge case where line features pass geometry
-  if (Array.isArray(marker.long) || Array.isArray(marker.lat)) {
-    marker.long = marker.long[0];
-    marker.lat = marker.lat[1];
+  if (Array.isArray(details.LONGITUDE) || Array.isArray(details.LATITUDE)) {
+    details.LONGITUDE = details.LONGITUDE[0];
+    details.LATITUDE = details.LATITUDE[1];
   }
 
   tilePopup
-    .setLngLat([marker.long, marker.lat])
+    .setLngLat([details.LONGITUDE, details.LATITUDE])
     .setHTML(
-      `<h2>${marker.mpms}</h2><p style="border-bottom: 8px solid #${
-        colors[marker.category].forMap
-      };">${marker.name}</p>`
+      `<h2>${details.MPMS_ID}</h2><p style="border-bottom: 8px solid #${
+        colors[details.DESCRIPTIO].forMap
+      };">${details.ROAD_NAME}</p>`
     )
     .addTo(map);
 
