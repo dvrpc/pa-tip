@@ -160,7 +160,7 @@ class Expanded extends Component {
                         <tr>
                           <td colspan="2" style={{ background: "#666" }} />
                           <td colspan="4" style={{ background: "#333" }}>
-                            <h3>TIP Program Years ($000)</h3>
+                            <h3>FY19 TIP Program Years ($000)</h3>
                           </td>
                           <td colspan="2" style={{ background: "#666" }} />
                         </tr>
@@ -173,12 +173,12 @@ class Expanded extends Component {
                           <td style={{ background: "#666" }}>
                             <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
                           </td>
-                          <td style={{ background: "#333" }}>2019</td>
-                          <td style={{ background: "#333" }}>2020</td>
-                          <td style={{ background: "#333" }}>2021</td>
-                          <td style={{ background: "#333" }}>2022</td>
-                          <td style={{ background: "#666" }}>2023-2026</td>
-                          <td style={{ background: "#666" }}>2027-2030</td>
+                          <td style={{ background: "#333" }}>FY19</td>
+                          <td style={{ background: "#333" }}>FY20</td>
+                          <td style={{ background: "#333" }}>FY21</td>
+                          <td style={{ background: "#333" }}>FY22</td>
+                          <td style={{ background: "#666" }}>FY23-26</td>
+                          <td style={{ background: "#666" }}>FY27-30</td>
                         </tr>
                         {details.funding &&
                           details.funding.data.map(row => (
@@ -264,9 +264,9 @@ class Expanded extends Component {
                           <td />
                         </tr>
                         <tr style={{ background: "#666" }}>
-                          <td colspan="3">Total FY2019 - 2022 Cost:</td>
+                          <td colspan="2">Total FY19-22 Cost:</td>
                           <td style={{ fontWeight: "700" }}>{funding[4]}</td>
-                          <td colspan="3">Total FY2019 - 2030 Cost:</td>
+                          <td colspan="2">Total FY219-30 Cost:</td>
                           <td style={{ fontWeight: "700" }}>{funding[5]}</td>
                         </tr>
                       </tbody>
