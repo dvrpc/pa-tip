@@ -5,7 +5,6 @@ import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
 import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
-//import ToggleResults from '../toggle/Toggle.js'
 import loading from "./loading.gif";
 import { setFilter } from "../reducers/getTIPInfo.js";
 import { filterByCategory } from "../../utils/filterByCategory.js";

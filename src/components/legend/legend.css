@@ -30,8 +30,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  text-align: center;
   font-weight: 700;
+}
+#legendTable-IPD tr {
+  width: 33%;
 }
 .legendItem-content>tr>td{
   height: 25px
