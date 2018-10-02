@@ -181,8 +181,20 @@
   .homepage {
     overflow: hidden;
   }
+  .homepage-main {
+    height: 65vh !important;
+  }
+  .homepage-banner {
+    border-bottom: 10px solid white;
+  }
+  #banner-logo {
+    padding-right: 5vw;
+  }
   #banner-logo img {
-    width: 100px;
+    width: 70px;
+  }
+  #banner-tip-logo {
+    width: 70px;
   }
   #bgvid {
     display: none;
@@ -192,23 +204,19 @@
     background-position: center;
     background-size: cover;
   }
-  .homgepage-main {
-    height: 30vh;
-  }
-  .homepage-banner h1 {
-    font-size: 1rem !important;
+  .stacked-headers h1{
+    font-size: 0.8rem;
   }
   #search-form{
-    width: 94%;
+    width: 90%;
     margin: 0 auto !important;
-    margin-top: 15vh !important;
-  }
-  .homepage-radio-group,
-  #homepage-search-bar {
-    font-size: 0.8rem !important;
+    margin-top: 25vh !important;
   }
   #homepage-search-bar {
-    padding: 7% 0 7% 15%;
+    font-size: 1rem !important;
+  }
+  #homepage-search-bar {
+    padding: 6% 0 6% 15%;
   }
   .tip-info-cluster {
     justify-content: center;
@@ -225,6 +233,9 @@
     margin-top: 2%;
     margin-bottom: 2%;
   }
+  .list-group-item {
+    font-size: 1rem;
+  }
 }
 
 /* Tablets (landscape)  */
@@ -235,9 +246,6 @@
   #bgvid {
     transform: translateX(-50%) translateY(-67%);
   }
-  .homepage-banner h1 {
-    font-size: 1.3rem;
-  }
   .radio-group-cluster {
     flex-direction: column;
   }
@@ -247,12 +255,6 @@
   #homepage-search-bar {
     text-overflow: wrap;
   }
-  #banner-logo,
-  #banner-tip-logo {
-    height: 12%;
-    width: 12%;
-  }
-
   .tip-info-paragraphs h2 {
     font-size: 1.3rem;
   }
