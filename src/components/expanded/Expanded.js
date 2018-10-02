@@ -12,6 +12,7 @@ import { scrollToElement } from "../../utils/scrollToElement.js";
 import { getTotals } from "../../utils/calculateFundingTotals.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";
+import counties from "../../utils/counties";
 
 class Expanded extends Component {
   constructor(props) {
@@ -140,7 +141,14 @@ class Expanded extends Component {
                       {details.municipalities && (
                         <span>{details.municipalities}, </span>
                       )}
-                      {details.county && <span>{details.county} County</span>}
+                      {details.county && (
+                        <span>
+                          {details.county}
+                          {counties.indexOf(details.county) > -1
+                            ? " County"
+                            : ""}
+                        </span>
+                      )}
                     </p>
                     {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
                   </div>
@@ -353,4 +361,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expanded);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Expanded);

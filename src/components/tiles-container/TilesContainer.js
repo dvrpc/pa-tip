@@ -21,7 +21,7 @@ class TilesContainer extends Component {
   }
 
   componentDidMount() {
-    if (typeof (this.props.category == "undefined"))
+    if (typeof this.props.category === "undefined")
       this.props.category = "All Categories";
 
     if (this.props.category !== "All Categories") {
@@ -55,7 +55,6 @@ class TilesContainer extends Component {
   };
 
   render() {
-    let projects;
     // handle keyword and bounds projects
     let keywordProjects =
       this.props.keywordProjects && this.props.keywordProjects.features
@@ -66,7 +65,7 @@ class TilesContainer extends Component {
         ? this.props.boundsProjects.features
         : [];
 
-    projects = keywordProjects.length ? keywordProjects : boundsProjects;
+    let projects = keywordProjects.length ? keywordProjects : boundsProjects;
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
@@ -74,6 +73,7 @@ class TilesContainer extends Component {
         project => project.category === this.state.categoryToFilter
       );
     }
+
     return (
       <div className="tilesContainer">
         <div className="header">
@@ -160,4 +160,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TilesContainer);

@@ -1,4 +1,4 @@
-import Inferno, { Component, render } from "inferno";
+import Inferno, { Component } from "inferno";
 import mapboxgl from "mapbox-gl";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
@@ -88,7 +88,7 @@ class MapComponent extends Component {
   };
 
   buildKeywordFilter = projects => {
-    let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
+    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
     if (projects.features && projects.features.length) {
       return ["in", "MPMS_ID"].concat(ids);
     }
@@ -340,5 +340,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MapComponent)
 );

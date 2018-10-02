@@ -6,6 +6,7 @@ import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
 import { clickTile } from "../../utils/clickTile.js";
 import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
+import counties from "../../utils/counties.js";
 
 class Tile extends Component {
   constructor(props) {
@@ -46,7 +47,9 @@ class Tile extends Component {
             {calculatedProjectInfo.projectName}
           </h2>
           <p className="tile-caption-text">
-            {project.cnty} County | {project.mpms}
+            {project.cnty}{" "}
+            {counties.indexOf(project.cnty) > -1 ? " County" : ""} |{" "}
+            {project.mpms}
           </p>
         </div>
       </div>
@@ -60,4 +63,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Tile));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Tile)
+);

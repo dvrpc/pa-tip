@@ -4,6 +4,7 @@ import { withRouter } from "inferno-router";
 
 import { clickTile } from "../../utils/clickTile.js";
 import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
+import counties from "../../utils/counties.js";
 
 import "./listItem.css";
 
@@ -18,27 +19,19 @@ class ListItem extends Component {
   componentWillMount() {
     let category = this.props.data.category;
 
-    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json").then(
-      response => {
-        response.json().then(body => {
-          let imgLocation = `-${body[category].x}px -${body[category].y}px`;
-
-          this.setState({
-            coords: imgLocation
-          });
-        });
-      }
-    );
+    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json")
+      .then(response => response.json())
+      .then(body =>
+        this.setState({
+          coords: `-${body[category].x}px -${body[category].y}px`
+        })
+      );
   }
 
   render() {
     const project = this.props.data;
-    let thumbnailAlign;
-
     // formatting
-    this.props.length < 3
-      ? (thumbnailAlign = "baseline")
-      : (thumbnailAlign = "center");
+    const thumbnailAlign = this.props.length < 3 ? "baseline" : "center";
 
     // set the category thumbnail
     let imgStyle = {
@@ -66,7 +59,10 @@ class ListItem extends Component {
         <div className="list-text">
           <h2 className="name">{project.name}</h2>
           <h2 className="county-and-funding">
-            <em>{project.cnty} County</em>
+            <em>
+              {project.cnty}
+              {counties.indexOf(project.cnty) > -1 ? " County" : ""}
+            </em>
           </h2>
           <h2 className="mpms">MPMS ID: {project.mpms}</h2>
         </div>
@@ -81,4 +77,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(ListItem));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(ListItem)
+);

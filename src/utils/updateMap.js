@@ -11,7 +11,7 @@ export const updateBounds = mapReference => {
     layers: ["pa-tip-points", "pa-tip-lines"]
   });
   rendered.forEach(item => {
-    if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) == -1) {
+    if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {
       renderedProjects.allMPMS.push(item.properties.MPMS_ID);
 
       renderedProjects.features.push({
@@ -20,11 +20,11 @@ export const updateBounds = mapReference => {
         category: item.properties.DESCRIPTIO,
         name: item.properties.ROAD_NAME,
         lat:
-          item.layer.id == "pa-tip-points"
+          item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[1]
             : item.geometry.coordinates[0][1],
         long:
-          item.layer.id == "pa-tip-points"
+          item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[0]
             : item.geometry.coordinates[1][0],
         mapbox_id: `${item.properties.MPMS_ID}_${
@@ -43,10 +43,10 @@ export const keywordBounds = (mapReference, data) => {
   let longitude = "";
 
   if (projects.features && projects.features.length) {
-    let ids = projects.features.map(feature => feature.attributes.MPMS_ID);
+    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
     for (var i = 0; i < projects.features.length; i++) {
-      longitude = projects.features[i].attributes.LONGITUDE;
-      latitude = projects.features[i].attributes.LATITUDE;
+      longitude = projects.features[i].properties.LONGITUDE;
+      latitude = projects.features[i].properties.LATITUDE;
       bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
       bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
       bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;

@@ -53,23 +53,21 @@ export default function tipReducer(state = [], action) {
 
 const keywordRequest = keyword =>
   new Promise(resolve => {
-    let keywordProjects;
     fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
       .then(response => response.json())
-      .then(projects => {
-        keywordProjects = projects;
+      .then(features => {
         // get geometry & rest of project information from the arcGIS server
-        let mpms_array = projects.map(project => project.id).join(",");
+        let mpms_array = features.map(project => project.id).join(",");
         let params = {
           where: `MPMS_ID in (${mpms_array})`,
           srOut: 4326,
-          f: "pjson",
+          f: "geojson",
           outFields:
             "OBJECTID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LATITUDE,LONGITUDE",
           returnGeometry: false
         };
         //Encode the data
-        const request = Object.keys(params)
+        const body = Object.keys(params)
           .map(
             key =>
               `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -82,52 +80,29 @@ const keywordRequest = keyword =>
               "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
             },
             method: "POST",
-            body: request
+            body
           }
         )
           .then(arcGISResponse => arcGISResponse.json())
           .then(arcGISProjects => {
-            // handle case of projects that do not have geometry (arcGIS return isnt the same as keyword return)
-            if (
-              arcGISProjects.features &&
-              arcGISProjects.features.length !== keywordProjects.length
-            ) {
-              // get a reference to arcGIS projects by roadName and  index
-              let arcClone = {};
-              arcGISProjects.features.forEach(
-                (project, index) =>
-                  (arcClone[project.attributes.ROAD_NAME] = index)
+            features.forEach(project => {
+              const matchedProject = arcGISProjects.features.filter(
+                feature => feature.properties.MPMS_ID === project.id
               );
-
-              keywordProjects.forEach(project => {
-                // format & add all the missing keyword projects IF they aren't already in the array
-                if (
-                  arcClone[project.road_name] !== 0 &&
-                  !arcClone[project.road_name]
-                ) {
-                  const formattedKeywordObject = {
-                    attributes: {
-                      // sham OBJECTID to act as a key for the tile
-                      OBJECTID: project.id + project.road_name,
-                      CTY: project.county,
-                      DESCRIPTIO: project.category,
-                      MPMS_ID: project.id,
-                      ROAD_NAME: project.road_name,
-                      LATITUDE: 40.018,
-                      LONGITUDE: -75.148
-                    }
+              project.properties = matchedProject.length
+                ? matchedProject[0].properties
+                : {
+                    OBJECTID: project.id + project.road_name,
+                    CTY: project.county,
+                    DESCRIPTIO: project.category,
+                    MPMS_ID: project.id,
+                    ROAD_NAME: project.road_name,
+                    LATITUDE: 40.018,
+                    LONGITUDE: -75.148,
+                    NOT_MAPPED: true
                   };
-
-                  // if the keyword is an MPMS ID, make it the first result
-                  if (project.id == keyword) {
-                    arcGISProjects.features.unshift(formattedKeywordObject);
-                  } else {
-                    arcGISProjects.features.push(formattedKeywordObject);
-                  }
-                }
-              });
-              resolve(arcGISProjects);
-            }
+            });
+            resolve({ features });
           });
       });
   });
@@ -135,7 +110,7 @@ const keywordRequest = keyword =>
 /*** DISPATCHERS ***/
 export const getTIPByKeywords = keyword => (dispatch, getState) => {
   //use already returned projects from search
-  if (getState().getTIP.fetchdKeywords !== undefined) {
+  if (getState().getTIP.fetchedKeywords !== undefined) {
     dispatch(get_tip_keywords(getState().getTIP.fetchedKeywords));
   } else {
     keywordRequest(keyword).then(arcGISProjects =>

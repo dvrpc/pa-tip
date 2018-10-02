@@ -14,7 +14,7 @@ import "./search.css";
 const getSuggestionValue = suggestion => suggestion.name;
 
 const renderSuggestion = suggestion => (
-  <span style="color:#000">{suggestion.name}</span>
+  <span style={{ color: "#000" }}>{suggestion.name}</span>
 );
 
 const renderSectionTitle = section => <strong>{section.title}</strong>;
@@ -33,8 +33,8 @@ const transformLocationSuggestions = data => ({
 const transformKeywordSuggestions = data => ({
   title: "TIP Projects",
   results: data.features.slice(0, 5).map(project => ({
-    name: `${project.attributes.MPMS_ID}: ${project.attributes.ROAD_NAME}`,
-    id: `${project.attributes.MPMS_ID}`,
+    name: `${project.properties.MPMS_ID}: ${project.properties.ROAD_NAME}`,
+    id: `${project.properties.MPMS_ID}`,
     type: "expanded"
   }))
 });
@@ -156,6 +156,7 @@ class Search extends Component {
         renderSuggestion={renderSuggestion}
         renderSectionTitle={renderSectionTitle}
         getSectionSuggestions={getSectionSuggestions}
+        highlightFirstSuggestion={true}
         inputProps={inputProps}
       />
     );
@@ -172,4 +173,9 @@ const mapDispatchToProps = dispatch => ({
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Search)
+);
