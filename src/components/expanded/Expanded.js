@@ -26,6 +26,8 @@ class Expanded extends Component {
 
   generateStreetview = props => {
     if (Object.keys(props).length > 0 && props.constructor === Object) {
+      props = props.features[0].attributes;
+
       window.streetview = new window.google.maps.StreetViewPanorama(
         this.streetview,
         {
