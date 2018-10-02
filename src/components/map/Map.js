@@ -225,11 +225,11 @@ class MapComponent extends Component {
 
     if (nextProps.category) this.buildCategoryFilter(nextProps.category);
 
-    // check if center has been updated by the search bar and flyTo if so
+    // check if center has been updated by the search bar and flyTo if so (adjust zoom level if on mobile/tablet)
     if (nextProps.center !== this.props.center)
       this.map.flyTo({
         center: [nextProps.center.lng, nextProps.center.lat],
-        zoom: 13
+        zoom: window.innerWidth > 900 ? 12.5 : 11
       });
 
     if (nextProps.markerFromTiles) {
@@ -340,8 +340,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MapComponent)
+  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
 );
