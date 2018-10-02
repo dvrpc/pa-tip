@@ -8,7 +8,6 @@ import PrintPage from "../printPage/PrintPage.js";
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "../../utils/switchTabs.js";
-import { scrollToElement } from "../../utils/scrollToElement.js";
 import { getTotals } from "../../utils/calculateFundingTotals.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";

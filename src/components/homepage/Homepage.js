@@ -1,4 +1,4 @@
-import Inferno, { Component, linkEvent } from "inferno";
+import Inferno, { Component } from "inferno";
 import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
