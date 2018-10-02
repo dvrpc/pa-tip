@@ -24,54 +24,29 @@ class Expanded extends Component {
     this.props.history.goBack();
   };
 
-  componentWillMount() {
-    this.props.getFullTIP(this.props.match.params.id);
-    this.props.hydrateGeometry(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.geometryBackup !== this.props.geometryBackup) {
-      // handle case of un-mapped keyword projects
-      if (
-        nextProps.geometryBackup.features &&
-        nextProps.geometryBackup.features.length
-      ) {
-        window.streetview = new window.google.maps.StreetViewPanorama(
-          this.streetview,
-          {
-            position: {
-              lat: nextProps.geometryBackup.features[0].attributes.LATITUDE,
-              lng: nextProps.geometryBackup.features[0].attributes.LONGITUDE
-            },
-            zoom: 0
-          }
-        );
-      }
+  generateStreetview = props => {
+    if (Object.keys(props).length > 0 && props.constructor === Object) {
+      window.streetview = new window.google.maps.StreetViewPanorama(
+        this.streetview,
+        {
+          position: {
+            lat: props.LATITUDE,
+            lng: props.LONGITUDE
+          },
+          zoom: 0
+        }
+      );
     }
-  }
+  };
 
   componentDidMount() {
-    if (this.props.geometryBackup) {
-      if (
-        this.props.geometryBackup.features &&
-        this.props.geometryBackup.features.length
-      ) {
-        window.streetview = new window.google.maps.StreetViewPanorama(
-          this.streetview,
-          {
-            position: {
-              lat: this.props.geometryBackup.features[0].attributes.LATITUDE,
-              lng: this.props.geometryBackup.features[0].attributes.LONGITUDE
-            },
-            zoom: 0
-          }
-        );
-      }
-    }
+    this.props.hydrateGeometry(this.props.match.params.id);
+    this.props.getFullTIP(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
-    this.props.geometryBackup = {};
+  componentDidUpdate(prevProps) {
+    if (prevProps.geometryBackup != this.props.geometryBackup)
+      this.generateStreetview(this.props.geometryBackup);
   }
 
   render() {
@@ -80,6 +55,7 @@ class Expanded extends Component {
     let navBackground;
     let toReturn;
     let funding;
+
     this.props.details
       ? ((details = this.props.details),
         (funding = getTotals(this.props.details.funding.data)),
@@ -349,7 +325,6 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    test: state.getTIP.currentProject,
     geometryBackup: state.getTIP.geometry
   };
 };
@@ -361,7 +336,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Expanded);
+export default connect(mapStateToProps, mapDispatchToProps)(Expanded);
