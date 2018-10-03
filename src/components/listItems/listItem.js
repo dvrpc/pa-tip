@@ -19,7 +19,7 @@ class ListItem extends Component {
   componentWillMount() {
     let category = this.props.data.DESCRIPTIO;
 
-    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.json")
+    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite.json")
       .then(response => response.json())
       .then(body =>
         this.setState({
@@ -36,8 +36,8 @@ class ListItem extends Component {
 
     // set the category thumbnail
     let imgStyle = {
-      width: "44px",
-      height: "42px",
+      width: "62px",
+      height: "62px",
       objectFit: "none",
       objectPosition: this.state.coords,
       alignSelf: thumbnailAlign
@@ -51,7 +51,7 @@ class ListItem extends Component {
         onMouseLeave={linkEvent(null, this.props.getMarkerInfo)}
       >
         <img
-          src="https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite.png"
+          src="https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite.png"
           className="list-category-thumbnail"
           style={imgStyle}
           alt={`icon for ${project.DESCRIPTIO} projects`}

@@ -2,7 +2,7 @@ import mapboxgl from "mapbox-gl";
 import { colors } from "./tileGeometryColorType.js";
 
 export const updateBounds = mapReference => {
-  updateMapPosition(mapReference);
+  //updateMapPosition(mapReference);
   let renderedProjects = {
     allMPMS: [],
     features: []
@@ -10,6 +10,7 @@ export const updateBounds = mapReference => {
   let rendered = mapReference.map.queryRenderedFeatures({
     layers: ["pa-tip-points", "pa-tip-lines"]
   });
+
   rendered.forEach(item => {
     if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {
       renderedProjects.allMPMS.push(item.properties.MPMS_ID);

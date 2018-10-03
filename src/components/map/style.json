@@ -97,7 +97,7 @@
       "url": "https://tiles.dvrpc.org/data/dvrpc-municipal.json"
     }
   },
-  "sprite": "https://tiles.dvrpc.org/data/styles/dvrpc-streets/sprite",
+  "sprite": "https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   "layers": [
     {

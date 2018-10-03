@@ -69,7 +69,7 @@ class TilesContainer extends Component {
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
       projects = projects.filter(
-        project => project.category === this.state.categoryToFilter
+        project => project.DESCRIPTIO === this.state.categoryToFilter
       );
     }
 
