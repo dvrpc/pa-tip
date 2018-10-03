@@ -26,7 +26,7 @@
 }
 #nav-search-form {
   margin-right: 10px;
-  width: 40%;
+  width: calc(40% - 10px);
   border-top-left-radius: 10px;
   background: rgba(238, 238, 238, 0.7);
   border-radius: 10px;

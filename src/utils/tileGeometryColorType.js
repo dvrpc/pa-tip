@@ -28,7 +28,7 @@ export const colors = {
   "Signal/ITS Improvements": {
     lightest: "rgba(237, 28, 36, 0.1)",
     middle: "rgba(237, 28, 36, 0.3)",
-    darkest: "rgba(237, 28, 36, 1)",
+    darkest: "rgb(203, 37, 43)",
     forMap: "ed1c24"
   },
   "Roadway Rehabilitation": {
