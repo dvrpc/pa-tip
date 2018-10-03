@@ -195,6 +195,9 @@ class MapComponent extends Component {
     // handle user events to update map results
     this.map.on("zoomend", () => updateBounds(this));
     this.map.on("moveend", () => updateBounds(this));
+    this.map.on("data", () => {
+      if (this.map.isStyleLoaded()) updateBounds(this);
+    });
 
     const { type, value } = this.props.match.params;
 
