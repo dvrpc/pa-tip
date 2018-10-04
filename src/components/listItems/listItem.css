@@ -10,6 +10,8 @@
 }
 .list-category-thumbnail{
     width: 25%;
+    object-fit: "none";
+    object-position: -1000px -1000px;
 }
 .list-text{
     display: flex;
