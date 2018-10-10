@@ -147,7 +147,7 @@ class Expanded extends Component {
                       onClick={linkEvent(this, switchTabs)}
                       ref={e => (this.milestonesButton = e)}
                     >
-                      Milestones
+                      Status
                     </button>
                   </div>
 
