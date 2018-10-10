@@ -2,7 +2,6 @@ import mapboxgl from "mapbox-gl";
 import { colors } from "./tileGeometryColorType.js";
 
 export const updateBounds = mapReference => {
-  //updateMapPosition(mapReference);
   let renderedProjects = {
     allMPMS: [],
     features: []

@@ -5,6 +5,7 @@ import { withRouter } from "inferno-router";
 import { clickTile } from "../../utils/clickTile.js";
 import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
 import counties from "../../utils/counties.js";
+import { fetchSprite } from "../../utils/fetchSprite.js";
 
 import "./listItem.css";
 
@@ -19,13 +20,11 @@ class ListItem extends Component {
   componentWillMount() {
     let category = this.props.data.DESCRIPTIO;
 
-    fetch("https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite.json")
-      .then(response => response.json())
-      .then(body =>
-        this.setState({
-          coords: `-${body[category].x}px -${body[category].y}px`
-        })
-      );
+    fetchSprite.then(response => {
+      this.setState({
+        coords: `-${response[category].x}px -${response[category].y}px`
+      });
+    });
   }
 
   render() {
