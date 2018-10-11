@@ -305,6 +305,167 @@ class Homepage extends Component {
                   </li>
                 </ul>
               </div>
+
+              <div id="obligation-table-wrapper">
+                <h2>Obligation Summary</h2>
+                <table id="obligation-summary-table">
+                  <tbody>
+                    <tr>
+                      <td>FY2018:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/2228_DVRPCSummary18.pdf">
+                          Summary
+                        </a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/2228_DVRPCandInterstateDetails18.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.4 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2017:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary17.pdf">Summary</a>{" "}
+                        <span class="sm">[0.1 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails17.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2016:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary16.pdf">Summary</a>{" "}
+                        <span class="sm">[0.1 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails16.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2015:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary15.pdf">Summary</a>{" "}
+                        <span class="sm">[0.1 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails15.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.4 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2014:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary14.pdf">Summary</a>{" "}
+                        <span class="sm">[0.1 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails14.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.4 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2013:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary13.pdf">Summary</a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails13.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.6 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2012:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary12.pdf">Summary</a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails12.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.6 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2011:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary11.pdf">Summary</a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails11.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.7 MB pdf]</span>
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>FY2010:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCSummary10.pdf">Summary</a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/DVRPCandInterstateDetails10.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.8 MB pdf]</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

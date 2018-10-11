@@ -35,7 +35,9 @@ class Navbar extends Component {
           />
 
           <div class="nav-text">
-            <img src={logo} alt="DVRPC logo" />
+            <a href="https://www.dvrpc.org/" rel="external">
+              <img src={logo} alt="DVRPC logo" />
+            </a>
 
             <h2 id="draft-text">
               <strong>FY2019 TIP for PA</strong>
