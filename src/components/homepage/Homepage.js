@@ -317,14 +317,14 @@ class Homepage extends Component {
                         <a href="/TIP/PA/pdf/2228_DVRPCSummary18.pdf">
                           Summary
                         </a>{" "}
-                        <span class="sm">[0.3 MB pdf]</span>
+                        <span class="sm">[0.4 MB pdf]</span>
                       </td>
 
                       <td>
-                        <a href="/TIP/PA/pdf/2228_DVRPCandInterstateDetails18.pdf">
+                        <a href="/TIP/PA/pdf/2794_DVRPCandInterstateDetails18.pdf">
                           Details
                         </a>{" "}
-                        <span class="sm">[0.4 MB pdf]</span>
+                        <span class="sm">[0.7 MB pdf]</span>
                         <br />
                       </td>
                     </tr>
