@@ -10,6 +10,7 @@
 }
 .list-category-thumbnail{
     width: 25%;
+    margin: 0 1%;
     object-fit: "none";
     object-position: -1000px -1000px;
 }
