@@ -167,7 +167,7 @@ class Expanded extends Component {
                         </tr>
                       </thead>
                       <tbody style={{ background: colorScheme.lightest }}>
-                        <tr>
+                        <tr id="funding-subheaders">
                           <td style={{ background: "#666" }}>
                             <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
                           </td>
@@ -222,7 +222,7 @@ class Expanded extends Component {
                               <td>{row[7]}</td>
                             </tr>
                           ))}
-                        <tr>
+                        <tr id="program-year-totals">
                           <td
                             colspan="2"
                             style={{ fontWeight: "700", color: "#333" }}
@@ -264,7 +264,7 @@ class Expanded extends Component {
                           <td />
                           <td />
                         </tr>
-                        <tr style={{ background: "#666" }}>
+                        <tr style={{ background: "#666" }} id="funding-totals">
                           <td colspan="2">Total FY19-22 Cost:</td>
                           <td style={{ fontWeight: "700" }}>{funding[4]}</td>
                           <td colspan="2">Total FY219-30 Cost:</td>

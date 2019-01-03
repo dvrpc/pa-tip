@@ -155,15 +155,24 @@ th {
     padding: 0;
     margin-top: 1vh;
   }
-  .tabs{
-    margin-bottom: 0;
-  }
 }
 @media screen and (max-width: 700px) {
-  #content-mini-nav p, #expanded-project-description p, .funding-and-awards-table {
+  #content-mini-nav p, #expanded-project-description p {
     font-size: 1rem;
   }
+  .funding-and-awards-table {
+    font-size: 0.9rem;
+  }
+  .table-data-rows, #funding-totals, #program-year-totals, #funding-subheaders {
+    font-size: 0.7rem;
+  }
   #expanded-project-title {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    /* hack to allow sticky for flex children (safari and edge only...) */
+    align-self: flex-start;
+    height: auto;
     font-size: 1.2rem;
   }
 }

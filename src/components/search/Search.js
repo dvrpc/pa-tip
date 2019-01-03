@@ -40,8 +40,8 @@ const transformKeywordSuggestions = data => ({
 });
 
 class Search extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       value: "",
@@ -139,7 +139,7 @@ class Search extends Component {
     }
 
     const inputProps = {
-      placeholder: "Search by address or project keywords",
+      placeholder: "Search by address or keywords",
       value: this.state.value,
       onChange: this.onChange,
       id: "homepage-search-bar"
@@ -173,9 +173,4 @@ const mapDispatchToProps = dispatch => ({
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

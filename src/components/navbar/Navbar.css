@@ -27,8 +27,7 @@
 #nav-search-form {
   margin-right: 1%;
   width: calc(39% - 1vh);
-  border-top-left-radius: 10px;
-  background: rgba(238, 238, 238, 0.7);
+  background: #f7f7f7;
   border-radius: 10px;
 }
 
@@ -51,18 +50,21 @@
   }
 }
 @media screen and (max-width: 700px) {
-  #navSearch,
-  #navBarSelector {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 550px) {
   #nav-search-form {
-    width: 80%;
+    width: 65%;
+    font-size: 0.8rem;
+  }
+  ::-webkit-input-placeholder {
+    font-size: 0.8rem;
+  }
+  ::-moz-placeholder {
+    font-size: 0.8rem;
+  }
+  :-ms-input-placeholder {
+    font-size: 0.8rem;
+  }
+  ::placeholder {
+    font-size: 0.8rem;
   }
 }
-@media screen and (max-width: 350px) {
-  #nav-search-form {
-    font-size: 0.7rem;
-  }
-}
+

@@ -75,8 +75,9 @@
   border: none;
   background: url("./magnifying-glass.png") no-repeat scroll 3% 50%;
   font-size: 1.4rem;
-  width: 100%;
-  padding: 3% 5% 3% 7%;
+  /* 91% to offset the 9% padding for the magnifying glass */
+  width: 91%;
+  padding: 3% 5% 3% 9%;
 }
 #search-form input:focus {
   outline: none;
@@ -181,7 +182,7 @@
 /* Media Queries*/
 
 /* Phones and tablets (portrait) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   /* hide the video for smartphone users */
   .homepage {
     overflow: hidden;
@@ -218,10 +219,10 @@
     margin-top: 25vh !important;
   }
   #homepage-search-bar {
-    font-size: 1rem !important;
-  }
-  #homepage-search-bar {
-    padding: 5% 0 5% 15%;
+    background: url("./magnifying-glass.png") no-repeat scroll 2% 50%;
+    background-size: 13px;
+    font-size: 0.8rem !important;
+    padding: 3% 0 3% 10%;
   }
   .tip-info-cluster {
     justify-content: center;
