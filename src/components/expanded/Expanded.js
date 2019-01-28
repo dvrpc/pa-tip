@@ -16,6 +16,10 @@ import counties from "../../utils/counties";
 class Expanded extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      streetView: false
+    };
   }
 
   // @TODO: function that does more than just history.goBack()
@@ -24,20 +28,21 @@ class Expanded extends Component {
   };
 
   generateStreetview = props => {
-    if (Object.keys(props).length > 0 && props.constructor === Object) {
-      props = props.features[0].attributes;
+    const geom = props.features[0].attributes;
 
-      window.streetview = new window.google.maps.StreetViewPanorama(
-        this.streetview,
-        {
-          position: {
-            lat: props.LATITUDE,
-            lng: props.LONGITUDE
-          },
-          zoom: 0
-        }
-      );
-    }
+    window.streetview = new window.google.maps.StreetViewPanorama(
+      this.streetview,
+      {
+        position: {
+          lat: geom.LATITUDE,
+          lng: geom.LONGITUDE
+        },
+        zoom: 0
+      }
+    );
+
+    // set streetView status and re-render to show the streetview component
+    if (!this.state.streetView) this.setState({ streetView: true });
   };
 
   componentDidMount() {
@@ -46,8 +51,13 @@ class Expanded extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.geometryBackup != this.props.geometryBackup)
-      this.generateStreetview(this.props.geometryBackup);
+    const features = this.props.geometry.features;
+    if (features.length) this.generateStreetview(this.props.geometry);
+  }
+
+  componentWillUnmount() {
+    // reset geometry (handle case where it was serving old features)
+    this.props.geometry.features = [];
   }
 
   render() {
@@ -57,7 +67,7 @@ class Expanded extends Component {
     let toReturn;
     let funding;
 
-    this.props.details
+    this.props && this.props.details
       ? ((details = this.props.details),
         (funding = getTotals(this.props.details.funding.data)),
         (colorScheme = colors[details.category]),
@@ -326,7 +336,7 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    geometryBackup: state.getTIP.geometry
+    geometry: state.getTIP.geometry
   };
 };
 
