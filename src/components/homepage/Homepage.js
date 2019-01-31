@@ -1,5 +1,4 @@
 import Inferno, { Component } from "inferno";
-import { connect } from "inferno-redux";
 import { withRouter } from "inferno-router";
 
 import Search from "../search/Search.js";
@@ -311,13 +310,30 @@ class Homepage extends Component {
                 <table id="obligation-summary-table">
                   <tbody>
                     <tr>
+                      <td>FY2019:</td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/3130_DVRPCSummary19.pdf">
+                          Summary
+                        </a>{" "}
+                        <span class="sm">[0.03 MB pdf]</span>
+                      </td>
+
+                      <td>
+                        <a href="/TIP/PA/pdf/3130_DVRPCandInterstateDetails19.pdf">
+                          Details
+                        </a>{" "}
+                        <span class="sm">[0.3 MB pdf]</span>
+                      </td>
+                    </tr>
+                    <tr>
                       <td>FY2018:</td>
 
                       <td>
                         <a href="/TIP/PA/pdf/2794_DVRPCSummary18.pdf">
                           Summary
                         </a>{" "}
-                        <span class="sm">[0.4 MB pdf]</span>
+                        <span class="sm">[0.03 MB pdf]</span>
                       </td>
 
                       <td>
@@ -334,7 +350,7 @@ class Homepage extends Component {
 
                       <td>
                         <a href="/TIP/PA/pdf/DVRPCSummary17.pdf">Summary</a>{" "}
-                        <span class="sm">[0.1 MB pdf]</span>
+                        <span class="sm">[0.04 MB pdf]</span>
                       </td>
 
                       <td>
@@ -351,7 +367,7 @@ class Homepage extends Component {
 
                       <td>
                         <a href="/TIP/PA/pdf/DVRPCSummary16.pdf">Summary</a>{" "}
-                        <span class="sm">[0.1 MB pdf]</span>
+                        <span class="sm">[0.04 MB pdf]</span>
                       </td>
 
                       <td>
@@ -368,7 +384,7 @@ class Homepage extends Component {
 
                       <td>
                         <a href="/TIP/PA/pdf/DVRPCSummary15.pdf">Summary</a>{" "}
-                        <span class="sm">[0.1 MB pdf]</span>
+                        <span class="sm">[0.07 MB pdf]</span>
                       </td>
 
                       <td>
@@ -402,7 +418,7 @@ class Homepage extends Component {
 
                       <td>
                         <a href="/TIP/PA/pdf/DVRPCSummary13.pdf">Summary</a>{" "}
-                        <span class="sm">[0.3 MB pdf]</span>
+                        <span class="sm">[0.08 MB pdf]</span>
                       </td>
 
                       <td>
