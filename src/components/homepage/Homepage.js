@@ -195,6 +195,20 @@ class Homepage extends Component {
               </div>
 
               <div>
+                <h2>Summary of Amendments and Modifications</h2>
+                <p>
+                  DVRPC will update these project listings (generally each
+                  month), as we amend or modify the TIP, as permitted under the
+                  TIP MOU. The{" "}
+                  <a href="/TIP/PA/pdf/actpa19.pdf">
+                    Summary of Amendments and Modifications
+                  </a>{" "}
+                  <span class="sm">[0.3 MB pdf]</span> provides a chronological
+                  listing of all project changes.
+                </p>
+              </div>
+
+              <div>
                 <h2>Program Lists</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
