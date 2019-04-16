@@ -62,11 +62,10 @@ export const geometryColorType = project => {
 
   // get the Category (streestcape, transit improvement, etc., of a project)
   const category = project.DESCRIPTIO;
+  const mapColors = colors[category].forMap;
 
   // Draw the project area (points will just show a static map centering on the project location)
-  let path = `&path=color:0x${
-    colors[category].forMap
-  }ff|weight:8|${formattedLatLng}`;
+  let path = `&path=color:0x${mapColors}ff|weight:8|${formattedLatLng}`;
 
   return path;
 };

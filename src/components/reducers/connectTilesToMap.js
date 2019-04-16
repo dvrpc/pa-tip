@@ -14,7 +14,6 @@ export default function connectTilesToMap(state = [], action) {
       return Object.assign({}, state, {
         markerInfo: action.markerInfo
       });
-      break;
     default:
       return [];
   }

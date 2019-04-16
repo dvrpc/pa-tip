@@ -63,13 +63,6 @@ export const keywordBounds = (mapReference, data) => {
   return ["!=", "MPMS_ID", ""];
 };
 
-const updateMapPosition = instance => {
-  instance.props.setMapState({
-    center: instance.map.getCenter(),
-    zoom: instance.map.getZoom()
-  });
-};
-
 export const showPopup = (marker, map) => {
   let details = marker.properties || marker;
 
