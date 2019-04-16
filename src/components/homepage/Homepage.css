@@ -74,10 +74,10 @@
 #homepage-search-bar {
   border: none;
   background: url("./magnifying-glass.png") no-repeat scroll 3% 50%;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   /* 91% to offset the 9% padding for the magnifying glass */
   width: 91%;
-  padding: 3% 5% 3% 9%;
+  padding: 3% 5% 3% 10%;
 }
 #search-form input:focus {
   outline: none;
