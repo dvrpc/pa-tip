@@ -27,9 +27,7 @@ class Expanded extends Component {
     this.props.history.goBack();
   };
 
-  generateStreetview = props => {
-    const geom = props.features[0].attributes;
-
+  generateStreetview = geom => {
     window.streetview = new window.google.maps.StreetViewPanorama(
       this.streetview,
       {
@@ -51,8 +49,12 @@ class Expanded extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const features = this.props.geometry.features;
-    if (features.length) this.generateStreetview(this.props.geometry);
+    let features = this.props.geometry ? this.props.geometry.features : [];
+
+    if (features.length) {
+      const geom = features[0].attributes;
+      this.generateStreetview(geom);
+    }
   }
 
   componentWillUnmount() {
@@ -347,4 +349,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expanded);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Expanded);
