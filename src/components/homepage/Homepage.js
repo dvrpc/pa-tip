@@ -117,12 +117,6 @@ class Homepage extends Component {
                 <h2>Detailed Information</h2>
                 <ul class="list-group">
                   <li class="list-group-item">
-                    <a href="/TIP/PA/pdf/MajorStatus19.pdf">
-                      Major Project Status Report
-                    </a>{" "}
-                    <span class="sm">[0.07 MB pdf]</span>
-                  </li>
-                  <li class="list-group-item">
                     <a href="/TIP/PA/pdf/HighlightsPA19.pdf">
                       Highlights of the FY2019 TIP for PA
                     </a>{" "}
@@ -164,6 +158,12 @@ class Homepage extends Component {
                   <li class="list-group-item">
                     <a href="/TIP/PA/pdf/TIP19Libraries.pdf">
                       Libraries Displaying the TIP
+                    </a>{" "}
+                    <span class="sm">[0.1 MB pdf]</span>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/TIP/PA/pdf/MajorStatus19.pdf">
+                      Major Project Status Report
                     </a>{" "}
                     <span class="sm">[0.1 MB pdf]</span>
                   </li>
