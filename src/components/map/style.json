@@ -90,7 +90,7 @@
     },
     "pa-tip": {
       "type": "vector",
-      "url": "https://tiles.dvrpc.org/data/dvrpc-tip.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-patip.json"
     },
     "boundary": {
       "type": "vector",
