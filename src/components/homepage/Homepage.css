@@ -46,31 +46,6 @@
   width: 50%;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
-.homepage-radio-group {
-  font-size: 1.4rem;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background: rgba(238, 238, 238, 0.9);
-  display: flex;
-  flex-direction: row;
-  padding: 3%;
-  text-align: center;
-  align-items: center;
-}
-.radio-group-cluster {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25%;
-}
-.homepage-radio-group input[type="radio"],
-#MPMS,
-#Keyword {
-  margin-left: 5%;
-}
-.homepage-radio-group input[type="radio"] {
-  margin-right: 1%;
-}
 #homepage-search-bar {
   border: none;
   background: url("./magnifying-glass.png") no-repeat scroll 3% 50%;
@@ -102,15 +77,15 @@
   padding: 4%;
   line-height: 1.4;
 }
-.tip-info-cluster {
-  display: flex;
-  justify-content: flex-end;
-}
-.tip-info-paragraphs h2 {
+.info-section-header {
   font-weight: 500;
   font-size: 1.8rem;
   color: #e5c942;
   padding-bottom: 2%;
+  margin-top: 4%;
+}
+#main-section-header{
+  margin-top: 0;
 }
 #tip-info p,
 #tip-info ul,
@@ -118,8 +93,8 @@
   font-size: 1.2rem;
   margin: 0 0 1rem;
 }
-.tip-info-paragraphs {
-  flex-direction: row;
+#tip-info-paragraphs {
+  margin-left: 30%;
   width: 70%;
   color: #ffffff;
 }
@@ -134,7 +109,7 @@
   color: unset;
   text-decoration: underline;
 }
-.nav-links-box {
+#nav-links-box {
   position: absolute;
   width: 23%;
   padding: 2% 0 0;
@@ -143,16 +118,16 @@
   border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(48, 48, 48, 0.7), 0 3px 5px 0 rgba(48, 48, 48, 0.8);
 }
-.nav-links-box p {
+#nav-links-box p {
   padding: 0 1.2rem 0 1.2rem;
   font-weight: bold;
 }
-.nav-links-box ul {
+#nav-links-box ul {
   list-style-type: none;
   padding: 0 1.2rem;
   background: linear-gradient(to right, #3d3c3c 0, transparent 65%);
 }
-.nav-links-box li {
+#nav-links-box li {
   padding: 5% 0 5% 0;
 }
 .list-group {
@@ -171,6 +146,7 @@
   font-size: 1rem;
 }
 #obligation-summary-table{
+  font-size: 1.2rem;
   width: 100%;
 }
 
@@ -224,13 +200,11 @@
     font-size: 0.8rem !important;
     padding: 3% 0 3% 10%;
   }
-  .tip-info-cluster {
-    justify-content: center;
-  }
-  .tip-info-paragraphs {
+  #tip-info-paragraphs {
+    margin-left: 0;
     width: 100%;
   }
-  .nav-links-box {
+  #nav-links-box {
     display: none;
   }
   #tip-info hr {
@@ -240,6 +214,9 @@
     margin-bottom: 2%;
   }
   .list-group-item {
+    font-size: 1rem;
+  }
+  #obligation-summary-table{
     font-size: 1rem;
   }
 }
@@ -252,16 +229,13 @@
   #bgvid {
     transform: translateX(-50%) translateY(-67%);
   }
-  .radio-group-cluster {
-    flex-direction: column;
-  }
   #search-form {
     margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
   }
   #homepage-search-bar {
     text-overflow: wrap;
   }
-  .tip-info-paragraphs h2 {
+  .info-section-header {
     font-size: 1.3rem;
   }
   #tip-info p {
@@ -277,7 +251,6 @@
   #bgvid {
     transform: translateX(-50%) translateY(-58%);
   }
-  .homepage-radio-group,
   #homepage-search-bar {
     font-size: 1.2rem;
   }
