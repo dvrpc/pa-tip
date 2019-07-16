@@ -1,12 +1,16 @@
+.homepage {
+  overflow: hidden;
+}
 .homepage-banner {
   display: flex;
   align-items: center;
-  padding: 2.5%;
+  padding: 10px 2%;
   background: linear-gradient(to right, white 35%, #e8e8e8 65%, #dcdcdc);
-  border-bottom: 15px solid white;
+  border-bottom: 10px solid white;
+  justify-content: space-between;
 }
 #banner-logo {
-  padding-right: 30vw;
+  margin-top: 5px;
 }
 #banner-tip-logo {
   padding-right: 2vw;
@@ -17,18 +21,22 @@
   font-weight: 600;
   font-size: 1.6rem;
 }
+.stacked-headers{
+  display: flex;
+  align-items: center;
+}
 .homepage-main {
   background: linear-gradient(
     to right,
     rgba(245, 181, 10, 0.6),
     rgba(0, 0, 0, 0.3) 50%
   );
-  height: 65vh;
+  height: 75vh;
   border: thin solid rgba(0, 0, 0, 0);
 }
 #bgvid {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   width: 100%;
   min-height: 85%;
@@ -40,18 +48,17 @@
 }
 #search-form {
   border-radius: 10px;
-  margin: 5% 5% 0 calc(30vw + 137px + 2.5vw);
+  margin: 5% 2% 0 auto;
   background: rgba(238, 238, 238, 0.7);
   color: black;
-  width: 50%;
+  width: 595px;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
 #homepage-search-bar {
   border: none;
   background: url("./magnifying-glass.png") no-repeat scroll 3% 50%;
   font-size: 1.1rem;
-  /* 91% to offset the 9% padding for the magnifying glass */
-  width: 91%;
+  width: 100%;
   padding: 3% 5% 3% 10%;
 }
 #search-form input:focus {
@@ -59,22 +66,24 @@
 }
 .homepage-bottom-bar {
   background: #303030;
-  padding: 1.5% 5%;
+  padding: 1.5% 2.5%;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 .homepage-bottom-bar a {
-  color: #fff;
+  color: #e5c942;
   white-space: nowrap;
+  font-weight: 700;
 }
 .homepage-bottom-bar img {
-  padding: 0 5%;
+  padding-left: 2%;
 }
 
 /* Information Section */
 #tip-info {
   background: #494848;
-  padding: 4%;
+  padding: 3% 4%;
   line-height: 1.4;
 }
 .info-section-header {
@@ -160,9 +169,6 @@
 /* Phones and tablets (portrait) */
 @media only screen and (max-width: 700px) {
   /* hide the video for smartphone users */
-  .homepage {
-    overflow: hidden;
-  }
   .homepage-main {
     height: 65vh !important;
   }
