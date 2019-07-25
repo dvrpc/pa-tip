@@ -336,12 +336,12 @@ class Homepage extends Component {
                     <td>FY2019:</td>
 
                     <td>
-                      <a href="/TIP/PA/pdf/3130_DVRPCSummary19.pdf">Summary</a>{" "}
+                      <a href="/TIP/PA/pdf/DVRPCSummary19.pdf">Summary</a>{" "}
                       <span class="sm">[0.03 MB pdf]</span>
                     </td>
 
                     <td>
-                      <a href="/TIP/PA/pdf/3130_DVRPCandInterstateDetails19.pdf">
+                      <a href="/TIP/PA/pdf/DVRPCandInterstateDetails19.pdf">
                         Details
                       </a>{" "}
                       <span class="sm">[0.3 MB pdf]</span>
