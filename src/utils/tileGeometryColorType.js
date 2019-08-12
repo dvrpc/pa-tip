@@ -54,6 +54,11 @@ export const colors = {
     middle: "rgba(90, 191, 65, 0.3)",
     darkest: "rgba(90, 191, 65, 1)",
     forMap: "5abf41"
+  },
+  Default: {
+    lightest: "rgb(171, 171, 171)",
+    middle: "#666666",
+    darkest: "#333333"
   }
 };
 

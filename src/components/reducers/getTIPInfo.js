@@ -142,8 +142,11 @@ export const getTIPByMapBounds = features => dispatch => {
 
 // pull project information from URL for link sharing
 export const hydrateGeometry = id => dispatch => {
+  // handle resetting of the expanded.js props to solve old components rendering while a new one loads
+  if (id === null) return dispatch(hydrate_geometry(null));
+
   fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_2019_to_2022/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=LATITUDE,LONGITUDE,OBJECTID&returnGeometry=false&outSR=4326&f=json`
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_2019_to_2022/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
   )
     .then(response => {
       if (response.ok)
@@ -156,6 +159,9 @@ export const hydrateGeometry = id => dispatch => {
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
+  // handle resetting of the expanded.js props to solve old components rendering while a new one loads
+  if (id === null) return dispatch(get_full_tip(null));
+
   fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`)
     .then(response => {
       if (response.ok) {

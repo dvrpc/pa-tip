@@ -27,8 +27,7 @@ class Expanded extends Component {
   backToResults = () => this.props.history.goBack();
 
   generateStreetview = geom => {
-    console.log("streetview geom ", geom);
-    window.streetview = new window.google.maps.StreetViewPanorama(
+    this.streetview = new window.google.maps.StreetViewPanorama(
       this.streetview,
       {
         position: {
@@ -95,12 +94,11 @@ class Expanded extends Component {
     let funding;
     let loaded = false;
 
-    console.log("details is ", this.props.details);
-
     if (this.props.details) {
+      details = this.props.details;
       // handle fetching errors
-      if (this.props.details.error) {
-        const reason = this.props.details.reason;
+      if (details.error) {
+        const reason = details.reason;
 
         const throwError = () => {
           alert(
@@ -116,9 +114,8 @@ class Expanded extends Component {
 
         // extract project information from store props
       } else {
-        details = this.props.details;
         funding = getTotals(details.funding.data);
-        colorScheme = colors[details.category];
+        colorScheme = colors[details.category] || colors["Default"];
         navBackground = `background: linear-gradient(to right, white 35%, ${
           colorScheme.middle
         } 65%, ${colorScheme.darkest})`;
