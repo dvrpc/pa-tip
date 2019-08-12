@@ -33,7 +33,8 @@ class MapComponent extends Component {
       toggleLegendList: false,
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""],
-      tilePopup: {}
+      tilePopup: {},
+      url: this.props.match.params
     };
 
     this.Places = new window.google.maps.places.PlacesService(
@@ -199,7 +200,9 @@ class MapComponent extends Component {
       if (this.map.isStyleLoaded()) updateBounds(this);
     });
 
-    const { type, value } = this.props.match.params;
+    //const { type, value } = this.props.match.params;
+    const type = this.state.url.type;
+    const value = this.state.url.value;
 
     if (type === "location") {
       this.context.store.getState().getTIP.keyword = [];
@@ -341,5 +344,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MapComponent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MapComponent)
 );

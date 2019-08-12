@@ -19,6 +19,7 @@ class ListItem extends Component {
 
   componentWillMount() {
     let category = this.props.data.DESCRIPTIO;
+    if (category === "null") category = "Other";
 
     fetchSprite.then(response => {
       this.setState({
@@ -77,4 +78,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(ListItem));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(ListItem)
+);

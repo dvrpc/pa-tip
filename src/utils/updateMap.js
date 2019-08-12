@@ -64,6 +64,9 @@ export const keywordBounds = (mapReference, data) => {
 };
 
 export const showPopup = (marker, map) => {
+  // short out of unmapped projects
+  if (marker.NOT_MAPPED) return {};
+
   let details = marker.properties || marker;
 
   let tilePopup = new mapboxgl.Popup({

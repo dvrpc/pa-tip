@@ -44,17 +44,6 @@ class Expanded extends Component {
     this.props.getFullTIP(this.state.params);
   }
 
-  // OLD did update for geometry
-  // componentDidUpdate(prevProps) {
-  //   console.log('geom format pa ', this.props.geometry)
-  //   let features = this.props.geometry ? this.props.geometry.features : [];
-
-  //   if (features.length) {
-  //     const geom = features[0].attributes;
-  //     this.generateStreetview(geom);
-  //   }
-  // }
-
   componentDidUpdate(prevProps) {
     const oldGeom = prevProps.geometry;
     const newGeom = this.props.geometry;
@@ -72,12 +61,6 @@ class Expanded extends Component {
       }
     }
   }
-
-  // OLD did mount for emptying geometry
-  // componentWillUnmount() {
-  //   // reset geometry (handle case where it was serving old features)
-  //   this.props.geometry.features = [];
-  // }
 
   // clear old project data (and timeout, if necessary) from the store to prevent expanded.js from pulling old information while fetching a new page
   componentWillUnmount() {
@@ -106,7 +89,7 @@ class Expanded extends Component {
               this.state.params
             } could not be fetched at this time due to ${reason}. Click 'ok' to return to the map.`
           );
-          this.props.history.push("/keyword/all");
+          this.props.history.push("/location/ChIJ60u11Ni3xokRwVg-jNgU9Yk");
         };
 
         // throw the error alert after 1.2 seconds of delay because immediate feedback from errors is bad ux
