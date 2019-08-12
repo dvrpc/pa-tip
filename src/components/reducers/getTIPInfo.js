@@ -158,10 +158,14 @@ export const hydrateGeometry = id => dispatch => {
 export const getFullTIP = id => dispatch => {
   fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`)
     .then(response => {
-      if (response.ok)
+      if (response.ok) {
         response
           .json()
           .then(projectDetails => dispatch(get_full_tip(projectDetails)));
+      } else {
+        const output = { error: true, reason: response.statusText };
+        dispatch(get_full_tip(output));
+      }
     })
     .catch(error => console.error(error));
 };
