@@ -9,7 +9,7 @@ const ipd = {
     "fill-color": [
       "interpolate",
       ["linear"],
-      ["get", "IPD_Score"],
+      ["get", "IPD_SCORE"],
       9,
       "#ffffd9",
       13,
@@ -30,7 +30,8 @@ const ipd = {
       "#081d58"
     ],
     "fill-opacity": 0.5
-  }
+  },
+  filter: ["==", "STATE_FIPS", "42"]
 };
 const cmp = {
   id: "CMP Corridors",

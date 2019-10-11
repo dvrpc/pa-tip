@@ -134,7 +134,7 @@ class MapComponent extends Component {
       this.map.addSource("IPD", {
         type: "geojson",
         data:
-          "https://opendata.arcgis.com/datasets/ab586640e7ab40e58c0615f9355cb35a_0.geojson"
+          "https://opendata.arcgis.com/datasets/44fdcc72f46e4e3f90126f4f9c5f7629_0.geojson"
       });
       this.map.addSource("CMP", {
         type: "geojson",
