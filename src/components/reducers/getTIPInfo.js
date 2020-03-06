@@ -50,61 +50,23 @@ export default function tipReducer(state = [], action) {
   }
 }
 
-const keywordRequest = keyword =>
-  new Promise(resolve => {
-    fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
-      .then(response => response.json())
-      .then(features => {
-        // get geometry & rest of project information from the arcGIS server
-        let mpms_array = features.map(project => project.id).join(",");
-        let params = {
-          where: `MPMS_ID in (${mpms_array})`,
-          srOut: 4326,
-          f: "geojson",
-          outFields:
-            "OBJECTID,CTY,MPMS_ID,ROAD_NAME,DESCRIPTIO,LATITUDE,LONGITUDE",
-          returnGeometry: false
-        };
-        //Encode the data
-        const body = Object.keys(params)
-          .map(
-            key =>
-              `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-          )
-          .join("&");
-        fetch(
-          `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_2019_to_2022/FeatureServer/0/query`,
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-            method: "POST",
-            body
-          }
-        )
-          .then(arcGISResponse => arcGISResponse.json())
-          .then(arcGISProjects => {
-            features.forEach(project => {
-              const matchedProject = arcGISProjects.features.filter(
-                feature => feature.properties.MPMS_ID === project.id
-              );
-              project.properties = matchedProject.length
-                ? matchedProject[0].properties
-                : {
-                    OBJECTID: project.id + project.road_name,
-                    CTY: project.county,
-                    DESCRIPTIO: project.category,
-                    MPMS_ID: project.id,
-                    ROAD_NAME: project.road_name,
-                    LATITUDE: 40.018,
-                    LONGITUDE: -75.148,
-                    NOT_MAPPED: true
-                  };
-            });
-            resolve({ features });
-          });
+// take search input and find TIP Projects that satisfy the criteria
+const getProjectsFromSearch = keyword =>
+  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
+    .then(response => response.json())
+    .then(features => {
+      // return empty array for no results
+      if (!features[0]) return [];
+
+      // get id, name and set cateogry type for projects
+      let mpmsAndNames = features.map(project => {
+        return { name: project.road_name, id: project.id, type: "expanded" };
       });
-  });
+
+      // trim response to the first 5 entries & return
+      mpmsAndNames = mpmsAndNames.slice(0, 5);
+      return mpmsAndNames;
+    });
 
 /*** DISPATCHERS ***/
 export const getTIPByKeywords = keyword => (dispatch, getState) => {
@@ -112,7 +74,7 @@ export const getTIPByKeywords = keyword => (dispatch, getState) => {
   if (getState().getTIP.fetchedKeywords !== undefined) {
     dispatch(get_tip_keywords(getState().getTIP.fetchedKeywords));
   } else {
-    keywordRequest(keyword).then(arcGISProjects =>
+    getProjectsFromSearch(keyword).then(arcGISProjects =>
       dispatch(get_tip_keywords(arcGISProjects))
     );
   }
@@ -120,9 +82,9 @@ export const getTIPByKeywords = keyword => (dispatch, getState) => {
 
 //get search results without updating the entire app
 export const fetchTIPByKeywords = keyword => dispatch => {
-  keywordRequest(keyword).then(arcGISProjects =>
-    dispatch(fetch_tip_keywords(arcGISProjects))
-  );
+  getProjectsFromSearch(keyword).then(projects => {
+    dispatch(fetch_tip_keywords(projects));
+  });
 };
 
 export const setMapCenter = latlng => dispatch =>

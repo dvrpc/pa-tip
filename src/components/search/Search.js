@@ -30,14 +30,12 @@ const transformLocationSuggestions = data => ({
   }))
 });
 
-const transformKeywordSuggestions = data => ({
-  title: "TIP Projects",
-  results: data.features.slice(0, 5).map(project => ({
-    name: `${project.properties.MPMS_ID}: ${project.properties.ROAD_NAME}`,
-    id: `${project.properties.MPMS_ID}`,
-    type: "expanded"
-  }))
-});
+const transformKeywordSuggestions = data => {
+  return {
+    title: "TIP Projects",
+    results: data
+  };
+};
 
 class Search extends Component {
   constructor(props) {
@@ -45,7 +43,7 @@ class Search extends Component {
 
     this.state = {
       value: "",
-      keywordProjects: { features: [] },
+      TIPProjects: [],
       locations: []
     };
 
@@ -78,9 +76,7 @@ class Search extends Component {
     let oldPath = this.props.history.location.pathname.split("/")[1];
     let newPath = suggestion.type;
 
-    this.props.history.push(
-      `/${suggestion.type}/${suggestion.id.replace(/\s/g, "_")}`
-    );
+    this.props.history.push(`/${suggestion.type}/${suggestion.id}`);
 
     if (oldPath === "expanded" && newPath === "expanded") {
       let id = this.props.history.location.pathname.split("/")[2];
@@ -104,21 +100,17 @@ class Search extends Component {
     });
   };
 
-  componentWillReceiveProps({ keywordProjects }) {
-    if (
-      keywordProjects &&
-      keywordProjects.hasOwnProperty("features") &&
-      keywordProjects.features.length !==
-        this.state.keywordProjects.features.length
-    ) {
-      this.setState({ keywordProjects });
+  componentWillReceiveProps({ TIPProjects }) {
+    if (typeof TIPProjects !== "STRING") {
+      this.setState({ TIPProjects });
     }
   }
 
   render() {
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
-    const keywords = transformKeywordSuggestions(this.state.keywordProjects);
+    const projects = transformKeywordSuggestions(this.state.TIPProjects);
+
     const search = {
       title: "Keyword",
       results: [
@@ -130,8 +122,13 @@ class Search extends Component {
       ]
     };
 
+    // add text input to Keywords header
     suggestions.push(search);
-    if (keywords.results.length) suggestions.push(keywords);
+
+    // add fetched projects to TIP Projects header (if applicable)
+    if (projects) suggestions.push(projects);
+
+    // add geolocated areas to Locations header (if applicable)
     if (locations.results.length) {
       // because google wont let you limit results to > 5
       locations.results = locations.results.slice(0, 2);
@@ -164,7 +161,7 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => ({
-  keywordProjects: state.getTIP.fetchedKeywords
+  TIPProjects: state.getTIP.fetchedKeywords
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -173,4 +170,9 @@ const mapDispatchToProps = dispatch => ({
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Search)
+);
