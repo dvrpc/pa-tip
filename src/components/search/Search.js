@@ -4,7 +4,7 @@ import Autosuggest from "react-autosuggest";
 
 import { connect } from "inferno-redux";
 import {
-  fetchTIPByKeywords,
+  searchTIPByKeywords,
   getFullTIP,
   hydrateGeometry
 } from "../reducers/getTIPInfo";
@@ -65,7 +65,7 @@ class Search extends Component {
     });
 
   loadKeywordSuggestions = input => {
-    this.props.fetchTIPByKeywords(input);
+    this.props.searchTIPByKeywords(input);
   };
 
   onChange = (event, { newValue }) => {
@@ -165,7 +165,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTIPByKeywords: keywords => dispatch(fetchTIPByKeywords(keywords)),
+  searchTIPByKeywords: keywords => dispatch(searchTIPByKeywords(keywords)),
   getFullTIP: id => dispatch(getFullTIP(id)),
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });

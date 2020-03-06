@@ -51,7 +51,7 @@ export default function tipReducer(state = [], action) {
 }
 
 // take search input and find TIP Projects that satisfy the criteria
-const getProjectsFromSearch = keyword =>
+const getTIPProjects = keyword =>
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
     .then(response => response.json())
     .then(features => {
@@ -74,15 +74,15 @@ export const getTIPByKeywords = keyword => (dispatch, getState) => {
   if (getState().getTIP.fetchedKeywords !== undefined) {
     dispatch(get_tip_keywords(getState().getTIP.fetchedKeywords));
   } else {
-    getProjectsFromSearch(keyword).then(arcGISProjects =>
+    getTIPProjects(keyword).then(arcGISProjects =>
       dispatch(get_tip_keywords(arcGISProjects))
     );
   }
 };
 
 //get search results without updating the entire app
-export const fetchTIPByKeywords = keyword => dispatch => {
-  getProjectsFromSearch(keyword).then(projects => {
+export const searchTIPByKeywords = keyword => dispatch => {
+  getTIPProjects(keyword).then(projects => {
     dispatch(fetch_tip_keywords(projects));
   });
 };
