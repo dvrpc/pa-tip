@@ -54,17 +54,9 @@ class TilesContainer extends Component {
   };
 
   render() {
-    // handle keyword and bounds projects
-    let keywordProjects =
-      this.props.keywordProjects && this.props.keywordProjects.features
-        ? this.props.keywordProjects.features
-        : [];
-    let boundsProjects =
-      this.props.boundsProjects && this.props.boundsProjects.features
-        ? this.props.boundsProjects.features
-        : [];
-
-    let projects = keywordProjects.length ? keywordProjects : boundsProjects;
+    // grab projects from the visible map extent
+    const bounds = this.props.boundsProjects;
+    let projects = bounds && bounds.features ? bounds.features : [];
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
@@ -122,7 +114,7 @@ class TilesContainer extends Component {
             /<h2 onClick={this.showTiles}>Tiles</h2>
           </span>
         </div>
-        {projects ? (
+        {projects.length ? (
           this.state.showList ? (
             projects.map(feature => (
               <ListItem
@@ -140,7 +132,11 @@ class TilesContainer extends Component {
             ))
           )
         ) : (
-          <img id="no-results" src={loading} alt="loading" />
+          <p id="noResults">
+            Sorry! No projects matched your search criteria. Please try again or
+            contact Rick Murphy at rmurphy@dvrpc.org. <br /> Thank you for using
+            the DVRPC FY2019 TIP for PA.
+          </p>
         )}
         <Footer />
       </div>
@@ -162,4 +158,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TilesContainer);

@@ -55,6 +55,10 @@
     border: thin solid #ffffff;
     margin: 0 3%;
 }
+#noResults {
+    color: #fff;
+    padding: 0 3%;
+}
 
 /* media queries */
  @media screen and (max-width: 880px) {
