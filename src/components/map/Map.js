@@ -88,13 +88,7 @@ class MapComponent extends Component {
     }
   };
 
-  buildKeywordFilter = projects => {
-    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
-    if (projects.features && projects.features.length) {
-      return ["in", "MPMS_ID"].concat(ids);
-    }
-    return ["!=", "MPMS_ID", ""];
-  };
+  buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   componentWillMount() {
     if (this.props.category) this.buildCategoryFilter(this.props.category);
@@ -122,7 +116,7 @@ class MapComponent extends Component {
       updateBounds(this);
 
       // check for keyword search
-      if (this.props.keywordProjects && this.props.keywordProjects.features) {
+      if (this.props.keywordProjects && this.props.keywordProjects.length) {
         let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
         this.setState({ keyFilter });
       }

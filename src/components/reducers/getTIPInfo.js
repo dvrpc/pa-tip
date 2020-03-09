@@ -51,8 +51,8 @@ export default function tipReducer(state = [], action) {
 }
 
 // take search input and find TIP Projects that satisfy the criteria
-const getTIPProjects = keyword =>
-  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`)
+const getTIPProjects = input =>
+  fetch(`https://www.dvrpc.org/data/tip/2019/list/${input}`)
     .then(response => response.json())
     .then(features => {
       // return empty array for no results
@@ -69,15 +69,19 @@ const getTIPProjects = keyword =>
     });
 
 /*** DISPATCHERS ***/
-export const getTIPByKeywords = keyword => (dispatch, getState) => {
-  //use already returned projects from search
-  if (getState().getTIP.fetchedKeywords !== undefined) {
-    dispatch(get_tip_keywords(getState().getTIP.fetchedKeywords));
-  } else {
-    getTIPProjects(keyword).then(arcGISProjects =>
-      dispatch(get_tip_keywords(arcGISProjects))
-    );
-  }
+export const getTIPByKeywords = keyword => dispatch => {
+  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
+    response => {
+      if (response.ok) {
+        response.json().then(projects => {
+          projects = projects.map(project => project.id);
+          dispatch(get_tip_keywords(projects));
+        });
+      } else {
+        console.log("failed to fetch keyword projects with status: ", response);
+      }
+    }
+  );
 };
 
 //get search results without updating the entire app
