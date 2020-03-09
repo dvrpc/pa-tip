@@ -116,8 +116,12 @@ class MapComponent extends Component {
       updateBounds(this);
 
       // check for keyword search
-      if (this.props.keywordProjects && this.props.keywordProjects.length) {
-        let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
+      const keywordProjects = this.props.keywordProjects;
+      if (keywordProjects.length) {
+        let keyFilter =
+          keywordProjects !== "empty"
+            ? this.buildKeywordFilter(keywordProjects)
+            : this.buildKeywordFilter("");
         this.setState({ keyFilter });
       }
 

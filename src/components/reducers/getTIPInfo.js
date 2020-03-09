@@ -70,11 +70,16 @@ const getTIPProjects = input =>
 
 /*** DISPATCHERS ***/
 export const getTIPByKeywords = keyword => dispatch => {
+  // encode in case of multiple word keywords
+  keyword = encodeURI(keyword);
   fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
     response => {
       if (response.ok) {
         response.json().then(projects => {
-          projects = projects.map(project => project.id);
+          // handle keyword searches that do or do not yield a result
+          projects = projects.length
+            ? projects.map(project => project.id)
+            : "empty";
           dispatch(get_tip_keywords(projects));
         });
       } else {
@@ -112,6 +117,7 @@ export const hydrateGeometry = id => dispatch => {
   if (id === null) return dispatch(hydrate_geometry(null));
 
   fetch(
+    // @TODO: update this
     `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_2019_to_2022/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
   )
     .then(response => {
