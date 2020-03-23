@@ -33,7 +33,11 @@ const transformLocationSuggestions = data => ({
 const transformKeywordSuggestions = data => {
   return {
     title: "TIP Projects",
-    results: data
+    results: data.map(project => ({
+      id: project.id,
+      name: `${project.id}: ${project.name}`,
+      type: project.type
+    }))
   };
 };
 
