@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import React, { Component } from "react";
 import "./legend.css";
 import { layers } from "./layers.js";
 
@@ -53,6 +53,9 @@ class Legend extends Component {
           </li>
           <li className="legendLink" id="legendLink-LU">
             Land Use
+          </li>
+          <li className="legendLink" id="legendLink-Urban">
+            Urbanized Areas
           </li>
         </ul>
 

@@ -1,17 +1,20 @@
-import Inferno, { Component, linkEvent } from "inferno";
-import { connect } from "inferno-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 import PrintPage from "../printPage/PrintPage.js";
+import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
+import { getSpecificComment } from "../reducers/commentsReducer";
+
 import { colors } from "../../utils/tileGeometryColorType.js";
-import { switchTabs } from "../../utils/switchTabs.js";
-import { getTotals } from "../../utils/calculateFundingTotals.js";
+import { switchTabs } from "./switchTabs.js";
+import { getTotals } from "./calculateFundingTotals.js";
+import { programLookup } from "./programLookup.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";
-import counties from "../../utils/counties";
 
 class Expanded extends Component {
   constructor(props) {
@@ -42,6 +45,7 @@ class Expanded extends Component {
   componentDidMount() {
     this.props.hydrateGeometry(this.state.params);
     this.props.getFullTIP(this.state.params);
+    this.props.getComments(this.state.params);
   }
 
   componentDidUpdate(prevProps) {
@@ -72,24 +76,22 @@ class Expanded extends Component {
   render() {
     let details;
     let colorScheme;
-    let navBackground;
+    let navBackground = {};
     let toReturn;
     let funding;
     let loaded = false;
+    let program;
 
     if (this.props.details) {
-      details = this.props.details;
       // handle fetching errors
-      if (details.error) {
-        const reason = details.reason;
+      if (this.props.details.error) {
+        const reason = this.props.details.reason;
 
         const throwError = () => {
           alert(
-            `Sorry! Project #${
-              this.state.params
-            } could not be fetched at this time due to ${reason}. Click 'ok' to return to the map.`
+            `Sorry! Project #${this.state.params} could not be fetched at this time due to ${reason}. Click 'ok' to return to the map.`
           );
-          this.props.history.push("/location/ChIJ60u11Ni3xokRwVg-jNgU9Yk");
+          this.props.history.push("/keyword/tip");
         };
 
         // throw the error alert after 1.2 seconds of delay because immediate feedback from errors is bad ux
@@ -97,11 +99,13 @@ class Expanded extends Component {
 
         // extract project information from store props
       } else {
+        details = this.props.details;
         funding = getTotals(details.funding.data);
+        program = programLookup(details.plan, details.mpo_finan);
         colorScheme = colors[details.category] || colors["Default"];
-        navBackground = `background: linear-gradient(to right, white 35%, ${
-          colorScheme.middle
-        } 65%, ${colorScheme.darkest})`;
+        navBackground = {
+          background: `linear-gradient(to right, white 35%, ${colorScheme.middle} 65%, ${colorScheme.darkest})`
+        };
         loaded = true;
       }
     }
@@ -109,7 +113,12 @@ class Expanded extends Component {
     loaded
       ? (toReturn = (
           <div>
-            <PrintPage details={details} totals={funding} id="print-mount" />
+            <PrintPage
+              details={details}
+              totals={funding}
+              program={program}
+              id="print-mount"
+            />
             <div className="expanded" id="react-no-print">
               <Navbar backgroundGradient={navBackground} id="expandedNav" />
               <div className="wrapper">
@@ -143,7 +152,7 @@ class Expanded extends Component {
                     className="left-column-padding"
                   >
                     {details.id
-                      ? details.id + ": " + details.road_name
+                      ? "DB #" + details.id + ": " + details.road_name
                       : "Project Title"}
                   </h2>
 
@@ -156,21 +165,33 @@ class Expanded extends Component {
                         ? details.description
                         : "Project Description"}
                     </p>
-                    {details.limits && <div>{details.limits}</div>}
-                    <p>
-                      {details.municipalities && (
-                        <span>{details.municipalities}, </span>
-                      )}
-                      {details.county && (
-                        <span>
-                          {details.county}
-                          {counties.indexOf(details.county) > -1
-                            ? " County"
-                            : ""}
-                        </span>
-                      )}
-                    </p>
-                    {details.aq_code && <p>AQ Code: {details.aq_code}</p>}
+                    <hr />
+                    {details.limits && (
+                      <p>
+                        <strong>Limits:</strong> {details.limits}
+                      </p>
+                    )}
+                    {details.municipalities && (
+                      <p>
+                        <strong>Municipality(s)</strong>:{" "}
+                        {details.municipalities}
+                      </p>
+                    )}
+                    {details.county && (
+                      <p>
+                        <strong>County(s)</strong>: {details.county}
+                      </p>
+                    )}
+                    {details.aq_code && (
+                      <p>
+                        <strong>Air Quality Code</strong>: {details.aq_code}
+                      </p>
+                    )}
+                    {program && (
+                      <p>
+                        <strong>Program:</strong> {program}
+                      </p>
+                    )}
                   </div>
                 </section>
                 <section className="right-column">
@@ -179,15 +200,15 @@ class Expanded extends Component {
                     style={{ background: colorScheme.darkest }}
                   >
                     <button
-                      class="tablinks active"
-                      onClick={linkEvent(this, switchTabs)}
+                      className="tablinks active"
+                      onClick={e => switchTabs(this, e)}
                       ref={e => (this.fundingButton = e)}
                     >
                       Funding
                     </button>
                     <button
-                      class="tablinks"
-                      onClick={linkEvent(this, switchTabs)}
+                      className="tablinks"
+                      onClick={e => switchTabs(this, e)}
                       ref={e => (this.milestonesButton = e)}
                     >
                       Status
@@ -196,160 +217,186 @@ class Expanded extends Component {
 
                   <div
                     id="Funding"
-                    class="table-wrapper"
+                    className="table-wrapper"
                     ref={e => (this.funding = e)}
                   >
-                    <table className="funding-and-awards-table">
-                      <thead>
-                        <tr>
-                          <td colspan="2" style={{ background: "#666" }} />
-                          <td colspan="4" style={{ background: "#333" }}>
-                            <h3>FY19 TIP Program Years ($000)</h3>
-                          </td>
-                          <td colspan="2" style={{ background: "#666" }} />
-                        </tr>
-                      </thead>
-                      <tbody style={{ background: colorScheme.lightest }}>
-                        <tr id="funding-subheaders">
-                          <td style={{ background: "#666" }}>
-                            <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Phase</a>
-                          </td>
-                          <td style={{ background: "#666" }}>
-                            <a href="/TIP/Draft/pdf/CodesAbbrev.pdf">Fund</a>
-                          </td>
-                          <td style={{ background: "#333" }}>FY19</td>
-                          <td style={{ background: "#333" }}>FY20</td>
-                          <td style={{ background: "#333" }}>FY21</td>
-                          <td style={{ background: "#333" }}>FY22</td>
-                          <td style={{ background: "#666" }}>FY23-26</td>
-                          <td style={{ background: "#666" }}>FY27-30</td>
-                        </tr>
-                        {details.funding &&
-                          details.funding.data.map(row => (
-                            <tr className="table-data-rows">
-                              <td>{row[0]}</td>
-                              <td>{row[1]}</td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
-                                }}
+                    {details.funding.data.length ? (
+                      <table className="funding-and-awards-table">
+                        <thead>
+                          <tr>
+                            <td colSpan={3} style={{ background: "#666" }} />
+                            <td colSpan={4} style={{ background: "#333" }}>
+                              <h3>NJ FY2020 TIP Program Years (in Millions)</h3>
+                            </td>
+                            <td colSpan={1} style={{ background: "#666" }} />
+                          </tr>
+                        </thead>
+                        <tbody style={{ background: colorScheme.lightest }}>
+                          <tr id="funding-subheaders">
+                            <td colSpan={2} style={{ background: "#666" }}>
+                              <a href="/TIP/NJ/pdf/CodesAbbrev.pdf">Phase</a>
+                            </td>
+                            <td style={{ background: "#666" }}>
+                              <a href="/TIP/NJ/pdf/CodesAbbrev.pdf">Fund</a>
+                            </td>
+                            <td style={{ background: "#333" }}>FY20</td>
+                            <td style={{ background: "#333" }}>FY21</td>
+                            <td style={{ background: "#333" }}>FY22</td>
+                            <td style={{ background: "#333" }}>FY23</td>
+                            <td style={{ background: "#666" }}>FY24-29</td>
+                          </tr>
+                          {details.funding &&
+                            details.funding.data.map(row => (
+                              <tr
+                                className="table-data-rows"
+                                key={row[0] + row[1]}
                               >
-                                {row[2]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
-                                }}
-                              >
-                                {row[3]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
-                                }}
-                              >
-                                {row[4]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
-                                }}
-                              >
-                                {row[5]}
-                              </td>
-                              <td>{row[6]}</td>
-                              <td>{row[7]}</td>
-                            </tr>
-                          ))}
-                        <tr id="program-year-totals">
-                          <td
-                            colspan="2"
-                            style={{ fontWeight: "700", color: "#333" }}
+                                <td colSpan={2}>{row[0]}</td>
+                                <td>{row[1]}</td>
+                                <td
+                                  style={{
+                                    background: colorScheme.middle,
+                                    fontWeight: "700"
+                                  }}
+                                >
+                                  ${row[2]}
+                                </td>
+                                <td
+                                  style={{
+                                    background: colorScheme.middle,
+                                    fontWeight: "700"
+                                  }}
+                                >
+                                  ${row[3]}
+                                </td>
+                                <td
+                                  style={{
+                                    background: colorScheme.middle,
+                                    fontWeight: "700"
+                                  }}
+                                >
+                                  ${row[4]}
+                                </td>
+                                <td
+                                  style={{
+                                    background: colorScheme.middle,
+                                    fontWeight: "700"
+                                  }}
+                                >
+                                  ${row[5]}
+                                </td>
+                                <td>${row[6]}</td>
+                              </tr>
+                            ))}
+                          <tr id="program-year-totals">
+                            <td
+                              colSpan={3}
+                              style={{ fontWeight: "700", color: "#333" }}
+                            >
+                              Program Year Totals (in Millions):
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.darkest,
+                                fontWeight: "700"
+                              }}
+                            >
+                              ${funding[0]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.darkest,
+                                fontWeight: "700"
+                              }}
+                            >
+                              ${funding[1]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.darkest,
+                                fontWeight: "700"
+                              }}
+                            >
+                              ${funding[2]}
+                            </td>
+                            <td
+                              style={{
+                                background: colorScheme.darkest,
+                                fontWeight: "700"
+                              }}
+                            >
+                              ${funding[3]}
+                            </td>
+                            <td />
+                          </tr>
+                          <tr
+                            style={{ background: "#666" }}
+                            id="funding-totals"
                           >
-                            Program Year Totals ($000):
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[0]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[1]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[2]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[3]}
-                          </td>
-                          <td />
-                          <td />
-                        </tr>
-                        <tr style={{ background: "#666" }} id="funding-totals">
-                          <td colspan="2">Total FY19-22 Cost:</td>
-                          <td style={{ fontWeight: "700" }}>{funding[4]}</td>
-                          <td colspan="2">Total FY219-30 Cost:</td>
-                          <td style={{ fontWeight: "700" }}>{funding[5]}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                            <td colSpan={2}>
+                              Total FY20-23 Cost (in Millions):
+                            </td>
+                            <td style={{ fontWeight: "700" }}>${funding[4]}</td>
+                            <td colSpan={2}>
+                              Total FY20-29 Cost (in Millions):
+                            </td>
+                            <td style={{ fontWeight: "700" }}>${funding[5]}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    ) : (
+                      <h3 id="noFunding">
+                        This project is in the Study and Development Program,
+                        which could become a candidate for consideration in a
+                        future TIP and STIP Update for the phases of Preliminary
+                        Engineering, Final Design, Right-of-Way Acquisition, and
+                        Construction.
+                      </h3>
+                    )}
                   </div>
 
                   <div
                     id="Milestones"
-                    class="table-wrapper hidden"
+                    className="table-wrapper hidden"
                     ref={e => (this.milestones = e)}
                   >
-                    <table className="funding-and-awards-table">
-                      <thead>
-                        <tr>
-                          <th style={{ background: "#333" }}>Phase</th>
+                    {details.milestones.data.length ? (
+                      <table className="funding-and-awards-table">
+                        <thead>
+                          <tr>
+                            <th style={{ background: "#333" }}>Milestone</th>
 
-                          <th style={{ background: "#333" }}>Milestone</th>
+                            <th style={{ background: "#333" }}>
+                              Estimated Date
+                            </th>
 
-                          <th style={{ background: "#333" }}>Estimated Date</th>
-
-                          <th style={{ background: "#333" }}>Actual Date</th>
-                        </tr>
-                      </thead>
-                      <tbody style={{ background: colorScheme.lightest }}>
-                        {details.milestones &&
-                          details.milestones.data.map(row => (
-                            <tr className="table-data-rows">
+                            <th style={{ background: "#333" }}>Actual Date</th>
+                          </tr>
+                        </thead>
+                        <tbody style={{ background: colorScheme.lightest }}>
+                          {details.milestones.data.map(row => (
+                            <tr className="table-data-rows" key={row.join()}>
                               <td>{row[0]}</td>
                               <td>{row[1]}</td>
                               <td>{row[2]}</td>
-                              <td>{row[3]}</td>
                             </tr>
                           ))}
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    ) : (
+                      <h3 id="noMilestones">
+                        No milestones are available for this project.
+                      </h3>
+                    )}
                   </div>
                 </section>
               </div>
             </div>
+            <ReadOnlyComments
+              colorScheme={colorScheme}
+              comments={details.comments || []}
+              title={"Comments and Responses"}
+            />
           </div>
         ))
       : (toReturn = (
@@ -369,18 +416,17 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    geometry: state.getTIP.geometry
+    geometry: state.getTIP.geometry,
+    comments: state.getComments
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    hydrateGeometry: id => dispatch(hydrateGeometry(id))
+    hydrateGeometry: id => dispatch(hydrateGeometry(id)),
+    getComments: id => dispatch(getSpecificComment(id))
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Expanded);
+export default connect(mapStateToProps, mapDispatchToProps)(Expanded);

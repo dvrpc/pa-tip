@@ -6,30 +6,30 @@ export const updateBounds = mapReference => {
     allMPMS: [],
     features: []
   };
+
   let rendered = mapReference.map.queryRenderedFeatures({
-    layers: ["pa-tip-points", "pa-tip-lines"]
+    layers: ["nj-tip-points", "nj-tip-lines"]
   });
 
   rendered.forEach(item => {
-    if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {
-      renderedProjects.allMPMS.push(item.properties.MPMS_ID);
+    if (renderedProjects.allMPMS.indexOf(item.properties.DBNUM) === -1) {
+      renderedProjects.allMPMS.push(item.properties.DBNUM);
 
+      // add descriptive info for tiles + lat/lng for the tile hover + map popup link
       renderedProjects.features.push({
-        CTY: item.properties.CTY,
-        MPMS_ID: item.properties.MPMS_ID,
-        DESCRIPTIO: item.properties.DESCRIPTIO,
-        ROAD_NAME: item.properties.ROAD_NAME,
+        // CTY: item.properties.CTY,
+        DBNUM: item.properties.DBNUM,
+        TYPE_DESC: item.properties.TYPE_DESC,
+        PROJECTNAM: item.properties.PROJECTNAM,
         LATITUDE:
-          item.layer.id === "pa-tip-points"
+          item.layer.id === "nj-tip-points"
             ? item.geometry.coordinates[1]
             : item.geometry.coordinates[0][1],
         LONGITUDE:
-          item.layer.id === "pa-tip-points"
+          item.layer.id === "nj-tip-points"
             ? item.geometry.coordinates[0]
             : item.geometry.coordinates[1][0],
-        mapbox_id: `${item.properties.MPMS_ID}_${
-          item._vectorTileFeature._geometry
-        }`
+        mapbox_id: `${item.properties.DBNUM}_${item._vectorTileFeature._geometry}`
       });
     }
   });
@@ -43,7 +43,7 @@ export const keywordBounds = (mapReference, data) => {
   let longitude = "";
 
   if (projects.features && projects.features.length) {
-    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
+    let ids = projects.features.map(feature => feature.properties.DBNUM);
     for (var i = 0; i < projects.features.length; i++) {
       longitude = projects.features[i].properties.LONGITUDE;
       latitude = projects.features[i].properties.LATITUDE;
@@ -54,19 +54,19 @@ export const keywordBounds = (mapReference, data) => {
     }
 
     mapReference.map.fitBounds(
-      [[bounds.xMin, bounds.yMin], [bounds.xMax, bounds.yMax]],
+      [
+        [bounds.xMin, bounds.yMin],
+        [bounds.xMax, bounds.yMax]
+      ],
       { padding: 20 }
     );
 
-    return ["in", "MPMS_ID"].concat(ids);
+    return ["in", "DBNUM"].concat(ids);
   }
-  return ["!=", "MPMS_ID", ""];
+  return ["!=", "DBNUM", ""];
 };
 
 export const showPopup = (marker, map) => {
-  // short out of unmapped projects
-  if (marker.NOT_MAPPED) return {};
-
   let details = marker.properties || marker;
 
   let tilePopup = new mapboxgl.Popup({
@@ -93,9 +93,9 @@ export const showPopup = (marker, map) => {
   tilePopup
     .setLngLat([details.LONGITUDE, details.LATITUDE])
     .setHTML(
-      `<h2>${details.MPMS_ID}</h2><p style="border-bottom: 8px solid #${
-        colors[details.DESCRIPTIO].forMap
-      };">${details.ROAD_NAME}</p>`
+      `<h2>${details.DBNUM}</h2><p style="border-bottom: 8px solid #${
+        colors[details.TYPE_DESC].forMap
+      };">${details.PROJECTNAM}</p>`
     )
     .addTo(map);
 

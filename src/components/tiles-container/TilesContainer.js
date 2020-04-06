@@ -1,5 +1,5 @@
-import Inferno, { Component, linkEvent } from "inferno";
-import { connect } from "inferno-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import "./TilesContainer.css";
 import Tile from "../tiles/Tiles.js";
@@ -20,13 +20,14 @@ class TilesContainer extends Component {
   }
 
   componentDidMount() {
-    if (typeof this.props.category === "undefined")
-      this.props.category = "All Categories";
-
-    if (this.props.category !== "All Categories") {
+    let { category } = this.props;
+    if (typeof category === "undefined") {
+      category = "All Categories";
+    }
+    if (category !== "All Categories") {
       this.setState({
         filtered: true,
-        categoryToFilter: this.props.category
+        categoryToFilter: category
       });
     }
   }
@@ -54,14 +55,22 @@ class TilesContainer extends Component {
   };
 
   render() {
-    // grab projects from the visible map extent
-    const bounds = this.props.boundsProjects;
-    let projects = bounds && bounds.features ? bounds.features : [];
+    // handle keyword and bounds projects
+    let keywordProjects =
+      this.props.keywordProjects && this.props.keywordProjects.features
+        ? this.props.keywordProjects.features
+        : [];
+    let boundsProjects =
+      this.props.boundsProjects && this.props.boundsProjects.features
+        ? this.props.boundsProjects.features
+        : [];
+
+    let projects = keywordProjects.length ? keywordProjects : boundsProjects;
 
     // determine whether to display all projects, or filtered projects
     if (this.state.filtered) {
       projects = projects.filter(
-        project => project.DESCRIPTIO === this.state.categoryToFilter
+        project => project.TYPE_DESC === this.state.categoryToFilter
       );
     }
 
@@ -71,32 +80,51 @@ class TilesContainer extends Component {
           <select
             id="selectedCategory"
             name="category"
-            onChange={linkEvent(this, filterByCategory)}
+            onChange={e => filterByCategory(this, e)}
             ref={e => (this.categorySelector = e)}
             value={this.props.category}
+            defaultValue="All Categories"
           >
-            <option selected value="All Categories">
-              All Categories
-            </option>
-            <option value="Bicycle/Pedestrian Improvement">
+            <option value="All Categories">All Categories</option>
+            <option
+              style={{ color: "#f26522" }}
+              value="Bicycle/Pedestrian Improvement"
+            >
               Bicycle/Pedestrian Improvement
             </option>
-            <option value="Bridge Repair/Replacement">
+            <option
+              style={{ color: "#223860" }}
+              value="Bridge Repair/Replacement"
+            >
               Bridge Repair/Replacement
             </option>
-            <option value="Streetscape">Streetscape</option>
-            <option value="Transit Improvements">Transit Improvements</option>
-            <option value="Signal/ITS Improvements">
+            <option style={{ color: "#0b6d32" }} value="Streetscape">
+              Streetscape
+            </option>
+            <option style={{ color: "#729faa" }} value="Transit Improvements">
+              Transit Improvements
+            </option>
+            <option
+              style={{ color: "#ed1c24" }}
+              value="Signal/ITS Improvements"
+            >
               Signal/ITS Improvements
             </option>
-            <option value="Roadway Rehabilitation">
+            <option style={{ color: "#511851" }} value="Roadway Rehabilitation">
               Roadway Rehabilitation
             </option>
-            <option value="Roadway New Capacity">Roadway New Capacity</option>
-            <option value="Intersection/Interchange Improvements">
+            <option style={{ color: "#9d1d20" }} value="Roadway New Capacity">
+              Roadway New Capacity
+            </option>
+            <option
+              style={{ color: "#ffc10e" }}
+              value="Intersection/Interchange Improvements"
+            >
               Intersection/Interchange Improvements
             </option>
-            <option value="Other">Other</option>
+            <option style={{ color: "#5abf41" }} value="Other">
+              Other
+            </option>
           </select>
 
           <span className="vr" />
@@ -114,29 +142,22 @@ class TilesContainer extends Component {
             /<h2 onClick={this.showTiles}>Tiles</h2>
           </span>
         </div>
-        {projects.length ? (
+        {projects ? (
           this.state.showList ? (
             projects.map(feature => (
               <ListItem
                 data={feature.properties || feature}
-                key={feature.mapbox_id}
+                key={feature.id}
                 length={projects.length}
               />
             ))
           ) : (
             projects.map(feature => (
-              <Tile
-                data={feature.properties || feature}
-                key={feature.mapbox_id}
-              />
+              <Tile data={feature.properties || feature} key={feature.id} />
             ))
           )
         ) : (
-          <p id="noResults">
-            Sorry! No projects matched your search criteria. Please try again or
-            contact Rick Murphy at rmurphy@dvrpc.org. <br /> Thank you for using
-            the DVRPC FY2019 TIP for PA.
-          </p>
+          <img id="no-results" src={loading} alt="loading" />
         )}
         <Footer />
       </div>
@@ -158,7 +179,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TilesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TilesContainer);

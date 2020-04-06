@@ -66,8 +66,7 @@ export const geometryColorType = project => {
   const formattedLatLng = `${project.LATITUDE},${project.LONGITUDE}`;
 
   // get the Category (streestcape, transit improvement, etc., of a project)
-  let category = project.DESCRIPTIO;
-  if (category === "null") category = "Other";
+  const category = project.TYPE_DESC;
   const mapColors = colors[category].forMap;
 
   // Draw the project area (points will just show a static map centering on the project location)

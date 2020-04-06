@@ -1,6 +1,6 @@
-import Inferno, { Component } from "inferno";
-import { connect } from "inferno-redux";
-import { withRouter } from "inferno-router";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Search from "../search/Search";
 
@@ -25,25 +25,20 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navBar" style={this.props.backgroundGradient}>
-        <a className="navbar-link-to-home" href="/TIP/PA/">
-          <img
-            id="TIPlogo"
-            className="navbar-logo"
-            src={TIP_logo}
-            alt="TIP logo"
-          />
+      <nav className="navBar">
+        <div className="navbar-links">
+          <a href="https://www.dvrpc.org/" rel="external">
+            <img src={logo} alt="DVRPC logo" id="dvrpc-logo" />
+          </a>
 
-          <div class="nav-text">
-            <a href="https://www.dvrpc.org/" rel="external">
-              <img src={logo} alt="DVRPC logo" />
-            </a>
+          <span className="nav-vr"></span>
 
-            <h2 id="draft-text">
-              <strong>FY2019 TIP for PA</strong>
-            </h2>
-          </div>
-        </a>
+          <a href="/TIP/NJ/">
+            <img id="TIPlogo" src={TIP_logo} alt="TIP logo" />
+          </a>
+
+          <h2 id="NJ-text">FY2020 TIP for NJ</h2>
+        </div>
 
         <div id="nav-search-form">
           <Search />
@@ -61,9 +56,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(Navbar)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Navbar));
