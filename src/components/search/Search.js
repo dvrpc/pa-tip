@@ -111,10 +111,12 @@ class Search extends Component {
   }
 
   render() {
-    const suggestions = [];
-    const locations = transformLocationSuggestions(this.state.locations);
+    let suggestions = [];
+    let locations = transformLocationSuggestions(this.state.locations);
     const projects = transformKeywordSuggestions(this.state.TIPProjects);
 
+    // @BUG: the initial value of suggestions and inputProps.value is not the same. This could be causing the bug.
+    //
     const search = {
       title: "Keyword",
       results: [
@@ -129,36 +131,34 @@ class Search extends Component {
     // add text input to Keywords header
     suggestions.push(search);
 
-    // add fetched projects to TIP Projects header (if applicable)
-    if (projects) suggestions.push(projects);
+    // add fetched projects to TIP Projects header
+    suggestions.push(projects);
 
-    // add geolocated areas to Locations header (if applicable)
-    if (locations.results.length) {
-      // because google wont let you limit results to > 5
-      locations.results = locations.results.slice(0, 2);
-      suggestions.push(locations);
-    }
+    // add geolocated areas to Locations header (slice because google wont let you limit results to > 5)
+    if (locations.results.length) locations = locations.results.slice(0, 2);
+    suggestions.push(locations);
 
+    // value has to be a string?
     const inputProps = {
       placeholder: "Search by address or keywords",
-      value: this.state.value,
+      value: "",
       onChange: this.onChange,
       id: "homepage-search-bar"
     };
 
     return (
       <Autosuggest
-        multiSection={true}
         suggestions={suggestions}
-        onSuggestionSelected={this.onSelect}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+        onSuggestionSelected={this.onSelect}
+        multiSection={true}
         renderSectionTitle={renderSectionTitle}
         getSectionSuggestions={getSectionSuggestions}
         highlightFirstSuggestion={true}
-        inputProps={inputProps}
       />
     );
   }
@@ -174,9 +174,4 @@ const mapDispatchToProps = dispatch => ({
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
