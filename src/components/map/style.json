@@ -88,9 +88,9 @@
       "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7",
       "type": "vector"
     },
-    "nj-tip": {
+    "pa-tip": {
       "type": "vector",
-      "url": "https://tiles.dvrpc.org/data/nj-tip.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-patip.json"
     },
     "boundary": {
       "type": "vector",
@@ -3945,9 +3945,9 @@
       }
     },
     {
-      "id": "nj-tip-lines",
-      "source": "nj-tip",
-      "source-layer": "draft_njtip_line",
+      "id": "pa-tip-lines",
+      "source": "pa-tip",
+      "source-layer": "patip_line",
       "type": "line",
       "paint": {
         "line-width": [
@@ -3963,7 +3963,7 @@
         ],
         "line-color": [
           "match",
-          ["get", "TYPE_DESC"],
+          ["get", "DESCRIPTIO"],
           "Bicycle/Pedestrian Improvement",
           "#f26522",
           "Bridge Repair/Replacement",
@@ -4232,7 +4232,7 @@
       "type": "line",
       "source": "boundary",
       "source-layer": "municipalities",
-      "filter": ["all", ["==", "state", "NJ"]],
+      "filter": ["all", ["==", "state", "PA"]],
       "minzoom": 11,
       "maxzoom": 18,
       "layout": {
@@ -4266,9 +4266,9 @@
       "type": "line",
       "source": "boundary",
       "source-layer": "county",
-      "filter": ["all", ["==", "state", "NJ"], ["==", "dvrpc", "Yes"]],
+      "filter": ["all", ["==", "state", "PA"], ["==", "dvrpc", "Yes"]],
       "paint": {
-        "line-color": "#323236",
+        "line-color": "#9699A6",
         "line-width": {
           "stops": [
             [7, 1],
@@ -4286,7 +4286,7 @@
           ]
         }
       },
-      "minzoom": 6,
+      "minzoom": 8,
       "maxzoom": 14,
       "layout": {
         "line-cap": "butt"
@@ -5782,15 +5782,15 @@
       "source-layer": "country_label"
     },
     {
-      "id": "nj-tip-points",
-      "source": "nj-tip",
-      "source-layer": "draft_njtip_point",
+      "id": "pa-tip-points",
+      "source": "pa-tip",
+      "source-layer": "patip_fy19",
       "type": "circle",
       "paint": {
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 8],
         "circle-color": [
           "match",
-          ["get", "TYPE_DESC"],
+          ["get", "DESCRIPTIO"],
           "Bicycle/Pedestrian Improvement",
           "#f26522",
           "Bridge Repair/Replacement",
