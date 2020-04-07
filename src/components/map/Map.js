@@ -182,7 +182,7 @@ class MapComponent extends Component {
       this.map.addControl(zoom, "bottom-left");
     });
 
-    this.map.on("click", "nj-tip-points", e => {
+    this.map.on("click", "pa-tip-points", e => {
       clickTile({
         props: {
           history,
@@ -194,7 +194,7 @@ class MapComponent extends Component {
     let popup;
 
     // show popup when a user hovers over a marker.
-    this.map.on("mouseenter", "nj-tip-points", e => {
+    this.map.on("mouseenter", "pa-tip-points", e => {
       this.map.getCanvas().style.cursor = "pointer";
 
       const coordinates = e.features[0].geometry.coordinates.slice();
@@ -206,7 +206,7 @@ class MapComponent extends Component {
     });
 
     // remove popup when the user leaves
-    this.map.on("mouseleave", "nj-tip-points", () => {
+    this.map.on("mouseleave", "pa-tip-points", () => {
       this.map.getCanvas().style.cursor = "";
       popup.remove();
     });
@@ -247,11 +247,11 @@ class MapComponent extends Component {
 
   render() {
     if (this.map) {
-      let lines = this.map.getLayer("nj-tip-lines");
-      let points = this.map.getLayer("nj-tip-points");
+      let lines = this.map.getLayer("pa-tip-lines");
+      let points = this.map.getLayer("pa-tip-points");
 
       if (points && lines) {
-        ["nj-tip-points", "nj-tip-lines"].forEach(layer => {
+        ["pa-tip-points", "pa-tip-lines"].forEach(layer => {
           this.map.setFilter(layer, [
             "all",
             this.state.catFilter,
