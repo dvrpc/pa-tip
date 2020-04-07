@@ -224,7 +224,7 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // add tile popups
+    // handle tileContainer popups
     const newTileHover = this.props.markerFromTiles;
     const hasPopup = Object.keys(this.state.tilePopup).length;
 
@@ -238,8 +238,14 @@ class MapComponent extends Component {
 
       const marker = this.props.markerFromTiles;
       const tilePopup = showPopup(marker, this.map);
+
+      // set the new popup
       this.setState({ tilePopup });
     } else if (hasPopup) this.state.tilePopup.remove();
+
+    // handle categories
+    if (this.props.category !== prevProps.category)
+      this.buildCategoryFilter(this.props.category);
   }
 
   componentWillUnmount() {
