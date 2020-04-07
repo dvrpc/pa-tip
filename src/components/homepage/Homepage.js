@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// @COMMENTS: add when comment period opens
+// import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Search from "../search/Search.js";
 import Footer from "../footer/Footer.js";
-import ReadOnlyComments from "../comments/ReadOnlyComments.js";
+// @COMMENTS: add when comment period opens
+// import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import "./Homepage.css";
 
-import { getGeneralComments } from "../reducers/commentsReducer.js";
+// @COMMENTS: add when comment period opens
+// import { getGeneralComments } from "../reducers/commentsReducer.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
@@ -18,12 +21,14 @@ import philly from "./philly.mp4";
 import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
-  componentDidMount() {
-    this.props.getGeneralComments();
-  }
+  // @COMMENTS: add when comment period opens
+  // componentDidMount() {
+  //   this.props.getGeneralComments();
+  // }
 
   render() {
-    const comments = this.props.comments.comments || [];
+    // @COMMENTS: add when comment period opens
+    // const comments = this.props.comments.comments || [];
 
     return (
       <div className="homepage">
@@ -519,14 +524,17 @@ class Homepage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  comments: state.getComments
-});
+// @COMMENTS: add when comment period opens
+// const mapStateToProps = state => ({
+//   comments: state.getComments
+// });
 
-const mapDispatchToProps = dispatch => ({
-  getGeneralComments: () => dispatch(getGeneralComments())
-});
+// const mapDispatchToProps = dispatch => ({
+//   getGeneralComments: () => dispatch(getGeneralComments())
+// });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Homepage)
-);
+// export default withRouter(
+//   connect(mapStateToProps, mapDispatchToProps)(Homepage)
+// );
+
+export default withRouter(Homepage);
