@@ -46,7 +46,7 @@ class Tile extends Component {
           <h2 className="tile-caption-text">
             {calculatedProjectInfo.projectName}
           </h2>
-          <p className="tile-caption-text">DB #{project.DBNUM}</p>
+          <p className="tile-caption-text">DB #{project.MPMS_ID}</p>
         </div>
       </div>
     );

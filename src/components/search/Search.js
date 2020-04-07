@@ -23,8 +23,8 @@ const transformLocationSuggestions = data => ({
 const transformKeywordSuggestions = data => ({
   label: "TIP Projects",
   options: data.features.slice(0, 5).map(project => ({
-    label: `${project.properties.DBNUM}: ${project.properties.PROJECTNAM}`,
-    value: `${project.properties.DBNUM}`,
+    label: `${project.properties.MPMS_ID}: ${project.properties.ROAD_NAME}`,
+    value: `${project.properties.MPMS_ID}`,
     type: "expanded"
   }))
 });

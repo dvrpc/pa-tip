@@ -19,9 +19,9 @@ class ListItem extends Component {
 
   componentDidMount() {
     let category =
-      this.props.data.TYPE_DESC === "null"
+      this.props.data.DESCRIPTIO === "null"
         ? "Other"
-        : this.props.data.TYPE_DESC;
+        : this.props.data.DESCRIPTIO;
     fetchSprite.then(response => {
       this.setState({
         coords: `-${response[category].x}px -${response[category].y}px`
@@ -55,18 +55,18 @@ class ListItem extends Component {
           src="https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite.png"
           className="list-category-thumbnail"
           style={imgStyle}
-          alt={`icon for ${project.TYPE_DESC} projects`}
+          alt={`icon for ${project.DESCRIPTIO} projects`}
         />
 
         <div className="list-text">
-          <h2 className="name">{project.PROJECTNAM}</h2>
+          <h2 className="name">{project.ROAD_NAME}</h2>
           <h2 className="county-and-funding">
             <em>
               {project.CTY}
               {counties.indexOf(project.CTY) > -1 ? " County" : ""}
             </em>
           </h2>
-          <h2 className="mpms">DB #{project.DBNUM}</h2>
+          <h2 className="mpms">DB #{project.MPMS_ID}</h2>
         </div>
       </div>
     );

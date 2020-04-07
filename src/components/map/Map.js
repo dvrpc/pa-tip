@@ -33,8 +33,8 @@ class MapComponent extends Component {
       },
       toggleLayerList: false,
       toggleLegendList: false,
-      keyFilter: ["!=", "DBNUM", ""],
-      catFilter: ["!=", "TYPE_DESC", ""],
+      keyFilter: ["!=", "MPMS_ID", ""],
+      catFilter: ["!=", "DESCRIPTIO", ""],
       tilePopup: {}
     };
 
@@ -123,20 +123,14 @@ class MapComponent extends Component {
   buildCategoryFilter = cat => {
     switch (cat) {
       case "All Categories":
-        this.setState({ catFilter: ["!=", "TYPE_DESC", ""] });
+        this.setState({ catFilter: ["!=", "DESCRIPTIO", ""] });
         break;
       default:
-        this.setState({ catFilter: ["==", "TYPE_DESC", cat || ""] });
+        this.setState({ catFilter: ["==", "DESCRIPTIO", cat || ""] });
     }
   };
 
-  buildKeywordFilter = projects => {
-    let ids = projects.features.map(feature => feature.properties.DBNUM);
-    if (projects.features && projects.features.length) {
-      return ["in", "DBNUM"].concat(ids);
-    }
-    return ["!=", "DBNUM", ""];
-  };
+  buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   componentDidMount() {
     if (this.props.category) this.buildCategoryFilter(this.props.category);
@@ -192,7 +186,7 @@ class MapComponent extends Component {
       clickTile({
         props: {
           history,
-          data: { id: e.features[0].properties.DBNUM }
+          data: { id: e.features[0].properties.MPMS_ID }
         }
       });
     });

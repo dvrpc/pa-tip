@@ -12,15 +12,15 @@ export const updateBounds = mapReference => {
   });
 
   rendered.forEach(item => {
-    if (renderedProjects.allMPMS.indexOf(item.properties.DBNUM) === -1) {
-      renderedProjects.allMPMS.push(item.properties.DBNUM);
+    if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {
+      renderedProjects.allMPMS.push(item.properties.MPMS_ID);
 
       // add descriptive info for tiles + lat/lng for the tile hover + map popup link
       renderedProjects.features.push({
         // CTY: item.properties.CTY,
-        DBNUM: item.properties.DBNUM,
-        TYPE_DESC: item.properties.TYPE_DESC,
-        PROJECTNAM: item.properties.PROJECTNAM,
+        MPMS_ID: item.properties.MPMS_ID,
+        DESCRIPTIO: item.properties.DESCRIPTIO,
+        ROAD_NAME: item.properties.ROAD_NAME,
         LATITUDE:
           item.layer.id === "nj-tip-points"
             ? item.geometry.coordinates[1]
@@ -29,7 +29,7 @@ export const updateBounds = mapReference => {
           item.layer.id === "nj-tip-points"
             ? item.geometry.coordinates[0]
             : item.geometry.coordinates[1][0],
-        mapbox_id: `${item.properties.DBNUM}_${item._vectorTileFeature._geometry}`
+        mapbox_id: `${item.properties.MPMS_ID}_${item._vectorTileFeature._geometry}`
       });
     }
   });
@@ -43,7 +43,7 @@ export const keywordBounds = (mapReference, data) => {
   let longitude = "";
 
   if (projects.features && projects.features.length) {
-    let ids = projects.features.map(feature => feature.properties.DBNUM);
+    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
     for (var i = 0; i < projects.features.length; i++) {
       longitude = projects.features[i].properties.LONGITUDE;
       latitude = projects.features[i].properties.LATITUDE;
@@ -61,9 +61,9 @@ export const keywordBounds = (mapReference, data) => {
       { padding: 20 }
     );
 
-    return ["in", "DBNUM"].concat(ids);
+    return ["in", "MPMS_ID"].concat(ids);
   }
-  return ["!=", "DBNUM", ""];
+  return ["!=", "MPMS_ID", ""];
 };
 
 export const showPopup = (marker, map) => {
@@ -93,9 +93,9 @@ export const showPopup = (marker, map) => {
   tilePopup
     .setLngLat([details.LONGITUDE, details.LATITUDE])
     .setHTML(
-      `<h2>${details.DBNUM}</h2><p style="border-bottom: 8px solid #${
-        colors[details.TYPE_DESC].forMap
-      };">${details.PROJECTNAM}</p>`
+      `<h2>${details.MPMS_ID}</h2><p style="border-bottom: 8px solid #${
+        colors[details.DESCRIPTIO].forMap
+      };">${details.ROAD_NAME}</p>`
     )
     .addTo(map);
 
