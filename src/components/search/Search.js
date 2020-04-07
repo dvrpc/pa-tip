@@ -4,7 +4,7 @@ import Select from "react-select";
 
 import { connect } from "react-redux";
 import {
-  fetchTIPByKeywords,
+  searchTIPByKeywords,
   getFullTIP,
   hydrateGeometry
 } from "../reducers/getTIPInfo";
@@ -57,7 +57,7 @@ class Search extends Component {
     });
 
   loadKeywordSuggestions = input => {
-    this.props.fetchTIPByKeywords(input);
+    this.props.searchTIPByKeywords(input);
   };
 
   onChange = newValue => {
@@ -141,7 +141,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchTIPByKeywords: keywords => dispatch(fetchTIPByKeywords(keywords)),
+  searchTIPByKeywords: keywords => dispatch(searchTIPByKeywords(keywords)),
   getFullTIP: id => dispatch(getFullTIP(id)),
   hydrateGeometry: id => dispatch(hydrateGeometry(id))
 });
