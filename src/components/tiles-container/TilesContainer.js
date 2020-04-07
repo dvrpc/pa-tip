@@ -147,13 +147,16 @@ class TilesContainer extends Component {
             projects.map(feature => (
               <ListItem
                 data={feature.properties || feature}
-                key={feature.id}
+                key={feature.mapbox_id}
                 length={projects.length}
               />
             ))
           ) : (
             projects.map(feature => (
-              <Tile data={feature.properties || feature} key={feature.id} />
+              <Tile
+                data={feature.properties || feature}
+                key={feature.mapbox_id}
+              />
             ))
           )
         ) : (
