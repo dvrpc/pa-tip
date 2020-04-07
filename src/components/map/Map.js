@@ -10,6 +10,7 @@ import {
   setMapState,
   setBounds
 } from "../reducers/getTIPInfo";
+
 import { updateBounds, showPopup } from "../../utils/updateMap";
 import { clickTile } from "../../utils/clickTile.js";
 
@@ -135,25 +136,6 @@ class MapComponent extends Component {
   componentDidMount() {
     if (this.props.category) this.buildCategoryFilter(this.props.category);
 
-    // check if center has been updated by the search bar and flyTo if so (adjust zoom level if on mobile/tablet)
-    /*if (this.props.center !== this.props.center)
-      this.map.flyTo({
-        center: [this.props.center.lng, this.props.center.lat],
-        zoom: window.innerWidth > 900 ? 12.5 : 11
-      });
-*/
-    if (this.props.markerFromTiles) {
-      const marker = this.props.markerFromTiles;
-      const tilePopup = showPopup(marker, this.map);
-      this.setState({ tilePopup });
-    }
-
-    // remove any existing popups from hover
-    if (Object.keys(this.state.tilePopup).length) {
-      this.state.tilePopup.remove();
-      this.setState({ tilePopup: {} });
-    }
-
     const { history } = this.props;
     const position =
       this.props.position && this.props.position.center
@@ -239,6 +221,25 @@ class MapComponent extends Component {
       this.props.setBounds([]);
       this.props.getTIPByKeywords(value);
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    // add tile popups
+    const newTileHover = this.props.markerFromTiles;
+    const hasPopup = Object.keys(this.state.tilePopup).length;
+
+    if (newTileHover) {
+      // check if old = current
+      const oldTileHover = prevProps.markerFromTiles;
+      if (oldTileHover && oldTileHover.MPMS_ID === newTileHover.MPMS_ID) return;
+
+      // remove the old popup
+      if (hasPopup) this.state.tilePopup.remove();
+
+      const marker = this.props.markerFromTiles;
+      const tilePopup = showPopup(marker, this.map);
+      this.setState({ tilePopup });
+    } else if (hasPopup) this.state.tilePopup.remove();
   }
 
   componentWillUnmount() {

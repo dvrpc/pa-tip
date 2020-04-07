@@ -17,7 +17,6 @@ export const updateBounds = mapReference => {
 
       // add descriptive info for tiles + lat/lng for the tile hover + map popup link
       renderedProjects.features.push({
-        // CTY: item.properties.CTY,
         MPMS_ID: item.properties.MPMS_ID,
         DESCRIPTIO: item.properties.DESCRIPTIO,
         ROAD_NAME: item.properties.ROAD_NAME,
