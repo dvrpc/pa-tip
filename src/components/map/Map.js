@@ -29,8 +29,7 @@ class MapComponent extends Component {
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
         "Freight Centers": false,
-        "DVRPC Land Use (2015)": false,
-        "Urbanized Areas": false
+        "DVRPC Land Use (2015)": false
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -52,8 +51,7 @@ class MapComponent extends Component {
       "CMP Corridors": "CMP",
       "Connections 2045 Centers": "Connections",
       "Freight Centers": "Freight",
-      "DVRPC Land Use (2015)": "LandUse",
-      "Urbanized Areas": "UrbanizedAreas"
+      "DVRPC Land Use (2015)": "LandUse"
     };
 
     const selectedSrc = srcLookup[selectedLayer];
