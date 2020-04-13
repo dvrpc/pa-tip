@@ -97,7 +97,7 @@ class Homepage extends Component {
                 <a href="https://www.dvrpc.org/Products/17065/">TIP Guide</a>
               </li>
               <li>
-                <a href="https://www.dvrpc.org/TIP/NJ/">FY2018 TIP for NJ</a>
+                <a href="https://www.dvrpc.org/TIP/PA/">FY2018 TIP for PA</a>
               </li>
               <li>
                 <a href="https://www.dvrpc.org/ProjectImplementation/">

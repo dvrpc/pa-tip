@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import "./Expanded.css";
 import Navbar from "../navbar/Navbar.js";
 import PrintPage from "../printPage/PrintPage.js";
-import ReadOnlyComments from "../comments/ReadOnlyComments.js";
+// @ADD back when commenting period is over
+//import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
 import { getSpecificComment } from "../reducers/commentsReducer";
@@ -12,7 +13,6 @@ import { getSpecificComment } from "../reducers/commentsReducer";
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "./switchTabs.js";
 import { getTotals } from "./calculateFundingTotals.js";
-import { programLookup } from "./programLookup.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";
 
@@ -80,7 +80,6 @@ class Expanded extends Component {
     let toReturn;
     let funding;
     let loaded = false;
-    let program;
 
     if (this.props.details) {
       // handle fetching errors
@@ -101,7 +100,6 @@ class Expanded extends Component {
       } else {
         details = this.props.details;
         funding = getTotals(details.funding.data);
-        program = programLookup(details.plan, details.mpo_finan);
         colorScheme = colors[details.category] || colors["Default"];
         navBackground = {
           background: `linear-gradient(to right, white 35%, ${colorScheme.middle} 65%, ${colorScheme.darkest})`
@@ -113,12 +111,7 @@ class Expanded extends Component {
     loaded
       ? (toReturn = (
           <div>
-            <PrintPage
-              details={details}
-              totals={funding}
-              program={program}
-              id="print-mount"
-            />
+            <PrintPage details={details} totals={funding} id="print-mount" />
             <div className="expanded" id="react-no-print">
               <Navbar backgroundGradient={navBackground} id="expandedNav" />
               <div className="wrapper">
@@ -187,11 +180,6 @@ class Expanded extends Component {
                         <strong>Air Quality Code</strong>: {details.aq_code}
                       </p>
                     )}
-                    {program && (
-                      <p>
-                        <strong>Program:</strong> {program}
-                      </p>
-                    )}
                   </div>
                 </section>
                 <section className="right-column">
@@ -220,139 +208,124 @@ class Expanded extends Component {
                     className="table-wrapper"
                     ref={e => (this.funding = e)}
                   >
-                    {details.funding.data.length ? (
-                      <table className="funding-and-awards-table">
-                        <thead>
-                          <tr>
-                            <td colSpan={3} style={{ background: "#666" }} />
-                            <td colSpan={4} style={{ background: "#333" }}>
-                              <h3>NJ FY2020 TIP Program Years (in Millions)</h3>
-                            </td>
-                            <td colSpan={1} style={{ background: "#666" }} />
-                          </tr>
-                        </thead>
-                        <tbody style={{ background: colorScheme.lightest }}>
-                          <tr id="funding-subheaders">
-                            <td colSpan={2} style={{ background: "#666" }}>
-                              <a href="/TIP/NJ/pdf/CodesAbbrev.pdf">Phase</a>
-                            </td>
-                            <td style={{ background: "#666" }}>
-                              <a href="/TIP/NJ/pdf/CodesAbbrev.pdf">Fund</a>
-                            </td>
-                            <td style={{ background: "#333" }}>FY20</td>
-                            <td style={{ background: "#333" }}>FY21</td>
-                            <td style={{ background: "#333" }}>FY22</td>
-                            <td style={{ background: "#333" }}>FY23</td>
-                            <td style={{ background: "#666" }}>FY24-29</td>
-                          </tr>
-                          {details.funding &&
-                            details.funding.data.map(row => (
-                              <tr
-                                className="table-data-rows"
-                                key={row[0] + row[1]}
+                    <table className="funding-and-awards-table">
+                      <thead>
+                        <tr>
+                          <td colSpan={3} style={{ background: "#666" }} />
+                          <td colSpan={4} style={{ background: "#333" }}>
+                            <h3>PA FY2020 TIP Program Years (in Millions)</h3>
+                          </td>
+                          <td colSpan={1} style={{ background: "#666" }} />
+                        </tr>
+                      </thead>
+                      <tbody style={{ background: colorScheme.lightest }}>
+                        <tr id="funding-subheaders">
+                          <td colSpan={2} style={{ background: "#666" }}>
+                            {/* @UPDATE: find equivalent PA TIP pdf */}
+                            <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Phase</a>
+                          </td>
+                          <td style={{ background: "#666" }}>
+                            {/* @UPDATE: find equivalent PA TIP pdf */}
+                            <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Fund</a>
+                          </td>
+                          <td style={{ background: "#333" }}>FY20</td>
+                          <td style={{ background: "#333" }}>FY21</td>
+                          <td style={{ background: "#333" }}>FY22</td>
+                          <td style={{ background: "#333" }}>FY23</td>
+                          <td style={{ background: "#666" }}>FY24-29</td>
+                        </tr>
+                        {details.funding &&
+                          details.funding.data.map(row => (
+                            <tr
+                              className="table-data-rows"
+                              key={row[0] + row[1]}
+                            >
+                              <td colSpan={2}>{row[0]}</td>
+                              <td>{row[1]}</td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
                               >
-                                <td colSpan={2}>{row[0]}</td>
-                                <td>{row[1]}</td>
-                                <td
-                                  style={{
-                                    background: colorScheme.middle,
-                                    fontWeight: "700"
-                                  }}
-                                >
-                                  ${row[2]}
-                                </td>
-                                <td
-                                  style={{
-                                    background: colorScheme.middle,
-                                    fontWeight: "700"
-                                  }}
-                                >
-                                  ${row[3]}
-                                </td>
-                                <td
-                                  style={{
-                                    background: colorScheme.middle,
-                                    fontWeight: "700"
-                                  }}
-                                >
-                                  ${row[4]}
-                                </td>
-                                <td
-                                  style={{
-                                    background: colorScheme.middle,
-                                    fontWeight: "700"
-                                  }}
-                                >
-                                  ${row[5]}
-                                </td>
-                                <td>${row[6]}</td>
-                              </tr>
-                            ))}
-                          <tr id="program-year-totals">
-                            <td
-                              colSpan={3}
-                              style={{ fontWeight: "700", color: "#333" }}
-                            >
-                              Program Year Totals (in Millions):
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.darkest,
-                                fontWeight: "700"
-                              }}
-                            >
-                              ${funding[0]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.darkest,
-                                fontWeight: "700"
-                              }}
-                            >
-                              ${funding[1]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.darkest,
-                                fontWeight: "700"
-                              }}
-                            >
-                              ${funding[2]}
-                            </td>
-                            <td
-                              style={{
-                                background: colorScheme.darkest,
-                                fontWeight: "700"
-                              }}
-                            >
-                              ${funding[3]}
-                            </td>
-                            <td />
-                          </tr>
-                          <tr
-                            style={{ background: "#666" }}
-                            id="funding-totals"
+                                ${row[2]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                ${row[3]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                ${row[4]}
+                              </td>
+                              <td
+                                style={{
+                                  background: colorScheme.middle,
+                                  fontWeight: "700"
+                                }}
+                              >
+                                ${row[5]}
+                              </td>
+                              <td>${row[6]}</td>
+                            </tr>
+                          ))}
+                        <tr id="program-year-totals">
+                          <td
+                            colSpan={3}
+                            style={{ fontWeight: "700", color: "#333" }}
                           >
-                            <td colSpan={2}>
-                              Total FY20-23 Cost (in Millions):
-                            </td>
-                            <td style={{ fontWeight: "700" }}>${funding[4]}</td>
-                            <td colSpan={2}>
-                              Total FY20-29 Cost (in Millions):
-                            </td>
-                            <td style={{ fontWeight: "700" }}>${funding[5]}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    ) : (
-                      <h3 id="noFunding">
-                        This project is in the Study and Development Program,
-                        which could become a candidate for consideration in a
-                        future TIP and STIP Update for the phases of Preliminary
-                        Engineering, Final Design, Right-of-Way Acquisition, and
-                        Construction.
-                      </h3>
-                    )}
+                            Program Year Totals (in Millions):
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            ${funding[0]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            ${funding[1]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            ${funding[2]}
+                          </td>
+                          <td
+                            style={{
+                              background: colorScheme.darkest,
+                              fontWeight: "700"
+                            }}
+                          >
+                            ${funding[3]}
+                          </td>
+                          <td />
+                        </tr>
+                        <tr style={{ background: "#666" }} id="funding-totals">
+                          <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
+                          <td style={{ fontWeight: "700" }}>${funding[4]}</td>
+                          <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
+                          <td style={{ fontWeight: "700" }}>${funding[5]}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                   <div
@@ -392,11 +365,11 @@ class Expanded extends Component {
                 </section>
               </div>
             </div>
-            <ReadOnlyComments
+            {/* <ReadOnlyComments
               colorScheme={colorScheme}
               comments={details.comments || []}
               title={"Comments and Responses"}
-            />
+            /> */}
           </div>
         ))
       : (toReturn = (

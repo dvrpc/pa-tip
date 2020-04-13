@@ -33,11 +33,11 @@ class Navbar extends Component {
 
           <span className="nav-vr"></span>
 
-          <a href="/TIP/NJ/">
+          <a href="/TIP/PA/">
             <img id="TIPlogo" src={TIP_logo} alt="TIP logo" />
           </a>
 
-          <h2 id="NJ-text">FY2020 TIP for NJ</h2>
+          <h2 id="PA-text">FY2020 TIP for PA</h2>
         </div>
 
         <div id="nav-search-form">

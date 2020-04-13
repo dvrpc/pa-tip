@@ -59,7 +59,8 @@ class MapComponent extends Component {
 
     // if the layer doesn't exist yet, add it
     if (!hasSrc) {
-      const srcInfo = layers[selectedSrc].source;
+      const srcInfo = layers[selectedSrc];
+      console.log("what is srcInfo: ", srcInfo);
 
       // handle different addSource() format for vector tiles and geojsons
       if (srcInfo.type === "geojson") {
