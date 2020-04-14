@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import "./Tiles.css";
 import { tileDetails } from "../../utils/tileDetails.js";
 import { clickTile } from "../../utils/clickTile.js";
-import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
+import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
 
 class Tile extends Component {
   constructor(props) {

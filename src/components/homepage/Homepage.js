@@ -11,7 +11,7 @@ import Footer from "../footer/Footer.js";
 import "./Homepage.css";
 
 // @COMMENTS: add when comment period opens
-// import { getGeneralComments } from "../reducers/commentsReducer.js";
+// import { getGeneralComments } from "../../redux/reducers/commentsReducer.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";

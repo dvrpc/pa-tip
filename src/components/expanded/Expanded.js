@@ -7,8 +7,8 @@ import PrintPage from "../printPage/PrintPage.js";
 // @ADD back when commenting period is over
 //import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
-import { getFullTIP, hydrateGeometry } from "../reducers/getTIPInfo";
-import { getSpecificComment } from "../reducers/commentsReducer";
+import { getFullTIP, hydrateGeometry } from "../../redux/reducers/getTIPInfo";
+import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "./switchTabs.js";

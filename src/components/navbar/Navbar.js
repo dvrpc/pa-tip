@@ -8,7 +8,7 @@ import {
   getTIPByKeywords,
   setMapCenter,
   setMapState
-} from "../reducers/getTIPInfo";
+} from "../../redux/reducers/getTIPInfo";
 import "./Navbar.css";
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";

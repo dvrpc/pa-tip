@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import "./Comments.css";
 import { POSTComment } from "./POSTComment.js";
-import { submitComment } from "../reducers/commentsReducer.js";
+import { submitComment } from "../../redux/reducers/commentsReducer.js";
 
 class Comments extends Component {
   constructor(props) {

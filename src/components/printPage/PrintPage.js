@@ -72,7 +72,7 @@ class PrintPage extends Component {
                     colSpan="4"
                     style={{ fontWeight: "700", textAlign: "center" }}
                   >
-                    FY2020 TIP for New Jersey Program Years (in Millions)
+                    FY2020 TIP for Pennsylvania Program Years (in Millions)
                   </td>
                   <td colSpan="2" />
                 </tr>

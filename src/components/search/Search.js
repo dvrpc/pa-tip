@@ -7,7 +7,7 @@ import {
   searchTIPByKeywords,
   getFullTIP,
   hydrateGeometry
-} from "../reducers/getTIPInfo";
+} from "../../redux/reducers/getTIPInfo";
 
 const formatGroupLabel = section => <strong>{section.label}</strong>;
 
@@ -71,7 +71,6 @@ class Search extends Component {
   };
 
   onSelect = suggestion => {
-    console.log("selected: ", suggestion);
     let oldPath = this.props.history.location.pathname.split("/")[1];
     let newPath = suggestion.type;
 

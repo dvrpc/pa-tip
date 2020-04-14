@@ -9,7 +9,7 @@ import {
   setMapCenter,
   setMapState,
   setBounds
-} from "../reducers/getTIPInfo";
+} from "../../redux/reducers/getTIPInfo";
 
 import { updateBounds, showPopup } from "../../utils/updateMap";
 import { clickTile } from "../../utils/clickTile.js";
