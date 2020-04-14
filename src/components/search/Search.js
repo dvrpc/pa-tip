@@ -11,32 +11,49 @@ import {
 
 const formatGroupLabel = section => <strong>{section.label}</strong>;
 
-const transformLocationSuggestions = data => ({
-  label: "Location",
-  options: data.map(location => ({
-    label: location.description,
-    value: location.place_id,
-    type: "location"
-  }))
-});
+const transformLocationSuggestions = data => {
+  let options;
+  if (data) {
+    options = data.map(location => ({
+      label: location.description,
+      value: location.place_id,
+      type: "location"
+    }));
+  } else {
+    options = [];
+  }
 
-const transformKeywordSuggestions = data => ({
-  label: "TIP Projects",
-  options: data.features.slice(0, 5).map(project => ({
-    label: `${project.properties.MPMS_ID}: ${project.properties.ROAD_NAME}`,
-    value: `${project.properties.MPMS_ID}`,
-    type: "expanded"
-  }))
-});
+  return {
+    label: "Location",
+    options
+  };
+};
+
+const transformKeywordSuggestions = data => {
+  let options;
+
+  if (data) {
+    options = data.map(project => ({
+      label: `${project.id}: ${project.name}`,
+      value: `${project.id}`,
+      type: "expanded"
+    }));
+  } else {
+    options = [];
+  }
+
+  return {
+    label: "TIP Projects",
+    options
+  };
+};
 
 class Search extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "",
-      keywordProjects: { features: [] },
-      locations: []
+      value: ""
     };
 
     this.Autocomplete = new window.google.maps.places.AutocompleteService();
@@ -85,21 +102,11 @@ class Search extends Component {
     }
   };
 
-  static getDerivedStateFromProps({ keywordProjects }, state) {
-    if (
-      keywordProjects &&
-      keywordProjects.hasOwnProperty("features") &&
-      keywordProjects.features.length !== state.keywordProjects.features.length
-    ) {
-      return { keywordProjects };
-    }
-    return null;
-  }
-
   render() {
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
-    const keywords = transformKeywordSuggestions(this.state.keywordProjects);
+    const keywords = transformKeywordSuggestions(this.props.keywordProjects);
+
     const search = {
       label: "Keyword",
       options: [
@@ -110,17 +117,13 @@ class Search extends Component {
         }
       ]
     };
+
     suggestions.push(search);
+    suggestions.push(keywords);
 
-    if (keywords.options.length) {
-      suggestions.push(keywords);
-    }
-
-    if (locations.options.length) {
-      // because google wont let you limit results to > 5
-      locations.options = locations.options.slice(0, 2);
-      suggestions.push(locations);
-    }
+    // because google wont let you limit results to > 5
+    locations.options = locations.options.slice(0, 2);
+    suggestions.push(locations);
 
     return (
       <Select

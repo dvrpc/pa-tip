@@ -69,6 +69,8 @@ const getTIPProjects = input =>
 
       // trim response to the first 5 entries & return
       mpmsAndNames = mpmsAndNames.slice(0, 5);
+
+      console.log("mpms response from search: ", mpmsAndNames);
       return mpmsAndNames;
     });
 
@@ -96,6 +98,7 @@ export const getTIPByKeywords = keyword => dispatch => {
 //get search results without updating the entire app
 export const searchTIPByKeywords = keyword => dispatch => {
   getTIPProjects(keyword).then(projects => {
+    console.log("projects at serachTIPbyKeywords ", projects);
     dispatch(fetch_tip_keywords(projects));
   });
 };
