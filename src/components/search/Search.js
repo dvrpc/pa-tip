@@ -88,7 +88,6 @@ class Search extends Component {
   };
 
   onSelect = suggestion => {
-    console.log("suggestion on select: ", suggestion);
     let oldType = this.props.history.location.pathname.split("/")[1];
     let newType = suggestion.type;
 

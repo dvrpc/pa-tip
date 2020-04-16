@@ -60,22 +60,21 @@ class MapComponent extends Component {
     // if the layer doesn't exist yet, add it
     if (!hasSrc) {
       const srcInfo = layers[selectedSrc];
-      console.log("what is srcInfo: ", srcInfo);
 
       // handle different addSource() format for vector tiles and geojsons
-      if (srcInfo.type === "geojson") {
+      if (srcInfo.layerType === "geojson") {
         this.map.addSource(selectedSrc, {
-          type: srcInfo.type,
+          type: srcInfo.layerType,
           data: srcInfo.data
         });
       } else {
         this.map.addSource(selectedSrc, {
-          type: srcInfo.type,
+          type: srcInfo.layerType,
           url: srcInfo.url
         });
       }
 
-      this.map.addLayer(layers[selectedSrc].layout, "water shadow");
+      this.map.addLayer(layers[selectedSrc], "water shadow");
     }
 
     //toggle selected layer state
@@ -113,6 +112,7 @@ class MapComponent extends Component {
     this.setState({ dropdownLayers });
   };
 
+  // @TODO: add keys and fix the table HTML (doesn't have <thead> or <tbody>)
   toggleDropdown = e => {
     e.preventDefault();
     e.target.id === "layerMenuButton"
@@ -141,6 +141,7 @@ class MapComponent extends Component {
       this.Places.getDetails(
         { placeId: value, fields: ["geometry.location"] },
         results => {
+          // we use the store here b/c the query is async
           this.props.setMapCenter({
             lng: results.geometry.location.lng(),
             lat: results.geometry.location.lat()
@@ -165,7 +166,7 @@ class MapComponent extends Component {
 
     this.map.on("load", () => {
       // check for keyword search
-      if (this.props.keywordProjects && this.props.keywordProjects.features) {
+      if (this.props.keywordProjects) {
         let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
         this.setState({ keyFilter });
       }
