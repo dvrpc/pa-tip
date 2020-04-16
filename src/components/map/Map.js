@@ -112,7 +112,6 @@ class MapComponent extends Component {
     this.setState({ dropdownLayers });
   };
 
-  // @TODO: add keys and fix the table HTML (doesn't have <thead> or <tbody>)
   toggleDropdown = e => {
     e.preventDefault();
     e.target.id === "layerMenuButton"
