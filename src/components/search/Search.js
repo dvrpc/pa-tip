@@ -88,14 +88,15 @@ class Search extends Component {
   };
 
   onSelect = suggestion => {
-    let oldPath = this.props.history.location.pathname.split("/")[1];
-    let newPath = suggestion.type;
+    console.log("suggestion on select: ", suggestion);
+    let oldType = this.props.history.location.pathname.split("/")[1];
+    let newType = suggestion.type;
 
     this.props.history.push(
-      `/${suggestion.type}/${suggestion.value.replace(/\s/g, "_")}`
+      `/${newType}/${suggestion.value.replace(/\s/g, "_")}`
     );
 
-    if (oldPath === "expanded" && newPath === "expanded") {
+    if (oldType === "expanded" && newType === "expanded") {
       let id = this.props.history.location.pathname.split("/")[2];
       this.props.getFullTIP(id);
       this.props.hydrateGeometry(id);

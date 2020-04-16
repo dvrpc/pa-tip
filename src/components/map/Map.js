@@ -133,21 +133,33 @@ class MapComponent extends Component {
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   componentDidMount() {
-    if (this.props.category) this.buildCategoryFilter(this.props.category);
-
     const { history } = this.props;
-    const position =
-      this.props.position && this.props.position.center
-        ? { center: this.props.position.center, zoom: this.props.position.zoom }
-        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
+    const { type, value } = this.props.match.params;
+    let popup;
+
+    if (type === "location") {
+      this.Places.getDetails(
+        { placeId: value, fields: ["geometry.location"] },
+        results => {
+          this.props.setMapCenter({
+            lng: results.geometry.location.lng(),
+            lat: results.geometry.location.lat()
+          });
+        }
+      );
+    } else {
+      this.props.setBounds([]);
+      this.props.getTIPByKeywords(value);
+    }
 
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
+
     this.map = new mapboxgl.Map({
       container: this.tipMap,
       style: mapStyle,
-      center: position.center,
-      zoom: position.zoom,
+      center: [-75.4, 40.15],
+      zoom: 8.5,
       dragRotate: false
     });
 
@@ -171,8 +183,6 @@ class MapComponent extends Component {
         }
       });
     });
-
-    let popup;
 
     // show popup when a user hovers over a marker.
     this.map.on("mouseenter", "pa-tip-points", e => {
@@ -201,25 +211,8 @@ class MapComponent extends Component {
       if (this.map.isStyleLoaded()) updateBounds(this);
     });
 
-    const { type, value } = this.props.match.params;
-
-    if (type === "location") {
-      //@TODO: add getTIP to Connect
-      //this.context.store.getState().getTIP.keyword = [];
-      this.Places.getDetails(
-        { placeId: value, fields: ["geometry.location"] },
-        results => {
-          this.props.setMapCenter({
-            lng: results.geometry.location.lng(),
-            lat: results.geometry.location.lat()
-          });
-        }
-      );
-    } else {
-      //@TODO: add getTIP to Connect
-      this.props.setBounds([]);
-      this.props.getTIPByKeywords(value);
-    }
+    // after map is done initializing, build a filter
+    if (this.props.category) this.buildCategoryFilter(this.props.category);
   }
 
   componentDidUpdate(prevProps) {
@@ -245,6 +238,20 @@ class MapComponent extends Component {
     // handle categories
     if (this.props.category !== prevProps.category)
       this.buildCategoryFilter(this.props.category);
+
+    // update map center
+    if (this.props.center !== prevProps.center) {
+      const { lng, lat } = this.props.center;
+      this.map.setCenter([lng, lat]);
+      this.map.setZoom(11);
+    }
+
+    // this was meant as a way to save state when navigating to/from expanded which is no longer necessary
+    // @UPDATE: delete this and its reducer
+    const position =
+      this.props.position && this.props.position.center
+        ? { center: this.props.position.center, zoom: this.props.position.zoom }
+        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
   }
 
   componentWillUnmount() {
@@ -328,6 +335,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
+    // @UPDATE remove
     position: state.getTIP.position,
     markerFromTiles: state.connectTilesToMap.markerInfo
   };
@@ -338,6 +346,7 @@ const mapDispatchToProps = dispatch => {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
     setMapCenter: latlng => dispatch(setMapCenter(latlng)),
+    // @UPDATE remove
     setMapState: position => dispatch(setMapState(position)),
     setBounds: bounds => dispatch(setBounds(bounds))
   };

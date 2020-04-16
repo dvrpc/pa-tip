@@ -17,6 +17,7 @@ const fetch_tip_keywords = fetchedKeywords => ({
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
 const get_full_tip = id => ({ type: GET_FULL_TIP, id });
 const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
+// @UPDATE remove
 const set_map_state = position => ({ type: SET_MAP_STATE, position });
 const get_tip_by_map_bounds = features => ({
   type: GET_TIP_BY_MAP_BOUNDS,
@@ -37,6 +38,7 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { keyword: action.keyword });
     case SET_MAP_CENTER:
       return Object.assign({}, state, { center: action.latlng });
+    // @UPDATE remove
     case SET_MAP_STATE:
       return Object.assign({}, state, { position: action.position });
     case GET_TIP_BY_MAP_BOUNDS:
@@ -70,7 +72,6 @@ const getTIPProjects = input =>
       // trim response to the first 5 entries & return
       mpmsAndNames = mpmsAndNames.slice(0, 5);
 
-      console.log("mpms response from search: ", mpmsAndNames);
       return mpmsAndNames;
     });
 
@@ -98,7 +99,6 @@ export const getTIPByKeywords = keyword => dispatch => {
 //get search results without updating the entire app
 export const searchTIPByKeywords = keyword => dispatch => {
   getTIPProjects(keyword).then(projects => {
-    console.log("projects at serachTIPbyKeywords ", projects);
     dispatch(fetch_tip_keywords(projects));
   });
 };
@@ -106,6 +106,7 @@ export const searchTIPByKeywords = keyword => dispatch => {
 export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
 
+// @UPDATE remove
 export const setMapState = position => dispatch =>
   dispatch(set_map_state(position));
 
