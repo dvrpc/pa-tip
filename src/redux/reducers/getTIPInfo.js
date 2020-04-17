@@ -103,6 +103,8 @@ export const searchTIPByKeywords = keyword => dispatch => {
   });
 };
 
+export const clearKeywords = () => dispatch => dispatch(get_tip_keywords(null));
+
 export const setMapCenter = latlng => dispatch =>
   dispatch(set_map_center(latlng));
 

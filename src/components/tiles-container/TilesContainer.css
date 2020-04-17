@@ -22,10 +22,9 @@
     font-weight: 400;
     text-align: center;
 }
-#no-results{
-    margin: 0 auto;
-    max-height: 5%;
-    max-width: 8%;
+#noResults {
+    color: #fff;
+    padding: 0 3%;
 }
 #selectedCategory{
     padding: 8px 0;

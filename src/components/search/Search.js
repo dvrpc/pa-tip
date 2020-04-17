@@ -5,8 +5,7 @@ import Select from "react-select";
 import { connect } from "react-redux";
 import {
   searchTIPByKeywords,
-  getFullTIP,
-  hydrateGeometry
+  clearKeywords
 } from "../../redux/reducers/getTIPInfo";
 
 const formatGroupLabel = section => <strong>{section.label}</strong>;
@@ -87,19 +86,18 @@ class Search extends Component {
     });
   };
 
+  // @BUG: this needs to remove the keyword filter on search
+  // if you do a keyword search, and then do a geography search, the geography works but the map will filter w/the old keyword filter (and tiles as a result b/c they are derived from the map)
   onSelect = suggestion => {
-    let oldType = this.props.history.location.pathname.split("/")[1];
     let newType = suggestion.type;
 
+    // clear keyword projects from store for non-keyword searches
+    if (newType !== "keyword") this.props.clearKeywords();
+
+    // let routing handle data
     this.props.history.push(
       `/${newType}/${suggestion.value.replace(/\s/g, "_")}`
     );
-
-    if (oldType === "expanded" && newType === "expanded") {
-      let id = this.props.history.location.pathname.split("/")[2];
-      this.props.getFullTIP(id);
-      this.props.hydrateGeometry(id);
-    }
   };
 
   render() {
@@ -144,8 +142,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   searchTIPByKeywords: keywords => dispatch(searchTIPByKeywords(keywords)),
-  getFullTIP: id => dispatch(getFullTIP(id)),
-  hydrateGeometry: id => dispatch(hydrateGeometry(id))
+  clearKeywords: () => dispatch(clearKeywords())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
