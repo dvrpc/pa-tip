@@ -34,7 +34,6 @@ class PrintPage extends Component {
   render() {
     const details = this.props.details;
     const totals = this.props.totals;
-    const program = this.props.program;
 
     return (
       <PrintTemplate style={printMain}>
@@ -49,15 +48,13 @@ class PrintPage extends Component {
         </div>
 
         <div style={printSubheadersWrap}>
-          <h3 style={{ fontSize: "0.9rem" }}>Program: {program}</h3>
           <h3 style={{ fontSize: "0.9rem" }}>
             Air Quality Code: {details.aq_code}
           </h3>
+          <h3 style={{ fontSize: "0.9rem", textAlign: "center" }}>
+            Limits: {details.limits}
+          </h3>
         </div>
-
-        <h3 style={{ fontSize: "0.9rem", textAlign: "center" }}>
-          Limits: {details.limits}
-        </h3>
 
         <p style={{ paddingTop: "2%" }}>{details.description}</p>
 
@@ -110,23 +107,21 @@ class PrintPage extends Component {
                   <td colSpan="2" style={{ fontWeight: "700", color: "#333" }}>
                     Program Year Totals (in Millions):
                   </td>
-                  <td style={{ fontWeight: "700" }}>${totals[0]}</td>
-                  <td style={{ fontWeight: "700" }}>${totals[1]}</td>
-                  <td style={{ fontWeight: "700" }}>${totals[2]}</td>
-                  <td style={{ fontWeight: "700" }}>${totals[3]}</td>
+                  <td style={{ fontWeight: "700" }}>{totals[0]}</td>
+                  <td style={{ fontWeight: "700" }}>{totals[1]}</td>
+                  <td style={{ fontWeight: "700" }}>{totals[2]}</td>
+                  <td style={{ fontWeight: "700" }}>{totals[3]}</td>
                   <td />
                   <td />
                 </tr>
               </tbody>
             </table>
             <p style={{ marginLeft: "2%" }}>
-              Total FY20 - FY23 Cost (in Millions):{" "}
-              <strong>${totals[4]}</strong>
+              Total FY20 - FY23 Cost (in Millions): <strong>{totals[4]}</strong>
             </p>
 
             <p style={{ marginLeft: "2%" }}>
-              Total FY20 - FY29 Cost (in Millions):{" "}
-              <strong>${totals[5]}</strong>
+              Total FY20 - FY29 Cost (in Millions): <strong>{totals[5]}</strong>
             </p>
           </div>
         ) : (
