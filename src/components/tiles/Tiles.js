@@ -1,12 +1,11 @@
-import Inferno, { Component, linkEvent } from "inferno";
-import { connect } from "inferno-redux";
-import { withRouter } from "inferno-router";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import "./Tiles.css";
-import { tileDetails } from "../../utils/tileDetails.js";
+import { tileDetails } from "./tileDetails.js";
 import { clickTile } from "../../utils/clickTile.js";
-import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
-import counties from "../../utils/counties.js";
+import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
 
 class Tile extends Component {
   constructor(props) {
@@ -34,10 +33,10 @@ class Tile extends Component {
     return (
       <div
         className="tile"
-        onClick={linkEvent(this, clickTile)}
-        onMouseEnter={linkEvent(project, this.props.getMarkerInfo)}
-        onMouseLeave={linkEvent(null, this.props.getMarkerInfo)}
-        style={`background: url(${calculatedProjectInfo.background})`}
+        onClick={e => clickTile(this, e)}
+        onMouseEnter={e => this.props.getMarkerInfo(project, e)}
+        onMouseLeave={e => this.props.getMarkerInfo(null, e)}
+        style={{ background: `url(${calculatedProjectInfo.background})` }}
         ref={tile => (this.tileRef = tile)}
       >
         <div
@@ -47,10 +46,7 @@ class Tile extends Component {
           <h2 className="tile-caption-text">
             {calculatedProjectInfo.projectName}
           </h2>
-          <p className="tile-caption-text">
-            {project.CTY} {counties.indexOf(project.CTY) > -1 ? " County" : ""}{" "}
-            | {project.MPMS_ID}
-          </p>
+          <p className="tile-caption-text">DB #{project.MPMS_ID}</p>
         </div>
       </div>
     );

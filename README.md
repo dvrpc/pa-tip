@@ -5,7 +5,7 @@ The Delaware Valley Regional Planning Commission (DVRPC) is pleased to present t
 The PA TIP web app hosts information about the PA TIP as well as an interactive map containing every PA TIP project. Users can search by keyword, project name or location to find the projects they are interested in. From the map view, users can pan and zoom to reveal more projects and can filter projects by type. Projects are displayed as icons on the map as well as either list items or tiles with satellite imagery on the sidebar. Clicking on a project either in the map or on the sidebar will bring users to a detailed view that has all of the project information including funding and milestones tables. Users can print all of the detailed information by clicking the 'print' button.
 
 ## How was it made?
-The app is built on Inferno, a React-like library. The web mapping component is built on top of Mapbox GL JS. The projects and several of the map overlay layers are custom made vector tiles hosted by Digital Ocean. The other map overlay layers are geoJSON's loaded in from DVRPC's ArcGIS online portal.
+The app is built in React, bootstrapped with create-react-app. The web mapping component is built on top of Mapbox GL JS. The projects and several of the map overlay layers are custom made vector tiles hosted by Digital Ocean. The other map overlay layers are geoJSON's loaded in from DVRPC's ArcGIS online portal.
 
 ## Getting started
 - `cd` to project directory

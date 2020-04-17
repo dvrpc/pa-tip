@@ -7,22 +7,26 @@
   align-items: center;
   justify-content: space-between;
 }
-.navbar-link-to-home {
+.navbar-links {
   padding-left: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  width: 50%;
 }
-.navbar-logo{
-  padding-right: 5%;
+#TIPlogo{
+  width: 74px;
 }
-.nav-text{
-  border-left: 2px solid #666;
-  padding-left: 5%;
-  width: 100%;
+.nav-vr{
+  border: 1px solid #333333;
+  margin: 0 3%;
+  height: 6vh;
 }
 #draft-text {
+  font-size: 1.3em;
+  font-weight: 700;
   color: #333333;
+  margin-left: 3%;
 }
 #nav-search-form {
   margin-right: 1%;
@@ -41,30 +45,36 @@
   #nav-search-form {
     font-size: 1rem;
   }
-  .nav-text {
-    font-size: 0.5rem;
-    border-left: none;
-  }
-  .nav-text img {
-    width: 50%;
-  }
 }
 @media screen and (max-width: 700px) {
   #nav-search-form {
-    width: 65%;
-    font-size: 0.8rem;
+    width: 80%;
+    font-size: 0.7rem;
+  }
+  #TIPlogo{
+    display: none;
+  }
+  #dvrpc-logo{
+    width: 40px;
+  }
+  .nav-vr {
+    height: 4vh;
+  }
+  #draft-text{
+    font-size: 0.7em;
+    margin-left: 0;
   }
   ::-webkit-input-placeholder {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   ::-moz-placeholder {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   :-ms-input-placeholder {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   ::placeholder {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 

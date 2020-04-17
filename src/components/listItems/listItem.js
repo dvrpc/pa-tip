@@ -1,11 +1,11 @@
-import Inferno, { Component, linkEvent } from "inferno";
-import { connect } from "inferno-redux";
-import { withRouter } from "inferno-router";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { clickTile } from "../../utils/clickTile.js";
-import { getMarkerInfo } from "../reducers/connectTilesToMap.js";
-import counties from "../../utils/counties.js";
-import { fetchSprite } from "../../utils/fetchSprite.js";
+import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
+import counties from "./counties.js";
+import { fetchSprite } from "./fetchSprite.js";
 
 import "./listItem.css";
 
@@ -17,10 +17,11 @@ class ListItem extends Component {
     };
   }
 
-  componentWillMount() {
-    let category = this.props.data.DESCRIPTIO;
-    if (category === "null") category = "Other";
-
+  componentDidMount() {
+    let category =
+      this.props.data.DESCRIPTIO === "null"
+        ? "Other"
+        : this.props.data.DESCRIPTIO;
     fetchSprite.then(response => {
       this.setState({
         coords: `-${response[category].x}px -${response[category].y}px`
@@ -46,9 +47,9 @@ class ListItem extends Component {
     return (
       <div
         className="list-item"
-        onClick={linkEvent(this, clickTile)}
-        onMouseEnter={linkEvent(this.props.data, this.props.getMarkerInfo)}
-        onMouseLeave={linkEvent(null, this.props.getMarkerInfo)}
+        onClick={e => clickTile(this, e)}
+        onMouseEnter={e => this.props.getMarkerInfo(this.props.data, e)}
+        onMouseLeave={e => this.props.getMarkerInfo(null, e)}
       >
         <img
           src="https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite.png"
@@ -65,7 +66,7 @@ class ListItem extends Component {
               {counties.indexOf(project.CTY) > -1 ? " County" : ""}
             </em>
           </h2>
-          <h2 className="mpms">MPMS ID: {project.MPMS_ID}</h2>
+          <h2 className="mpms">DB #{project.MPMS_ID}</h2>
         </div>
       </div>
     );
@@ -78,9 +79,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(ListItem)
-);
+export default withRouter(connect(null, mapDispatchToProps)(ListItem));

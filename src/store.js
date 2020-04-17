@@ -1,20 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import ReduxThunk from "redux-thunk";
 
-import getTIP from "./components/reducers/getTIPInfo";
-import connectTilesToMap from "./components/reducers/connectTilesToMap";
-import StateLoader from "./utils/persist.js";
+import getTIP from "./redux/reducers/getTIPInfo";
+import connectTilesToMap from "./redux/reducers/connectTilesToMap";
+import getComments from "./redux/reducers/commentsReducer";
 
-const stateLoader = new StateLoader();
+const rootReducer = combineReducers({ getTIP, connectTilesToMap, getComments });
 
-const rootReducer = combineReducers({ getTIP, connectTilesToMap });
-
-let store = createStore(
-  rootReducer,
-  stateLoader.loadState(),
-  applyMiddleware(ReduxThunk)
-);
-
-store.subscribe(() => stateLoader.saveState(store.getState()));
+let store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default store;

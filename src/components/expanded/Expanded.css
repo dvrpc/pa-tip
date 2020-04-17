@@ -125,6 +125,14 @@ th {
 .funding-and-awards-table td:first-child,
 .funding-and-awards-table th:first-child {
   border-left: none;
+  word-wrap: break-word;
+}
+#noFunding, #noMilestones {
+  margin: 3%;
+  font-size: 1.1rem;
+}
+#noMilestones {
+  text-align: center;
 }
 
 
@@ -137,6 +145,7 @@ th {
 #loadingBackground {
   text-align: center;
   height: 100vh;
+  overflow: hidden;
   background: linear-gradient(to bottom, white 2%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0.2));
 }
 

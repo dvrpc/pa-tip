@@ -1,6 +1,6 @@
-import { Component } from "inferno";
+import React, { Component } from "react";
 import "./registerServiceWorker";
-import { BrowserRouter as Router, Route, Switch } from "inferno-router";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /* app components */
 import "./App.css";

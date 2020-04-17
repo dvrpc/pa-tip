@@ -1,10 +1,10 @@
-const ipd = {
+const IPD = {
   id: "Indicators of Potential Disadvantage",
+  data:
+    "https://opendata.arcgis.com/datasets/44fdcc72f46e4e3f90126f4f9c5f7629_0.geojson",
+  layerType: "geojson",
   type: "fill",
   source: "IPD",
-  layout: {
-    visibility: "none"
-  },
   paint: {
     "fill-color": [
       "interpolate",
@@ -33,25 +33,25 @@ const ipd = {
   },
   filter: ["==", "STATE_FIPS", "42"]
 };
-const cmp = {
+const CMP = {
   id: "CMP Corridors",
+  data:
+    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson",
+  layerType: "geojson",
   type: "fill",
   source: "CMP",
-  layout: {
-    visibility: "none"
-  },
   paint: {
     "fill-color": ["get", "WEB_COLOR"],
     "fill-opacity": 0.8
   }
 };
-const connections = {
+const Connections = {
   id: "Connections 2045 Centers",
+  data:
+    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=STATE=%27PA%27&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson",
+  layerType: "geojson",
   type: "fill",
   source: "Connections",
-  layout: {
-    visibility: "none"
-  },
   paint: {
     "fill-color": [
       "case",
@@ -84,13 +84,13 @@ const connections = {
     ]
   }
 };
-const freight = {
+const Freight = {
   id: "Freight Centers",
+  data:
+    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson",
+  layerType: "geojson",
   type: "fill",
   source: "Freight",
-  layout: {
-    visibility: "none"
-  },
   paint: {
     "fill-color": [
       "case",
@@ -121,13 +121,12 @@ const freight = {
     ]
   }
 };
-const landUse = {
+const LandUse = {
   id: "DVRPC Land Use (2015)",
+  url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json",
+  layerType: "vector",
   type: "fill",
   source: "LandUse",
-  layout: {
-    visibility: "none"
-  },
   "source-layer": "lu2015",
   paint: {
     "fill-color": [
@@ -175,4 +174,4 @@ const landUse = {
   }
 };
 
-export default { ipd, cmp, connections, freight, landUse };
+export default { IPD, CMP, Connections, Freight, LandUse };

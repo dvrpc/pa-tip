@@ -1,43 +1,49 @@
-import Inferno, { Component } from "inferno";
-import { withRouter } from "inferno-router";
-import Autosuggest from "react-autosuggest";
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Select from "react-select";
 
-import { connect } from "inferno-redux";
+import { connect } from "react-redux";
 import {
   searchTIPByKeywords,
-  getFullTIP,
-  hydrateGeometry
-} from "../reducers/getTIPInfo";
+  clearKeywords
+} from "../../redux/reducers/getTIPInfo";
 
-import "./search.css";
+const formatGroupLabel = section => <strong>{section.label}</strong>;
 
-const getSuggestionValue = suggestion => suggestion.name;
+const transformLocationSuggestions = data => {
+  let options;
+  if (data) {
+    options = data.map(location => ({
+      label: location.description,
+      value: location.place_id,
+      type: "location"
+    }));
+  } else {
+    options = [];
+  }
 
-const renderSuggestion = suggestion => (
-  <span style={{ color: "#000" }}>{suggestion.name}</span>
-);
-
-const renderSectionTitle = section => <strong>{section.title}</strong>;
-
-const getSectionSuggestions = section => section.results;
-
-const transformLocationSuggestions = data => ({
-  title: "Location",
-  results: data.map(location => ({
-    name: location.description,
-    id: location.place_id,
-    type: "location"
-  }))
-});
+  return {
+    label: "Location",
+    options
+  };
+};
 
 const transformKeywordSuggestions = data => {
+  let options;
+
+  if (data) {
+    options = data.map(project => ({
+      label: `${project.id}: ${project.name}`,
+      value: `${project.id}`,
+      type: "expanded"
+    }));
+  } else {
+    options = [];
+  }
+
   return {
-    title: "TIP Projects",
-    results: data.map(project => ({
-      id: project.id,
-      name: `${project.id}: ${project.name}`,
-      type: project.type
-    }))
+    label: "TIP Projects",
+    options
   };
 };
 
@@ -46,9 +52,7 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      value: "",
-      TIPProjects: [],
-      locations: []
+      value: ""
     };
 
     this.Autocomplete = new window.google.maps.places.AutocompleteService();
@@ -60,8 +64,8 @@ class Search extends Component {
         {
           input,
           bounds: new window.google.maps.LatLngBounds(
-            { lat: 39.514909, lng: -76.13659 },
-            { lat: 40.608542, lng: -74.389531 }
+            { lat: 39.513289, lng: -75.433101 },
+            { lat: 40.423627, lng: -74.383175 }
           )
         },
         data => resolve(data)
@@ -72,106 +76,71 @@ class Search extends Component {
     this.props.searchTIPByKeywords(input);
   };
 
-  onChange = (event, { newValue }) => {
+  onChange = newValue => {
     this.setState({ value: newValue });
-  };
-
-  onSelect = (event, { suggestion }) => {
-    let oldPath = this.props.history.location.pathname.split("/")[1];
-    let newPath = suggestion.type;
-
-    this.props.history.push(`/${suggestion.type}/${suggestion.id}`);
-
-    if (oldPath === "expanded" && newPath === "expanded") {
-      let id = this.props.history.location.pathname.split("/")[2];
-      this.props.getFullTIP(id);
-      this.props.hydrateGeometry(id);
-    }
-  };
-
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.loadKeywordSuggestions(value);
-    this.loadLocationSuggestions(value).then(locations => {
+    this.loadKeywordSuggestions(newValue);
+    this.loadLocationSuggestions(newValue).then(locations => {
       if (locations !== null) {
         this.setState({ locations });
       }
     });
   };
 
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
+  onSelect = suggestion => {
+    let newType = suggestion.type;
+
+    // clear keyword projects from store for non-keyword searches
+    if (newType !== "keyword") this.props.clearKeywords();
+
+    // let routing handle data
+    this.props.history.push(
+      `/${newType}/${suggestion.value.replace(/\s/g, "_")}`
+    );
   };
 
-  componentWillReceiveProps({ TIPProjects }) {
-    if (typeof TIPProjects !== "STRING") {
-      this.setState({ TIPProjects });
-    }
-  }
-
   render() {
-    let suggestions = [];
-    let locations = transformLocationSuggestions(this.state.locations);
-    const projects = transformKeywordSuggestions(this.state.TIPProjects);
+    const suggestions = [];
+    const locations = transformLocationSuggestions(this.state.locations);
+    const keywords = transformKeywordSuggestions(this.props.keywordProjects);
 
-    // @BUG: the initial value of suggestions and inputProps.value is not the same. This could be causing the bug.
-    //
     const search = {
-      title: "Keyword",
-      results: [
+      label: "Keyword",
+      options: [
         {
-          name: this.state.value,
-          id: this.state.value,
+          label: this.state.value,
+          value: this.state.value,
           type: "keyword"
         }
       ]
     };
 
-    // add text input to Keywords header
     suggestions.push(search);
+    suggestions.push(keywords);
 
-    // add fetched projects to TIP Projects header
-    suggestions.push(projects);
-
-    // add geolocated areas to Locations header (slice because google wont let you limit results to > 5)
-    if (locations.results.length) locations = locations.results.slice(0, 2);
+    // because google wont let you limit results to > 5
+    locations.options = locations.options.slice(0, 2);
     suggestions.push(locations);
 
-    // value has to be a string?
-    const inputProps = {
-      placeholder: "Search by address or keywords",
-      value: "",
-      onChange: this.onChange,
-      id: "homepage-search-bar"
-    };
-
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSelect}
-        multiSection={true}
-        renderSectionTitle={renderSectionTitle}
-        getSectionSuggestions={getSectionSuggestions}
-        highlightFirstSuggestion={true}
+      <Select
+        options={suggestions}
+        formatGroupLabel={formatGroupLabel}
+        onInputChange={this.onChange}
+        onChange={(value, { action }) => {
+          action === "select-option" && this.onSelect(value);
+        }}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  TIPProjects: state.getTIP.fetchedKeywords
+  keywordProjects: state.getTIP.fetchedKeywords
 });
 
 const mapDispatchToProps = dispatch => ({
   searchTIPByKeywords: keywords => dispatch(searchTIPByKeywords(keywords)),
-  getFullTIP: id => dispatch(getFullTIP(id)),
-  hydrateGeometry: id => dispatch(hydrateGeometry(id))
+  clearKeywords: () => dispatch(clearKeywords())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

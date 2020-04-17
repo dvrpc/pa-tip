@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import React, { Component } from "react";
 import "./legend.css";
 import { layers } from "./layers.js";
 
@@ -36,22 +36,30 @@ class Legend extends Component {
     return (
       <div className={`legend-menu ${this.props.show}`}>
         <ul className="legend-links" onClick={this.updateLegendVisibility}>
-          <li className="legendLink active" id="legendLink-TIP">
+          <li
+            className="legendLink active"
+            id="legendLink-TIP"
+            key="legendLink-TIP"
+          >
             TIP
           </li>
-          <li className="legendLink" id="legendLink-IPD">
+          <li className="legendLink" id="legendLink-IPD" key="legendLink-IPD">
             IPD
           </li>
-          <li className="legendLink" id="legendLink-CMP">
+          <li className="legendLink" id="legendLink-CMP" key="legendLink-CMP">
             CMP
           </li>
-          <li className="legendLink" id="legendLink-LRP">
+          <li className="legendLink" id="legendLink-LRP" key="legendLink-LRP">
             LRP
           </li>
-          <li className="legendLink" id="legendLink-Freight">
+          <li
+            className="legendLink"
+            id="legendLink-Freight"
+            key="legendLink-Freight"
+          >
             Freight
           </li>
-          <li className="legendLink" id="legendLink-LU">
+          <li className="legendLink" id="legendLink-LU" key="legendLink-LU">
             Land Use
           </li>
         </ul>
@@ -71,21 +79,23 @@ class Legend extends Component {
               className={"legendItem-content"}
               id={`legendTable-${this.state.selected}`}
             >
-              {layers[this.state.selected].classifications.map(row => {
-                return (
-                  <tr>
-                    <td
-                      style={{
-                        height: "25px",
-                        width: "25px",
-                        backgroundColor: `${row[1]}`,
-                        borderRadius: "3px"
-                      }}
-                    />
-                    <td>{row[0]}</td>
-                  </tr>
-                );
-              })}
+              <tbody>
+                {layers[this.state.selected].classifications.map(row => {
+                  return (
+                    <tr key={row[0]}>
+                      <td
+                        style={{
+                          height: "25px",
+                          width: "25px",
+                          backgroundColor: `${row[1]}`,
+                          borderRadius: "3px"
+                        }}
+                      />
+                      <td>{row[0]}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         ) : null}

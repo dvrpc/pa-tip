@@ -1,4 +1,4 @@
-import Inferno, { Component } from "inferno";
+import React, { Component } from "react";
 import swal from "sweetalert2";
 
 class Modal extends Component {

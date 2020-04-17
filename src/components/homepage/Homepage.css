@@ -54,13 +54,6 @@
   width: 595px;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
-#homepage-search-bar {
-  border: none;
-  background: url("./magnifying-glass.png") no-repeat scroll 3% 50%;
-  font-size: 1.1rem;
-  width: 100%;
-  padding: 3% 5% 3% 10%;
-}
 #search-form input:focus {
   outline: none;
 }
@@ -200,12 +193,6 @@
     margin: 0 auto !important;
     margin-top: 25vh !important;
   }
-  #homepage-search-bar {
-    background: url("./magnifying-glass.png") no-repeat scroll 2% 50%;
-    background-size: 13px;
-    font-size: 0.8rem !important;
-    padding: 3% 0 3% 10%;
-  }
   #tip-info-paragraphs {
     margin-left: 0;
     width: 100%;
@@ -238,9 +225,6 @@
   #search-form {
     margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
   }
-  #homepage-search-bar {
-    text-overflow: wrap;
-  }
   .info-section-header {
     font-size: 1.3rem;
   }
@@ -256,8 +240,5 @@
   }
   #bgvid {
     transform: translateX(-50%) translateY(-58%);
-  }
-  #homepage-search-bar {
-    font-size: 1.2rem;
   }
 }
