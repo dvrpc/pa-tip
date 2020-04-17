@@ -4,8 +4,8 @@ import { withRouter } from "react-router-dom";
 
 import { clickTile } from "../../utils/clickTile.js";
 import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
-import counties from "../../utils/counties.js";
-import { fetchSprite } from "../../utils/fetchSprite.js";
+import counties from "./counties.js";
+import { fetchSprite } from "./fetchSprite.js";
 
 import "./listItem.css";
 

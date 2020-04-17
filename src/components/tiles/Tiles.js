@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import "./Tiles.css";
-import { tileDetails } from "../../utils/tileDetails.js";
+import { tileDetails } from "./tileDetails.js";
 import { clickTile } from "../../utils/clickTile.js";
 import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
 

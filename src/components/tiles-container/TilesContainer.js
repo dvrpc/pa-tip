@@ -7,7 +7,7 @@ import ListItem from "../listItems/listItem.js";
 import Footer from "../footer/Footer.js";
 import loading from "./loading.gif";
 import { setFilter } from "../../redux/reducers/getTIPInfo.js";
-import { filterByCategory } from "../../utils/filterByCategory.js";
+import { filterByCategory } from "./filterByCategory.js";
 
 class TilesContainer extends Component {
   constructor(props) {

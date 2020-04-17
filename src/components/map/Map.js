@@ -11,7 +11,7 @@ import {
   setBounds
 } from "../../redux/reducers/getTIPInfo";
 
-import { updateBounds, showPopup } from "../../utils/updateMap";
+import { updateBounds, showPopup } from "./updateMap";
 import { clickTile } from "../../utils/clickTile.js";
 
 import "./Map.css";

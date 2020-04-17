@@ -1,5 +1,4 @@
 // util function to establish color schemes for projects based on their category
-
 export const colors = {
   "Bicycle/Pedestrian Improvement": {
     lightest: "rgba(242, 101, 34, 0.1)",

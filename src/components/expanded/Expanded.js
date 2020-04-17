@@ -290,7 +290,7 @@ class Expanded extends Component {
                               fontWeight: "700"
                             }}
                           >
-                            ${funding[0]}
+                            {funding[0]}
                           </td>
                           <td
                             style={{
@@ -298,7 +298,7 @@ class Expanded extends Component {
                               fontWeight: "700"
                             }}
                           >
-                            ${funding[1]}
+                            {funding[1]}
                           </td>
                           <td
                             style={{
@@ -306,7 +306,7 @@ class Expanded extends Component {
                               fontWeight: "700"
                             }}
                           >
-                            ${funding[2]}
+                            {funding[2]}
                           </td>
                           <td
                             style={{
@@ -314,15 +314,15 @@ class Expanded extends Component {
                               fontWeight: "700"
                             }}
                           >
-                            ${funding[3]}
+                            {funding[3]}
                           </td>
                           <td />
                         </tr>
                         <tr style={{ background: "#666" }} id="funding-totals">
                           <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
-                          <td style={{ fontWeight: "700" }}>${funding[4]}</td>
+                          <td style={{ fontWeight: "700" }}>{funding[4]}</td>
                           <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
-                          <td style={{ fontWeight: "700" }}>${funding[5]}</td>
+                          <td style={{ fontWeight: "700" }}>{funding[5]}</td>
                         </tr>
                       </tbody>
                     </table>

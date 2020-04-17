@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import { colors } from "./tileGeometryColorType.js";
+import { colors } from "../../utils/tileGeometryColorType.js";
 
 export const updateBounds = mapReference => {
   let renderedProjects = {
@@ -33,36 +33,6 @@ export const updateBounds = mapReference => {
     }
   });
   mapReference.props.getTIPByMapBounds(renderedProjects);
-};
-
-export const keywordBounds = (mapReference, data) => {
-  const projects = data || mapReference.props.keywordProjects;
-  var bounds = {};
-  let latitude = "";
-  let longitude = "";
-
-  if (projects.features && projects.features.length) {
-    let ids = projects.features.map(feature => feature.properties.MPMS_ID);
-    for (var i = 0; i < projects.features.length; i++) {
-      longitude = projects.features[i].properties.LONGITUDE;
-      latitude = projects.features[i].properties.LATITUDE;
-      bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
-      bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;
-      bounds.yMin = bounds.yMin < latitude ? bounds.yMin : latitude;
-      bounds.yMax = bounds.yMax > latitude ? bounds.yMax : latitude;
-    }
-
-    mapReference.map.fitBounds(
-      [
-        [bounds.xMin, bounds.yMin],
-        [bounds.xMax, bounds.yMax]
-      ],
-      { padding: 20 }
-    );
-
-    return ["in", "MPMS_ID"].concat(ids);
-  }
-  return ["!=", "MPMS_ID", ""];
 };
 
 export const showPopup = (marker, map) => {
