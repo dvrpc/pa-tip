@@ -164,13 +164,11 @@ class MapComponent extends Component {
     });
 
     this.map.on("load", () => {
-      // check for keyword search
       if (this.props.keywordProjects) {
         let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
         this.setState({ keyFilter });
       }
 
-      // add zoom controls
       let zoom = new mapboxgl.NavigationControl();
       this.map.addControl(zoom, "bottom-left");
     });

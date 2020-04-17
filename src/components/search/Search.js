@@ -86,8 +86,6 @@ class Search extends Component {
     });
   };
 
-  // @BUG: this needs to remove the keyword filter on search
-  // if you do a keyword search, and then do a geography search, the geography works but the map will filter w/the old keyword filter (and tiles as a result b/c they are derived from the map)
   onSelect = suggestion => {
     let newType = suggestion.type;
 

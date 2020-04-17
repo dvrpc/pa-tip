@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Search from "../search/Search";
 
-import {
-  getTIPByKeywords,
-  setMapCenter,
-  setMapState
-} from "../../redux/reducers/getTIPInfo";
 import "./Navbar.css";
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
@@ -48,12 +42,4 @@ class Navbar extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getTIPByKeywords: address => dispatch(getTIPByKeywords(address)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
-    setMapState: position => dispatch(setMapState(position))
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(Navbar));
+export default withRouter(Navbar);
