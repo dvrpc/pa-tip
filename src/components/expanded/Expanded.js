@@ -114,8 +114,8 @@ class Expanded extends Component {
             <PrintPage details={details} totals={funding} id="print-mount" />
             <div className="expanded" id="react-no-print">
               <Navbar backgroundGradient={navBackground} id="expandedNav" />
-              <div className="wrapper">
-                <section className="left-column">
+              <div id="expanded-content-wrapper">
+                <section className="expanded-content-section">
                   <div
                     id="content-mini-nav"
                     style={{ background: colorScheme.darkest }}
@@ -140,10 +140,7 @@ class Expanded extends Component {
                     />
                   </figure>
 
-                  <h2
-                    id="expanded-project-title"
-                    className="left-column-padding"
-                  >
+                  <h2 id="expanded-project-title" className="title-padding">
                     {details.id
                       ? "DB #" + details.id + ": " + details.road_name
                       : "Project Title"}
@@ -151,14 +148,14 @@ class Expanded extends Component {
 
                   <div
                     id="expanded-project-description"
-                    className="left-column-padding"
+                    className="title-padding"
                   >
                     <p>
                       {details.description
                         ? details.description
                         : "Project Description"}
                     </p>
-                    <hr />
+
                     {details.limits && (
                       <p>
                         <strong>Limits:</strong> {details.limits}
@@ -182,11 +179,8 @@ class Expanded extends Component {
                     )}
                   </div>
                 </section>
-                <section className="right-column">
-                  <div
-                    className="tabs"
-                    style={{ background: colorScheme.darkest }}
-                  >
+                <section className="expanded-content-section">
+                  <div className="tabs">
                     <button
                       className="tablinks active"
                       onClick={e => switchTabs(this, e)}
@@ -211,8 +205,8 @@ class Expanded extends Component {
                     <table className="funding-and-awards-table">
                       <thead>
                         <tr>
-                          <td colSpan={3} style={{ background: "#666" }} />
-                          <td colSpan={4} style={{ background: "#333" }}>
+                          <td colSpan={2} style={{ background: "#666" }} />
+                          <td colSpan={4}>
                             <h3>PA FY2020 TIP Program Years (in Millions)</h3>
                           </td>
                           <td colSpan={1} style={{ background: "#666" }} />
@@ -220,7 +214,7 @@ class Expanded extends Component {
                       </thead>
                       <tbody style={{ background: colorScheme.lightest }}>
                         <tr id="funding-subheaders">
-                          <td colSpan={2} style={{ background: "#666" }}>
+                          <td colSpan={1} style={{ background: "#666" }}>
                             {/* @UPDATE: find equivalent PA TIP pdf */}
                             <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Phase</a>
                           </td>
@@ -228,10 +222,18 @@ class Expanded extends Component {
                             {/* @UPDATE: find equivalent PA TIP pdf */}
                             <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Fund</a>
                           </td>
-                          <td style={{ background: "#333" }}>FY20</td>
-                          <td style={{ background: "#333" }}>FY21</td>
-                          <td style={{ background: "#333" }}>FY22</td>
-                          <td style={{ background: "#333" }}>FY23</td>
+                          <td style={{ background: `${colorScheme.middle}` }}>
+                            FY20
+                          </td>
+                          <td style={{ background: `${colorScheme.middle}` }}>
+                            FY21
+                          </td>
+                          <td style={{ background: `${colorScheme.middle}` }}>
+                            FY22
+                          </td>
+                          <td style={{ background: `${colorScheme.middle}` }}>
+                            FY23
+                          </td>
                           <td style={{ background: "#666" }}>FY24-29</td>
                         </tr>
                         {details.funding &&
@@ -240,7 +242,7 @@ class Expanded extends Component {
                               className="table-data-rows"
                               key={row[0] + row[1]}
                             >
-                              <td colSpan={2}>{row[0]}</td>
+                              <td colSpan={1}>{row[0]}</td>
                               <td>{row[1]}</td>
                               <td
                                 style={{
@@ -278,10 +280,7 @@ class Expanded extends Component {
                             </tr>
                           ))}
                         <tr id="program-year-totals">
-                          <td
-                            colSpan={3}
-                            style={{ fontWeight: "700", color: "#333" }}
-                          >
+                          <td colSpan={2} style={{ fontWeight: "700" }}>
                             Program Year Totals (in Millions):
                           </td>
                           <td

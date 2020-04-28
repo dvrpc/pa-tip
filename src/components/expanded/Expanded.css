@@ -1,24 +1,14 @@
 /* General Purpose Targetting */
-.expanded{
-  overflow-x: hidden;
+#expanded-content-wrapper{
+  background-color: #666666;
+  color: #fff;
+  line-height: 1.7;
 }
 .expanded a{
   color: #ffffff;
 }
 .expanded a:hover{
   color: #c1c1c1;
-}
-.wrapper {
-  display: flex;
-}
-.left-column {
-  width: 50%;
-  line-height: 1.7;
-  color: #ffffff;
-}
-.right-column {
-  width: calc(50% - 1vh);
-  padding-left: 1vh;
 }
 .hidden {
   position: absolute;
@@ -27,8 +17,8 @@
 }
 
 /*Paragraph and Title*/
-.left-column-padding {
-  padding: 2vh 2vw;
+.title-padding {
+  padding: 2%;
 }
 #content-mini-nav {
   height: 8vh;
@@ -68,8 +58,8 @@
 
 /* Data Tables Tabs */
 .tabs {
-  height: 8vh;
-  margin-bottom: 1vh;
+  padding: 3% 0;
+  background: #333333;
 }
 .tablinks {
   background: none;
@@ -108,9 +98,6 @@ th {
 }
 .funding-and-awards-table td a:hover {
   text-decoration: underline;
-}
-.table-data-rows td {
-  color: #333333;
 }
 .funding-and-awards-table tr {
   width: 100%;
