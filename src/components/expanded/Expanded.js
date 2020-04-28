@@ -140,7 +140,7 @@ class Expanded extends Component {
                     />
                   </figure>
 
-                  <h2 id="expanded-project-title" className="title-padding">
+                  <h2 className="title-padding expanded-h2">
                     {details.id
                       ? "DB #" + details.id + ": " + details.road_name
                       : "Project Title"}
@@ -180,16 +180,17 @@ class Expanded extends Component {
                   </div>
                 </section>
                 <section className="expanded-content-section">
+                  <h2 className="expanded-h2">Funding and Status Tables</h2>
                   <div className="tabs">
                     <button
-                      className="tablinks active"
+                      className="tab-buttons active"
                       onClick={e => switchTabs(this, e)}
                       ref={e => (this.fundingButton = e)}
                     >
                       Funding
                     </button>
                     <button
-                      className="tablinks"
+                      className="tab-buttons"
                       onClick={e => switchTabs(this, e)}
                       ref={e => (this.milestonesButton = e)}
                     >
@@ -246,32 +247,28 @@ class Expanded extends Component {
                               <td>{row[1]}</td>
                               <td
                                 style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
+                                  background: colorScheme.middle
                                 }}
                               >
                                 ${row[2]}
                               </td>
                               <td
                                 style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
+                                  background: colorScheme.middle
                                 }}
                               >
                                 ${row[3]}
                               </td>
                               <td
                                 style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
+                                  background: colorScheme.middle
                                 }}
                               >
                                 ${row[4]}
                               </td>
                               <td
                                 style={{
-                                  background: colorScheme.middle,
-                                  fontWeight: "700"
+                                  background: colorScheme.middle
                                 }}
                               >
                                 ${row[5]}
@@ -317,11 +314,11 @@ class Expanded extends Component {
                           </td>
                           <td />
                         </tr>
-                        <tr style={{ background: "#666" }} id="funding-totals">
+                        <tr style={{ fontWeight: "700" }} id="funding-totals">
                           <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
-                          <td style={{ fontWeight: "700" }}>{funding[4]}</td>
+                          <td>{funding[4]}</td>
                           <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
-                          <td style={{ fontWeight: "700" }}>{funding[5]}</td>
+                          <td>{funding[5]}</td>
                         </tr>
                       </tbody>
                     </table>
