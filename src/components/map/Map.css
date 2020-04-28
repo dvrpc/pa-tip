@@ -2,15 +2,13 @@
   width: 60%;
   height: 100%;
 }
-.marker:hover {
+.marker {
   cursor: pointer;
 }
 .mapboxgl-popup {
   min-width: 100px;
   max-width: 250px;
   min-height: 100px;
-}
-.mapboxgl-popup:hover {
   cursor: pointer;
 }
 .mapboxgl-popup-content {
@@ -117,9 +115,9 @@
   color: inherit;
   white-space: nowrap;
   transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .dropdown-item:hover {
-  cursor: pointer;
   background-color: #ddd;
   color: #000;
 }

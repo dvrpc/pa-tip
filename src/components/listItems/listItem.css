@@ -3,9 +3,9 @@
     display: flex;
     padding: 4% 2%;
     border-bottom: 1px solid #f7f7f7;
+    cursor: pointer;
 }
 .list-item:hover{
-    cursor: pointer;
     background: #848484;
 }
 .list-category-thumbnail{

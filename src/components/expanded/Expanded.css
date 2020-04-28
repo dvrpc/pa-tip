@@ -32,7 +32,7 @@
   font-weight: 700;
   font-size: 1rem;
 }
-#content-mini-nav p:hover {
+#content-mini-nav p{
   cursor: pointer;
 }
 .divider {

@@ -39,8 +39,6 @@
 .results-toggle{
     display: flex;
     width: 15%;
-}
-.results-toggle:hover{
     cursor: pointer;
 }
 .results-toggle h2{
