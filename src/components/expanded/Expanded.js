@@ -112,254 +112,243 @@ class Expanded extends Component {
       ? (toReturn = (
           <div>
             <PrintPage details={details} totals={funding} id="print-mount" />
-            <div className="expanded" id="react-no-print">
-              <Navbar backgroundGradient={navBackground} id="expandedNav" />
-              <div id="expanded-content-wrapper">
-                <section className="expanded-content-section">
+
+            <Navbar backgroundGradient={navBackground} id="expandedNav" />
+
+            <div id="expanded">
+              <section className="expanded-content-section">
+                <div
+                  id="content-mini-nav"
+                  style={{ background: colorScheme.darkest }}
+                >
+                  <p onClick={this.backToResults}>
+                    <em>back</em>
+                  </p>
+                  <p onClick={window.print}>
+                    <em>print</em>
+                  </p>
+                </div>
+
+                <figure>
                   <div
-                    id="content-mini-nav"
-                    style={{ background: colorScheme.darkest }}
-                  >
-                    <p onClick={this.backToResults}>
-                      <em>back</em>
-                    </p>
-                    <p onClick={window.print}>
-                      <em>print</em>
-                    </p>
-                  </div>
+                    id="placeholder"
+                    ref={x => (this.streetview = x)}
+                    style={{
+                      backgroundImage: `url(${noStreetview})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center"
+                    }}
+                  />
+                </figure>
 
-                  <figure>
-                    <div
-                      id="placeholder"
-                      ref={x => (this.streetview = x)}
-                      style={{
-                        background: `url(${noStreetview})`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center"
-                      }}
-                    />
-                  </figure>
+                <h2 className=" expanded-h2">
+                  {details.road_name ? details.road_name : "Project Title"}
+                </h2>
 
-                  <h2 className="title-padding expanded-h2">
-                    {details.id
-                      ? "DB #" + details.id + ": " + details.road_name
-                      : "Project Title"}
-                  </h2>
-
-                  <div
-                    id="expanded-project-description"
-                    className="title-padding"
-                  >
+                <div id="expanded-project-description">
+                  <p>
+                    {details.description
+                      ? details.description
+                      : "Project Description"}
+                  </p>
+                  {details.id && (
                     <p>
-                      {details.description
-                        ? details.description
-                        : "Project Description"}
+                      <strong>MPMS: </strong> {details.id}
                     </p>
-
-                    {details.limits && (
-                      <p>
-                        <strong>Limits:</strong> {details.limits}
-                      </p>
-                    )}
-                    {details.municipalities && (
-                      <p>
-                        <strong>Municipality(s)</strong>:{" "}
-                        {details.municipalities}
-                      </p>
-                    )}
-                    {details.county && (
-                      <p>
-                        <strong>County(s)</strong>: {details.county}
-                      </p>
-                    )}
-                    {details.aq_code && (
-                      <p>
-                        <strong>Air Quality Code</strong>: {details.aq_code}
-                      </p>
-                    )}
-                  </div>
-                </section>
-                <section className="expanded-content-section">
-                  <h2 className="expanded-h2">Funding and Status Tables</h2>
-                  <div className="tabs">
-                    <button
-                      className="tab-buttons active"
-                      onClick={e => switchTabs(this, e)}
-                      ref={e => (this.fundingButton = e)}
-                    >
-                      Funding
-                    </button>
-                    <button
-                      className="tab-buttons"
-                      onClick={e => switchTabs(this, e)}
-                      ref={e => (this.milestonesButton = e)}
-                    >
-                      Status
-                    </button>
-                  </div>
-
-                  <div
-                    id="Funding"
-                    className="table-wrapper"
-                    ref={e => (this.funding = e)}
+                  )}
+                  {details.limits && (
+                    <p>
+                      <strong>Limits:</strong> {details.limits}
+                    </p>
+                  )}
+                  {details.municipalities && (
+                    <p>
+                      <strong>Municipality(s)</strong>: {details.municipalities}
+                    </p>
+                  )}
+                  {details.county && (
+                    <p>
+                      <strong>County(s)</strong>: {details.county}
+                    </p>
+                  )}
+                  {details.aq_code && (
+                    <p>
+                      <strong>Air Quality Code</strong>: {details.aq_code}
+                    </p>
+                  )}
+                </div>
+              </section>
+              <section className="expanded-content-section">
+                <h2 className="expanded-h2">Funding and Status Tables</h2>
+                <div className="tabs">
+                  <button
+                    className="tab-buttons active"
+                    onClick={e => switchTabs(this, e)}
+                    ref={e => (this.fundingButton = e)}
                   >
+                    Funding
+                  </button>
+                  <button
+                    className="tab-buttons"
+                    onClick={e => switchTabs(this, e)}
+                    ref={e => (this.milestonesButton = e)}
+                  >
+                    Status
+                  </button>
+                </div>
+
+                <div
+                  id="Funding"
+                  className="table-wrapper"
+                  ref={e => (this.funding = e)}
+                >
+                  <table className="funding-and-awards-table">
+                    <thead>
+                      <tr>
+                        <th colSpan={2} style={{ background: "#666" }} />
+                        <th colSpan={4}>
+                          <h3>PA FY2020 TIP Program Years (in Millions)</h3>
+                        </th>
+                        <th colSpan={1} style={{ background: "#666" }} />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colSpan={1} style={{ background: "#666" }}>
+                          {/* @UPDATE: find equivalent PA TIP pdf */}
+                          <a
+                            className="table-links"
+                            href="/TIP/PA/pdf/CodesAbbrev.pdf"
+                          >
+                            Phase
+                          </a>
+                        </td>
+                        <td style={{ background: "#666" }}>
+                          {/* @UPDATE: find equivalent PA TIP pdf */}
+                          <a
+                            className="table-links"
+                            href="/TIP/PA/pdf/CodesAbbrev.pdf"
+                          >
+                            Fund
+                          </a>
+                        </td>
+                        <td style={{ background: colorScheme.middle }}>FY20</td>
+                        <td style={{ background: colorScheme.middle }}>FY21</td>
+                        <td style={{ background: colorScheme.middle }}>FY22</td>
+                        <td style={{ background: colorScheme.middle }}>FY23</td>
+                        <td style={{ background: "#666" }}>FY24-29</td>
+                      </tr>
+                      {details.funding &&
+                        details.funding.data.map(row => (
+                          <tr className="table-data-rows" key={row[0] + row[1]}>
+                            <td colSpan={1}>{row[0]}</td>
+                            <td>{row[1]}</td>
+                            <td style={{ background: colorScheme.middle }}>
+                              ${row[2]}
+                            </td>
+                            <td style={{ background: colorScheme.middle }}>
+                              ${row[3]}
+                            </td>
+                            <td style={{ background: colorScheme.middle }}>
+                              ${row[4]}
+                            </td>
+                            <td style={{ background: colorScheme.middle }}>
+                              ${row[5]}
+                            </td>
+                            <td>${row[6]}</td>
+                          </tr>
+                        ))}
+                      <tr>
+                        <td colSpan={2} style={{ fontWeight: "700" }}>
+                          Program Year Totals (in Millions):
+                        </td>
+                        <td
+                          style={{
+                            background: colorScheme.darkest,
+                            fontWeight: "700"
+                          }}
+                        >
+                          {funding[0]}
+                        </td>
+                        <td
+                          style={{
+                            background: colorScheme.darkest,
+                            fontWeight: "700"
+                          }}
+                        >
+                          {funding[1]}
+                        </td>
+                        <td
+                          style={{
+                            background: colorScheme.darkest,
+                            fontWeight: "700"
+                          }}
+                        >
+                          {funding[2]}
+                        </td>
+                        <td
+                          style={{
+                            background: colorScheme.darkest,
+                            fontWeight: "700"
+                          }}
+                        >
+                          {funding[3]}
+                        </td>
+                        <td />
+                      </tr>
+                      <tr
+                        style={{
+                          fontWeight: "700",
+                          backgroundColor: colorScheme.lightest
+                        }}
+                        id="funding-totals"
+                      >
+                        <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
+                        <td>{funding[4]}</td>
+                        <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
+                        <td>{funding[5]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div
+                  id="Milestones"
+                  className="table-wrapper hidden"
+                  ref={e => (this.milestones = e)}
+                >
+                  {details.milestones.data.length ? (
                     <table className="funding-and-awards-table">
                       <thead>
                         <tr>
-                          <td colSpan={2} style={{ background: "#666" }} />
-                          <td colSpan={4}>
-                            <h3>PA FY2020 TIP Program Years (in Millions)</h3>
-                          </td>
-                          <td colSpan={1} style={{ background: "#666" }} />
+                          <th>
+                            <h3>Milestone</h3>
+                          </th>
+                          <th>
+                            <h3>Estimated Date</h3>
+                          </th>
+                          <th>
+                            <h3>Actual Date</h3>
+                          </th>
                         </tr>
                       </thead>
-                      <tbody style={{ background: colorScheme.lightest }}>
-                        <tr id="funding-subheaders">
-                          <td colSpan={1} style={{ background: "#666" }}>
-                            {/* @UPDATE: find equivalent PA TIP pdf */}
-                            <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Phase</a>
-                          </td>
-                          <td style={{ background: "#666" }}>
-                            {/* @UPDATE: find equivalent PA TIP pdf */}
-                            <a href="/TIP/PA/pdf/CodesAbbrev.pdf">Fund</a>
-                          </td>
-                          <td style={{ background: `${colorScheme.middle}` }}>
-                            FY20
-                          </td>
-                          <td style={{ background: `${colorScheme.middle}` }}>
-                            FY21
-                          </td>
-                          <td style={{ background: `${colorScheme.middle}` }}>
-                            FY22
-                          </td>
-                          <td style={{ background: `${colorScheme.middle}` }}>
-                            FY23
-                          </td>
-                          <td style={{ background: "#666" }}>FY24-29</td>
-                        </tr>
-                        {details.funding &&
-                          details.funding.data.map(row => (
-                            <tr
-                              className="table-data-rows"
-                              key={row[0] + row[1]}
-                            >
-                              <td colSpan={1}>{row[0]}</td>
-                              <td>{row[1]}</td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle
-                                }}
-                              >
-                                ${row[2]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle
-                                }}
-                              >
-                                ${row[3]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle
-                                }}
-                              >
-                                ${row[4]}
-                              </td>
-                              <td
-                                style={{
-                                  background: colorScheme.middle
-                                }}
-                              >
-                                ${row[5]}
-                              </td>
-                              <td>${row[6]}</td>
-                            </tr>
-                          ))}
-                        <tr id="program-year-totals">
-                          <td colSpan={2} style={{ fontWeight: "700" }}>
-                            Program Year Totals (in Millions):
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[0]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[1]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[2]}
-                          </td>
-                          <td
-                            style={{
-                              background: colorScheme.darkest,
-                              fontWeight: "700"
-                            }}
-                          >
-                            {funding[3]}
-                          </td>
-                          <td />
-                        </tr>
-                        <tr style={{ fontWeight: "700" }} id="funding-totals">
-                          <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
-                          <td>{funding[4]}</td>
-                          <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
-                          <td>{funding[5]}</td>
-                        </tr>
+                      <tbody>
+                        {details.milestones.data.map(row => (
+                          <tr className="table-data-rows" key={row.join()}>
+                            <td>{row[0]}</td>
+                            <td>{row[1]}</td>
+                            <td>{row[2]}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
-                  </div>
-
-                  <div
-                    id="Milestones"
-                    className="table-wrapper hidden"
-                    ref={e => (this.milestones = e)}
-                  >
-                    {details.milestones.data.length ? (
-                      <table className="funding-and-awards-table">
-                        <thead>
-                          <tr>
-                            <th style={{ background: "#333" }}>Milestone</th>
-
-                            <th style={{ background: "#333" }}>
-                              Estimated Date
-                            </th>
-
-                            <th style={{ background: "#333" }}>Actual Date</th>
-                          </tr>
-                        </thead>
-                        <tbody style={{ background: colorScheme.lightest }}>
-                          {details.milestones.data.map(row => (
-                            <tr className="table-data-rows" key={row.join()}>
-                              <td>{row[0]}</td>
-                              <td>{row[1]}</td>
-                              <td>{row[2]}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    ) : (
-                      <h3 id="noMilestones">
-                        No milestones are available for this project.
-                      </h3>
-                    )}
-                  </div>
-                </section>
-              </div>
+                  ) : (
+                    <h3 id="noMilestones">
+                      No milestones are available for this project.
+                    </h3>
+                  )}
+                </div>
+              </section>
             </div>
             {/* <ReadOnlyComments
               colorScheme={colorScheme}
