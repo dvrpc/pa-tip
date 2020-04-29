@@ -1,57 +1,77 @@
 /* General Purpose Targetting */
-#expanded{
+#project{
   background-color: #666666;
-  color: #fff;
-  line-height: 1.7;
+  color: #f7f7f7;
+  line-height: 1.6;
 }
 .hidden {
   position: absolute;
   top: -9999px;
   left: -9999px;
 }
-.expanded-h2 {
-  text-align: center;
-  font-weight: 400;
-  min-height: 5vh;
-  background: #333333;
-  padding: 2%;
+.project-content{
+  padding: 2% 4%;
+}
+.vr{
+  height: 40px;
 }
 
-/*Paragraph and Title*/
+
+/* Nav and Streetview */
 #content-mini-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2%;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1rem;
+  text-decoration: underline;
 }
 #content-mini-nav p{
   cursor: pointer;
 }
 #placeholder {
   width: 100%;
-  height: 250px;
+  height: 190px;
   background: #fff;
 }
-#expanded-project-description {
-  padding: 2% 4%;
+
+
+/*Paragraph and Title*/
+#project-title{
+  background-color: #333;
+  color: #fff;
+  padding: 9px 5px;
+  font-weight: 500;
+  text-align: center;
+}
+#project-description {
   background: #666666;
   font-size: 1rem;
 }
-#expanded-project-description p {
+#project-description p {
   margin-bottom: 2%;
+}
+
+/* Separator */
+#project-hr{
+  margin: 3% auto 5% auto;
+  color: #f7f7f7;
+  width: 92%;
+  border-radius: 50%;
 }
 
 /* Data Tables Tabs */
 .tabs {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 }
 .tab-buttons {
-  width: 50%;
-  padding: 3%;
+  width: 40%;
+  padding: 12px 0;
   border: none;
+  border-radius: 6px;
   color: #ffffff;
   cursor: pointer;
   font-size: 1.1rem;
@@ -62,6 +82,7 @@
   font-weight: 900;
   background-color: #666;
   text-decoration: none;
+  cursor: auto;
 }
 .tab-buttons:focus {
   outline: none;
@@ -84,17 +105,17 @@
   margin: 2% 0;
 }
 .funding-and-award-table tbody{
-  border-top: 4px solid white;
-  border-bottom: 4px solid white;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
 }
 .funding-and-awards-table tr {
   width: 100%;
-  border-bottom: 4px solid white;
+  border-bottom: 3px solid white;
   display: table;
   table-layout: fixed;
 }
 .funding-and-awards-table td {
-  padding: 15px 0;
+  padding: 6px 0;
 }
 .table-links{
   color: #fff;
@@ -112,14 +133,15 @@
 
 
 /*Loading Styles */
-#loadingExpanded {
+#loadingProject {
   display: block;
   margin: 0 auto;
   margin-top: 20%;
 }
 #loadingBackground {
   text-align: center;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: linear-gradient(to bottom, white 2%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0.2));
 }

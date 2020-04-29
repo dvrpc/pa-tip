@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "./Expanded.css";
-import Navbar from "../navbar/Navbar.js";
+import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
 // @ADD back when commenting period is over
 //import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import { getFullTIP, hydrateGeometry } from "../../redux/reducers/getTIPInfo";
-import { getSpecificComment } from "../../redux/reducers/commentsReducer";
+// import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "./switchTabs.js";
@@ -16,12 +15,12 @@ import { getTotals } from "./calculateFundingTotals.js";
 import cat from "./cat.gif";
 import noStreetview from "./noStreetview.jpg";
 
-class Expanded extends Component {
+class Project extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      params: this.props.match.params.id
+      //params: this.props.match.params.id
     };
 
     this.timeoutID = null;
@@ -42,31 +41,35 @@ class Expanded extends Component {
     );
   };
 
-  componentDidMount() {
-    this.props.hydrateGeometry(this.state.params);
-    this.props.getFullTIP(this.state.params);
-    this.props.getComments(this.state.params);
-  }
+  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
-    const oldGeom = prevProps.geometry;
-    const newGeom = this.props.geometry;
+    const mpms = this.props.mpms;
 
-    // generate streetview if the project has geometry
-    if (newGeom && newGeom.features.length) {
-      const newCoords = newGeom.features[0].geometry.coordinates;
-      if (!oldGeom) {
-        this.generateStreetview(newCoords);
-      } else {
-        const oldCoords = oldGeom.features[0].geometry.coordinates;
-        if (newCoords[0] !== oldCoords[0]) {
-          this.generateStreetview(newCoords);
-        }
-      }
-    }
+    // this.props.getComments(mpms);
+    this.props.getFullTIP(mpms);
+
+    // coinstar
+    // this.props.hydrateGeometry(mpms);
+
+    // const oldGeom = prevProps.geometry;
+    // const newGeom = this.props.geometry;
+
+    // // generate streetview if the project has geometry
+    // if (newGeom && newGeom.features.length) {
+    //   const newCoords = newGeom.features[0].geometry.coordinates;
+    //   if (!oldGeom) {
+    //     this.generateStreetview(newCoords);
+    //   } else {
+    //     const oldCoords = oldGeom.features[0].geometry.coordinates;
+    //     if (newCoords[0] !== oldCoords[0]) {
+    //       this.generateStreetview(newCoords);
+    //     }
+    //   }
+    // }
   }
 
-  // clear old project data (and timeout, if necessary) from the store to prevent expanded.js from pulling old information while fetching a new page
+  // clear old project data (and timeout, if necessary) from the store to prevent Project.js from pulling old information while fetching a new page
   componentWillUnmount() {
     this.props.hydrateGeometry(null);
     this.props.getFullTIP(null);
@@ -76,7 +79,6 @@ class Expanded extends Component {
   render() {
     let details;
     let colorScheme;
-    let navBackground = {};
     let toReturn;
     let funding;
     let loaded = false;
@@ -101,9 +103,6 @@ class Expanded extends Component {
         details = this.props.details;
         funding = getTotals(details.funding.data);
         colorScheme = colors[details.category] || colors["Default"];
-        navBackground = {
-          background: `linear-gradient(to right, white 35%, ${colorScheme.middle} 65%, ${colorScheme.darkest})`
-        };
         loaded = true;
       }
     }
@@ -113,43 +112,41 @@ class Expanded extends Component {
           <div>
             <PrintPage details={details} totals={funding} id="print-mount" />
 
-            <Navbar backgroundGradient={navBackground} id="expandedNav" />
+            <div id="project">
+              <div
+                id="content-mini-nav"
+                style={{ background: colorScheme.darkest }}
+              >
+                <p onClick={this.backToResults}>
+                  <em>back</em>
+                </p>
+                <p onClick={window.print}>
+                  <em>print</em>
+                </p>
+              </div>
 
-            <div id="expanded">
-              <section className="expanded-content-section">
+              <figure>
                 <div
-                  id="content-mini-nav"
-                  style={{ background: colorScheme.darkest }}
-                >
-                  <p onClick={this.backToResults}>
-                    <em>back</em>
-                  </p>
-                  <p onClick={window.print}>
-                    <em>print</em>
-                  </p>
-                </div>
+                  id="placeholder"
+                  ref={x => (this.streetview = x)}
+                  style={{
+                    backgroundImage: `url(${noStreetview})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                  }}
+                />
+              </figure>
 
-                <figure>
-                  <div
-                    id="placeholder"
-                    ref={x => (this.streetview = x)}
-                    style={{
-                      backgroundImage: `url(${noStreetview})`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center"
-                    }}
-                  />
-                </figure>
-
-                <h2 className=" expanded-h2">
+              <section className="project-content-section">
+                <h2 id="project-title">
                   {details.road_name ? details.road_name : "Project Title"}
                 </h2>
 
-                <div id="expanded-project-description">
+                <div id="project-description" className="project-content">
                   <p>
                     {details.description
                       ? details.description
-                      : "Project Description"}
+                      : "project Description"}
                   </p>
                   {details.id && (
                     <p>
@@ -178,8 +175,10 @@ class Expanded extends Component {
                   )}
                 </div>
               </section>
-              <section className="expanded-content-section">
-                <h2 className="expanded-h2">Funding and Status Tables</h2>
+
+              <hr id="project-hr" />
+
+              <section className="project-content">
                 <div className="tabs">
                   <button
                     className="tab-buttons active"
@@ -188,6 +187,10 @@ class Expanded extends Component {
                   >
                     Funding
                   </button>
+                  <span
+                    className="vr"
+                    style={{ border: `1px dotted ${colorScheme.darkest}` }}
+                  ></span>
                   <button
                     className="tab-buttons"
                     onClick={e => switchTabs(this, e)}
@@ -205,16 +208,16 @@ class Expanded extends Component {
                   <table className="funding-and-awards-table">
                     <thead>
                       <tr>
-                        <th colSpan={2} style={{ background: "#666" }} />
+                        <th colSpan={2} />
                         <th colSpan={4}>
                           <h3>PA FY2020 TIP Program Years (in Millions)</h3>
                         </th>
-                        <th colSpan={1} style={{ background: "#666" }} />
+                        <th colSpan={1} />
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td colSpan={1} style={{ background: "#666" }}>
+                        <td colSpan={1}>
                           {/* @UPDATE: find equivalent PA TIP pdf */}
                           <a
                             className="table-links"
@@ -223,7 +226,7 @@ class Expanded extends Component {
                             Phase
                           </a>
                         </td>
-                        <td style={{ background: "#666" }}>
+                        <td>
                           {/* @UPDATE: find equivalent PA TIP pdf */}
                           <a
                             className="table-links"
@@ -232,11 +235,19 @@ class Expanded extends Component {
                             Fund
                           </a>
                         </td>
-                        <td style={{ background: colorScheme.middle }}>FY20</td>
-                        <td style={{ background: colorScheme.middle }}>FY21</td>
-                        <td style={{ background: colorScheme.middle }}>FY22</td>
-                        <td style={{ background: colorScheme.middle }}>FY23</td>
-                        <td style={{ background: "#666" }}>FY24-29</td>
+                        <td style={{ background: colorScheme.darkest }}>
+                          FY20
+                        </td>
+                        <td style={{ background: colorScheme.darkest }}>
+                          FY21
+                        </td>
+                        <td style={{ background: colorScheme.darkest }}>
+                          FY22
+                        </td>
+                        <td style={{ background: colorScheme.darkest }}>
+                          FY23
+                        </td>
+                        <td>FY24-29</td>
                       </tr>
                       {details.funding &&
                         details.funding.data.map(row => (
@@ -259,12 +270,10 @@ class Expanded extends Component {
                           </tr>
                         ))}
                       <tr>
-                        <td colSpan={2} style={{ fontWeight: "700" }}>
-                          Program Year Totals (in Millions):
-                        </td>
+                        <td colSpan={2}>Program Year Totals (in Millions):</td>
                         <td
                           style={{
-                            background: colorScheme.darkest,
+                            background: colorScheme.middle,
                             fontWeight: "700"
                           }}
                         >
@@ -272,7 +281,7 @@ class Expanded extends Component {
                         </td>
                         <td
                           style={{
-                            background: colorScheme.darkest,
+                            background: colorScheme.middle,
                             fontWeight: "700"
                           }}
                         >
@@ -280,7 +289,7 @@ class Expanded extends Component {
                         </td>
                         <td
                           style={{
-                            background: colorScheme.darkest,
+                            background: colorScheme.middle,
                             fontWeight: "700"
                           }}
                         >
@@ -288,7 +297,7 @@ class Expanded extends Component {
                         </td>
                         <td
                           style={{
-                            background: colorScheme.darkest,
+                            background: colorScheme.middle,
                             fontWeight: "700"
                           }}
                         >
@@ -298,8 +307,7 @@ class Expanded extends Component {
                       </tr>
                       <tr
                         style={{
-                          fontWeight: "700",
-                          backgroundColor: colorScheme.lightest
+                          fontWeight: "700"
                         }}
                         id="funding-totals"
                       >
@@ -359,10 +367,7 @@ class Expanded extends Component {
         ))
       : (toReturn = (
           <div id="loadingBackground">
-            <Navbar
-              backgroundGradient={`background: linear-gradient(to right, white 35%, grey 65%, black)`}
-            />
-            <img id="loadingExpanded" src={cat} alt="loading gif" />
+            <img id="loadingProject" src={cat} alt="loading gif" />
             <h2>Loading...</h2>
           </div>
         ));
@@ -374,17 +379,17 @@ class Expanded extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    geometry: state.getTIP.geometry,
-    comments: state.getComments
+    geometry: state.getTIP.geometry
+    // comments: state.getComments
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    hydrateGeometry: id => dispatch(hydrateGeometry(id)),
-    getComments: id => dispatch(getSpecificComment(id))
+    hydrateGeometry: id => dispatch(hydrateGeometry(id))
+    // getComments: id => dispatch(getSpecificComment(id))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expanded);
+export default connect(mapStateToProps, mapDispatchToProps)(Project);

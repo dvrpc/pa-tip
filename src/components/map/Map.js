@@ -244,7 +244,7 @@ class MapComponent extends Component {
       this.map.setZoom(11);
     }
 
-    // this was meant as a way to save state when navigating to/from expanded which is no longer necessary
+    // this was meant as a way to save state when navigating to/from Project which is no longer necessary
     // @UPDATE: delete this and its reducer
     const position =
       this.props.position && this.props.position.center

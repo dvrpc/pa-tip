@@ -4,5 +4,5 @@ export const clickTile = (instance, e) => {
 
   // render for keywords or geocoded response format
   const id = data.id || data.MPMS_ID;
-  instance.props.history.push(`/expanded/${id}`);
+  instance.props.history.push(`/Project/${id}`);
 };

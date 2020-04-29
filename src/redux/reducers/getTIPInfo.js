@@ -66,7 +66,7 @@ const getTIPProjects = input =>
 
       // get id, name and set cateogry type for projects
       let mpmsAndNames = features.map(project => {
-        return { name: project.road_name, id: project.id, type: "expanded" };
+        return { name: project.road_name, id: project.id, type: "Project" };
       });
 
       // trim response to the first 5 entries & return
@@ -127,7 +127,7 @@ export const getTIPByMapBounds = features => dispatch => {
 
 // pull project information from URL for link sharing
 export const hydrateGeometry = id => dispatch => {
-  // handle resetting of the expanded.js props to solve old components rendering while a new one loads
+  // handle resetting of the Project.js props to solve old components rendering while a new one loads
   if (id === null) return dispatch(hydrate_geometry(null));
 
   fetch(
@@ -145,7 +145,7 @@ export const hydrateGeometry = id => dispatch => {
 
 // gets the full information for a project to display in the modal when a tile is clicked
 export const getFullTIP = id => dispatch => {
-  // handle resetting of the expanded.js props to solve old components rendering while a new one loads
+  // handle resetting of the Project.js props to solve old components rendering while a new one loads
   if (id === null) return dispatch(get_full_tip(null));
 
   fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`)

@@ -35,7 +35,7 @@ const transformKeywordSuggestions = data => {
     options = data.map(project => ({
       label: `${project.id}: ${project.name}`,
       value: `${project.id}`,
-      type: "expanded"
+      type: "Project"
     }));
   } else {
     options = [];

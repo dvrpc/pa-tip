@@ -17,7 +17,7 @@ class AppContainer extends Component {
         <Navbar backgroundGradient={background} />
         <div className="appContainer">
           <MapComponentWithRouter />
-          <TilesContainerWithRouter />
+          <TilesContainerWithRouter params={this.props.match.params} />
         </div>
       </div>
     );

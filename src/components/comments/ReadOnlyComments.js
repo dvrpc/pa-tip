@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "../comments/Comments.css";
 
-// This component will replace the comment form in expanded.js once the public comment period is over
+// This component will replace the comment form in Project.js once the public comment period is over
 class ReadOnlyComments extends Component {
   render() {
     const { comments } = this.props;
