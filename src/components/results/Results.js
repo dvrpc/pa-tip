@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import "./Results.css";
 
 import Tile from "../tiles/Tiles.js";
 import ListItem from "../listItems/listItem.js";
-import { filterByCategory } from "./filterByCategory.js";
 import { setFilter } from "../../redux/reducers/getTIPInfo.js";
 
 class Results extends Component {
@@ -19,16 +19,16 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    // const { category } = this.props;
-    // if (typeof category === "undefined") {
-    //   category = "All Categories";
-    // }
-    // if (category !== "All Categories") {
-    //   this.setState({
-    //     filtered: true,
-    //     categoryToFilter: category
-    //   });
-    // }
+    let { category } = this.props;
+    if (typeof category === "undefined") {
+      category = "All Categories";
+    }
+    if (category !== "All Categories") {
+      this.setState({
+        filtered: true,
+        categoryToFilter: category
+      });
+    }
   }
 
   showList = e => {
@@ -53,21 +53,35 @@ class Results extends Component {
     this.setState({ showList: false });
   };
 
-  componentDidUpdate() {}
+  filterByCategory = e => {
+    // get a handle on the selected option
+    const selector = this.categorySelector;
+    const categoryToFilter = selector.options[selector.selectedIndex].text;
+
+    // apply or remove filter depending on the selected option
+    if (categoryToFilter === "All Categories") {
+      this.setState({ filtered: false });
+    } else {
+      this.setState({
+        filtered: true,
+        categoryToFilter
+      });
+    }
+    this.props.setFilter(categoryToFilter);
+  };
 
   render() {
-    const projects = {};
-    //     let projects =
-    //     this.props.projects && this.props.projects.features
-    //       ? this.props.projects.features
-    //       : [];
+    let projects =
+      this.props.projects && this.props.projects.features
+        ? this.props.projects.features
+        : [];
 
-    //   // determine whether to display all projects, or filtered projects
-    //   if (this.state.filtered) {
-    //     projects = projects.filter(
-    //       project => project.DESCRIPTIO === this.state.categoryToFilter
-    //     );
-    //   }
+    // determine whether to display all projects, or filtered projects
+    if (this.state.filtered) {
+      projects = projects.filter(
+        project => project.DESCRIPTIO === this.state.categoryToFilter
+      );
+    }
 
     return (
       <div>
@@ -75,7 +89,7 @@ class Results extends Component {
           <select
             id="selectedCategory"
             name="category"
-            onChange={e => filterByCategory(this, e)}
+            onChange={e => this.filterByCategory(e)}
             ref={e => (this.categorySelector = e)}
             value={this.props.category}
             defaultValue="All Categories"
@@ -166,4 +180,16 @@ class Results extends Component {
   }
 }
 
-export default Results;
+const mapStateToProps = state => {
+  return {
+    projects: state.getTIP.projects,
+    category: state.getTIP.category
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setFilter: filter => dispatch(setFilter(filter))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

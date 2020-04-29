@@ -5,7 +5,7 @@
     width: 29%;
     margin: 2%;
     overflow: hidden;
-    border-radius: 10px 10px 5px 5px;
+    border-radius: 6px;
     cursor: pointer;
 }
 .tile:hover{

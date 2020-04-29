@@ -13,13 +13,15 @@ export const updateBounds = mapReference => {
 
   rendered.forEach(item => {
     if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {
-      renderedProjects.allMPMS.push(item.properties.MPMS_ID);
+      const props = item.properties;
 
-      // add descriptive info for tiles + lat/lng for the tile hover + map popup link
+      // extract features from rendered projects
+      renderedProjects.allMPMS.push(props.MPMS_ID);
       renderedProjects.features.push({
-        MPMS_ID: item.properties.MPMS_ID,
-        DESCRIPTIO: item.properties.DESCRIPTIO,
-        ROAD_NAME: item.properties.ROAD_NAME,
+        MPMS_ID: props.MPMS_ID,
+        DESCRIPTIO: props.DESCRIPTIO,
+        ROAD_NAME: props.ROAD_NAME,
+        CTY: props.CTY,
         LATITUDE:
           item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[1]
@@ -28,7 +30,7 @@ export const updateBounds = mapReference => {
           item.layer.id === "pa-tip-points"
             ? item.geometry.coordinates[0]
             : item.geometry.coordinates[1][0],
-        mapbox_id: `${item.properties.MPMS_ID}_${item._vectorTileFeature._geometry}`
+        mapbox_id: `${props.MPMS_ID}_${item._vectorTileFeature._geometry}`
       });
     }
   });

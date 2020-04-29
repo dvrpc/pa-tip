@@ -55,7 +55,7 @@
 
 /* Separator */
 #project-hr{
-  margin: 3% auto 5% auto;
+  margin: 2% auto 3% auto;
   color: #f7f7f7;
   width: 92%;
   border-radius: 50%;
@@ -77,12 +77,14 @@
   font-size: 1.1rem;
   background-color: #9c9c9c;
   text-decoration: underline;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
 }
 .active {
   font-weight: 900;
   background-color: #666;
   text-decoration: none;
   cursor: auto;
+  box-shadow: none;
 }
 .tab-buttons:focus {
   outline: none;
@@ -102,7 +104,7 @@
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  margin: 2% 0;
+  margin: 3% 0;
 }
 .funding-and-award-table tbody{
   border-top: 3px solid white;
