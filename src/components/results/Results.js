@@ -84,7 +84,7 @@ class Results extends Component {
     }
 
     return (
-      <div>
+      <div id="results">
         <div className="header">
           <select
             id="selectedCategory"
@@ -151,6 +151,7 @@ class Results extends Component {
             /<h2 onClick={this.showTiles}>Tiles</h2>
           </span>
         </div>
+
         {projects.length ? (
           this.state.showList ? (
             projects.map(feature => (
@@ -161,12 +162,14 @@ class Results extends Component {
               />
             ))
           ) : (
-            projects.map(feature => (
-              <Tile
-                data={feature.properties || feature}
-                key={feature.mapbox_id}
-              />
-            ))
+            <div id="tiles-wrapper">
+              {projects.map(feature => (
+                <Tile
+                  data={feature.properties || feature}
+                  key={feature.mapbox_id}
+                />
+              ))}
+            </div>
           )
         ) : (
           <p id="noResults">

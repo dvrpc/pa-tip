@@ -1,3 +1,7 @@
+
+#results{
+    width: 100%;
+}
 .header{
     padding: 3%;
     display: flex;
@@ -39,6 +43,13 @@
 .vr{
     border: thin solid #ffffff;
     margin: 0 3%;
+}
+
+/* Tiles */
+#tiles-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
