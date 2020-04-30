@@ -170,6 +170,9 @@ class MapComponent extends Component {
 
     this.map.on("load", () => {
       if (this.props.keywordProjects) {
+        // @UPDATE: this looks ok but there's still an initial render of all projects that throws off the loading/no results handling
+        // maybe move it to *before* map.on('load') or into didUpdate
+        // in addition to ^, try initializing the map with the default state key filter i.e. an empty map to start until it gets populated...
         let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
         this.setState({ keyFilter });
       }

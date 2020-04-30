@@ -1,12 +1,11 @@
 .contentContainer{
     background: #666666;
     overflow-x: hidden;
-	width: 43%;
+	width: 42.5%;
 	display: flex;
     flex-wrap: wrap;
 	overflow-y: scroll;
 	justify-content: flex-start;
-    margin-left: 1vh;
 }
 
 
