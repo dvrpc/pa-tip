@@ -7,7 +7,6 @@ import {
   getTIPByKeywords,
   getTIPByMapBounds,
   setMapCenter,
-  setMapState,
   setBounds
 } from "../../redux/reducers/getTIPInfo";
 
@@ -38,6 +37,7 @@ class MapComponent extends Component {
       tilePopup: {}
     };
 
+    // @TODO: replace this with the mapbox geocoder
     this.Places = new window.google.maps.places.PlacesService(
       document.createElement("div")
     );
@@ -138,6 +138,7 @@ class MapComponent extends Component {
 
     switch (type) {
       case "location":
+        // @TODO: replace this with the mapbox geocoder
         this.Places.getDetails(
           { placeId: value, fields: ["geometry.location"] },
           results => {
@@ -251,13 +252,6 @@ class MapComponent extends Component {
       this.map.setCenter([lng, lat]);
       this.map.setZoom(11);
     }
-
-    // this was meant as a way to save state when navigating to/from Project which is no longer necessary
-    // @UPDATE: delete this and its reducer
-    const position =
-      this.props.position && this.props.position.center
-        ? { center: this.props.position.center, zoom: this.props.position.zoom }
-        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
   }
 
   componentWillUnmount() {
@@ -341,8 +335,6 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    // @UPDATE remove
-    position: state.getTIP.position,
     markerFromTiles: state.connectTilesToMap.markerInfo
   };
 };
@@ -352,8 +344,6 @@ const mapDispatchToProps = dispatch => {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
     setMapCenter: latlng => dispatch(setMapCenter(latlng)),
-    // @UPDATE remove
-    setMapState: position => dispatch(setMapState(position)),
     setBounds: bounds => dispatch(setBounds(bounds))
   };
 };

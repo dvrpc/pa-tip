@@ -77,7 +77,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log("projects at results ", this.props.projects);
     let projects = this.props.projects ? this.props.projects.features : null;
 
     // determine whether to display all projects, or filtered projects
