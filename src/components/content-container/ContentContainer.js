@@ -11,7 +11,7 @@ class ContentContainer extends Component {
     super(props);
 
     this.state = {
-      isProject: true,
+      isProject: false,
       params: this.props.match.params,
       mpms: null
     };

@@ -115,20 +115,21 @@ export const getTIPByMapBounds = features => dispatch => {
   dispatch(get_tip_by_map_bounds(features));
 };
 
-// pull project information from URL for link sharing
 export const hydrateGeometry = id => dispatch => {
   // handle resetting of the Project.js props to solve old components rendering while a new one loads
   if (id === null) return dispatch(hydrate_geometry(null));
 
+  console.log("called hydrate geom with ID ", id);
+
   fetch(
     // @TODO: update this
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Pennsylvania_Transportation_Improvement_Program_2019_to_2022/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
+    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=mpms_id=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
   )
     .then(response => {
       if (response.ok)
-        response
-          .json()
-          .then(geoPromise => dispatch(hydrate_geometry(geoPromise)));
+        response.json().then(geoPromise => {
+          dispatch(hydrate_geometry(geoPromise));
+        });
     })
     .catch(error => console.error(error));
 };

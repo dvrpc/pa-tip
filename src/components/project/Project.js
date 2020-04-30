@@ -20,13 +20,16 @@ class Project extends Component {
     super(props);
 
     this.state = {
-      //params: this.props.match.params.id
+      geom: false
     };
 
     this.timeoutID = null;
   }
 
-  backToResults = () => this.props.history.goBack();
+  backToResults = () => {
+    console.log("props at back button ", this.props);
+    //this.props.history.goBack();
+  };
 
   generateStreetview = geom => {
     this.streetview = new window.google.maps.StreetViewPanorama(
@@ -41,35 +44,25 @@ class Project extends Component {
     );
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
     const mpms = this.props.mpms;
-
-    // this.props.getComments(mpms);
+    this.props.hydrateGeometry(mpms);
     this.props.getFullTIP(mpms);
-
-    // coinstar
-    // this.props.hydrateGeometry(mpms);
-
-    // const oldGeom = prevProps.geometry;
-    // const newGeom = this.props.geometry;
-
-    // // generate streetview if the project has geometry
-    // if (newGeom && newGeom.features.length) {
-    //   const newCoords = newGeom.features[0].geometry.coordinates;
-    //   if (!oldGeom) {
-    //     this.generateStreetview(newCoords);
-    //   } else {
-    //     const oldCoords = oldGeom.features[0].geometry.coordinates;
-    //     if (newCoords[0] !== oldCoords[0]) {
-    //       this.generateStreetview(newCoords);
-    //     }
-    //   }
-    // }
   }
 
-  // clear old project data (and timeout, if necessary) from the store to prevent Project.js from pulling old information while fetching a new page
+  componentDidUpdate() {
+    const esriGeom = this.props.coords;
+
+    if (!this.state.geom && esriGeom) {
+      const coords = esriGeom.features[0].geometry.coordinates;
+
+      // @ADD: this works but no need to ping streetview servers while developing. Comment back in before build
+      //this.generateStreetview(coords)
+      this.setState({ geom: true });
+    }
+  }
+
+  // clear old project data, geometry and timeout
   componentWillUnmount() {
     this.props.hydrateGeometry(null);
     this.props.getFullTIP(null);
@@ -379,7 +372,7 @@ class Project extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    geometry: state.getTIP.geometry
+    coords: state.getTIP.geometry
     // comments: state.getComments
   };
 };
