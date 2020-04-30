@@ -15,9 +15,11 @@
     font-weight: 400;
     text-align: center;
 }
-#noResults {
-    color: #fff;
-    padding: 0 3%;
+#results-loading{
+    display: block;
+    text-align: center;
+    margin-top: 20%;
+
 }
 #selectedCategory{
     padding: 8px 0;
@@ -43,6 +45,10 @@
 .vr{
     border: thin solid #ffffff;
     margin: 0 3%;
+}
+#no-results {
+    color: #fff;
+    padding: 10% 5%;
 }
 
 /* Tiles */

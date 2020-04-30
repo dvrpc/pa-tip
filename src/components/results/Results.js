@@ -14,7 +14,8 @@ class Results extends Component {
     this.state = {
       filtered: false,
       categoryToFilter: "",
-      showList: true
+      showList: true,
+      loading: true
     };
   }
 
@@ -70,14 +71,17 @@ class Results extends Component {
     this.props.setFilter(categoryToFilter);
   };
 
+  componentDidUpdate() {
+    if (this.state.loading && this.props.projects)
+      this.setState({ loading: false });
+  }
+
   render() {
-    let projects =
-      this.props.projects && this.props.projects.features
-        ? this.props.projects.features
-        : [];
+    console.log("projects at results ", this.props.projects);
+    let projects = this.props.projects ? this.props.projects.features : null;
 
     // determine whether to display all projects, or filtered projects
-    if (this.state.filtered) {
+    if (this.state.filtered && projects) {
       projects = projects.filter(
         project => project.DESCRIPTIO === this.state.categoryToFilter
       );
@@ -152,7 +156,11 @@ class Results extends Component {
           </span>
         </div>
 
-        {projects.length ? (
+        {this.state.loading ? (
+          <div id="results-loading" ref={el => (this.loadingProjects = el)}>
+            LOADING...
+          </div>
+        ) : projects ? (
           this.state.showList ? (
             projects.map(feature => (
               <ListItem
@@ -172,10 +180,10 @@ class Results extends Component {
             </div>
           )
         ) : (
-          <p id="noResults">
+          <p id="no-results">
             Sorry! No projects matched your search criteria. Please try again or
-            contact Rick Murphy at rmurphy@dvrpc.org. <br /> Thank you for using
-            the Draft DVRPC FY2020 TIP for PA.
+            contact Rick Murphy at rmurphy@dvrpc.org. <br />
+            <br /> Thank you for using the Draft DVRPC FY2020 TIP for PA.
           </p>
         )}
       </div>

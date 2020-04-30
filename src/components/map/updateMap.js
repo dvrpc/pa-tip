@@ -2,14 +2,20 @@ import mapboxgl from "mapbox-gl";
 import { colors } from "../../utils/tileGeometryColorType.js";
 
 export const updateBounds = mapReference => {
+  let rendered = mapReference.map.queryRenderedFeatures({
+    layers: ["pa-tip-points", "pa-tip-lines"]
+  });
+
+  // exit & clear store when no projects are rendered
+  if (!rendered.length) {
+    mapReference.props.getTIPByMapBounds(null);
+    return;
+  }
+
   let renderedProjects = {
     allMPMS: [],
     features: []
   };
-
-  let rendered = mapReference.map.queryRenderedFeatures({
-    layers: ["pa-tip-points", "pa-tip-lines"]
-  });
 
   rendered.forEach(item => {
     if (renderedProjects.allMPMS.indexOf(item.properties.MPMS_ID) === -1) {

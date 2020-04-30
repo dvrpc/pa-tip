@@ -136,20 +136,25 @@ class MapComponent extends Component {
     const { type, value } = this.props.match.params;
     let popup;
 
-    if (type === "location") {
-      this.Places.getDetails(
-        { placeId: value, fields: ["geometry.location"] },
-        results => {
-          // we use the store here b/c the query is async
-          this.props.setMapCenter({
-            lng: results.geometry.location.lng(),
-            lat: results.geometry.location.lat()
-          });
-        }
-      );
-    } else {
-      this.props.setBounds([]);
-      this.props.getTIPByKeywords(value);
+    switch (type) {
+      case "location":
+        this.Places.getDetails(
+          { placeId: value, fields: ["geometry.location"] },
+          results => {
+            // we use the store here b/c the query is async
+            this.props.setMapCenter({
+              lng: results.geometry.location.lng(),
+              lat: results.geometry.location.lat()
+            });
+          }
+        );
+        break;
+      case "keyword":
+        this.props.setBounds([]);
+        this.props.getTIPByKeywords(value);
+        break;
+      default:
+        console.log("project case ");
     }
 
     mapboxgl.accessToken =
