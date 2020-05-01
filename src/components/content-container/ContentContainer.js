@@ -36,7 +36,7 @@ class ContentContainer extends Component {
     return (
       <div className="contentContainer">
         {this.state.isProject ? (
-          <Project mpms={this.state.mpms} />
+          <Project mpms={this.state.mpms} history={this.props.history} />
         ) : (
           <Results />
         )}

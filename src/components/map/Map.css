@@ -63,6 +63,9 @@
   border-bottom: 0;
   border-left: 0.3em solid transparent;
 }
+.mapboxgl-ctrl-top-right {
+  top: calc(50% - 60px);
+}
 .layer-menu, .legend-menu {
   display: none;
   border: 0;

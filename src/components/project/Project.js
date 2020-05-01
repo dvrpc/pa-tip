@@ -27,8 +27,17 @@ class Project extends Component {
   }
 
   backToResults = () => {
-    console.log("props at back button ", this.props);
-    //this.props.history.goBack();
+    const hasHistory = this.props.history.length;
+
+    // needs work to figure out if it should go back in history OR back to default map w/all projects...
+    if (hasHistory > 1) {
+      this.props.history.goBack();
+    }
+
+    // @UPDATE:
+    // This needs to:
+    // remove filter from project circle or line segment
+    // zoom out
   };
 
   generateStreetview = geom => {
@@ -85,7 +94,9 @@ class Project extends Component {
           alert(
             `Sorry! Project #${this.state.params} could not be fetched at this time due to ${reason}. Click 'ok' to return to the map.`
           );
-          this.props.history.push("/keyword/tip");
+
+          // @UPDATE: need a catch all keyword route. * crashes the server.
+          this.props.history.push("/keyword/the");
         };
 
         // throw the error alert after 1.2 seconds of delay because immediate feedback from errors is bad ux
@@ -169,9 +180,7 @@ class Project extends Component {
                 </div>
               </section>
 
-              <hr id="project-hr" />
-
-              <section className="project-content">
+              <section id="project-table-section" className="project-content">
                 <div className="tabs">
                   <button
                     className="tab-buttons active"
@@ -180,10 +189,6 @@ class Project extends Component {
                   >
                     Funding
                   </button>
-                  <span
-                    className="vr"
-                    style={{ border: `1px dotted ${colorScheme.darkest}` }}
-                  ></span>
                   <button
                     className="tab-buttons"
                     onClick={e => switchTabs(this, e)}
@@ -208,7 +213,12 @@ class Project extends Component {
                         <th colSpan={1} />
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody
+                      style={{
+                        borderTop: `3px solid ${colorScheme.darkest}`,
+                        borderBottom: `3px solid ${colorScheme.darkest}`
+                      }}
+                    >
                       <tr>
                         <td colSpan={1}>
                           {/* @UPDATE: find equivalent PA TIP pdf */}
@@ -228,18 +238,10 @@ class Project extends Component {
                             Fund
                           </a>
                         </td>
-                        <td style={{ background: colorScheme.darkest }}>
-                          FY20
-                        </td>
-                        <td style={{ background: colorScheme.darkest }}>
-                          FY21
-                        </td>
-                        <td style={{ background: colorScheme.darkest }}>
-                          FY22
-                        </td>
-                        <td style={{ background: colorScheme.darkest }}>
-                          FY23
-                        </td>
+                        <td style={{ fontWeight: "700" }}>FY20</td>
+                        <td style={{ fontWeight: "700" }}>FY21</td>
+                        <td style={{ fontWeight: "700" }}>FY22</td>
+                        <td style={{ fontWeight: "700" }}>FY23</td>
                         <td>FY24-29</td>
                       </tr>
                       {details.funding &&
@@ -247,63 +249,22 @@ class Project extends Component {
                           <tr className="table-data-rows" key={row[0] + row[1]}>
                             <td colSpan={1}>{row[0]}</td>
                             <td>{row[1]}</td>
-                            <td style={{ background: colorScheme.middle }}>
-                              ${row[2]}
-                            </td>
-                            <td style={{ background: colorScheme.middle }}>
-                              ${row[3]}
-                            </td>
-                            <td style={{ background: colorScheme.middle }}>
-                              ${row[4]}
-                            </td>
-                            <td style={{ background: colorScheme.middle }}>
-                              ${row[5]}
-                            </td>
+                            <td>${row[2]}</td>
+                            <td>${row[3]}</td>
+                            <td>${row[4]}</td>
+                            <td>${row[5]}</td>
                             <td>${row[6]}</td>
                           </tr>
                         ))}
                       <tr>
                         <td colSpan={2}>Program Year Totals (in Millions):</td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {funding[0]}
-                        </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {funding[1]}
-                        </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {funding[2]}
-                        </td>
-                        <td
-                          style={{
-                            background: colorScheme.middle,
-                            fontWeight: "700"
-                          }}
-                        >
-                          {funding[3]}
-                        </td>
+                        <td style={{ fontWeight: "700" }}>{funding[0]}</td>
+                        <td style={{ fontWeight: "700" }}>{funding[1]}</td>
+                        <td style={{ fontWeight: "700" }}>{funding[2]}</td>
+                        <td style={{ fontWeight: "700" }}>{funding[3]}</td>
                         <td />
                       </tr>
-                      <tr
-                        style={{
-                          fontWeight: "700"
-                        }}
-                        id="funding-totals"
-                      >
+                      <tr id="funding-totals" style={{ fontWeight: "700" }}>
                         <td colSpan={2}>Total FY20-23 Cost (in Millions):</td>
                         <td>{funding[4]}</td>
                         <td colSpan={2}>Total FY20-29 Cost (in Millions):</td>
@@ -333,7 +294,12 @@ class Project extends Component {
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody
+                        style={{
+                          borderTop: `3px solid ${colorScheme.darkest}`,
+                          borderBottom: `3px solid ${colorScheme.darkest}`
+                        }}
+                      >
                         {details.milestones.data.map(row => (
                           <tr className="table-data-rows" key={row.join()}>
                             <td>{row[0]}</td>

@@ -179,7 +179,7 @@ class MapComponent extends Component {
       }
 
       let zoom = new mapboxgl.NavigationControl();
-      this.map.addControl(zoom, "bottom-left");
+      this.map.addControl(zoom, "top-right");
     });
 
     this.map.on("click", "pa-tip-points", e => {

@@ -47,6 +47,7 @@ const transformKeywordSuggestions = data => {
   };
 };
 
+// @TODO: change default text from Select to Seach for TIP Projects
 class Search extends Component {
   constructor(props) {
     super(props);
