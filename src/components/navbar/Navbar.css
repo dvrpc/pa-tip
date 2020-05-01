@@ -15,19 +15,22 @@
   align-items: center;
   width: 50%;
 }
+#tip-logo-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pa-text{
+  font-size: 1.1rem;
+}
 #TIPlogo{
-  width: 74px;
+  width: 70px;
+  margin-right: 5%;
 }
 .nav-vr{
   border: 1px solid #333333;
-  margin: 0 3%;
-  height: 6vh;
-}
-#draft-text {
-  font-size: 1.3em;
-  font-weight: 700;
-  color: #333333;
-  margin-left: 3%;
+  margin: 0 2%;
+  height: 5vh;
 }
 #nav-search-form {
   margin-right: 1%;

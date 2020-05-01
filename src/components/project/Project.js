@@ -62,8 +62,14 @@ class Project extends Component {
   componentDidUpdate() {
     const esriGeom = this.props.coords;
 
+    // check for response
     if (!this.state.geom && esriGeom) {
-      const coords = esriGeom.features[0].geometry.coordinates;
+      const coords = esriGeom.features.length
+        ? esriGeom.features[0].geometry.coordinates
+        : null;
+
+      // check for non empty response
+      if (!coords) return;
 
       // @ADD: this works but no need to ping streetview servers while developing. Comment back in before build
       //this.generateStreetview(coords)
