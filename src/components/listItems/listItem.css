@@ -15,6 +15,7 @@
     object-position: -1000px -1000px;
 }
 .list-text{
+    width: 75%;
     display: flex;
     flex-direction: column;
     padding: 0 3%;

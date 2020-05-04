@@ -223,7 +223,7 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // handle tileContainer popups
+    // popups
     const newTileHover = this.props.markerFromTiles;
     const hasPopup = Object.keys(this.state.tilePopup).length;
 
@@ -242,16 +242,18 @@ class MapComponent extends Component {
       this.setState({ tilePopup });
     } else if (hasPopup) this.state.tilePopup.remove();
 
-    // handle categories
+    // categories
     if (this.props.category !== prevProps.category)
       this.buildCategoryFilter(this.props.category);
 
-    // update map center
+    // location search
     if (this.props.center !== prevProps.center) {
       const { lng, lat } = this.props.center;
       this.map.setCenter([lng, lat]);
       this.map.setZoom(11);
     }
+
+    // project view
   }
 
   componentWillUnmount() {
@@ -259,6 +261,7 @@ class MapComponent extends Component {
   }
 
   render() {
+    // @UPDATE: move this to didUpdate so that it doesn't run for project views
     if (this.map) {
       let lines = this.map.getLayer("pa-tip-lines");
       let points = this.map.getLayer("pa-tip-points");

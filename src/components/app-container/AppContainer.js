@@ -14,14 +14,13 @@ class AppContainer extends Component {
     // unless the bool is present, all map does is receive props and set filters
 
     const ContentContainerWithRouter = withRouter(ContentContainer);
-    const background =
-      "background: linear-gradient( to right, white 35%, #E8E8E8 45%, #666)";
     return (
       <div className="overflow-wrap">
-        <Navbar backgroundGradient={background} />
+        <Navbar />
+
         <div className="appContainer">
-          {/* <MapComponentWithRouter /> */}
           <MapComponent />
+
           <ContentContainerWithRouter params={this.props.match.params} />
         </div>
       </div>

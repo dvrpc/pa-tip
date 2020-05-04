@@ -116,10 +116,8 @@ export const getTIPByMapBounds = features => dispatch => {
 };
 
 export const hydrateGeometry = id => dispatch => {
-  // handle resetting of the Project.js props to solve old components rendering while a new one loads
+  // clear geom when Project unMounts
   if (id === null) return dispatch(hydrate_geometry(null));
-
-  console.log("called hydrate geom with ID ", id);
 
   fetch(
     // @TODO: update this

@@ -113,6 +113,9 @@
   display: table;
   table-layout: fixed;
 }
+.funding-and-awards-table tr:last-child {
+  border-bottom: none;
+}
 .funding-and-awards-table td {
   padding: 8px 0;
 }
