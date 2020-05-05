@@ -6,8 +6,7 @@ import { withRouter } from "react-router-dom";
 import {
   getTIPByKeywords,
   getTIPByMapBounds,
-  setMapCenter,
-  setBounds
+  setMapCenter
 } from "../../redux/reducers/getTIPInfo";
 
 import { updateBounds, showPopup } from "./updateMap";
@@ -151,7 +150,7 @@ class MapComponent extends Component {
         );
         break;
       case "keyword":
-        this.props.setBounds([]);
+        //this.props.setBounds([]);
         this.props.getTIPByKeywords(value);
         break;
       default:
@@ -346,8 +345,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
-    setBounds: bounds => dispatch(setBounds(bounds))
+    setMapCenter: latlng => dispatch(setMapCenter(latlng))
   };
 };
 

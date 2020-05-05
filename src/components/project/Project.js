@@ -37,7 +37,8 @@ class Project extends Component {
     // @UPDATE:
     // This needs to:
     // remove filter from project circle or line segment
-    // zoom out
+    // zoom out back to default zoom level (11?)
+    // clear the position reducer
   };
 
   generateStreetview = geom => {
