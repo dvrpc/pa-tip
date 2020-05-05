@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { clickTile } from "../../utils/clickTile.js";
+import "./listItem.css";
+
 import { getMarkerInfo } from "../../redux/reducers/connectTilesToMap.js";
+import { setProjectScope } from "../../redux/reducers/getTIPInfo";
+
+import { clickTile } from "../../utils/clickTile.js";
 import counties from "./counties.js";
 import { fetchSprite } from "./fetchSprite.js";
-
-import "./listItem.css";
 
 class ListItem extends Component {
   constructor(props) {
@@ -31,6 +33,14 @@ class ListItem extends Component {
 
   render() {
     const project = this.props.data;
+    const clickProps = {
+      history: this.props.history,
+      data: {
+        LONGITUDE: project.LONGITUDE,
+        LATITUDE: project.LATITUDE,
+        MPMS_ID: project.MPMS_ID
+      }
+    };
 
     // formatting
     const thumbnailAlign = this.props.length < 3 ? "baseline" : "center";
@@ -47,7 +57,7 @@ class ListItem extends Component {
     return (
       <div
         className="list-item"
-        onClick={e => clickTile(this, e)}
+        onClick={e => clickTile(clickProps, this.props.setProjectScope)}
         onMouseEnter={e => this.props.getMarkerInfo(this.props.data, e)}
         onMouseLeave={e => this.props.getMarkerInfo(null, e)}
       >
@@ -75,7 +85,8 @@ class ListItem extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMarkerInfo: tile => dispatch(getMarkerInfo(tile))
+    getMarkerInfo: tile => dispatch(getMarkerInfo(tile)),
+    setProjectScope: projectScope => dispatch(setProjectScope(projectScope))
   };
 };
 

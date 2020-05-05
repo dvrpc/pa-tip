@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 import {
   getTIPByKeywords,
   getTIPByMapBounds,
-  setMapCenter
+  setMapCenter,
+  setProjectScope
 } from "../../redux/reducers/getTIPInfo";
 
 import { updateBounds, showPopup } from "./updateMap";
@@ -150,11 +151,20 @@ class MapComponent extends Component {
         );
         break;
       case "keyword":
-        //this.props.setBounds([]);
         this.props.getTIPByKeywords(value);
         break;
       default:
-        console.log("project case ");
+        // need to extract lat/lng. Could be done from the reducer itsetl
+        // i.e. if !coords, use id to fetch coords
+        const projectScope = {
+          coords: [],
+          id: value,
+          zoom: 18
+        };
+        //setProjectScope()
+        console.log(
+          "project case - will eventually need to populate reducer w/lat, lng and id "
+        );
     }
 
     mapboxgl.accessToken =
@@ -182,12 +192,24 @@ class MapComponent extends Component {
     });
 
     this.map.on("click", "pa-tip-points", e => {
-      clickTile({
-        props: {
-          history,
-          data: { id: e.features[0].properties.MPMS_ID }
-        }
-      });
+      if (!e) return;
+
+      // extract and format values to match those from listItem/tiles
+      const geom = e.lngLat;
+      const MPMS_ID = e.features[0].properties.MPMS_ID;
+
+      const data = {
+        LONGITUDE: geom.lng,
+        LATITUDE: geom.lat,
+        MPMS_ID
+      };
+      const project = {
+        history,
+        data
+      };
+
+      // send em (@TODO: import setProjectScope reducer into clickTile and have it call it there to avoid passing this from listItem, tiles and Map...)
+      clickTile(project, this.props.setProjectScope);
     });
 
     // show popup when a user hovers over a marker.
@@ -253,6 +275,17 @@ class MapComponent extends Component {
     }
 
     // project view
+    if (this.props.projectScope) {
+      const scope = this.props.projectScope;
+
+      // zoom to project
+      this.map.flyTo({
+        center: scope.coords,
+        zoom: scope.zoom
+      });
+
+      // highlight project (@TODO: either set project popup or update project style)
+    }
   }
 
   componentWillUnmount() {
@@ -337,6 +370,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
+    projectScope: state.getTIP.projectScope,
     markerFromTiles: state.connectTilesToMap.markerInfo
   };
 };
@@ -345,7 +379,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng))
+    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
+    setProjectScope: projectScope => dispatch(setProjectScope(projectScope))
   };
 };
 

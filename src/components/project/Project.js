@@ -6,7 +6,11 @@ import PrintPage from "../printPage/PrintPage.js";
 // @ADD back when commenting period is over
 //import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
-import { getFullTIP, hydrateGeometry } from "../../redux/reducers/getTIPInfo";
+import {
+  getFullTIP,
+  hydrateGeometry,
+  setProjectScope
+} from "../../redux/reducers/getTIPInfo";
 // import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -82,6 +86,7 @@ class Project extends Component {
   componentWillUnmount() {
     this.props.hydrateGeometry(null);
     this.props.getFullTIP(null);
+    this.props.undoProjectScope();
     if (this.timeoutID) window.clearTimeout(this.timeoutID);
   }
 
@@ -353,7 +358,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
-    hydrateGeometry: id => dispatch(hydrateGeometry(id))
+    hydrateGeometry: id => dispatch(hydrateGeometry(id)),
+    undoProjectScope: () => dispatch(setProjectScope(null))
     // getComments: id => dispatch(getSpecificComment(id))
   };
 };

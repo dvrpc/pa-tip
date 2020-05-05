@@ -6,6 +6,7 @@ const SET_MAP_CENTER = "SET_MAP_CENTER";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 const SET_FILTER = "SET_FILTER";
 const HYDRATE_GEOMETRY = "HYDRATE_GEOMETRY'";
+const SET_PROJECT_SCOPE = "SET_PROJECT_SCOPE";
 
 /*** ACTION_CREATORS ***/
 const fetch_tip_keywords = fetchedKeywords => ({
@@ -21,6 +22,10 @@ const get_tip_by_map_bounds = features => ({
 });
 const set_filter = category => ({ type: SET_FILTER, category });
 const hydrate_geometry = geometry => ({ type: HYDRATE_GEOMETRY, geometry });
+const set_project_scope = projectScope => ({
+  type: SET_PROJECT_SCOPE,
+  projectScope
+});
 
 /*** REDUCERS ***/
 export default function tipReducer(state = [], action) {
@@ -41,6 +46,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { category: action.category });
     case HYDRATE_GEOMETRY:
       return Object.assign({}, state, { geometry: action.geometry });
+    case SET_PROJECT_SCOPE:
+      return Object.assign({}, state, { projectScope: action.projectScope });
     default:
       return state;
   }
@@ -142,3 +149,7 @@ export const getFullTIP = id => dispatch => {
     })
     .catch(error => console.error(error));
 };
+
+// sets project details for project view
+export const setProjectScope = projectScope => dispatch =>
+  dispatch(set_project_scope(projectScope));
