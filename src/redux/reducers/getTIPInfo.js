@@ -2,7 +2,6 @@
 const FETCH_TIP_KEYWORDS = "FETCH_TIP_KEYWORDS";
 const GET_TIP_KEYWORDS = "GET_TIP_KEYWORDS";
 const GET_FULL_TIP = "GET_FULL_TIP";
-const SET_MAP_CENTER = "SET_MAP_CENTER";
 const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 const SET_FILTER = "SET_FILTER";
 const HYDRATE_GEOMETRY = "HYDRATE_GEOMETRY'";
@@ -15,7 +14,6 @@ const fetch_tip_keywords = fetchedKeywords => ({
 });
 const get_tip_keywords = keyword => ({ type: GET_TIP_KEYWORDS, keyword });
 const get_full_tip = id => ({ type: GET_FULL_TIP, id });
-const set_map_center = latlng => ({ type: SET_MAP_CENTER, latlng });
 const get_tip_by_map_bounds = features => ({
   type: GET_TIP_BY_MAP_BOUNDS,
   features
@@ -36,8 +34,6 @@ export default function tipReducer(state = [], action) {
       });
     case GET_TIP_KEYWORDS:
       return Object.assign({}, state, { keyword: action.keyword });
-    case SET_MAP_CENTER:
-      return Object.assign({}, state, { center: action.latlng });
     case GET_TIP_BY_MAP_BOUNDS:
       return Object.assign({}, state, { projects: action.features });
     case GET_FULL_TIP:
@@ -101,9 +97,6 @@ export const searchTIPByKeywords = keyword => dispatch => {
 };
 
 export const clearKeywords = () => dispatch => dispatch(get_tip_keywords(null));
-
-export const setMapCenter = latlng => dispatch =>
-  dispatch(set_map_center(latlng));
 
 export const setFilter = category => dispatch => {
   dispatch(set_filter(category));

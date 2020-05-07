@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 import {
   getTIPByKeywords,
   getTIPByMapBounds,
-  setMapCenter,
   setProjectScope
 } from "../../redux/reducers/getTIPInfo";
 
@@ -132,37 +131,40 @@ class MapComponent extends Component {
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   componentDidMount() {
-    const { history } = this.props;
-    const { type, value } = this.props.match.params;
     let popup;
+    const { type, value } = this.props.match.params;
 
+    // @ panMap function START
     switch (type) {
       case "location":
         // @TODO: replace this with the mapbox geocoder
         this.Places.getDetails(
           { placeId: value, fields: ["geometry.location"] },
           results => {
-            // we use the store here b/c the query is async
-            this.props.setMapCenter({
-              lng: results.geometry.location.lng(),
-              lat: results.geometry.location.lat()
+            const lng = results.geometry.location.lng();
+            const lat = results.geometry.location.lat();
+            this.map.flyTo({
+              center: [lng, lat],
+              zoom: 11
             });
           }
         );
         break;
       case "keyword":
+        // @panMap NOTE: on didUpdate, this can flyTo because this.map exists. on didMount, it can't. Handle this in the function with a bool
+        // get mpms array to filter & then fly to default extent
         this.props.getTIPByKeywords(value);
         break;
       default:
-        // need to extract lat/lng. Could be done from the reducer itsetl
         const projectScope = {
           coords: null,
           id: value,
           zoom: 18
         };
-        console.log("scope before hitting jawn: ", projectScope);
+
         this.props.setProjectScope(projectScope);
     }
+    // @panMap function END
 
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -191,6 +193,9 @@ class MapComponent extends Component {
     this.map.on("click", "pa-tip-points", e => {
       if (!e) return;
 
+      // get a hnadle on history
+      const { history } = this.props;
+
       // extract and format values to match those from listItem/tiles
       const geom = e.lngLat;
       const MPMS_ID = e.features[0].properties.MPMS_ID;
@@ -205,7 +210,6 @@ class MapComponent extends Component {
         data
       };
 
-      console.log("calling projectScope before clickTile");
       clickTile(project, this.props.setProjectScope);
     });
 
@@ -241,6 +245,11 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { type, value } = this.props.match.params;
+    let oldType = prevProps.match.params.type || null;
+    let oldValue = prevProps.match.params.value || null;
+    let oldScope = prevProps.projectScope;
+
     // popups
     const newTileHover = this.props.markerFromTiles;
     const hasPopup = Object.keys(this.state.tilePopup).length;
@@ -272,7 +281,45 @@ class MapComponent extends Component {
     }
 
     // project view
-    if (this.props.projectScope) {
+    if (type !== oldType || value !== oldValue) {
+      // @panMap function START
+      switch (type) {
+        case "location":
+          // @TODO: replace this with the mapbox geocoder
+          this.Places.getDetails(
+            { placeId: value, fields: ["geometry.location"] },
+            results => {
+              const lng = results.geometry.location.lng();
+              const lat = results.geometry.location.lat();
+              this.map.flyTo({
+                center: [lng, lat],
+                zoom: 11
+              });
+            }
+          );
+          break;
+        case "keyword":
+          // @panMap NOTE: on didUpdate, this can flyTo because this.map exists. on didMount, it can't. Handle this in the function with a bool
+          // get mpms array to filter & then fly to default extent
+          this.props.getTIPByKeywords(value);
+          this.map.flyTo({
+            center: [-75.4, 40.15],
+            zoom: 8.5
+          });
+          break;
+        default:
+          const projectScope = {
+            coords: null,
+            id: value,
+            zoom: 18
+          };
+
+          this.props.setProjectScope(projectScope);
+      }
+      // @panMap function END
+    }
+
+    if (this.props.projectScope && this.props.projectScope !== oldScope) {
       const scope = this.props.projectScope;
 
       // zoom to project
@@ -376,7 +423,6 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
     setProjectScope: projectScope => dispatch(setProjectScope(projectScope))
   };
 };
