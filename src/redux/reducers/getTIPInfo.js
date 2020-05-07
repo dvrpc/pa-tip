@@ -119,7 +119,6 @@ export const hydrateGeometry = id => dispatch => {
   if (id === null) return dispatch(hydrate_geometry(null));
 
   fetch(
-    // @TODO: update this
     `https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=mpms_id=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
   )
     .then(response => {
@@ -151,5 +150,47 @@ export const getFullTIP = id => dispatch => {
 };
 
 // sets project details for project view
-export const setProjectScope = projectScope => dispatch =>
-  dispatch(set_project_scope(projectScope));
+export const setProjectScope = projectScope => dispatch => {
+  // handle Project unmount @TODO: this, but better
+  if (!projectScope) return;
+
+  // handle clickTile
+  if (projectScope.coords) {
+    dispatch(set_project_scope(projectScope));
+
+    // handle search/refresh/direct link
+  } else {
+    const id = projectScope.id;
+
+    // @API: ask Kris or Jesse to create an endpoint that accepts an MPMS ID and *just* returns the lat/lng
+    // this endpoint is problematic b/c when it fails, it doesn't return an error. It just returns an empty geoJSON...
+    fetch(
+      `https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=mpms_id=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
+    ).then(response => {
+      if (response.ok) {
+        response.json().then(project => {
+          // @API: the endpoint will have better error handling so this won't be necessary
+          if (!project.features.length) {
+            console.log("failed to fetch coords for project ID: ", id);
+            projectScope.coords = [-75.4, 40.15];
+            projectScope.zoom = 8.5;
+            dispatch(set_project_scope(projectScope));
+            return;
+          }
+          const geom = project.features[0].geometry.coordinates;
+
+          const lng = geom[0];
+          const lat = geom[1];
+          projectScope.coords = [lng, lat];
+
+          dispatch(set_project_scope(projectScope));
+        });
+      } else {
+        console.log("failed to fetch coords for project ID: ", id);
+        projectScope.coords = [-75.4, 40.15];
+        projectScope.zoom = 8.5;
+        dispatch(set_project_scope(projectScope));
+      }
+    });
+  }
+};

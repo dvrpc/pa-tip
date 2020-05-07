@@ -155,16 +155,13 @@ class MapComponent extends Component {
         break;
       default:
         // need to extract lat/lng. Could be done from the reducer itsetl
-        // i.e. if !coords, use id to fetch coords
         const projectScope = {
-          coords: [],
+          coords: null,
           id: value,
           zoom: 18
         };
-        //setProjectScope()
-        console.log(
-          "project case - will eventually need to populate reducer w/lat, lng and id "
-        );
+        console.log("scope before hitting jawn: ", projectScope);
+        this.props.setProjectScope(projectScope);
     }
 
     mapboxgl.accessToken =
@@ -208,7 +205,7 @@ class MapComponent extends Component {
         data
       };
 
-      // send em (@TODO: import setProjectScope reducer into clickTile and have it call it there to avoid passing this from listItem, tiles and Map...)
+      console.log("calling projectScope before clickTile");
       clickTile(project, this.props.setProjectScope);
     });
 
