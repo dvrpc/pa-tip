@@ -90,8 +90,8 @@ class Search extends Component {
   onSelect = suggestion => {
     let newType = suggestion.type;
 
-    // clear keyword projects from store for non-keyword searches
-    if (newType !== "keyword") this.props.clearKeywords();
+    // clear keyword projects from store
+    this.props.clearKeywords();
 
     // let routing handle data
     this.props.history.push(

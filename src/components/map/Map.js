@@ -182,8 +182,8 @@ class MapComponent extends Component {
         // @UPDATE: this looks ok but there's still an initial render of all projects that throws off the loading/no results handling
         // maybe move it to *before* map.on('load') or into didUpdate
         // in addition to ^, try initializing the map with the default state key filter i.e. an empty map to start until it gets populated...
-        let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
-        this.setState({ keyFilter });
+        // let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
+        // this.setState({ keyFilter });
       }
 
       let zoom = new mapboxgl.NavigationControl();
@@ -248,7 +248,10 @@ class MapComponent extends Component {
     const { type, value } = this.props.match.params;
     let oldType = prevProps.match.params.type || null;
     let oldValue = prevProps.match.params.value || null;
-    let oldScope = prevProps.projectScope;
+    let oldScope = prevProps.projectScope ? prevProps.projectScope.id : null;
+    const oldKeywords = prevProps.keywordProjects
+      ? prevProps.keywordProjects.length
+      : null;
 
     // popups
     const newTileHover = this.props.markerFromTiles;
@@ -273,11 +276,17 @@ class MapComponent extends Component {
     if (this.props.category !== prevProps.category)
       this.buildCategoryFilter(this.props.category);
 
-    // location search
-    if (this.props.center !== prevProps.center) {
-      const { lng, lat } = this.props.center;
-      this.map.setCenter([lng, lat]);
-      this.map.setZoom(11);
+    // set keywords filter
+    if (
+      this.props.keywordProjects &&
+      this.props.keywordProjects.length !== oldKeywords
+    ) {
+      // set new keyFilter or default. this is gross but it works @UPDATE: improve
+      let keyFilter =
+        this.props.keywordProjects[0] === "!="
+          ? this.props.keywordProjects
+          : this.buildKeywordFilter(this.props.keywordProjects);
+      this.setState({ keyFilter });
     }
 
     // project view
@@ -319,7 +328,7 @@ class MapComponent extends Component {
       // @panMap function END
     }
 
-    if (this.props.projectScope && this.props.projectScope !== oldScope) {
+    if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
       const scope = this.props.projectScope;
 
       // zoom to project
@@ -338,6 +347,7 @@ class MapComponent extends Component {
 
   render() {
     // @UPDATE: move this to didUpdate so that it doesn't run for project views
+    // @NOTE: this trigers for every listItem/tile hover so this *really* needs to be fixed
     if (this.map) {
       let lines = this.map.getLayer("pa-tip-lines");
       let points = this.map.getLayer("pa-tip-points");

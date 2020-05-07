@@ -96,7 +96,8 @@ export const searchTIPByKeywords = keyword => dispatch => {
   });
 };
 
-export const clearKeywords = () => dispatch => dispatch(get_tip_keywords(null));
+export const clearKeywords = () => dispatch =>
+  dispatch(get_tip_keywords(["!=", "MPMS_ID", ""]));
 
 export const setFilter = category => dispatch => {
   dispatch(set_filter(category));
