@@ -113,7 +113,7 @@ export const hydrateGeometry = id => dispatch => {
   if (id === null) return dispatch(hydrate_geometry(null));
 
   fetch(
-    `https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=mpms_id=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
+    `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
   )
     .then(response => {
       if (response.ok)

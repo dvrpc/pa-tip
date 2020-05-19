@@ -85,7 +85,7 @@ class Project extends Component {
       if (!coords) return;
 
       // @ADD: this works but no need to ping streetview servers while developing. Comment back in before build
-      //this.generateStreetview(coords)
+      this.generateStreetview(coords);
       this.setState({ geom: true });
     }
   }
