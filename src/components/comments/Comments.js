@@ -6,10 +6,6 @@ import { POSTComment } from "./POSTComment.js";
 import { submitComment } from "../../redux/reducers/commentsReducer.js";
 
 class Comments extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div

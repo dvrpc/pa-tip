@@ -48,24 +48,24 @@ const CMP = {
 const Connections = {
   id: "Connections 2045 Centers",
   data:
-    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Planning_Centers/FeatureServer/0/query?where=STATE=%27PA%27&outFields=LUP_TYPE&geometryPrecision=4&outSR=4326&f=pgeojson",
+    "https://arcgis.dvrpc.org/portal/rest/services/Planning/LRP_2045_PlanningCenters/FeatureServer/0/query?where=1=1&outFields=lup_type&geometryPrecision=4&outSR=4326&f=geojson",
   layerType: "geojson",
   type: "fill",
   source: "Connections",
   paint: {
     "fill-color": [
       "case",
-      ["==", ["get", "LUP_TYPE"], "Metropolitan Center"],
+      ["==", ["get", "lup_type"], "Metropolitan Center"],
       "#f26522",
-      ["==", ["get", "LUP_TYPE"], "Metropolitan Subcenter"],
+      ["==", ["get", "lup_type"], "Metropolitan Subcenter"],
       "#223860",
-      ["==", ["get", "LUP_TYPE"], "Suburban Center"],
+      ["==", ["get", "lup_type"], "Suburban Center"],
       "#0b6d32",
-      ["==", ["get", "LUP_TYPE"], "Town Center"],
+      ["==", ["get", "lup_type"], "Town Center"],
       "#729faa",
-      ["==", ["get", "LUP_TYPE"], "Rural Center"],
+      ["==", ["get", "lup_type"], "Rural Center"],
       "#ed1c24",
-      ["==", ["get", "LUP_TYPE"], "Planned Town Center"],
+      ["==", ["get", "lup_type"], "Planned Town Center"],
       "#9d1d20",
       "#cccccc"
     ],
@@ -87,22 +87,22 @@ const Connections = {
 const Freight = {
   id: "Freight Centers",
   data:
-    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/arcgis/rest/services/DVRPC_Connections_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=TYPES&outSR=4326&f=geojson",
+    "https://arcgis.dvrpc.org/portal/rest/services/Planning/LRP_2045_Freight_Centers/FeatureServer/0/query?where=1%3D1&outFields=types&outSR=4326&f=geojson",
   layerType: "geojson",
   type: "fill",
   source: "Freight",
   paint: {
     "fill-color": [
       "case",
-      ["==", ["get", "TYPES"], "International Gateway"],
+      ["==", ["get", "types"], "International Gateway"],
       "#f4bd48",
-      ["==", ["get", "TYPES"], "Heavy Industrial"],
+      ["==", ["get", "types"], "Heavy Industrial"],
       "#ef7e51",
-      ["==", ["get", "TYPES"], "Distribution and Logistics"],
+      ["==", ["get", "types"], "Distribution and Logistics"],
       "#ca4b66",
-      ["==", ["get", "TYPES"], "High Tech Manufacturing"],
+      ["==", ["get", "types"], "High Tech Manufacturing"],
       "#883272",
-      ["==", ["get", "TYPES"], "Local Manufacturing and Distribution"],
+      ["==", ["get", "types"], "Local Manufacturing and Distribution"],
       "#312867",
       "#cccccc"
     ],
