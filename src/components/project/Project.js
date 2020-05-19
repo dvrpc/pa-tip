@@ -32,24 +32,9 @@ class Project extends Component {
 
   backToResults = () => {
     const hasHistory = this.props.history.length;
-
-    // needs work to figure out if it should go back in history OR back to default map w/all projects...
-    // IF it's possible to loop through history: do this
-    // go through until it finds the most recent 'type' that's either location or keyword
-    // update map position w/that result
-    // else hit the catch-all keyword endpoint (a keyword that finds everything)
-    // have jesse/kris create this endpoint
-
     if (hasHistory > 1) {
       this.props.history.goBack();
     }
-
-    // @UPDATE:
-    // This needs to:
-    // remove filter from project circle or line segment (TBD)
-    // zoom out back to default zoom level (11?)
-    // clear the position reducer (this is done at unMount)
-    // ^^ all of this could happen at unmount...
   };
 
   generateStreetview = geom => {
@@ -84,7 +69,6 @@ class Project extends Component {
       // check for non empty response
       if (!coords) return;
 
-      // @ADD: this works but no need to ping streetview servers while developing. Comment back in before build
       this.generateStreetview(coords);
       this.setState({ geom: true });
     }

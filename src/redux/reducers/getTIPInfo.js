@@ -159,7 +159,7 @@ export const setProjectScope = projectScope => dispatch => {
     // @API: ask Kris or Jesse to create an endpoint that accepts an MPMS ID and *just* returns the lat/lng
     // this endpoint is problematic b/c when it fails, it doesn't return an error. It just returns an empty geoJSON...
     fetch(
-      `https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=mpms_id=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=pgeojson`
+      `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
     ).then(response => {
       if (response.ok) {
         response.json().then(project => {
