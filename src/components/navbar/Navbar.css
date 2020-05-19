@@ -1,8 +1,9 @@
 .navBar {
   position: relative;
+  z-index: 10;
   width: 100%;
   height: 10vh;
-  margin-bottom: 1vh;
+  box-shadow: 0 -3px 3px 3px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,23 +15,26 @@
   align-items: center;
   width: 50%;
 }
+#tip-logo-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pa-text{
+  font-size: 1.1rem;
+}
 #TIPlogo{
-  width: 74px;
+  width: 70px;
+  margin-right: 5%;
 }
 .nav-vr{
   border: 1px solid #333333;
-  margin: 0 3%;
-  height: 6vh;
-}
-#draft-text {
-  font-size: 1.3em;
-  font-weight: 700;
-  color: #333333;
-  margin-left: 3%;
+  margin: 0 2%;
+  height: 5vh;
 }
 #nav-search-form {
   margin-right: 1%;
-  width: calc(39% - 1vh);
+  width: calc(42.5% - 1%);
   background: #f7f7f7;
   border-radius: 5px;
 }

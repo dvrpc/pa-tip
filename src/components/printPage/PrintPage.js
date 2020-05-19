@@ -69,7 +69,7 @@ class PrintPage extends Component {
                     colSpan="4"
                     style={{ fontWeight: "700", textAlign: "center" }}
                   >
-                    FY2020 TIP for Pennsylvania Program Years (in Millions)
+                    FY2021 TIP for Pennsylvania Program Years (in Millions)
                   </td>
                   <td colSpan="2" />
                 </tr>
@@ -79,10 +79,10 @@ class PrintPage extends Component {
                 <tr style={{ color: "#f7f7f7" }}>
                   <td>Phase</td>
                   <td>Fund</td>
-                  <td style={{ fontWeight: "700" }}>2020</td>
                   <td style={{ fontWeight: "700" }}>2021</td>
                   <td style={{ fontWeight: "700" }}>2022</td>
                   <td style={{ fontWeight: "700" }}>2023</td>
+                  <td style={{ fontWeight: "700" }}>2024</td>
                   <td colSpan={2}>2024-2029</td>
                 </tr>
 

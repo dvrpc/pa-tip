@@ -1,12 +1,6 @@
-.tilesContainer{
-    background: #666666;
-    overflow-x: hidden;
-	width: 40%;
-	display: flex;
-    flex-wrap: wrap;
-	overflow-y: scroll;
-	justify-content: flex-start;
-    margin-left: 1vh;
+
+#results{
+    width: 100%;
 }
 .header{
     padding: 3%;
@@ -15,16 +9,17 @@
     width: 100%;
     background: #333333;
     color: #FFFFFF;
-    height: 12%;
 }
 .header h2{
     font-size: 1rem;
     font-weight: 400;
     text-align: center;
 }
-#noResults {
-    color: #fff;
-    padding: 0 3%;
+#results-loading{
+    display: block;
+    text-align: center;
+    margin-top: 20%;
+
 }
 #selectedCategory{
     padding: 8px 0;
@@ -39,8 +34,6 @@
 .results-toggle{
     display: flex;
     width: 15%;
-}
-.results-toggle:hover{
     cursor: pointer;
 }
 .results-toggle h2{
@@ -50,21 +43,27 @@
     text-decoration: underline;
 }
 .vr{
-    height: 45%;
     border: thin solid #ffffff;
     margin: 0 3%;
 }
+#no-results {
+    color: #fff;
+    padding: 10% 5%;
+}
+
+/* Tiles */
+#tiles-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 /* media queries */
- @media screen and (max-width: 880px) {
+@media screen and (max-width: 880px) {
     .header h2 {
         font-size: 1rem;
     }
-   .tilesContainer{
-        margin-left: 0;
-        max-height: 50vh;
-        width: 100%;
-   }
  }
   @media screen and (max-width: 600px) {
     .header h2, .header p {

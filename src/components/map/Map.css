@@ -1,16 +1,14 @@
 .map {
-  width: 60%;
+  width: 57%;
   height: 100%;
 }
-.marker:hover {
+.marker {
   cursor: pointer;
 }
 .mapboxgl-popup {
   min-width: 100px;
   max-width: 250px;
   min-height: 100px;
-}
-.mapboxgl-popup:hover {
   cursor: pointer;
 }
 .mapboxgl-popup-content {
@@ -65,6 +63,9 @@
   border-bottom: 0;
   border-left: 0.3em solid transparent;
 }
+.mapboxgl-ctrl-top-right {
+  top: calc(50% - 60px);
+}
 .layer-menu, .legend-menu {
   display: none;
   border: 0;
@@ -117,9 +118,9 @@
   color: inherit;
   white-space: nowrap;
   transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .dropdown-item:hover {
-  cursor: pointer;
   background-color: #ddd;
   color: #000;
 }

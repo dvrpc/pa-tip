@@ -6,9 +6,7 @@ import { withRouter } from "react-router-dom";
 import {
   getTIPByKeywords,
   getTIPByMapBounds,
-  setMapCenter,
-  setMapState,
-  setBounds
+  setProjectScope
 } from "../../redux/reducers/getTIPInfo";
 
 import { updateBounds, showPopup } from "./updateMap";
@@ -38,6 +36,7 @@ class MapComponent extends Component {
       tilePopup: {}
     };
 
+    // @TODO: replace this with the mapbox geocoder
     this.Places = new window.google.maps.places.PlacesService(
       document.createElement("div")
     );
@@ -132,25 +131,40 @@ class MapComponent extends Component {
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   componentDidMount() {
-    const { history } = this.props;
-    const { type, value } = this.props.match.params;
     let popup;
+    const { type, value } = this.props.match.params;
 
-    if (type === "location") {
-      this.Places.getDetails(
-        { placeId: value, fields: ["geometry.location"] },
-        results => {
-          // we use the store here b/c the query is async
-          this.props.setMapCenter({
-            lng: results.geometry.location.lng(),
-            lat: results.geometry.location.lat()
-          });
-        }
-      );
-    } else {
-      this.props.setBounds([]);
-      this.props.getTIPByKeywords(value);
+    // @ panMap function START
+    switch (type) {
+      case "location":
+        // @TODO: replace this with the mapbox geocoder
+        this.Places.getDetails(
+          { placeId: value, fields: ["geometry.location"] },
+          results => {
+            const lng = results.geometry.location.lng();
+            const lat = results.geometry.location.lat();
+            this.map.flyTo({
+              center: [lng, lat],
+              zoom: 11
+            });
+          }
+        );
+        break;
+      case "keyword":
+        // @panMap NOTE: on didUpdate, this can flyTo because this.map exists. on didMount, it can't. Handle this in the function with a bool
+        // get mpms array to filter & then fly to default extent
+        this.props.getTIPByKeywords(value);
+        break;
+      default:
+        const projectScope = {
+          coords: null,
+          id: value,
+          zoom: 18
+        };
+
+        this.props.setProjectScope(projectScope);
     }
+    // @panMap function END
 
     mapboxgl.accessToken =
       "pk.eyJ1IjoibW1vbHRhIiwiYSI6ImNqZDBkMDZhYjJ6YzczNHJ4cno5eTcydnMifQ.RJNJ7s7hBfrJITOBZBdcOA";
@@ -165,21 +179,38 @@ class MapComponent extends Component {
 
     this.map.on("load", () => {
       if (this.props.keywordProjects) {
-        let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
-        this.setState({ keyFilter });
+        // @UPDATE: this looks ok but there's still an initial render of all projects that throws off the loading/no results handling
+        // maybe move it to *before* map.on('load') or into didUpdate
+        // in addition to ^, try initializing the map with the default state key filter i.e. an empty map to start until it gets populated...
+        // let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
+        // this.setState({ keyFilter });
       }
 
       let zoom = new mapboxgl.NavigationControl();
-      this.map.addControl(zoom, "bottom-left");
+      this.map.addControl(zoom, "top-right");
     });
 
     this.map.on("click", "pa-tip-points", e => {
-      clickTile({
-        props: {
-          history,
-          data: { id: e.features[0].properties.MPMS_ID }
-        }
-      });
+      if (!e) return;
+
+      // get a hnadle on history
+      const { history } = this.props;
+
+      // extract and format values to match those from listItem/tiles
+      const geom = e.lngLat;
+      const MPMS_ID = e.features[0].properties.MPMS_ID;
+
+      const data = {
+        LONGITUDE: geom.lng,
+        LATITUDE: geom.lat,
+        MPMS_ID
+      };
+      const project = {
+        history,
+        data
+      };
+
+      clickTile(project, this.props.setProjectScope);
     });
 
     // show popup when a user hovers over a marker.
@@ -214,7 +245,15 @@ class MapComponent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // handle tileContainer popups
+    const { type, value } = this.props.match.params;
+    let oldType = prevProps.match.params.type || null;
+    let oldValue = prevProps.match.params.value || null;
+    let oldScope = prevProps.projectScope ? prevProps.projectScope.id : null;
+    const oldKeywords = prevProps.keywordProjects
+      ? prevProps.keywordProjects.length
+      : null;
+
+    // popups
     const newTileHover = this.props.markerFromTiles;
     const hasPopup = Object.keys(this.state.tilePopup).length;
 
@@ -233,23 +272,73 @@ class MapComponent extends Component {
       this.setState({ tilePopup });
     } else if (hasPopup) this.state.tilePopup.remove();
 
-    // handle categories
+    // categories
     if (this.props.category !== prevProps.category)
       this.buildCategoryFilter(this.props.category);
 
-    // update map center
-    if (this.props.center !== prevProps.center) {
-      const { lng, lat } = this.props.center;
-      this.map.setCenter([lng, lat]);
-      this.map.setZoom(11);
+    // set keywords filter
+    if (
+      this.props.keywordProjects &&
+      this.props.keywordProjects.length !== oldKeywords
+    ) {
+      // set new keyFilter or default. this is gross but it works @UPDATE: improve
+      let keyFilter =
+        this.props.keywordProjects[0] === "!="
+          ? this.props.keywordProjects
+          : this.buildKeywordFilter(this.props.keywordProjects);
+      this.setState({ keyFilter });
     }
 
-    // this was meant as a way to save state when navigating to/from expanded which is no longer necessary
-    // @UPDATE: delete this and its reducer
-    const position =
-      this.props.position && this.props.position.center
-        ? { center: this.props.position.center, zoom: this.props.position.zoom }
-        : { center: this.props.center || [-75.148, 40.018], zoom: 9 };
+    // project view
+    if (type !== oldType || value !== oldValue) {
+      // @panMap function START
+      switch (type) {
+        case "location":
+          // @TODO: replace this with the mapbox geocoder
+          this.Places.getDetails(
+            { placeId: value, fields: ["geometry.location"] },
+            results => {
+              const lng = results.geometry.location.lng();
+              const lat = results.geometry.location.lat();
+              this.map.flyTo({
+                center: [lng, lat],
+                zoom: 11
+              });
+            }
+          );
+          break;
+        case "keyword":
+          // @panMap NOTE: on didUpdate, this can flyTo because this.map exists. on didMount, it can't. Handle this in the function with a bool
+          // get mpms array to filter & then fly to default extent
+          this.props.getTIPByKeywords(value);
+          this.map.flyTo({
+            center: [-75.4, 40.15],
+            zoom: 8.5
+          });
+          break;
+        default:
+          const projectScope = {
+            coords: null,
+            id: value,
+            zoom: 18
+          };
+
+          this.props.setProjectScope(projectScope);
+      }
+      // @panMap function END
+    }
+
+    if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
+      const scope = this.props.projectScope;
+
+      // zoom to project
+      this.map.flyTo({
+        center: scope.coords,
+        zoom: scope.zoom
+      });
+
+      // highlight project (@TODO: either set project popup or update project style)
+    }
   }
 
   componentWillUnmount() {
@@ -257,6 +346,8 @@ class MapComponent extends Component {
   }
 
   render() {
+    // @UPDATE: move this to didUpdate so that it doesn't run for project views
+    // @NOTE: this trigers for every listItem/tile hover so this *really* needs to be fixed
     if (this.map) {
       let lines = this.map.getLayer("pa-tip-lines");
       let points = this.map.getLayer("pa-tip-points");
@@ -333,8 +424,7 @@ const mapStateToProps = state => {
     center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
-    // @UPDATE remove
-    position: state.getTIP.position,
+    projectScope: state.getTIP.projectScope,
     markerFromTiles: state.connectTilesToMap.markerInfo
   };
 };
@@ -343,10 +433,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
-    setMapCenter: latlng => dispatch(setMapCenter(latlng)),
-    // @UPDATE remove
-    setMapState: position => dispatch(setMapState(position)),
-    setBounds: bounds => dispatch(setBounds(bounds))
+    setProjectScope: projectScope => dispatch(setProjectScope(projectScope))
   };
 };
 

@@ -1,0 +1,19 @@
+.contentContainer{
+    background: #666666;
+    overflow-x: hidden;
+	width: 42.5%;
+	display: flex;
+    flex-wrap: wrap;
+	overflow-y: scroll;
+	justify-content: flex-start;
+}
+
+
+/* media queries */
+ @media screen and (max-width: 880px) {
+   .contentContainer{
+        margin-left: 0;
+        max-height: 50vh;
+        width: 100%;
+   }
+ }

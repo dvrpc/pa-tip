@@ -31,12 +31,12 @@
     rgba(245, 181, 10, 0.6),
     rgba(0, 0, 0, 0.3) 50%
   );
-  height: 75vh;
+  height: 65vh;
   border: thin solid rgba(0, 0, 0, 0);
 }
 #bgvid {
   position: absolute;
-  top: 45%;
+  top: 56%;
   left: 50%;
   width: 100%;
   min-height: 85%;

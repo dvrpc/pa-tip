@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import AppContainer from "./components/app-container/AppContainer.js";
 import Homepage from "./components/homepage/Homepage.js";
-import Expanded from "./components/expanded/Expanded.js";
 
 class App extends Component {
   render() {
@@ -15,10 +14,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route
-            path="/:type(location|keyword)/:value"
+            path="/:type(location|keyword|project)/:value"
             component={AppContainer}
           />
-          <Route path="/expanded/:id" component={Expanded} />
         </Switch>
       </Router>
     );

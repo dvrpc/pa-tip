@@ -12,6 +12,7 @@ const formatGroupLabel = section => <strong>{section.label}</strong>;
 
 const transformLocationSuggestions = data => {
   let options;
+
   if (data) {
     options = data.map(location => ({
       label: location.description,
@@ -35,7 +36,7 @@ const transformKeywordSuggestions = data => {
     options = data.map(project => ({
       label: `${project.id}: ${project.name}`,
       value: `${project.id}`,
-      type: "expanded"
+      type: "Project"
     }));
   } else {
     options = [];
@@ -47,6 +48,7 @@ const transformKeywordSuggestions = data => {
   };
 };
 
+// @TODO: change default text from Select to Seach for TIP Projects
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -55,9 +57,10 @@ class Search extends Component {
       value: ""
     };
 
-    this.Autocomplete = new window.google.maps.places.AutocompleteService();
+    this.Autocomplete = {};
   }
 
+  // @TODO: replace with mapboxgl
   loadLocationSuggestions = input =>
     new Promise(resolve => {
       this.Autocomplete.getQueryPredictions(
@@ -79,6 +82,7 @@ class Search extends Component {
   onChange = newValue => {
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
+    // @TODO: replace with mapboxgl geocoder
     this.loadLocationSuggestions(newValue).then(locations => {
       if (locations !== null) {
         this.setState({ locations });
@@ -87,21 +91,26 @@ class Search extends Component {
   };
 
   onSelect = suggestion => {
-    let newType = suggestion.type;
+    const newType = suggestion.type;
+    const newValue = suggestion.value.replace(/\s/g, "_");
 
-    // clear keyword projects from store for non-keyword searches
-    if (newType !== "keyword") this.props.clearKeywords();
+    // clear keyword projects from store
+    this.props.clearKeywords();
 
     // let routing handle data
-    this.props.history.push(
-      `/${newType}/${suggestion.value.replace(/\s/g, "_")}`
-    );
+    this.props.history.push(`/${newType}/${newValue}`);
   };
+
+  componentDidMount() {
+    this.Autocomplete = new window.google.maps.places.AutocompleteService(
+      this.search
+    );
+  }
 
   render() {
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
-    const keywords = transformKeywordSuggestions(this.props.keywordProjects);
+    const projects = transformKeywordSuggestions(this.props.keywordProjects);
 
     const search = {
       label: "Keyword",
@@ -115,7 +124,7 @@ class Search extends Component {
     };
 
     suggestions.push(search);
-    suggestions.push(keywords);
+    suggestions.push(projects);
 
     // because google wont let you limit results to > 5
     locations.options = locations.options.slice(0, 2);
@@ -129,6 +138,7 @@ class Search extends Component {
         onChange={(value, { action }) => {
           action === "select-option" && this.onSelect(value);
         }}
+        ref={el => (this.search = el)}
       />
     );
   }
