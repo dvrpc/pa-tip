@@ -51,7 +51,7 @@ export default function tipReducer(state = [], action) {
 
 // take search input and find TIP Projects that satisfy the criteria
 const getTIPProjects = input =>
-  fetch(`https://www.dvrpc.org/data/tip/2019/list/${input}`)
+  fetch(`https://www.dvrpc.org/data/tip/2021/list/${input}`)
     .then(response => response.json())
     .then(features => {
       // return empty array for no results
@@ -129,7 +129,7 @@ export const getFullTIP = id => dispatch => {
   // handle resetting of the Project.js props to solve old components rendering while a new one loads
   if (id === null) return dispatch(get_full_tip(null));
 
-  fetch(`https://www.dvrpc.org/data/tip/2019/id/${id}`)
+  fetch(`https://www.dvrpc.org/data/tip/2021/id/${id}`)
     .then(response => {
       if (response.ok) {
         response

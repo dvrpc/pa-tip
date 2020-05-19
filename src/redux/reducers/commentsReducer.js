@@ -33,7 +33,7 @@ export const resetCommentBool = bool => dispatch =>
   dispatch(posted_comment_response(false));
 
 export const submitComment = comment => dispatch => {
-  fetch("https://www.dvrpc.org/data/tip/2020/comments", {
+  fetch("https://www.dvrpc.org/data/tip/2021/comments", {
     method: "post",
     headers: {
       "Content-Type": "text/plain"
@@ -44,7 +44,7 @@ export const submitComment = comment => dispatch => {
       if (response.ok) {
         dispatch(posted_comment_response(true));
         alert(
-          "Success! Thank you for submitting a public comment for the Draft FY2020 TIP or Draft STIP."
+          "Success! Thank you for submitting a public comment for the Draft FY2021 TIP or Draft STIP."
         );
         window.location.reload();
       } else {
@@ -56,14 +56,14 @@ export const submitComment = comment => dispatch => {
 };
 
 export const getGeneralComments = () => dispatch => {
-  fetch("https://www.dvrpc.org/data/tip/2020/comments/null")
+  fetch("https://www.dvrpc.org/data/tip/2021/comments/null")
     .then(response => response.json())
     .then(response => dispatch(get_comments(response)))
     .catch(err => console.log(err));
 };
 
 export const getSpecificComment = id => dispatch => {
-  fetch(`https://www.dvrpc.org/data/tip/2020/comments/${id}`)
+  fetch(`https://www.dvrpc.org/data/tip/2021/comments/${id}`)
     .then(response => response.json())
     .then(response => dispatch(get_specific_comments(response)))
     .catch(err => console.log(err));

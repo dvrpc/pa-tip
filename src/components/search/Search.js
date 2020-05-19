@@ -12,6 +12,7 @@ const formatGroupLabel = section => <strong>{section.label}</strong>;
 
 const transformLocationSuggestions = data => {
   let options;
+
   if (data) {
     options = data.map(location => ({
       label: location.description,
@@ -56,9 +57,10 @@ class Search extends Component {
       value: ""
     };
 
-    this.Autocomplete = new window.google.maps.places.AutocompleteService();
+    this.Autocomplete = {};
   }
 
+  // @TODO: replace with mapboxgl
   loadLocationSuggestions = input =>
     new Promise(resolve => {
       this.Autocomplete.getQueryPredictions(
@@ -80,6 +82,7 @@ class Search extends Component {
   onChange = newValue => {
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
+    // @TODO: replace with mapboxgl geocoder
     this.loadLocationSuggestions(newValue).then(locations => {
       if (locations !== null) {
         this.setState({ locations });
@@ -88,16 +91,21 @@ class Search extends Component {
   };
 
   onSelect = suggestion => {
-    let newType = suggestion.type;
+    const newType = suggestion.type;
+    const newValue = suggestion.value.replace(/\s/g, "_");
 
     // clear keyword projects from store
     this.props.clearKeywords();
 
     // let routing handle data
-    this.props.history.push(
-      `/${newType}/${suggestion.value.replace(/\s/g, "_")}`
-    );
+    this.props.history.push(`/${newType}/${newValue}`);
   };
+
+  componentDidMount() {
+    this.Autocomplete = new window.google.maps.places.AutocompleteService(
+      this.search
+    );
+  }
 
   render() {
     const suggestions = [];
@@ -130,6 +138,7 @@ class Search extends Component {
         onChange={(value, { action }) => {
           action === "select-option" && this.onSelect(value);
         }}
+        ref={el => (this.search = el)}
       />
     );
   }

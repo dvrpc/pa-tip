@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
 // @ADD back when commenting period is over
-//import ReadOnlyComments from "../comments/ReadOnlyComments.js";
+import Comments from "../comments/Comments.js";
 
 import {
   getFullTIP,
@@ -163,6 +163,7 @@ class Project extends Component {
 
               <section className="project-content-section">
                 <h2 id="project-title">
+                  #{details.id} |{" "}
                   {details.road_name ? details.road_name : "Project Title"}
                 </h2>
 
@@ -228,7 +229,7 @@ class Project extends Component {
                       <tr>
                         <th colSpan={2} />
                         <th colSpan={4}>
-                          <h3>PA FY2020 TIP Program Years (in Millions)</h3>
+                          <h3>PA FY2021 TIP Program Years (in Millions)</h3>
                         </th>
                         <th colSpan={1} />
                       </tr>
@@ -337,6 +338,7 @@ class Project extends Component {
                 </div>
               </section>
             </div>
+            <Comments />
             {/* <ReadOnlyComments
               colorScheme={colorScheme}
               comments={details.comments || []}

@@ -19,7 +19,7 @@ class Comments extends Component {
           this.comments = el;
         }}
       >
-        <h1>{this.props.title}</h1>
+        <h2>Submit a Public Comment</h2>
         <form className="comments-form" onSubmit={e => POSTComment(this, e)}>
           <textarea placeholder="Enter your public comment here" />
           <div className="input-fields">
@@ -37,7 +37,7 @@ class Comments extends Component {
               placeholder="email"
               required
             />
-            <select className="custom-select" name="county" required>
+            <select className="comment-form-info" name="county" required>
               <option value="">county</option>
               <option value="Bucks">Bucks County</option>
               <option value="Burlington">Burlington County</option>
@@ -50,17 +50,17 @@ class Comments extends Component {
               <option value="Montgomery">Montgomery County</option>
               <option value="Other">Other</option>
             </select>
-            <input
-              id="submitCommentButton"
-              type="submit"
-              value="submit"
-              style={{
-                background: this.props.colorScheme
-                  ? this.props.colorScheme.darkest
-                  : "#e5c942"
-              }}
-            />
           </div>
+          <input
+            id="submitCommentButton"
+            type="submit"
+            value="submit"
+            style={{
+              background: this.props.colorScheme
+                ? this.props.colorScheme.darkest
+                : "#e5c942"
+            }}
+          />
         </form>
       </div>
     );
