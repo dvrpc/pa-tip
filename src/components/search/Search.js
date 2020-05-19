@@ -110,7 +110,7 @@ class Search extends Component {
   render() {
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
-    const keywords = transformKeywordSuggestions(this.props.keywordProjects);
+    const projects = transformKeywordSuggestions(this.props.keywordProjects);
 
     const search = {
       label: "Keyword",
@@ -124,7 +124,7 @@ class Search extends Component {
     };
 
     suggestions.push(search);
-    suggestions.push(keywords);
+    suggestions.push(projects);
 
     // because google wont let you limit results to > 5
     locations.options = locations.options.slice(0, 2);

@@ -4,59 +4,58 @@
     padding: 4% 3%;
 }
 .comments h2 {
-font-weight: 400;
-color: #ffffff;
-text-align: center;
-padding-bottom: 3%;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    padding-bottom: 3%;
 }
 .comments-form {
-display: flex;
-flex-direction: column;
-width: 94%;
-margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin: 0 auto;
 }
 .comments-form textarea {
-font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
-    "lucida sans unicode", tahoma, sans-serif;
-font-size: 1rem;
-border-radius: 3px;
-width: 100%;
-padding: 1%;
-height: 120px;
+    font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
+        "lucida sans unicode", tahoma, sans-serif;
+    font-size: 1rem;
+    border-radius: 3px;
+    width: 100%;
+    padding: 1%;
+    height: 120px;
 }
 .input-fields {
-width: 100%;
+    width: 100%;
 }
 .comment-form-info {
-font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
-    "lucida sans unicode", tahoma, sans-serif;
-font-size: 1rem;
-width: 100%;
-padding: 5px;
-margin-top: 10px;
-border-radius: 3px;
+    font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
+        "lucida sans unicode", tahoma, sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 3px;
 }
 #submitCommentButton {
-font-size: 1rem;
-width: 35%;
-margin: 10px auto;
-padding: 10px 5px;
-border: none;
-border-radius: 3px;
-color: #f1f1f1;
-cursor: pointer;
--webkit-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
--moz-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
-
+    font-size: 1rem;
+    width: 35%;
+    margin: 10px auto;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 3px;
+    color: #f1f1f1;
+    cursor: pointer;
+    -webkit-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 }
 #submitCommentButton:focus {
-outline: none;
+    outline: none;
 }
 #submitCommentButton:active {
--webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
--moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* media queries */
