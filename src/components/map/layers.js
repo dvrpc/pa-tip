@@ -1,7 +1,7 @@
 const IPD = {
   id: "Indicators of Potential Disadvantage",
   data:
-    "https://opendata.arcgis.com/datasets/44fdcc72f46e4e3f90126f4f9c5f7629_0.geojson",
+    "https://arcgis.dvrpc.org/portal/rest/services/Demographics/IPD_2018/FeatureServer/0/query?where=geoid10+like+%2742%25%27&outFields=IPD_SCORE&outSR=4326&f=geojson",
   layerType: "geojson",
   type: "fill",
   source: "IPD",
@@ -9,7 +9,7 @@ const IPD = {
     "fill-color": [
       "interpolate",
       ["linear"],
-      ["get", "IPD_SCORE"],
+      ["get", "ipd_score"],
       9,
       "#ffffd9",
       13,
@@ -29,19 +29,30 @@ const IPD = {
       30,
       "#081d58"
     ],
-    "fill-opacity": 0.5
-  },
-  filter: ["==", "STATE_FIPS", "42"]
+    "fill-opacity": [
+      "interpolate",
+      ["linear"],
+      ["zoom"],
+      0,
+      1,
+      7,
+      0.75,
+      9,
+      0.5,
+      11,
+      0.25
+    ]
+  }
 };
 const CMP = {
   id: "CMP Corridors",
   data:
-    "https://services1.arcgis.com/LWtWv6q6BJyKidj8/ArcGIS/rest/services/DVRPC_CMP_2015/FeatureServer/1/query?where=1%3D1&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=pgeojson",
+    "https://arcgis.dvrpc.org/portal/rest/services/Transportation/CMP2019_CorridorSubCorridorAreas/FeatureServer/0/query?where=state='PA'&outFields=WEB_COLOR&returnGeometry=true&geometryPrecision=4&outSR=4326&f=geojson",
   layerType: "geojson",
   type: "fill",
   source: "CMP",
   paint: {
-    "fill-color": ["get", "WEB_COLOR"],
+    "fill-color": ["get", "web_color"],
     "fill-opacity": 0.8
   }
 };
