@@ -28,13 +28,13 @@ class Navbar extends Component {
           <span className="nav-vr"></span>
 
           <div id="tip-logo-wrapper">
-            <a href="/TIP/PA/">
+            <a href="/TIP/Draft/">
               <img id="TIPlogo" src={TIP_logo} alt="TIP logo" />
             </a>
 
             <div>
-              <h2 className="pa-text">FY2021</h2>
-              <h2 className="pa-text">TIP for PA</h2>
+              <h2 className="pa-text">Draft FY2021</h2>
+              <h2 className="pa-text">TIP for PA (FY21-24)</h2>
             </div>
           </div>
         </div>

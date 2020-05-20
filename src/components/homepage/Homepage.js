@@ -46,9 +46,9 @@ class Homepage extends Component {
                 alt="Transportation Improvement Program logo"
               />
               <h1>
-                FY2019 Transportation Improvement
+                Draft FY2021 Transportation Improvement
                 <br />
-                Program for Pennsylvania (FY19-22)
+                Program for Pennsylvania (FY21-24)
               </h1>
             </div>
           </header>
@@ -91,7 +91,7 @@ class Homepage extends Component {
             </p>
             <ul>
               <li>
-                <b>FY2019 TIP for PA</b>
+                <b>Draft FY2021 TIP for PA</b>
               </li>
               <li>
                 <a href="https://www.dvrpc.org/Products/17065/">TIP Guide</a>
@@ -110,8 +110,8 @@ class Homepage extends Component {
           <article id="tip-info-paragraphs">
             <section>
               <h2 className="info-section-header" id="main-section-header">
-                FY2019 Transportation Improvement Program for Pennsylvania
-                (FY19-22)
+                Draft FY2021 Transportation Improvement Program for Pennsylvania
+                (FY21-24)
               </h2>
               <p>
                 Following a 30+ day public comment period, the DVRPC Board
