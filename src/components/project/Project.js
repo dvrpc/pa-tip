@@ -100,7 +100,8 @@ class Project extends Component {
           );
 
           // @UPDATE: need a catch all keyword route. * crashes the server.
-          this.props.history.push("/keyword/the");
+          //this.props.history.push("/keyword/the");
+          this.props.history.goBack();
         };
 
         // throw the error alert after 1.2 seconds of delay because immediate feedback from errors is bad ux

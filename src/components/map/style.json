@@ -90,7 +90,7 @@
     },
     "pa-tip": {
       "type": "vector",
-      "url": "https://tiles.dvrpc.org/data/dvrpc-patip.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-patip-draft.json"
     },
     "boundary": {
       "type": "vector",
@@ -5784,7 +5784,7 @@
     {
       "id": "pa-tip-points",
       "source": "pa-tip",
-      "source-layer": "patip_fy19",
+      "source-layer": "patip_point",
       "type": "circle",
       "paint": {
         "circle-radius": ["interpolate", ["linear"], ["zoom"], 7, 2, 12, 8],
