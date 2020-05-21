@@ -96,12 +96,10 @@ class Project extends Component {
 
         const throwError = () => {
           alert(
-            `Sorry! Project #${this.state.params} could not be fetched at this time due to ${reason}. Click 'ok' to return to the map.`
+            `Sorry! Project #${this.props.mpms} could not be fetched at this time due to ${reason}. Click 'ok' to return home.`
           );
 
-          // @UPDATE: need a catch all keyword route. * crashes the server.
-          //this.props.history.push("/keyword/the");
-          this.props.history.goBack();
+          this.props.history.push("/");
         };
 
         // throw the error alert after 1.2 seconds of delay because immediate feedback from errors is bad ux
