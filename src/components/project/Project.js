@@ -248,7 +248,7 @@ class Project extends Component {
                         <td style={{ fontWeight: "700" }}>FY22</td>
                         <td style={{ fontWeight: "700" }}>FY23</td>
                         <td style={{ fontWeight: "700" }}>FY24</td>
-                        <td>FY25-30</td>
+                        <td>FY25-32</td>
                       </tr>
                       {details.funding &&
                         details.funding.data.map(row => (
@@ -273,7 +273,7 @@ class Project extends Component {
                       <tr id="funding-totals" style={{ fontWeight: "700" }}>
                         <td colSpan={2}>Total FY21-24 Cost (in Millions):</td>
                         <td>{funding[4]}</td>
-                        <td colSpan={2}>Total FY21-30 Cost (in Millions):</td>
+                        <td colSpan={2}>Total FY21-32 Cost (in Millions):</td>
                         <td>{funding[5]}</td>
                       </tr>
                     </tbody>
