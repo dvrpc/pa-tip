@@ -114,18 +114,92 @@ class Homepage extends Component {
                 (FY21-24)
               </h2>
               <p>
-                Following a 30+ day public comment period, the DVRPC Board
-                adopted the DVRPC FY2019 TIP (FY19-22) for the Pennsylvania
-                portion of the region with Recommended Changes (see below) as
-                the priority program of transportation projects on June 28,
-                2018. The regional TIP is included in the Pennsylvania Statewide
-                Transportation Improvement Program (STIP), and was developed in
-                cooperation with PennDOT, SEPTA, Pottstown Area Rapid Transit
-                (PART), and DVRPC's member cities and counties. The TIP has been
-                approved by the federal review agencies (FHWA, FTA, and EPA) and
-                became the official DVRPC FY2019 TIP for PA on October 1, 2018.
-                Program lists (below) are updated on a regular basis as DVRPC
-                amends or modifies the program.
+                DVRPC's Draft TIP for Pennsylvania represents the region's
+                federally funded transportation improvement priorities and is
+                required by federal law in order for the region to receive and
+                spend federal transportation funds. It has been developed in
+                cooperation with the Pennsylvania Department of Transportation
+                (PennDOT), Southeastern Transportation Authority (SEPTA),
+                Pottstown Area Rapid Transit (PART) and DVRPC's member counties
+                and cities. After consideration of public comments, the Draft
+                TIP with any recommended changes will be presented to the DVRPC
+                Board for adoption at the regularly scheduled Board meeting on
+                July 23, 2020.
+              </p>
+              <p>
+                DVRPC invites you to review and comment on the Draft FY2021 TIP
+                for the PA portion of the region as well as{" "}
+                <a href="./pdf/stwd21d.pdf"></a>Pennsylvania’s Statewide Items
+                (STWD Items) TIP<span class="sm"> [ MB pdf]</span> and{" "}
+                <a href="./pdf/simp21d.pdf">
+                  Statewide Interstate Management Program
+                </a>
+                <span class="sm"> [ MB pdf]</span>. The public comment period
+                will end at 5:00 PM local time on Monday, June 29, 2020.
+              </p>
+              <p>
+                The public comment period for the Draft DVRPC FY2021 TIP for
+                Pennsylvania opens on May 26, 2020 at 5:00 PM (local time), and
+                extends through June 29, 2020 at 5:00 PM (local time). Two
+                online open houses will be held at the following web address for
+                the purpose of informing interested parties on how to make
+                public comments on the Draft DVRPC FY2021 TIP:
+              </p>
+              <div>
+                <p>
+                  <strong>Wednesday, June 17, 2020</strong>
+                  <br />
+                  <strong>2:00 PM</strong> to <strong>3:00 PM</strong>
+                  <br />
+                  <strong>Call-in information: </strong>646-558-8656
+                  <br />
+                  <strong>Webinar ID: </strong>928 8347 2086;
+                  <br />
+                  <strong>Password: </strong>0b1&E1fB
+                  <br />
+                  <button className="btn">
+                    <a
+                      href="https://dvrpc.zoom.us/webinar/register/WN_l8Hr6IsaTk--nFbKxD1lLw"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Registration
+                    </a>
+                  </button>
+                  <br />
+                </p>
+                <p>
+                  <strong>Wednesday, June 17, 2020</strong>
+                  <br />
+                  <strong>7:00 PM</strong> to <strong>8:00 PM</strong>
+                  <br />
+                  <strong>Call-in information: </strong>646-558-8656
+                  <br />
+                  <strong>Webinar ID: </strong>969 5255 6273;
+                  <br />
+                  <strong>Password: </strong>0b1&E1fB
+                  <br />
+                  <button className="btn">
+                    <a
+                      href="https://dvrpc.zoom.us/webinar/register/WN_oFLiQk-eRnyyOEpHu4wdOQ"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Registration
+                    </a>
+                  </button>
+                  <br />
+                </p>
+              </div>
+              <p>
+                While participants need to register beforehand, they are
+                approved automatically and can register and join the meetings up
+                until the meetings end. Additionally, people who would like to
+                participate but do not have internet access or smart phones can
+                call in. Anyone who needs accommodations, such as closed
+                captioning or interpretation, can contact DVRPC’s Office of
+                Communications & Engagement at public_affairs@dvrpc.org or
+                215-238-2929.
               </p>
             </section>
 

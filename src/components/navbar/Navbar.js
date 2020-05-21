@@ -28,7 +28,7 @@ class Navbar extends Component {
           <span className="nav-vr"></span>
 
           <div id="tip-logo-wrapper">
-            <a href="/TIP/Draft/">
+            <a href="/review/TIP/Draft/">
               <img id="TIPlogo" src={TIP_logo} alt="TIP logo" />
             </a>
 
