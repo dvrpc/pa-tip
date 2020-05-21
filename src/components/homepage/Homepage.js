@@ -7,6 +7,7 @@ import Search from "../search/Search.js";
 import Footer from "../footer/Footer.js";
 // @COMMENTS: add when comment period opens
 // import ReadOnlyComments from "../comments/ReadOnlyComments.js";
+import Comments from "../comments/Comments.js";
 
 import "./Homepage.css";
 
@@ -647,6 +648,7 @@ class Homepage extends Component {
             </section>
           </article>
         </main>
+
         <Footer />
       </div>
     );
