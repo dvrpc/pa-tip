@@ -133,7 +133,7 @@ class Homepage extends Component {
                 <a href="/TIP/Draft/pdf/stwd21d.pdf">
                   Pennsylvania’s Statewide Items (STWD Items) TIP
                 </a>
-                <span class="sm"> [ MB pdf]</span> and{" "}
+                <span class="sm"> [1.8 MB pdf]</span> and{" "}
                 <a href="/TIP/Draft/pdf/simp21d.pdf">
                   Statewide Interstate Management Program
                 </a>
@@ -262,38 +262,38 @@ class Homepage extends Component {
                     Aspectos destacados del TIP para el FY2021 de Pennsylvania
                     (FY21-FY24)
                   </a>{" "}
-                  <span className="sm">[ MB pdf]</span>
+                  <span className="sm">[151 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/DraftTIPPA21.pdf">
                     Full Draft FY2021 TIP for PA Document
                   </a>{" "}
-                  <span className="sm">[1.0 MB pdf]</span>
+                  <span className="sm">[235 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/GenOverview.pdf">
                     Chapter 1: General Overview of the TIP
                   </a>{" "}
-                  <span className="sm">[0.2 MB pdf]</span>
+                  <span className="sm">[0.1 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/ProgramSum.pdf">
                     Chapter 2: Program Summaries
                   </a>{" "}
-                  <span className="sm">[0.2 MB pdf]</span>
+                  <span className="sm">[0.3 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/EJ_TitleVI.pdf">
                     Chapter 3: Responding to Environmental Justice (EJ) and
                     Title VI Concerns
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[0.8 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/PBPP.pdf">
                     Chapter 4: Performance-Based Planning and Programming (PBPP)
                   </a>{" "}
-                  <span className="sm">[0.2 MB pdf]</span>
+                  <span className="sm">[0.3 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/Public.pdf">
@@ -318,25 +318,25 @@ class Homepage extends Component {
                   <a href="/TIP/Draft/pdf/MapAppListings.pdf">
                     Chapter 6: Mapping Application and Listings Overview
                   </a>{" "}
-                  <span className="sm">[0.3 MB pdf]</span>
+                  <span className="sm">[0.1 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/CodesAbbr.pdf">
                     Chapter 7: Codes and Abbreviations Overview
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[0.4 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/PA-2021-Competitive-Programs.pdf">
                     Chapter 8: Competitive Programs
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[0.3 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/ProgramLists21d.pdf">
                     Chapter 9: Program Listings
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[1.9 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   Helpful Project Indices:
@@ -365,7 +365,7 @@ class Homepage extends Component {
                   <a href="/TIP/Draft/roadmapPA.pdf">
                     Draft TIP Project Listing Roadmap
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[0.2 MB pdf]</span>
                 </li>
               </ul>
             </section>
@@ -389,7 +389,7 @@ class Homepage extends Component {
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/mont21d.pdf">Montgomery County</a>{" "}
-                  <span className="sm">[0.4 MB pdf]</span>
+                  <span className="sm">[0.3 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/phil21d.pdf">Philadelphia County</a>{" "}
@@ -411,17 +411,17 @@ class Homepage extends Component {
               <ul className="list-group">
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/part21d.pdf">PART Projects</a>{" "}
-                  <span className="sm">[0.3 MB pdf]</span>
+                  <span className="sm">[0.1 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/septa21d.pdf">SEPTA Projects</a>{" "}
-                  <span className="sm">[0.4 MB pdf]</span>
+                  <span className="sm">[0.2 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
-                  <a href="/TIP/Draft/dvrpcimp19f.pdf">
+                  <a href="/TIP/Draft/dvrpcimp21d.pdf">
                     Interstate Management Program in the DVRPC Region
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[0.5 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/stwd21d.pdf">
@@ -433,7 +433,7 @@ class Homepage extends Component {
                   <a href="/TIP/Draft/simp21d.pdf">
                     PennDOT's Interstate Management Program
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[3.5 MB pdf]</span>
                 </li>
               </ul>
             </section>
@@ -445,34 +445,34 @@ class Homepage extends Component {
                   <a href="/TIP/Draft/pdf/DVRPC-Board-Resolutions.pdf">
                     A – Acknowledgement of Board Resolutions
                   </a>{" "}
-                  <span className="sm">[0.9 MB pdf]</span>
+                  <span className="sm">[0.2 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/PA-2021-FinGenPro-Guidance.pdf">
                     B – State DOT Financial, and General and Procedural Guidance
                     (Includes SPETA’s Financial Capacity Analysis)
                   </a>{" "}
-                  <span className="sm">[3.0 MB pdf]</span>
+                  <span className="sm">[11 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/Conformity-21TIP-ExecSum.pdf">
                     C – Acknowledgement of the Executive Summary of the Draft
                     Documentation of the Conformity Finding (Executive Summary)
                   </a>{" "}
-                  <span className="sm">[0.9 MB pdf]</span>
+                  <span className="sm">[0.2 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/DVRPC-TIP-Project-Benefit-Criteria-2021.pdf">
                     D – DVRPC TIP Project Benefit Criteria
                   </a>{" "}
-                  <span className="sm">[0.3 MB pdf]</span>
+                  <span className="sm">[0.4 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/PATIPMOU-plusPennDOT-FHWA.pdf">
                     E – Memorandum of Understanding on Procedures to Amend and
                     Modify the TIP
                   </a>{" "}
-                  <span className="sm">[1.6 MB pdf]</span>
+                  <span className="sm">[0.4 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/Draft/pdf/EJAppendix.pdf">
@@ -487,7 +487,7 @@ class Homepage extends Component {
                     Comments, Agency Responses, List of Recommended Changes, and
                     Supporting Documentation
                   </a>{" "}
-                  <span className="sm">[0.4 MB pdf]</span>
+                  <span className="sm">[0.2 MB pdf]</span>
                 </li>
               </ul>
             </section>
