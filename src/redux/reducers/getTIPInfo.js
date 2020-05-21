@@ -72,7 +72,7 @@ const getTIPProjects = input =>
 export const getTIPByKeywords = keyword => dispatch => {
   // encode in case of multiple word keywords
   keyword = encodeURI(keyword);
-  fetch(`https://www.dvrpc.org/data/tip/2019/list/${keyword}`).then(
+  fetch(`https://www.dvrpc.org/data/tip/2021/list/${keyword}`).then(
     response => {
       if (response.ok) {
         response.json().then(projects => {
