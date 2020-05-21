@@ -204,6 +204,48 @@ class Homepage extends Component {
             </section>
 
             <section>
+              <h2 className="info-section-header">
+                How to Submit a Public Comment
+              </h2>
+              <p>
+                Submit comments online by clicking the “SEARCH DRAFT TIP
+                PROJECTS BY ADDRESS OR KEYWORDS OR SUBMIT COMMENT” feature in
+                order for a response to be provided in the final TIP document.
+                You can still send comments by:
+              </p>
+              <ul style={{ fontSize: "initial" }}>
+                <li>email to TIP@dvrpc.org;</li>
+                <li>fax to (215) 592 – 9125; or</li>
+                <li>
+                  mail to the address at the bottom of this page, Attention: PA
+                  TIP Comments.
+                </li>
+              </ul>
+              <strong>
+                <a href="./pdf/tips.pdf">Click here</a> to view helpful tips
+                that can make a public comment more effective
+              </strong>
+              <span class="sm"> [ MB pdf]</span>
+            </section>
+
+            <section>
+              <h2 className="info-section-header">
+                What Happens After the Public Comment Period Ends?
+              </h2>
+              <p>
+                Written comments received during the public comment period and
+                responses to those comments will be provided in the final
+                printed TIP document as part of the public record. After
+                consideration of the public comments received, the Draft TIP
+                with any recommended changes will be presented to the DVRPC
+                Board for adoption at the July 23, 2020 regularly scheduled
+                Board meeting. Note that comments received after the comment
+                period is over might not receive a response or be included in
+                the final TIP document.
+              </p>
+            </section>
+
+            <section>
               <h2 className="info-section-header">Detailed Information</h2>
               <ul className="list-group">
                 <li className="list-group-item">
