@@ -101,8 +101,8 @@
   color: #ffffff;
 }
 #tip-info hr {
-  width: 70%;
-  margin: 2% 0 2% 30%;
+  width: 100%;
+  margin: 3% auto;
   background-color: #e5c942;
   height: 2px;
   border: 0;
