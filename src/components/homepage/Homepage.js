@@ -135,12 +135,12 @@ class Homepage extends Component {
                 <a href="/review/TIP/Draft/pdf/stwd21d.pdf">
                   PennDOT's Statewide Items (STWD Items) TIP
                 </a>
-                <span class="sm"> [1.8 MB pdf]</span> and{" "}
+                <span className="sm"> [1.8 MB pdf]</span> and{" "}
                 <a href="/review/TIP/Draft/pdf/simp21d.pdf">
                   Statewide Interstate Management Program
                 </a>
-                <span class="sm"> [ MB pdf]</span>. The public comment period
-                will end at 5:00 PM local time on Monday, June 29, 2020.
+                <span className="sm"> [ MB pdf]</span>. The public comment
+                period will end at 5:00 PM local time on Monday, June 29, 2020.
               </p>
               <p>
                 The public comment period for the Draft DVRPC FY2021 TIP for
@@ -235,7 +235,7 @@ class Homepage extends Component {
                 <a href="/review/TIP/Draft/pdf/tips.pdf">Click here</a> to view
                 helpful tips that can make a public comment more effective
               </strong>
-              <span class="sm"> [0.2 MB pdf]</span>
+              <span className="sm"> [0.2 MB pdf]</span>
             </section>
 
             <section>
@@ -317,7 +317,7 @@ class Homepage extends Component {
                       <a href="/review/TIP/Draft/pdf/tips.pdf">
                         Make Your Public Comment More Effective (see above)
                       </a>
-                      <span class="sm"> [0.2 MB pdf]</span>
+                      <span className="sm"> [0.2 MB pdf]</span>
                     </li>
                   </ul>
                 </li>

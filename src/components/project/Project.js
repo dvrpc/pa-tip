@@ -74,7 +74,7 @@ class Project extends Component {
       // check for non empty response
       if (!coords) return;
 
-      this.generateStreetview(coords);
+      //this.generateStreetview(coords);
       this.setState({ geom: true });
     }
   }
@@ -87,6 +87,7 @@ class Project extends Component {
     if (this.timeoutID) window.clearTimeout(this.timeoutID);
 
     // clear map filter
+    this.props.setActiveProject(null);
   }
 
   render() {

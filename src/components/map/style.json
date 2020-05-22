@@ -90,7 +90,8 @@
     },
     "pa-tip": {
       "type": "vector",
-      "url": "https://tiles.dvrpc.org/data/dvrpc-patip-draft.json"
+      "url": "https://tiles.dvrpc.org/data/dvrpc-patip-draft.json",
+      "promoteId": "MPMS_ID"
     },
     "boundary": {
       "type": "vector",
@@ -5810,15 +5811,17 @@
           "#5abf41"
         ],
         "circle-stroke-width": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          7,
-          1,
-          12,
-          2
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          5,
+          1
         ],
-        "circle-stroke-color": "#666"
+        "circle-stroke-color": [
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          "#fcc810",
+          "#666"
+        ]
       },
       "interactive": true
     }

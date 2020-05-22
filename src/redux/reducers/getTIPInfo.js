@@ -50,10 +50,7 @@ export default function tipReducer(state = [], action) {
     case SET_PROJECT_SCOPE:
       return Object.assign({}, state, { projectScope: action.projectScope });
     case SET_ACTIVE_PROJECT:
-      console.log("project to be filtered: ", action.activeProject);
-      return Object.assign({}, state, {
-        activeProjectFilter: action.activeProject
-      });
+      return Object.assign({}, state, { activeProject: action.activeProject });
     default:
       return state;
   }
@@ -113,8 +110,8 @@ export const setFilter = category => dispatch => {
   dispatch(set_filter(category));
 };
 
-export const setActiveProject = category => dispatch => {
-  dispatch(set_active_project(category));
+export const setActiveProject = id => dispatch => {
+  dispatch(set_active_project(id));
 };
 
 // get all projects within the boundaires of the current mapbox view
