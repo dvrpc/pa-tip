@@ -132,6 +132,9 @@ class Search extends Component {
 
     return (
       <Select
+        placeholder={
+          <span>Search Draft TIP Project by Address or Keywords</span>
+        }
         options={suggestions}
         formatGroupLabel={formatGroupLabel}
         onInputChange={this.onChange}
