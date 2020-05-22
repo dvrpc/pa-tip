@@ -9,7 +9,8 @@ import Comments from "../comments/Comments.js";
 import {
   getFullTIP,
   hydrateGeometry,
-  setProjectScope
+  setProjectScope,
+  setActiveProject
 } from "../../redux/reducers/getTIPInfo";
 // import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
@@ -51,9 +52,13 @@ class Project extends Component {
   };
 
   componentDidMount() {
+    // get project info
     const mpms = this.props.mpms;
     this.props.hydrateGeometry(mpms);
     this.props.getFullTIP(mpms);
+
+    // set map filter
+    this.props.setActiveProject(mpms);
   }
 
   componentDidUpdate() {
@@ -80,6 +85,8 @@ class Project extends Component {
     this.props.getFullTIP(null);
     this.props.undoProjectScope();
     if (this.timeoutID) window.clearTimeout(this.timeoutID);
+
+    // clear map filter
   }
 
   render() {
@@ -352,7 +359,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getFullTIP: id => dispatch(getFullTIP(id)),
     hydrateGeometry: id => dispatch(hydrateGeometry(id)),
-    undoProjectScope: () => dispatch(setProjectScope(null))
+    undoProjectScope: () => dispatch(setProjectScope(null)),
+    setActiveProject: id => dispatch(setActiveProject(id))
     // getComments: id => dispatch(getSpecificComment(id))
   };
 };
