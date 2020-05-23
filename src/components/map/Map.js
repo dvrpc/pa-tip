@@ -36,10 +36,11 @@ class MapComponent extends Component {
       tilePopup: {}
     };
 
-    // @TODO: replace this with the mapbox geocoder
     this.Places = new window.google.maps.places.PlacesService(
       document.createElement("div")
     );
+
+    this.loaderTimeout = true;
   }
 
   updateLayerVisibility = selectedLayer => {
@@ -137,7 +138,6 @@ class MapComponent extends Component {
     // @ panMap function START
     switch (type) {
       case "location":
-        // @TODO: replace this with the mapbox geocoder
         this.Places.getDetails(
           { placeId: value, fields: ["geometry.location"] },
           results => {
@@ -151,8 +151,6 @@ class MapComponent extends Component {
         );
         break;
       case "keyword":
-        // @panMap NOTE: on didUpdate, this can flyTo because this.map exists. on didMount, it can't. Handle this in the function with a bool
-        // get mpms array to filter & then fly to default extent
         this.props.getTIPByKeywords(value);
         break;
       default:
@@ -178,14 +176,6 @@ class MapComponent extends Component {
     });
 
     this.map.on("load", () => {
-      if (this.props.keywordProjects) {
-        // @UPDATE: this looks ok but there's still an initial render of all projects that throws off the loading/no results handling
-        // maybe move it to *before* map.on('load') or into didUpdate
-        // in addition to ^, try initializing the map with the default state key filter i.e. an empty map to start until it gets populated...
-        // let keyFilter = this.buildKeywordFilter(this.props.keywordProjects);
-        // this.setState({ keyFilter });
-      }
-
       let zoom = new mapboxgl.NavigationControl();
       this.map.addControl(zoom, "top-right");
     });
@@ -193,7 +183,7 @@ class MapComponent extends Component {
     this.map.on("click", "pa-tip-points", e => {
       if (!e) return;
 
-      // get a hnadle on history
+      // get a handle on history
       const { history } = this.props;
 
       // extract and format values to match those from listItem/tiles
@@ -294,7 +284,6 @@ class MapComponent extends Component {
       // @panMap function START
       switch (type) {
         case "location":
-          // @TODO: replace this with the mapbox geocoder
           this.Places.getDetails(
             { placeId: value, fields: ["geometry.location"] },
             results => {
@@ -332,12 +321,51 @@ class MapComponent extends Component {
       const scope = this.props.projectScope;
 
       // zoom to project
+      // if(unique project): // @ update: need the list of group projects to finish this
       this.map.flyTo({
         center: scope.coords,
         zoom: scope.zoom
       });
+      // else: this.map.flyTo (default center and default zoom)
+    }
 
-      // highlight project (@TODO: either set project popup or update project style)
+    // toggle active project style
+    if (this.props.activeProject !== prevProps.activeProject) {
+      const id = this.props.activeProject;
+      let intervalId;
+
+      const styleProject = id => {
+        if (id) {
+          this.map.setFeatureState(
+            {
+              source: "pa-tip",
+              sourceLayer: "patip_point",
+              id
+            },
+            {
+              active: true
+            }
+          );
+        } else {
+          this.map.removeFeatureState({
+            source: "pa-tip",
+            sourceLayer: "patip_point"
+          });
+        }
+      };
+
+      const checkStyle = () => {
+        if (this.map.isStyleLoaded()) {
+          styleProject(id);
+          clearInterval(intervalId);
+        }
+      };
+
+      if (this.map.isStyleLoaded()) {
+        styleProject(id);
+      } else {
+        intervalId = window.setInterval(checkStyle, 400);
+      }
     }
   }
 
@@ -421,11 +449,11 @@ class MapComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    center: state.getTIP.center,
     keywordProjects: state.getTIP.keyword,
     category: state.getTIP.category,
+    markerFromTiles: state.connectTilesToMap.markerInfo,
     projectScope: state.getTIP.projectScope,
-    markerFromTiles: state.connectTilesToMap.markerInfo
+    activeProject: state.getTIP.activeProject
   };
 };
 
