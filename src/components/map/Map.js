@@ -36,7 +36,6 @@ class MapComponent extends Component {
       tilePopup: {}
     };
 
-    // @TODO: replace this with the mapbox geocoder
     this.Places = new window.google.maps.places.PlacesService(
       document.createElement("div")
     );
@@ -139,7 +138,6 @@ class MapComponent extends Component {
     // @ panMap function START
     switch (type) {
       case "location":
-        // @TODO: replace this with the mapbox geocoder
         this.Places.getDetails(
           { placeId: value, fields: ["geometry.location"] },
           results => {
@@ -286,7 +284,6 @@ class MapComponent extends Component {
       // @panMap function START
       switch (type) {
         case "location":
-          // @TODO: replace this with the mapbox geocoder
           this.Places.getDetails(
             { placeId: value, fields: ["geometry.location"] },
             results => {
@@ -335,8 +332,9 @@ class MapComponent extends Component {
     // toggle active project style
     if (this.props.activeProject !== prevProps.activeProject) {
       const id = this.props.activeProject;
+      let intervalId;
 
-      if (this.map.isStyleLoaded()) {
+      const styleProject = id => {
         if (id) {
           this.map.setFeatureState(
             {
@@ -354,6 +352,19 @@ class MapComponent extends Component {
             sourceLayer: "patip_point"
           });
         }
+      };
+
+      const checkStyle = () => {
+        if (this.map.isStyleLoaded()) {
+          styleProject(id);
+          clearInterval(intervalId);
+        }
+      };
+
+      if (this.map.isStyleLoaded()) {
+        styleProject(id);
+      } else {
+        intervalId = window.setInterval(checkStyle, 400);
       }
     }
   }
