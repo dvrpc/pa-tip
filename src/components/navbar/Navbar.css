@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 850px) {
   .navBar {
-    height: 10vh;
+    height: 8vh;
   }
   .navbar-logo {
     display: none;

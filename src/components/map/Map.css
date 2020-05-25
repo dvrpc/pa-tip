@@ -136,10 +136,13 @@
 /*just guessing here...*/
  @media screen and (max-width: 880px) {
   .map{
-    height: 50vh;
+    height: 45vh;
     width: 100%;
   }
   .btn {
     padding: 0.3rem 0.4rem;
+  }
+  .mapboxgl-ctrl-top-right, .btn, .dropdown-item, .legend-link {
+    font-size: 0.7rem;
   }
  }

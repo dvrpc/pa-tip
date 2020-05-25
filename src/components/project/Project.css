@@ -152,8 +152,27 @@
 
 
 /* Media queries */
-@media all and(max-width: 700px) {
+@media all and (max-width: 700px) {
   #project-title{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+  #placeholder{
+    height: 200px;
+  }
+  #project-description p{
+    font-size: 0.9rem;
+  }
+  #project-table-section {
+    padding-bottom: 6%;
+  }
+  .tab-buttons, .tabs h3{
+    font-size: 1rem;
+  }
+  table {
+    font-size: 0.7rem;
+    table-layout: auto;
+  }
+  .table-data-rows, #funding-totals, #program-year-totals, #funding-subheaders {
+    font-size: 0.7rem;
   }
 }

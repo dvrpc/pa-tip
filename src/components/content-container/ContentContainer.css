@@ -13,7 +13,7 @@
  @media screen and (max-width: 880px) {
    .contentContainer{
         margin-left: 0;
-        max-height: 50vh;
+        height: 47vh;
         width: 100%;
    }
  }
