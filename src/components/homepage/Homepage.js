@@ -309,7 +309,7 @@ class Homepage extends Component {
                   <span className="sm">[0.1 MB pdf]</span>
                   <ul style={{ fontSize: "initial" }}>
                     <li>
-                      <a href="/GetInvolved/PublicNotices/2019-nj-tip.html">
+                      <a href="/GetInvolved/PublicNotices/2020-TIP-LRP.html">
                         Legal Notice
                       </a>
                     </li>
@@ -420,6 +420,12 @@ class Homepage extends Component {
                   </a>{" "}
                   <span className="sm">[0.2 MB pdf]</span>
                 </li>
+                <li className="list-group-item">
+                  <a href="/review/TIP/Draft/pdf/dvrpcimp21d.pdf">
+                    Interstate Management Program in the DVRPC Region
+                  </a>{" "}
+                  <span className="sm">[0.5 MB pdf]</span>
+                </li>
               </ul>
             </section>
 
@@ -437,12 +443,6 @@ class Homepage extends Component {
                     SEPTA Projects
                   </a>{" "}
                   <span className="sm">[0.2 MB pdf]</span>
-                </li>
-                <li className="list-group-item">
-                  <a href="/review/TIP/Draft/pdf/dvrpcimp21d.pdf">
-                    Interstate Management Program in the DVRPC Region
-                  </a>{" "}
-                  <span className="sm">[0.5 MB pdf]</span>
                 </li>
               </ul>
             </section>
@@ -507,7 +507,7 @@ class Homepage extends Component {
                   <a href="/review/TIP/Draft/pdf/EJAppendix.pdf">
                     F – Environmental Justice Appendix
                   </a>{" "}
-                  <span className="sm">[0.1 MB pdf]</span>
+                  <span className="sm">[34 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/review/TIP/Draft/pdf/AddendumPubInvolve21.pdf">

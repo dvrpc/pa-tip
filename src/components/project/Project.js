@@ -18,7 +18,7 @@ import { colors } from "../../utils/tileGeometryColorType.js";
 import { switchTabs } from "./switchTabs.js";
 import { getTotals } from "./calculateFundingTotals.js";
 import cat from "./cat.gif";
-import noStreetview from "./noStreetview.jpg";
+import noStreetview from "./noStreetview.png";
 
 class Project extends Component {
   constructor(props) {
@@ -220,7 +220,9 @@ class Project extends Component {
                       <tr>
                         <th colSpan={2} />
                         <th colSpan={4}>
-                          <h3>PA FY2021 TIP Program Years (in Millions)</h3>
+                          <h3>
+                            Draft PA FY2021 TIP Program Years (in Millions)
+                          </h3>
                         </th>
                         <th colSpan={1} />
                       </tr>
@@ -233,19 +235,17 @@ class Project extends Component {
                     >
                       <tr>
                         <td colSpan={1}>
-                          {/* @UPDATE: find equivalent PA TIP pdf */}
                           <a
                             className="table-links"
-                            href="/TIP/PA/pdf/CodesAbbrev.pdf"
+                            href="/review/TIP/Draft/pdf/CodesAbbr.pdf"
                           >
                             Phase
                           </a>
                         </td>
                         <td>
-                          {/* @UPDATE: find equivalent PA TIP pdf */}
                           <a
                             className="table-links"
-                            href="/TIP/PA/pdf/CodesAbbrev.pdf"
+                            href="/review/TIP/Draft/pdf/CodesAbbr.pdf"
                           >
                             Fund
                           </a>
@@ -296,13 +296,13 @@ class Project extends Component {
                       <thead>
                         <tr>
                           <th>
+                            <h3>Phase</h3>
+                          </th>
+                          <th>
                             <h3>Milestone</h3>
                           </th>
                           <th>
                             <h3>Estimated Date</h3>
-                          </th>
-                          <th>
-                            <h3>Actual Date</h3>
                           </th>
                         </tr>
                       </thead>
