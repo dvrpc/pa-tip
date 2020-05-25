@@ -392,7 +392,7 @@ class MapComponent extends Component {
     }
 
     return (
-      <div className="map" ref={e => (this.tipMap = e)}>
+      <div className="map no-print" ref={e => (this.tipMap = e)}>
         <nav className="dropdown-nav">
           <div className="dropdown-layers">
             <button

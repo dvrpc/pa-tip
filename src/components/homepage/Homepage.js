@@ -22,13 +22,13 @@ import philly from "./philly.mp4";
 import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
-  // @COMMENTS: add when comment period opens
+  // @COMMENTS: add when comment period closes
   // componentDidMount() {
   //   this.props.getGeneralComments();
   // }
 
   render() {
-    // @COMMENTS: add when comment period opens
+    // @COMMENTS: add when comment period closes
     // const comments = this.props.comments.comments || [];
 
     return (

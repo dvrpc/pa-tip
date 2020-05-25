@@ -19,7 +19,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navBar">
+      <nav className="navBar no-print">
         <div className="navbar-links">
           <a href="https://www.dvrpc.org/" rel="external">
             <img src={logo} alt="DVRPC logo" id="dvrpc-logo" />

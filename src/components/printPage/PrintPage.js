@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import PrintTemplate from "react-print";
 
 const printMain = {
-  position: "absolute",
-  height: "100%",
-  top: "1%",
   padding: "2% 3%",
   color: "#333"
 };
@@ -40,7 +37,7 @@ class PrintPage extends Component {
         <h1 style={header}>{details.road_name}</h1>
 
         <div style={printSubheadersWrap}>
-          <h2 style={{ fontSize: "1rem" }}>DB #: {details.id}</h2>
+          <h2 style={{ fontSize: "1rem" }}>MPMS #: {details.id}</h2>
           <h2 style={{ fontSize: "1rem" }}>
             Municipality(s): {details.municipalities}
           </h2>
@@ -69,7 +66,7 @@ class PrintPage extends Component {
                     colSpan="4"
                     style={{ fontWeight: "700", textAlign: "center" }}
                   >
-                    FY2021 TIP for Pennsylvania Program Years (in Millions)
+                    Draft PA FY2021 TIP Program Years (in Millions)
                   </td>
                   <td colSpan="2" />
                 </tr>
@@ -79,27 +76,21 @@ class PrintPage extends Component {
                 <tr style={{ color: "#f7f7f7" }}>
                   <td>Phase</td>
                   <td>Fund</td>
-                  <td style={{ fontWeight: "700" }}>2021</td>
-                  <td style={{ fontWeight: "700" }}>2022</td>
-                  <td style={{ fontWeight: "700" }}>2023</td>
-                  <td style={{ fontWeight: "700" }}>2024</td>
-                  <td colSpan={2}>2024-2029</td>
+                  <td style={{ fontWeight: "700" }}>FY21</td>
+                  <td style={{ fontWeight: "700" }}>FY22</td>
+                  <td style={{ fontWeight: "700" }}>FY23</td>
+                  <td style={{ fontWeight: "700" }}>FY24</td>
+                  <td colSpan={2}>2025-2032</td>
                 </tr>
 
                 {details.funding.data.map(row => (
                   <tr className="table-data-rows" key={row.join()}>
                     <td>{row[0]}</td>
-
                     <td>{row[1]}</td>
-
                     <td>${row[2]}</td>
-
                     <td>${row[3]}</td>
-
                     <td>${row[4]}</td>
-
                     <td>${row[5]}</td>
-
                     <td colSpan={2}>${row[6]}</td>
                   </tr>
                 ))}
@@ -117,19 +108,16 @@ class PrintPage extends Component {
               </tbody>
             </table>
             <p style={{ marginLeft: "2%" }}>
-              Total FY20 - FY23 Cost (in Millions): <strong>{totals[4]}</strong>
+              Total FY21 - FY24 Cost (in Millions): <strong>{totals[4]}</strong>
             </p>
 
             <p style={{ marginLeft: "2%" }}>
-              Total FY20 - FY29 Cost (in Millions): <strong>{totals[5]}</strong>
+              Total FY21 - FY32 Cost (in Millions): <strong>{totals[5]}</strong>
             </p>
           </div>
         ) : (
           <h3 id="noFunding" style={{ fontSize: "0.9rem" }}>
-            This project is in the Study and Development Program, which could
-            become a candidate for consideration in a future TIP and STIP Update
-            for the phases of Preliminary Engineering, Final Design,
-            Right-of-Way Acquisition, and Construction.
+            Funding information is not available for this project.
           </h3>
         )}
 
@@ -138,11 +126,9 @@ class PrintPage extends Component {
           <table style={printTable}>
             <thead>
               <tr>
-                <th style={{ textAlign: "left" }}>Milestone</th>
-
+                <th style={{ textAlign: "left" }}>Phase</th>
+                <th>Milestone</th>
                 <th>Estimated Date</th>
-
-                <th>Actual Date</th>
               </tr>
             </thead>
 

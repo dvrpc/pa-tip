@@ -9,7 +9,7 @@ class Comments extends Component {
   render() {
     return (
       <div
-        className="comments"
+        className="comments no-print"
         id="comments-anchor"
         ref={el => {
           this.comments = el;

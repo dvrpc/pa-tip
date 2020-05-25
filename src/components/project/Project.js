@@ -127,9 +127,10 @@ class Project extends Component {
           <div>
             <PrintPage details={details} totals={funding} id="print-mount" />
 
-            <div id="project">
+            <div id="project" className="no-print">
               <div
                 id="content-mini-nav"
+                className="no-print"
                 style={{ background: colorScheme.darkest }}
               >
                 <p onClick={this.backToResults}>
@@ -140,7 +141,7 @@ class Project extends Component {
                 </p>
               </div>
 
-              <figure>
+              <figure className="no-print">
                 <div
                   id="placeholder"
                   ref={x => (this.streetview = x)}
