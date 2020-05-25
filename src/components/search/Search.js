@@ -123,8 +123,20 @@ class Search extends Component {
       ]
     };
 
+    const fund = {
+      label: "Fund",
+      options: [
+        {
+          label: this.state.value,
+          value: this.state.value,
+          type: "keyword"
+        }
+      ]
+    };
+
     suggestions.push(search);
     suggestions.push(projects);
+    suggestions.push(fund);
 
     // because google wont let you limit results to > 5
     locations.options = locations.options.slice(0, 2);
