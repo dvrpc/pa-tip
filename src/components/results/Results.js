@@ -95,7 +95,6 @@ class Results extends Component {
             onChange={e => this.filterByCategory(e)}
             ref={e => (this.categorySelector = e)}
             value={this.props.category}
-            defaultValue="All Categories"
           >
             <option value="All Categories">All Categories</option>
             <option

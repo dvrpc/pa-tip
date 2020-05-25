@@ -6,6 +6,7 @@ const GET_TIP_BY_MAP_BOUNDS = "GET_TIP_BY_MAP_BOUNDS";
 const SET_FILTER = "SET_FILTER";
 const HYDRATE_GEOMETRY = "HYDRATE_GEOMETRY'";
 const SET_PROJECT_SCOPE = "SET_PROJECT_SCOPE";
+const SET_ACTIVE_PROJECT = "SET_ACTIVE_PROJECT";
 
 /*** ACTION_CREATORS ***/
 const fetch_tip_keywords = fetchedKeywords => ({
@@ -23,6 +24,10 @@ const hydrate_geometry = geometry => ({ type: HYDRATE_GEOMETRY, geometry });
 const set_project_scope = projectScope => ({
   type: SET_PROJECT_SCOPE,
   projectScope
+});
+const set_active_project = activeProject => ({
+  type: SET_ACTIVE_PROJECT,
+  activeProject
 });
 
 /*** REDUCERS ***/
@@ -44,6 +49,8 @@ export default function tipReducer(state = [], action) {
       return Object.assign({}, state, { geometry: action.geometry });
     case SET_PROJECT_SCOPE:
       return Object.assign({}, state, { projectScope: action.projectScope });
+    case SET_ACTIVE_PROJECT:
+      return Object.assign({}, state, { activeProject: action.activeProject });
     default:
       return state;
   }
@@ -101,6 +108,10 @@ export const clearKeywords = () => dispatch =>
 
 export const setFilter = category => dispatch => {
   dispatch(set_filter(category));
+};
+
+export const setActiveProject = id => dispatch => {
+  dispatch(set_active_project(id));
 };
 
 // get all projects within the boundaires of the current mapbox view
