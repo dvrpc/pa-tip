@@ -64,8 +64,8 @@
   .nav-vr {
     height: 4vh;
   }
-  #draft-text{
-    font-size: 0.7em;
+  .pa-text{
+    font-size: 0.6em;
     margin-left: 0;
   }
   ::-webkit-input-placeholder {
