@@ -131,6 +131,9 @@ class MapComponent extends Component {
 
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
+  resetControl = () =>
+    this.map ? this.map.flyTo({ center: [-75.4, 40.15], zoom: 8.5 }) : false;
+
   componentDidMount() {
     let popup;
     const { type, value } = this.props.match.params;
@@ -319,6 +322,7 @@ class MapComponent extends Component {
 
     if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
       const scope = this.props.projectScope;
+      console.log("scope ", scope);
 
       // zoom to project or full extent for group projects
       let unique = true;
@@ -448,6 +452,18 @@ class MapComponent extends Component {
             {this.state.toggleLegendList ? <Legend show={"show"} /> : null}
           </div>
         </nav>
+        <div
+          id="default-extent-btn"
+          className="shadow overlays"
+          aria-label="Default DVRPC Extent"
+          onClick={this.resetControl}
+        >
+          <img
+            id="default-extent-img"
+            src="https://www.dvrpc.org/img/banner/new/bug-favicon.png"
+            alt="DVRPC logo"
+          />
+        </div>
       </div>
     );
   }

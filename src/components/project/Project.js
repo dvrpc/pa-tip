@@ -65,14 +65,15 @@ class Project extends Component {
     const esriGeom = this.props.coords;
 
     // check for response
-    // @API: when Jesse/Kris creates the coords API and hydrateGeom is updated, update this too
     if (!this.state.geom && esriGeom) {
       const coords = esriGeom.features.length
         ? esriGeom.features[0].geometry.coordinates
         : null;
 
-      // check for non empty response
-      if (!coords) return;
+      let unique = true;
+
+      // check for non empty response or group projects
+      if (!unique || !coords) return;
 
       //this.generateStreetview(coords);
       this.setState({ geom: true });
