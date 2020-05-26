@@ -75,9 +75,9 @@ class Project extends Component {
       let groupProject = groupProjects.includes(id);
 
       // check for non empty response or group projects
-      if (!groupProject || !coords) return;
+      if (groupProject || !coords) return;
 
-      //this.generateStreetview(coords);
+      this.generateStreetview(coords);
       this.setState({ geom: true });
     }
   }
