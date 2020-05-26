@@ -37,7 +37,7 @@ class Homepage extends Component {
           <header className="homepage-banner">
             <div id="banner-logo">
               <a href="https://www.dvrpc.org/">
-                <img src={logo} alt="dvrpc logo" />
+                <img src={logo} alt="dvrpc logo" id="dvrpc-logo" />
               </a>
             </div>
             <div className="stacked-headers">

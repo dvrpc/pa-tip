@@ -49,12 +49,12 @@
 #search-form {
   position: absolute;
   border-radius: 10px;
-  left: 48%;
+  left: 54%;
   right: 0;
   top: 20%;
   background: rgba(238, 238, 238, 0.7);
   color: black;
-  width: 50%;
+  width: 44%;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
 #search-form input:focus {
@@ -160,6 +160,42 @@
   color: #DEDEDE;
 }
 /* Media Queries*/
+/* Special case for video  */
+@media only screen and (max-width: 1200px) {
+  .homepage-main {
+    height: 50vh;
+  }
+  #bgvid {
+    transform: translateX(-50%) translateY(-58%);
+  }
+}
+
+/* Tablets (landscape)  */
+@media only screen and (max-width: 900px) {
+  .homepage-main {
+    height: 40vh;
+  }
+  #banner-tip-logo, #dvrpc-logo {
+    width: 75px;
+  }
+  .homepage-banner h1 {
+    font-size: 1.1rem;
+  }
+  #bgvid {
+    top: 80%;
+    transform: translateX(-50%) translateY(-67%);
+  }
+  #search-form {
+    width: 80%;
+    left: 11%;
+  }
+  .info-section-header {
+    font-size: 1.3rem;
+  }
+  #tip-info p {
+    font-size: 1rem;
+  }
+}
 
 /* Phones and tablets (portrait) */
 @media only screen and (max-width: 700px) {
@@ -173,11 +209,8 @@
   #banner-logo {
     padding-right: 5vw;
   }
-  #banner-logo img {
-    width: 70px;
-  }
-  #banner-tip-logo {
-    width: 70px;
+  #banner-tip-logo, #dvrpc-logo {
+    width: 55px;
   }
   #bgvid {
     display: none;
@@ -213,36 +246,5 @@
   }
   #obligation-summary-table{
     font-size: 1rem;
-  }
-}
-
-/* Tablets (landscape)  */
-@media only screen and (max-width: 900px) {
-  .homepage-main {
-    height: 40vh;
-  }
-  #bgvid {
-    top: 60%;
-    transform: translateX(-50%) translateY(-67%);
-  }
-  #search-form {
-    width: 70%;
-    left: 17.5%;
-  }
-  .info-section-header {
-    font-size: 1.3rem;
-  }
-  #tip-info p {
-    font-size: 1rem;
-  }
-}
-
-/* Special case for video  */
-@media only screen and (max-width: 1200px) {
-  .homepage-main {
-    height: 50vh;
-  }
-  #bgvid {
-    transform: translateX(-50%) translateY(-58%);
   }
 }
