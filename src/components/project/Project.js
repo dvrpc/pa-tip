@@ -241,7 +241,7 @@ class Project extends Component {
                         <td colSpan={1}>
                           <a
                             className="table-links"
-                            href="/review/TIP/Draft/pdf/CodesAbbr.pdf"
+                            href="/TIP/Draft/pdf/CodesAbbr.pdf"
                           >
                             Phase
                           </a>
@@ -249,7 +249,7 @@ class Project extends Component {
                         <td>
                           <a
                             className="table-links"
-                            href="/review/TIP/Draft/pdf/CodesAbbr.pdf"
+                            href="/TIP/Draft/pdf/CodesAbbr.pdf"
                           >
                             Fund
                           </a>
