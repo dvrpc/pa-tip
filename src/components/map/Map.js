@@ -11,6 +11,7 @@ import {
 
 import { updateBounds, showPopup } from "./updateMap";
 import { clickTile } from "../../utils/clickTile.js";
+import { groupProjects } from "../../utils/groupProjectsMPMS.js";
 
 import "./Map.css";
 import layers from "./layers.js";
@@ -322,11 +323,11 @@ class MapComponent extends Component {
 
     if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
       const scope = this.props.projectScope;
-      console.log("scope ", scope);
+      const id = parseInt(scope.id);
+      let groupProject = groupProjects.includes(id);
 
       // zoom to project or full extent for group projects
-      let unique = true;
-      if (unique) {
+      if (!groupProject) {
         this.map.flyTo({
           center: scope.coords,
           zoom: scope.zoom

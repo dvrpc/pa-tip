@@ -15,6 +15,7 @@ import {
 // import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
+import { groupProjects } from "../../utils/groupProjectsMPMS.js";
 import { switchTabs } from "./switchTabs.js";
 import { getTotals } from "./calculateFundingTotals.js";
 import cat from "./cat.gif";
@@ -70,10 +71,11 @@ class Project extends Component {
         ? esriGeom.features[0].geometry.coordinates
         : null;
 
-      let unique = true;
+      const id = parseInt(this.props.mpms);
+      let groupProject = groupProjects.includes(id);
 
       // check for non empty response or group projects
-      if (!unique || !coords) return;
+      if (!groupProject || !coords) return;
 
       //this.generateStreetview(coords);
       this.setState({ geom: true });
