@@ -26,6 +26,7 @@
   align-items: center;
 }
 .homepage-main {
+  position: relative;
   background: linear-gradient(
     to right,
     rgba(102, 41, 103, 0.6),
@@ -36,10 +37,9 @@
 }
 #bgvid {
   position: absolute;
-  top: 56%;
+  top: 70%;
   left: 50%;
   width: 100%;
-  min-height: 85%;
   z-index: -100;
   -ms-transform: translateX(-50%) translateY(-40%);
   -moz-transform: translateX(-50%) translateY(-40%);
@@ -47,11 +47,14 @@
   transform: translateX(-50%) translateY(-45%);
 }
 #search-form {
+  position: absolute;
   border-radius: 10px;
-  margin: 5% 2% 0 auto;
+  left: 48%;
+  right: 0;
+  top: 20%;
   background: rgba(238, 238, 238, 0.7);
   color: black;
-  width: 595px;
+  width: 50%;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
 #search-form input:focus {
@@ -188,9 +191,9 @@
     font-size: 0.8rem;
   }
   #search-form{
-    width: 90%;
-    margin: 0 auto !important;
-    margin-top: 25vh !important;
+    width: 96% !important;
+    left: 2% !important;
+    font-size: 0.87rem;
   }
   #tip-info-paragraphs {
     margin-left: 0;
@@ -219,10 +222,12 @@
     height: 40vh;
   }
   #bgvid {
+    top: 60%;
     transform: translateX(-50%) translateY(-67%);
   }
   #search-form {
-    margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
+    width: 70%;
+    left: 17.5%;
   }
   .info-section-header {
     font-size: 1.3rem;

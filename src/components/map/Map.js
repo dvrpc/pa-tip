@@ -320,13 +320,19 @@ class MapComponent extends Component {
     if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
       const scope = this.props.projectScope;
 
-      // zoom to project
-      // if(unique project): // @ update: need the list of group projects to finish this
-      this.map.flyTo({
-        center: scope.coords,
-        zoom: scope.zoom
-      });
-      // else: this.map.flyTo (default center and default zoom)
+      // zoom to project or full extent for group projects
+      let unique = true;
+      if (unique) {
+        this.map.flyTo({
+          center: scope.coords,
+          zoom: scope.zoom
+        });
+      } else {
+        this.map.flyTo({
+          center: [-75.4, 40.15],
+          zoom: 8.5
+        });
+      }
     }
 
     // toggle active project style
