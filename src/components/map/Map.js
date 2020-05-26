@@ -11,6 +11,7 @@ import {
 
 import { updateBounds, showPopup } from "./updateMap";
 import { clickTile } from "../../utils/clickTile.js";
+import { groupProjects } from "../../utils/groupProjectsMPMS.js";
 
 import "./Map.css";
 import layers from "./layers.js";
@@ -130,6 +131,9 @@ class MapComponent extends Component {
   };
 
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
+
+  resetControl = () =>
+    this.map ? this.map.flyTo({ center: [-75.4, 40.15], zoom: 8.5 }) : false;
 
   componentDidMount() {
     let popup;
@@ -319,10 +323,11 @@ class MapComponent extends Component {
 
     if (this.props.projectScope && this.props.projectScope.id !== oldScope) {
       const scope = this.props.projectScope;
+      const id = parseInt(scope.id);
+      let groupProject = groupProjects.includes(id);
 
       // zoom to project or full extent for group projects
-      let unique = true;
-      if (unique) {
+      if (!groupProject) {
         this.map.flyTo({
           center: scope.coords,
           zoom: scope.zoom
@@ -448,6 +453,18 @@ class MapComponent extends Component {
             {this.state.toggleLegendList ? <Legend show={"show"} /> : null}
           </div>
         </nav>
+        <div
+          id="default-extent-btn"
+          className="shadow overlays"
+          aria-label="Default DVRPC Extent"
+          onClick={this.resetControl}
+        >
+          <img
+            id="default-extent-img"
+            src="https://www.dvrpc.org/img/banner/new/bug-favicon.png"
+            alt="DVRPC logo"
+          />
+        </div>
       </div>
     );
   }

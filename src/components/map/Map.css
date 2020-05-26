@@ -133,7 +133,24 @@
   flex-flow: row;
   justify-content: center;
 }
-/*just guessing here...*/
+#default-extent-btn{
+  height: 18px;
+  width: 18px;
+  right: 10px;
+  top: calc(50% + 42px);
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+}
+#default-extent-img{
+  height: 100%;
+}
+
+
  @media screen and (max-width: 880px) {
   .map{
     height: 45vh;

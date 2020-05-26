@@ -15,6 +15,7 @@ import {
 // import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
+import { groupProjects } from "../../utils/groupProjectsMPMS.js";
 import { switchTabs } from "./switchTabs.js";
 import { getTotals } from "./calculateFundingTotals.js";
 import cat from "./cat.gif";
@@ -65,14 +66,16 @@ class Project extends Component {
     const esriGeom = this.props.coords;
 
     // check for response
-    // @API: when Jesse/Kris creates the coords API and hydrateGeom is updated, update this too
     if (!this.state.geom && esriGeom) {
       const coords = esriGeom.features.length
         ? esriGeom.features[0].geometry.coordinates
         : null;
 
-      // check for non empty response
-      if (!coords) return;
+      const id = parseInt(this.props.mpms);
+      let groupProject = groupProjects.includes(id);
+
+      // check for non empty response or group projects
+      if (!groupProject || !coords) return;
 
       //this.generateStreetview(coords);
       this.setState({ geom: true });
