@@ -26,6 +26,7 @@
   align-items: center;
 }
 .homepage-main {
+  position: relative;
   background: linear-gradient(
     to right,
     rgba(102, 41, 103, 0.6),
@@ -36,10 +37,9 @@
 }
 #bgvid {
   position: absolute;
-  top: 56%;
+  top: 70%;
   left: 50%;
   width: 100%;
-  min-height: 85%;
   z-index: -100;
   -ms-transform: translateX(-50%) translateY(-40%);
   -moz-transform: translateX(-50%) translateY(-40%);
@@ -47,11 +47,14 @@
   transform: translateX(-50%) translateY(-45%);
 }
 #search-form {
+  position: absolute;
   border-radius: 10px;
-  margin: 5% 2% 0 auto;
+  left: 54%;
+  right: 0;
+  top: 20%;
   background: rgba(238, 238, 238, 0.7);
   color: black;
-  width: 595px;
+  width: 44%;
   box-shadow: 2px 3px 4px 1px rgba(0, 0, 0, 0.55);
 }
 #search-form input:focus {
@@ -157,6 +160,42 @@
   color: #DEDEDE;
 }
 /* Media Queries*/
+/* Special case for video  */
+@media only screen and (max-width: 1200px) {
+  .homepage-main {
+    height: 50vh;
+  }
+  #bgvid {
+    transform: translateX(-50%) translateY(-58%);
+  }
+}
+
+/* Tablets (landscape)  */
+@media only screen and (max-width: 900px) {
+  .homepage-main {
+    height: 40vh;
+  }
+  #banner-tip-logo, #dvrpc-logo {
+    width: 75px;
+  }
+  .homepage-banner h1 {
+    font-size: 1.1rem;
+  }
+  #bgvid {
+    top: 80%;
+    transform: translateX(-50%) translateY(-67%);
+  }
+  #search-form {
+    width: 80%;
+    left: 11%;
+  }
+  .info-section-header {
+    font-size: 1.3rem;
+  }
+  #tip-info p {
+    font-size: 1rem;
+  }
+}
 
 /* Phones and tablets (portrait) */
 @media only screen and (max-width: 700px) {
@@ -170,11 +209,8 @@
   #banner-logo {
     padding-right: 5vw;
   }
-  #banner-logo img {
-    width: 70px;
-  }
-  #banner-tip-logo {
-    width: 70px;
+  #banner-tip-logo, #dvrpc-logo {
+    width: 55px;
   }
   #bgvid {
     display: none;
@@ -188,9 +224,9 @@
     font-size: 0.8rem;
   }
   #search-form{
-    width: 90%;
-    margin: 0 auto !important;
-    margin-top: 25vh !important;
+    width: 96% !important;
+    left: 2% !important;
+    font-size: 0.87rem;
   }
   #tip-info-paragraphs {
     margin-left: 0;
@@ -210,34 +246,5 @@
   }
   #obligation-summary-table{
     font-size: 1rem;
-  }
-}
-
-/* Tablets (landscape)  */
-@media only screen and (max-width: 900px) {
-  .homepage-main {
-    height: 40vh;
-  }
-  #bgvid {
-    transform: translateX(-50%) translateY(-67%);
-  }
-  #search-form {
-    margin: 5% 5% 0 calc(30vw + 12% + 2.5vw);
-  }
-  .info-section-header {
-    font-size: 1.3rem;
-  }
-  #tip-info p {
-    font-size: 1rem;
-  }
-}
-
-/* Special case for video  */
-@media only screen and (max-width: 1200px) {
-  .homepage-main {
-    height: 50vh;
-  }
-  #bgvid {
-    transform: translateX(-50%) translateY(-58%);
   }
 }

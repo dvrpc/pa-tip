@@ -1,6 +1,6 @@
 .react-autosuggest__container {
-    position: relative;
-  }
+  position: relative;
+}
   
 .react-autosuggest__input--focused {
   outline: none;
