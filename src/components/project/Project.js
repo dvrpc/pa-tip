@@ -222,7 +222,7 @@ class Project extends Component {
                         <th colSpan={2} />
                         <th colSpan={4}>
                           <h3>
-                            Draft PA FY2021 TIP Program Years (in Millions)
+                            Draft FY2021 TIP for PA Program Years (in Millions)
                           </h3>
                         </th>
                         <th colSpan={1} />
