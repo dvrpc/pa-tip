@@ -137,7 +137,7 @@ class Homepage extends Component {
                 <a href="/TIP/Draft/pdf/simp21d.pdf">
                   Statewide Interstate Management Program
                 </a>
-                <span className="sm"> [ MB pdf]</span>. The public comment
+                <span className="sm"> [3.5 MB pdf]</span>. The public comment
                 period will end at 5:00 PM local time on Monday, June 29, 2020.
               </p>
               <p>
