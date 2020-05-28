@@ -124,7 +124,7 @@ export const hydrateGeometry = id => dispatch => {
   if (id === null) return dispatch(hydrate_geometry(null));
 
   fetch(
-    `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
+    `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2021_2024_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
   )
     .then(response => {
       if (response.ok)
@@ -170,7 +170,7 @@ export const setProjectScope = projectScope => dispatch => {
     // @API: ask Kris or Jesse to create an endpoint that accepts an MPMS ID and *just* returns the lat/lng
     // this endpoint is problematic b/c when it fails, it doesn't return an error. It just returns an empty geoJSON...
     fetch(
-      `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2019_2022_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
+      `https://arcgis.dvrpc.org/portal/rest/services/Transportation/PATIP_FY2021_2024_Point/FeatureServer/0/query?where=MPMS_ID=${id}&geometryType=esriGeometryPoint&returnGeometry=true&geometryPrecision=&outSR=4326&f=geojson`
     ).then(response => {
       if (response.ok) {
         response.json().then(project => {
