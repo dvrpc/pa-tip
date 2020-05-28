@@ -83,7 +83,7 @@
   line-height: 1.4;
 }
 .info-section-header, .homepage strong{
-  color: #492649;
+  color: #662967;
 }
 .info-section-header {
   font-weight: 500;
@@ -119,14 +119,13 @@
 	position: absolute;
   width: 20%;
   padding: 2% 0 0;
-  background: linear-gradient(90deg,#492649 5%, #9d779d 65%, transparent 99%);
+  background: #662967;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 2px 0 rgba(48,48,48,.5),0 3px 5px 0 rgba(48,48,48,.6);
 }
 #nav-links-box p {
   padding: 0 1.2rem 0 1.2rem;
-  font-weight: bold;
 }
 #nav-links-box ul {
   list-style-type: none;
