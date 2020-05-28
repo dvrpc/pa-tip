@@ -231,6 +231,9 @@
     left: 2% !important;
     font-size: 0.8rem;
   }
+  .homepage-bottom-bar a {
+    font-weight: 300;
+  }
   #tip-info-paragraphs {
     margin-left: 0;
     width: 100%;
