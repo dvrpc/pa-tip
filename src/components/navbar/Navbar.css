@@ -65,7 +65,7 @@
     height: 4vh;
   }
   .pa-text{
-    font-size: 0.6em;
+    font-size: 0.5em;
     margin-left: 0;
   }
   ::-webkit-input-placeholder {
@@ -82,3 +82,16 @@
   }
 }
 
+@media screen and (max-width: 628px) {
+  .navbar-links{
+    flex-direction: column;
+    align-items: baseline;
+  }
+  .nav-vr{
+    display: none
+  }
+  #tip-logo-wrapper{
+    border-top: 1px solid black;
+    padding-top: 4px;
+  }
+}

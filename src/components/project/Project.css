@@ -159,14 +159,22 @@
   #placeholder{
     height: 200px;
   }
-  #project-description p{
+  .project-content{
+    padding: 3% 6%;
+  }
+  #project-description p, .tab-buttons, #noMilestones{
     font-size: 0.9rem;
   }
-  #project-table-section {
-    padding-bottom: 6%;
+  .tabs{
+    margin-bottom: 6px;
   }
-  .tab-buttons, .tabs h3{
-    font-size: 1rem;
+  .tab-buttons{
+    min-width: 20%;
+    padding: 6px 0;
+  }
+  .table-wrapper{
+    width: 110%;
+    margin-left: -5%;
   }
   table {
     font-size: 0.7rem;

@@ -175,6 +175,9 @@
   .homepage-main {
     height: 40vh;
   }
+  .homepage-banner{
+    justify-content: center;
+  }
   #banner-tip-logo, #dvrpc-logo {
     width: 75px;
   }
@@ -188,6 +191,7 @@
   #search-form {
     width: 80%;
     left: 11%;
+    top: 45%;
   }
   .info-section-header {
     font-size: 1.3rem;
@@ -206,9 +210,6 @@
   .homepage-banner {
     border-bottom: 10px solid white;
   }
-  #banner-logo {
-    padding-right: 5vw;
-  }
   #banner-tip-logo, #dvrpc-logo {
     width: 55px;
   }
@@ -221,12 +222,12 @@
     background-size: cover;
   }
   .stacked-headers h1{
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   #search-form{
     width: 96% !important;
     left: 2% !important;
-    font-size: 0.87rem;
+    font-size: 0.8rem;
   }
   #tip-info-paragraphs {
     margin-left: 0;
@@ -248,3 +249,10 @@
     font-size: 1rem;
   }
 }
+
+@media only screen and (max-width: 473px) {
+  #banner-tip-logo, #dvrpc-logo {
+    width: 42px;
+  }
+}
+

@@ -20,30 +20,31 @@
         "lucida sans unicode", tahoma, sans-serif;
     font-size: 1rem;
     border-radius: 3px;
-    width: 100%;
     padding: 1%;
     height: 120px;
 }
 .input-fields {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .comment-form-info {
     font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana,
         "lucida sans unicode", tahoma, sans-serif;
     font-size: 1rem;
-    width: 100%;
+    width: 31%;
     padding: 5px;
     margin-top: 10px;
     border-radius: 3px;
 }
 #submitCommentButton {
     font-size: 1rem;
-    width: 35%;
+    min-width: 15%;
     margin: 10px auto;
     padding: 10px 5px;
     border: none;
     border-radius: 3px;
-    color: #f1f1f1;
+    color: #000036;
     cursor: pointer;
     -webkit-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
@@ -60,10 +61,22 @@
 
 /* media queries */
 @media screen and (max-width: 700px) {
+    .comments{
+        padding: 5% 3%;
+    }
     .comments h2 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+    }
+    .input-fields{
+        flex-direction: column;
+    }
+    .input-fields select{
+        width: 100%;
+    }
+    .comment-form-info{
+        width: 95.8%;
     }
     .comments-form textarea, .comment-form-info, #submitCommentButton {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 }
