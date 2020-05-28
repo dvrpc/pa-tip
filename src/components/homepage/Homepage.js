@@ -689,7 +689,7 @@ class Homepage extends Component {
 
             <hr />
 
-            <Comments />
+            <Comments headerColor={"#1A1423"} />
           </article>
         </main>
 

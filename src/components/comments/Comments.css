@@ -1,11 +1,9 @@
 /* Comments component */
 .comments {
-    background: #333;
     padding: 4% 3%;
 }
 .comments h2 {
     font-weight: 400;
-    color: #ffffff;
     text-align: center;
     padding-bottom: 3%;
 }
@@ -21,7 +19,7 @@
     font-size: 1rem;
     border-radius: 3px;
     padding: 1%;
-    height: 120px;
+    height: 150px;
 }
 .input-fields {
     width: 100%;
@@ -40,7 +38,7 @@
 #submitCommentButton {
     font-size: 1rem;
     min-width: 15%;
-    margin: 10px auto;
+    margin: 15px auto;
     padding: 10px 5px;
     border: none;
     border-radius: 3px;

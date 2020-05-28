@@ -333,7 +333,7 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-            <Comments />
+            <Comments headerColor={"#fff"} />
             {/* <ReadOnlyComments
               colorScheme={colorScheme}
               comments={details.comments || []}

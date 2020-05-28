@@ -30,7 +30,7 @@
   background: linear-gradient(
     to right,
     rgba(102, 41, 103, 0.6),
-    rgba(0, 0, 0, 0.3) 50%
+    rgba(0, 0, 0, 0.3) 62%
   );
   height: 65vh;
   border: thin solid rgba(0, 0, 0, 0);
@@ -78,14 +78,16 @@
 
 /* Information Section */
 #tip-info {
-  background: #494848;
+  background: #dddddd;
   padding: 3% 4%;
   line-height: 1.4;
+}
+.info-section-header, .homepage strong{
+  color: #492649;
 }
 .info-section-header {
   font-weight: 500;
   font-size: 1.8rem;
-  color: #e5c942;
   padding-bottom: 2%;
   margin-top: 4%;
 }
@@ -101,11 +103,10 @@
 #tip-info-paragraphs {
   margin-left: 30%;
   width: 70%;
-  color: #ffffff;
 }
 #tip-info hr {
   width: 100%;
-  margin: 3% auto;
+  margin: 1% auto;
   background-color: #e5c942;
   height: 2px;
   border: 0;
@@ -115,13 +116,13 @@
   text-decoration: underline;
 }
 #nav-links-box {
-  position: absolute;
-  width: 23%;
+	position: absolute;
+  width: 20%;
   padding: 2% 0 0;
-  background: linear-gradient(to right, #303030 0, transparent 65%);
-  color: #ffffff;
+  background: linear-gradient(90deg,#492649 5%, #9d779d 65%, transparent 99%);
+  color: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 2px 0 rgba(48, 48, 48, 0.7), 0 3px 5px 0 rgba(48, 48, 48, 0.8);
+  box-shadow: 0 2px 2px 0 rgba(48,48,48,.5),0 3px 5px 0 rgba(48,48,48,.6);
 }
 #nav-links-box p {
   padding: 0 1.2rem 0 1.2rem;
@@ -130,7 +131,6 @@
 #nav-links-box ul {
   list-style-type: none;
   padding: 0 1.2rem;
-  background: linear-gradient(to right, #3d3c3c 0, transparent 65%);
 }
 #nav-links-box li {
   padding: 5% 0 5% 0;
@@ -157,7 +157,10 @@
 .sm {
   font-style: italic;
   font-size: 1rem;
-  color: #DEDEDE;
+  color: #561D25;
+}
+.homepage .btn{
+  margin-top: 6px;
 }
 /* Media Queries*/
 /* Special case for video  */
