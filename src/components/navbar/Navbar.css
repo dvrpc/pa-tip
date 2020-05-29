@@ -43,9 +43,6 @@
   .navBar {
     height: 8vh;
   }
-  .navbar-logo {
-    display: none;
-  }
   #nav-search-form {
     font-size: 1rem;
   }
@@ -55,10 +52,8 @@
     width: 80%;
     font-size: 0.7rem;
   }
-  #TIPlogo{
-    display: none;
-  }
-  #dvrpc-logo{
+
+  #dvrpc-logo, #TIPlogo{
     width: 40px;
   }
   .nav-vr {
@@ -84,8 +79,16 @@
 
 @media screen and (max-width: 628px) {
   .navbar-links{
+    position: relative;
     flex-direction: column;
     align-items: baseline;
+  }
+  #TIPlogo{
+    position: absolute;
+    width: 35px;
+    left: 70px;
+    top: 0;
+    margin-right: 0;
   }
   .nav-vr{
     display: none
@@ -93,5 +96,24 @@
   #tip-logo-wrapper{
     border-top: 1px solid black;
     padding-top: 4px;
+  }
+}
+
+@media screen and (max-width: 473px) {
+  #TIPlogo{
+    width: 30px;
+    left: 55px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  #tip-logo-wrapper{
+    padding-top: 1px;
+  }
+  #dvrpc-logo{
+    width: 38px !important;
+  }
+  #nav-search-form{
+    font-size: 0.5rem;
   }
 }

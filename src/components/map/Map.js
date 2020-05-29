@@ -34,7 +34,8 @@ class MapComponent extends Component {
       toggleLegendList: false,
       keyFilter: ["!=", "MPMS_ID", ""],
       catFilter: ["!=", "DESCRIPTIO", ""],
-      tilePopup: {}
+      tilePopup: {},
+      zoom: window.innerWidth <= 950 ? 7.3 : 8.5
     };
 
     this.Places = new window.google.maps.places.PlacesService(
@@ -133,7 +134,9 @@ class MapComponent extends Component {
   buildKeywordFilter = projects => ["in", "MPMS_ID"].concat(projects);
 
   resetControl = () =>
-    this.map ? this.map.flyTo({ center: [-75.4, 40.15], zoom: 8.5 }) : false;
+    this.map
+      ? this.map.flyTo({ center: [-75.4, 40.15], zoom: this.state.zoom })
+      : false;
 
   componentDidMount() {
     let popup;
@@ -149,7 +152,7 @@ class MapComponent extends Component {
             const lat = results.geometry.location.lat();
             this.map.flyTo({
               center: [lng, lat],
-              zoom: 11
+              zoom: 12
             });
           }
         );
@@ -175,7 +178,7 @@ class MapComponent extends Component {
       container: this.tipMap,
       style: mapStyle,
       center: [-75.4, 40.15],
-      zoom: 8.5,
+      zoom: this.state.zoom,
       dragRotate: false
     });
 
@@ -295,7 +298,7 @@ class MapComponent extends Component {
               const lat = results.geometry.location.lat();
               this.map.flyTo({
                 center: [lng, lat],
-                zoom: 11
+                zoom: 12
               });
             }
           );
@@ -306,7 +309,7 @@ class MapComponent extends Component {
           this.props.getTIPByKeywords(value);
           this.map.flyTo({
             center: [-75.4, 40.15],
-            zoom: 8.5
+            zoom: this.state.zoom
           });
           break;
         default:
@@ -330,12 +333,12 @@ class MapComponent extends Component {
       if (!groupProject) {
         this.map.flyTo({
           center: scope.coords,
-          zoom: scope.zoom
+          zoom: 18
         });
       } else {
         this.map.flyTo({
           center: [-75.4, 40.15],
-          zoom: 8.5
+          zoom: this.state.zoom
         });
       }
     }

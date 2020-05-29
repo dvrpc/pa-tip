@@ -26,6 +26,7 @@ class Homepage extends Component {
   // componentDidMount() {
   //   this.props.getGeneralComments();
   // }
+  toTop = () => window.scroll({ top: 0, behavior: "smooth" });
 
   render() {
     // @COMMENTS: add when comment period closes
@@ -78,19 +79,28 @@ class Homepage extends Component {
               }}
             >
               More Information
-              <img src={arrow} alt="down navigation arrow" />
+              {/* <img src={arrow} alt="down navigation arrow" /> */}
+            </a>
+            <a
+              href="#tip-info"
+              onClick={e => {
+                scrollToElement(this, e, "tipInfo");
+              }}
+            >
+              <span>&darr;</span>
             </a>
           </div>
         </div>
 
         <main id="tip-info" ref={el => (this.tipInfo = el)}>
           <aside id="nav-links-box">
-            <p>
-              <a href="https://www.dvrpc.org/TIP/">
-                Transportation Improvement Program (TIP)
-              </a>
-            </p>
             <ul>
+              <li>
+                <b>Transportation Improvement Program (TIP)</b>
+              </li>
+              <li>
+                <a href="https://www.dvrpc.org/TIP/">TIP Homepage</a>
+              </li>
               <li>
                 <b>Draft FY2021 TIP for PA</b>
               </li>
@@ -106,6 +116,13 @@ class Homepage extends Component {
                 </a>
               </li>
             </ul>
+
+            <hr id="nav-links-hr" />
+
+            <div id="homepage-to-top" onClick={this.toTop}>
+              <span>&uarr;</span>
+              <div>to top</div>
+            </div>
           </aside>
 
           <article id="tip-info-paragraphs">

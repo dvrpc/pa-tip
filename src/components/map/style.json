@@ -4234,8 +4234,7 @@
       "source": "boundary",
       "source-layer": "municipalities",
       "filter": ["all", ["==", "state", "PA"]],
-      "minzoom": 11,
-      "maxzoom": 18,
+      "minzoom": 6.8,
       "layout": {
         "line-cap": "butt",
         "line-join": "round"
@@ -4244,13 +4243,12 @@
         "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "stops": [
+            [7, 0.6],
             [10, 0.75],
             [12, 1.25],
             [13, 1.5]
           ]
         },
-        "line-dasharray": [2, 5],
-        "line-gap-width": 0,
         "line-translate-anchor": "map",
         "line-opacity": {
           "stops": [
@@ -4287,8 +4285,8 @@
           ]
         }
       },
-      "minzoom": 8,
-      "maxzoom": 14,
+      "minzoom": 6.8,
+      "maxzoom": 22,
       "layout": {
         "line-cap": "butt"
       }
