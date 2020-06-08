@@ -17,7 +17,6 @@ import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
 import TIP_logo from "./TIP_logo.png";
-import arrow from "./arrow.png";
 import philly from "./philly.mp4";
 import firstFrame from "./firstFrame.jpg";
 
