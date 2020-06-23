@@ -7,6 +7,8 @@ import { submitComment } from "../../redux/reducers/commentsReducer.js";
 
 class Comments extends Component {
   render() {
+    const mpms = this.props.mpms || null;
+    const submit = this.props.submitComment;
     return (
       <div
         className="comments no-print"
@@ -16,7 +18,10 @@ class Comments extends Component {
         }}
       >
         <h2>Submit a comment on the Draft DVRPC FY2021 TIP for Pennsylvania</h2>
-        <form className="comments-form" onSubmit={e => POSTComment(this, e)}>
+        <form
+          className="comments-form"
+          onSubmit={e => POSTComment(submit, mpms, e)}
+        >
           <textarea placeholder="Enter your public comment here" />
           <div className="input-fields">
             <input

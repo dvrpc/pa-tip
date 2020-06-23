@@ -333,7 +333,7 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-            <Comments />
+            <Comments mpms={details.id} />
             {/* <ReadOnlyComments
               colorScheme={colorScheme}
               comments={details.comments || []}
