@@ -17,7 +17,9 @@ class Comments extends Component {
           this.comments = el;
         }}
       >
-        <h2>Submit a comment on the Draft DVRPC FY2021 TIP for Pennsylvania</h2>
+        <h2 style={{ color: `${this.props.headerColor}` }}>
+          Submit a comment on the Draft DVRPC FY2021 TIP for Pennsylvania
+        </h2>
         <form
           className="comments-form"
           onSubmit={e => POSTComment(submit, mpms, e)}
