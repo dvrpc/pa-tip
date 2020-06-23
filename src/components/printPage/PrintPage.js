@@ -10,14 +10,8 @@ const printTable = {
   padding: "2% 0",
   textAlign: "center"
 };
-const printSubheadersWrap = {
-  padding: "2% 0",
-  display: "flex",
-  justifyContent: "space-around",
-  alignContent: "center"
-};
 const header = {
-  fontSize: "1.3rem",
+  fontSize: "1.5rem",
   textAlign: "center"
 };
 const subHeaders = {
@@ -36,24 +30,26 @@ class PrintPage extends Component {
       <PrintTemplate style={printMain}>
         <h1 style={header}>{details.road_name}</h1>
 
-        <div style={printSubheadersWrap}>
-          <h2 style={{ fontSize: "1rem" }}>MPMS #: {details.id}</h2>
-          <h2 style={{ fontSize: "1rem" }}>
-            Municipality(s): {details.municipalities}
-          </h2>
-          <h2 style={{ fontSize: "1rem" }}>County(s): {details.county}</h2>
-        </div>
+        <h2 style={{ fontSize: "1.2rem", textAlign: "center" }}>
+          MPMS #: {details.id}
+        </h2>
 
-        <div style={printSubheadersWrap}>
-          <h3 style={{ fontSize: "0.9rem" }}>
-            Air Quality Code: {details.aq_code}
-          </h3>
-          <h3 style={{ fontSize: "0.9rem", textAlign: "center" }}>
-            Limits: {details.limits}
-          </h3>
-        </div>
+        <p style={{ padding: "2% 0" }}>{details.description}</p>
 
-        <p style={{ paddingTop: "2%" }}>{details.description}</p>
+        <h3 style={{ fontSize: "1rem" }}>
+          Municipality(s):{" "}
+          <span style={{ fontWeight: "400" }}>{details.municipalities}</span>
+        </h3>
+        <h3 style={{ fontSize: "1rem" }}>
+          County(s): <span style={{ fontWeight: "400" }}>{details.county}</span>
+        </h3>
+        <h3 style={{ fontSize: "1rem" }}>
+          Air Quality Code:{" "}
+          <span style={{ fontWeight: "400" }}>{details.aq_code}</span>
+        </h3>
+        <h3 style={{ fontSize: "1rem" }}>
+          Limits: <span style={{ fontWeight: "400" }}>{details.limits}</span>
+        </h3>
 
         <h1 style={subHeaders}>Project Funding:</h1>
         {details.funding.data.length ? (

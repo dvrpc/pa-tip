@@ -1,4 +1,5 @@
 .footer {
+  max-width: 100%;
   color: white;
   background: #222222;
   display: flex;

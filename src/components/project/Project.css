@@ -135,6 +135,11 @@
   text-align: center;
 }
 
+/* Comment */
+#project #comments-anchor h2 {
+  color: #fff;
+}
+
 
 /*Loading Styles */
 #loadingProject {
