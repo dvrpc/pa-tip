@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
-// @ADD back when commenting period is over
-import Comments from "../comments/Comments.js";
 
 import {
   getFullTIP,
@@ -12,6 +10,7 @@ import {
   setProjectScope,
   setActiveProject
 } from "../../redux/reducers/getTIPInfo";
+// @ADD back when commenting period is over
 // import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
@@ -333,7 +332,6 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-            <Comments headerColor={"#fff"} mpms={details.id} />
             {/* <ReadOnlyComments
               colorScheme={colorScheme}
               comments={details.comments || []}
