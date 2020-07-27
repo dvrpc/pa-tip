@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 // @COMMENTS: add when comment period opens
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Search from "../search/Search.js";
 import Footer from "../footer/Footer.js";
 // @COMMENTS: add when comment period opens
-// import ReadOnlyComments from "../comments/ReadOnlyComments.js";
+import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import "./Homepage.css";
 
 // @COMMENTS: add when comment period opens
-// import { getGeneralComments } from "../../redux/reducers/commentsReducer.js";
+import { getGeneralComments } from "../../redux/reducers/commentsReducer.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
@@ -21,14 +21,15 @@ import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
   // @COMMENTS: add when comment period closes
-  // componentDidMount() {
-  //   this.props.getGeneralComments();
-  // }
+  componentDidMount() {
+    this.props.getGeneralComments();
+  }
   toTop = () => window.scroll({ top: 0, behavior: "smooth" });
 
   render() {
     // @COMMENTS: add when comment period closes
-    // const comments = this.props.comments.comments || [];
+    const comments = this.props.comments.comments || [];
+    console.log("comments ", comments);
 
     return (
       <div className="homepage">
@@ -77,7 +78,6 @@ class Homepage extends Component {
               }}
             >
               More Information
-              {/* <img src={arrow} alt="down navigation arrow" /> */}
             </a>
             <a
               href="#tip-info"
@@ -609,6 +609,10 @@ class Homepage extends Component {
                 </tbody>
               </table>
             </section> */}
+            <section>
+              <h2 className="info-section-header">General Public Comments</h2>
+              <ReadOnlyComments comments={comments} />
+            </section>
           </article>
         </main>
 
@@ -618,17 +622,14 @@ class Homepage extends Component {
   }
 }
 
-// @COMMENTS: add when comment period opens
-// const mapStateToProps = state => ({
-//   comments: state.getComments
-// });
+const mapStateToProps = state => ({
+  comments: state.getComments
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   getGeneralComments: () => dispatch(getGeneralComments())
-// });
+const mapDispatchToProps = dispatch => ({
+  getGeneralComments: () => dispatch(getGeneralComments())
+});
 
-// export default withRouter(
-//   connect(mapStateToProps, mapDispatchToProps)(Homepage)
-// );
-
-export default withRouter(Homepage);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Homepage)
+);

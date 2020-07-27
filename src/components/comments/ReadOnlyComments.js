@@ -6,6 +6,7 @@ import "../comments/Comments.css";
 class ReadOnlyComments extends Component {
   render() {
     const { comments } = this.props;
+    console.log("comments at readonly ", comments);
     return (
       <div className="comments" id="comments-anchor">
         <h1>{this.props.title}</h1>
