@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
+import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import {
   getFullTIP,
@@ -11,7 +12,7 @@ import {
   setActiveProject
 } from "../../redux/reducers/getTIPInfo";
 // @ADD back when commenting period is over
-// import { getSpecificComment } from "../../redux/reducers/commentsReducer";
+import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { groupProjects } from "../../utils/groupProjectsMPMS.js";
@@ -332,11 +333,11 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-            {/* <ReadOnlyComments
-              colorScheme={colorScheme}
+
+            <ReadOnlyComments
               comments={details.comments || []}
-              title={"Comments and Responses"}
-            /> */}
+              title={`Public Comments for Project ${details.id}`}
+            />
           </div>
         ))
       : (toReturn = (
@@ -353,8 +354,8 @@ class Project extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    coords: state.getTIP.geometry
-    // comments: state.getComments
+    coords: state.getTIP.geometry,
+    comments: state.getComments
   };
 };
 
@@ -363,8 +364,8 @@ const mapDispatchToProps = dispatch => {
     getFullTIP: id => dispatch(getFullTIP(id)),
     hydrateGeometry: id => dispatch(hydrateGeometry(id)),
     undoProjectScope: () => dispatch(setProjectScope(null)),
-    setActiveProject: id => dispatch(setActiveProject(id))
-    // getComments: id => dispatch(getSpecificComment(id))
+    setActiveProject: id => dispatch(setActiveProject(id)),
+    getComments: id => dispatch(getSpecificComment(id))
   };
 };
 
