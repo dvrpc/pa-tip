@@ -157,22 +157,10 @@ class Homepage extends Component {
                 Draft TIP, as well as the Draft Transportation Conformity
                 Finding from June 3, 2016 to July 6, 2020.
               </p>
-            </section>
-
-            <section>
-              <h2 className="info-section-header">
-                What Happens After the Public Comment Period Ends?
-              </h2>
               <p>
-                Written comments received during the public comment period and
-                responses to those comments will be provided in the final
-                printed TIP document as part of the public record. After
-                consideration of the public comments received, the Draft TIP
-                with any recommended changes will be presented to the DVRPC
-                Board for adoption at the July 23, 2020 regularly scheduled
-                Board meeting. Note that comments received after the comment
-                period is over will not receive a response or be included in the
-                final TIP document.
+                Comments are no longer being accepted on the Draft DVRPC FY2021
+                TIP for PA. Responses to written comments are available on the
+                DVRPC website via the TIP Comment/Search/Map Tool.
               </p>
             </section>
 
