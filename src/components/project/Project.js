@@ -334,9 +334,15 @@ class Project extends Component {
               </section>
             </div>
 
+            <h2
+              style={{ color: "#f7f7f7", textAlign: "center", margin: "3% 0" }}
+            >
+              Public Comments for Project #{details.id}
+            </h2>
             <ReadOnlyComments
               comments={details.comments || []}
-              title={`Public Comments for Project ${details.id}`}
+              theme={"#f7f7f7"}
+              padding={"3% 4%"}
             />
           </div>
         ))

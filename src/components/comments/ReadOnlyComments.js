@@ -6,14 +6,22 @@ import "../comments/Comments.css";
 class ReadOnlyComments extends Component {
   render() {
     const { comments } = this.props;
+    console.log(comments);
     return (
-      <div className="comments" id="comments-anchor">
+      <div
+        className="comments"
+        id="comments-anchor"
+        style={{
+          color: this.props.theme || "initial",
+          padding: this.props.padding || "none"
+        }}
+      >
         {comments.length ? (
           <ul className="list-group">
             {comments.map((comment, index) => (
               <li
                 className="list-group-item"
-                style={{ borderBottom: "1px solid #fff" }}
+                style={{ borderBottom: "2px solid #fff" }}
                 key={`${comment.name} #${index}`}
               >
                 <h3>
@@ -31,7 +39,9 @@ class ReadOnlyComments extends Component {
                           <summary>
                             Click to view response from <b>{response.agency}</b>
                           </summary>
-                          <p>{response.response_text}</p>
+                          <p className="response-text">
+                            {response.response_text}
+                          </p>
                         </details>
                       </li>
                     ))}
