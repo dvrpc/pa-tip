@@ -29,7 +29,6 @@ class Homepage extends Component {
   render() {
     // @COMMENTS: add when comment period closes
     const comments = this.props.comments.comments || [];
-    console.log("comments ", comments);
 
     return (
       <div className="homepage">

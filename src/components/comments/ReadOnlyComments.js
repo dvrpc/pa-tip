@@ -6,16 +6,15 @@ import "../comments/Comments.css";
 class ReadOnlyComments extends Component {
   render() {
     const { comments } = this.props;
-    console.log("props ", this.props);
-    console.log("comments at readonly ", comments);
     return (
       <div className="comments" id="comments-anchor">
         {comments.length ? (
           <ul className="list-group">
-            {comments.map(comment => (
+            {comments.map((comment, index) => (
               <li
                 className="list-group-item"
                 style={{ borderBottom: "1px solid #fff" }}
+                key={`${comment.name} #${index}`}
               >
                 <h3>
                   Comment from <b>{comment.name}</b>
@@ -23,8 +22,11 @@ class ReadOnlyComments extends Component {
                 <p>{comment.comment_text}</p>
                 {comment.responses.length && (
                   <ul className="list-group">
-                    {comment.responses.map(response => (
-                      <li className="comment-response">
+                    {comment.responses.map((response, indexInner) => (
+                      <li
+                        className="comment-response"
+                        key={`${response.agency} #${indexInner}`}
+                      >
                         <details>
                           <summary>
                             Click to view response from <b>{response.agency}</b>
