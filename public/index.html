@@ -21,7 +21,11 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9v9tvNfI7DgJKkf-lqbH4IXqW5OXi64c&libraries=places"></script>
-  <script>var _gaq = [['_setAccount', 'UA-9825778-1'], ['_trackPageview']];</script>
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-9825778-1', 'auto');
+    ga('send', 'pageview');
+  </script> 
   <script async src="//www.google-analytics.com/ga.js"></script>
 </head>
 
