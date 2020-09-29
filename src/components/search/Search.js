@@ -145,7 +145,7 @@ class Search extends Component {
     return (
       <Select
         placeholder={
-          <span>Search Draft TIP by Project, Keywords, Fund or Address</span>
+          <span>Search TIP by Project, Keywords, Fund or Address</span>
         }
         options={suggestions}
         formatGroupLabel={formatGroupLabel}
