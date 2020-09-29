@@ -181,7 +181,7 @@ class Results extends Component {
           <p id="no-results">
             Sorry! No projects matched your search criteria. Please try again or
             contact Rick Murphy at rmurphy@dvrpc.org. <br />
-            <br /> Thank you for using the Draft DVRPC FY2021 TIP for PA.
+            <br /> Thank you for using the DVRPC FY2021 TIP for PA.
           </p>
         )}
       </div>

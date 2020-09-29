@@ -7,32 +7,41 @@ class ReadOnlyComments extends Component {
   render() {
     const { comments } = this.props;
     return (
-      <div className="comments" id="comments-anchor">
-        <h1>{this.props.title}</h1>
+      <div
+        className="comments"
+        id="comments-anchor"
+        style={{
+          color: this.props.theme || "initial",
+          padding: this.props.padding || "none"
+        }}
+      >
         {comments.length ? (
           <ul className="list-group">
-            {comments.map(comment => (
+            {comments.map((comment, index) => (
               <li
                 className="list-group-item"
-                style={{ borderBottom: "1px solid #fff", color: "#fff" }}
+                style={{ borderBottom: "2px solid #fff" }}
+                key={`${comment.name} #${index}`}
               >
-                <b>{comment.name}</b>
-                <p style={{ whiteSpace: "pre-line" }}>{comment.comment_text}</p>
+                <h3>
+                  Comment from <b>{comment.name}</b>
+                </h3>
+                <p>{comment.comment_text}</p>
                 {comment.responses.length && (
                   <ul className="list-group">
-                    {comment.responses.map(response => (
+                    {comment.responses.map((response, indexInner) => (
                       <li
-                        className="list-group-item"
-                        style={{
-                          margin: "1rem 0",
-                          padding: "1rem",
-                          backgroundColor: "#666"
-                        }}
+                        className="comment-response"
+                        key={`${response.agency} #${indexInner}`}
                       >
-                        <b>Response from {response.agency}</b>
-                        <p style={{ whiteSpace: "pre-line" }}>
-                          {response.response_text}
-                        </p>
+                        <details>
+                          <summary>
+                            Click to view response from <b>{response.agency}</b>
+                          </summary>
+                          <p className="response-text">
+                            {response.response_text}
+                          </p>
+                        </details>
                       </li>
                     ))}
                   </ul>
@@ -41,9 +50,7 @@ class ReadOnlyComments extends Component {
             ))}
           </ul>
         ) : (
-          <p style={{ color: "#fff" }}>
-            No comments were received for this project
-          </p>
+          <p>No comments were received for this project</p>
         )}
       </div>
     );

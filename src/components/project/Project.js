@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 
 import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
-// @ADD back when commenting period is over
-import Comments from "../comments/Comments.js";
+import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import {
   getFullTIP,
@@ -12,7 +11,8 @@ import {
   setProjectScope,
   setActiveProject
 } from "../../redux/reducers/getTIPInfo";
-// import { getSpecificComment } from "../../redux/reducers/commentsReducer";
+// @ADD back when commenting period is over
+import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { groupProjects } from "../../utils/groupProjectsMPMS.js";
@@ -333,12 +333,17 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-            <Comments headerColor={"#fff"} mpms={details.id} />
-            {/* <ReadOnlyComments
-              colorScheme={colorScheme}
+
+            <h2
+              style={{ color: "#f7f7f7", textAlign: "center", margin: "3% 0" }}
+            >
+              Public Comments for Project #{details.id}
+            </h2>
+            <ReadOnlyComments
               comments={details.comments || []}
-              title={"Comments and Responses"}
-            /> */}
+              theme={"#f7f7f7"}
+              padding={"3% 4%"}
+            />
           </div>
         ))
       : (toReturn = (
@@ -355,8 +360,8 @@ class Project extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    coords: state.getTIP.geometry
-    // comments: state.getComments
+    coords: state.getTIP.geometry,
+    comments: state.getComments
   };
 };
 
@@ -365,8 +370,8 @@ const mapDispatchToProps = dispatch => {
     getFullTIP: id => dispatch(getFullTIP(id)),
     hydrateGeometry: id => dispatch(hydrateGeometry(id)),
     undoProjectScope: () => dispatch(setProjectScope(null)),
-    setActiveProject: id => dispatch(setActiveProject(id))
-    // getComments: id => dispatch(getSpecificComment(id))
+    setActiveProject: id => dispatch(setActiveProject(id)),
+    getComments: id => dispatch(getSpecificComment(id))
   };
 };
 

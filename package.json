@@ -1,8 +1,8 @@
 {
   "name": "pa-tip",
-  "version": "2.0.8",
+  "version": "2.0.14",
   "private": true,
-  "homepage": "/TIP/Draft/",
+  "homepage": "/TIP/PA/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npm version patch",
