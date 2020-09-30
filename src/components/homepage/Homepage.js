@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-// @COMMENTS: add when comment period opens
-import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Search from "../search/Search.js";
 import Footer from "../footer/Footer.js";
-// @COMMENTS: add when comment period opens
-import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import "./Homepage.css";
 
-// @COMMENTS: add when comment period opens
-import { getGeneralComments } from "../../redux/reducers/commentsReducer.js";
 import { scrollToElement } from "../../utils/scrollToElement.js";
 
 import logo from "./logo.png";
@@ -20,16 +14,9 @@ import philly from "./philly.mp4";
 import firstFrame from "./firstFrame.jpg";
 
 class Homepage extends Component {
-  // @COMMENTS: add when comment period closes
-  componentDidMount() {
-    this.props.getGeneralComments();
-  }
   toTop = () => window.scroll({ top: 0, behavior: "smooth" });
 
   render() {
-    // @COMMENTS: add when comment period closes
-    const comments = this.props.comments.comments || [];
-
     return (
       <div className="homepage">
         <div className="landing">
@@ -48,7 +35,7 @@ class Homepage extends Component {
               <h1>
                 FY2021 Transportation Improvement
                 <br />
-                Program for Pennsylvania (FY21-24)
+                Program for Pennsylvania (FY21-FY24)
               </h1>
             </div>
           </header>
@@ -99,13 +86,16 @@ class Homepage extends Component {
                 <a href="https://www.dvrpc.org/TIP/">TIP Homepage</a>
               </li>
               <li>
-                <b>FY2021 TIP for PA</b>
+                <a href="https://arcg.is/19nnb0">TIP Fundamentals</a>
               </li>
               <li>
                 <a href="https://www.dvrpc.org/Products/17065/">TIP Guide</a>
               </li>
               <li>
-                <a href="https://www.dvrpc.org/TIP/PA/">FY2019 TIP for PA</a>
+                <b>FY2021 TIP for PA</b>
+              </li>
+              <li>
+                <a href="https://www.dvrpc.org/TIP/NJ/">FY2020 TIP for NJ</a>
               </li>
               <li>
                 <a href="https://www.dvrpc.org/ProjectImplementation/">
@@ -126,11 +116,11 @@ class Homepage extends Component {
             <section>
               <h2 className="info-section-header" id="main-section-header">
                 FY2021 Transportation Improvement Program for Pennsylvania
-                (FY21-24)
+                (FY21-FY24)
               </h2>
               <p>
                 Following a 30+ day public comment period, the DVRPC Board
-                adopted the DVRPC FY2021 TIP (FY19- FY24) for the Pennsylvania
+                adopted the DVRPC FY2021 TIP (FY21-FY24) for the Pennsylvania
                 portion of the region with Recommended Changes (see below) as
                 the priority program of transportation projects on July 23,
                 2020. The regional TIP is included in the Pennsylvania Statewide
@@ -142,29 +132,39 @@ class Homepage extends Component {
                 1, 2020. Program lists (below) are updated on a regular basis as
                 DVRPC amends or modifies the program.
               </p>
+              <p>
+                <a href="/TIP/PA/pdf/effective.pdf">Click here</a>{" "}
+                <span className="sm">[0.2 MB pdf]</span> to view helpful tips
+                that can make a public comment more effective.
+              </p>
             </section>
 
             <section>
               <h2 className="info-section-header">Detailed Information</h2>
               <ul className="list-group">
                 <li className="list-group-item">
+                  <a href="https://arcg.is/19nnb0" target="_blank">
+                    TIP Fundamentals: Learn the Basics
+                  </a>
+                </li>
+                <li className="list-group-item">
                   <a href="/TIP/PA/pdf/HighlightsPA21.pdf">
                     Highlights of the FY2021 TIP for PA
                   </a>{" "}
-                  <span className="sm">[ MB pdf]</span>
+                  <span className="sm">[30 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/esHighlightsPA21.pdf">
                     Aspectos destacados del TIP para el FY2021 de Pennsylvania
                     (FY21-FY24)
                   </a>{" "}
-                  <span className="sm">[151 MB pdf]</span>
+                  <span className="sm">[30 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/TIPPA21.pdf">
                     Full FY2021 TIP for PA Document
                   </a>{" "}
-                  <span className="sm">[235 MB pdf]</span>
+                  <span className="sm">[47 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/GenOverview.pdf">
@@ -401,7 +401,7 @@ class Homepage extends Component {
                     Responses, List of Recommended Changes, and Supporting
                     Documentation
                   </a>{" "}
-                  <span className="sm">[0.2 MB pdf]</span>
+                  <span className="sm">[206 MB pdf]</span>
                 </li>
               </ul>
             </section>
@@ -410,6 +410,21 @@ class Homepage extends Component {
               <h2 className="info-section-header">Obligation Summary</h2>
               <table id="obligation-summary-table">
                 <tbody>
+                  <tr>
+                    <td>FY2020:</td>
+
+                    <td>
+                      <a href="/TIP/PA/pdf/DVRPCSummary20.pdf">Summary</a>{" "}
+                      <span className="sm">[0.03 MB pdf]</span>
+                    </td>
+
+                    <td>
+                      <a href="/TIP/PA/pdf/DVRPCandInterstateDetails20.pdf">
+                        Details
+                      </a>{" "}
+                      <span className="sm">[0.3 MB pdf]</span>
+                    </td>
+                  </tr>
                   <tr>
                     <td>FY2019:</td>
 
@@ -588,14 +603,4 @@ class Homepage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  comments: state.getComments
-});
-
-const mapDispatchToProps = dispatch => ({
-  getGeneralComments: () => dispatch(getGeneralComments())
-});
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Homepage)
-);
+export default withRouter(Homepage);

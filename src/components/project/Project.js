@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import "./Project.css";
 import PrintPage from "../printPage/PrintPage.js";
-import ReadOnlyComments from "../comments/ReadOnlyComments.js";
 
 import {
   getFullTIP,
@@ -11,8 +10,6 @@ import {
   setProjectScope,
   setActiveProject
 } from "../../redux/reducers/getTIPInfo";
-// @ADD back when commenting period is over
-import { getSpecificComment } from "../../redux/reducers/commentsReducer";
 
 import { colors } from "../../utils/tileGeometryColorType.js";
 import { groupProjects } from "../../utils/groupProjectsMPMS.js";
@@ -281,9 +278,9 @@ class Project extends Component {
                         <td />
                       </tr>
                       <tr id="funding-totals" style={{ fontWeight: "700" }}>
-                        <td colSpan={2}>Total FY21-24 Cost (in Millions):</td>
+                        <td colSpan={2}>Total FY21-FY24 Cost (in Millions):</td>
                         <td>{funding[4]}</td>
-                        <td colSpan={2}>Total FY21-32 Cost (in Millions):</td>
+                        <td colSpan={2}>Total FY21-FY32 Cost (in Millions):</td>
                         <td>{funding[5]}</td>
                       </tr>
                     </tbody>
@@ -333,17 +330,6 @@ class Project extends Component {
                 </div>
               </section>
             </div>
-
-            <h2
-              style={{ color: "#f7f7f7", textAlign: "center", margin: "3% 0" }}
-            >
-              Public Comments for Project #{details.id}
-            </h2>
-            <ReadOnlyComments
-              comments={details.comments || []}
-              theme={"#f7f7f7"}
-              padding={"3% 4%"}
-            />
           </div>
         ))
       : (toReturn = (
@@ -360,8 +346,7 @@ class Project extends Component {
 const mapStateToProps = state => {
   return {
     details: state.getTIP.details,
-    coords: state.getTIP.geometry,
-    comments: state.getComments
+    coords: state.getTIP.geometry
   };
 };
 
@@ -370,8 +355,7 @@ const mapDispatchToProps = dispatch => {
     getFullTIP: id => dispatch(getFullTIP(id)),
     hydrateGeometry: id => dispatch(hydrateGeometry(id)),
     undoProjectScope: () => dispatch(setProjectScope(null)),
-    setActiveProject: id => dispatch(setActiveProject(id)),
-    getComments: id => dispatch(getSpecificComment(id))
+    setActiveProject: id => dispatch(setActiveProject(id))
   };
 };
 
