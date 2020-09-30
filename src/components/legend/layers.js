@@ -15,18 +15,36 @@ export const layers = {
   },
   IPD: {
     classifications: [
-      [9, "#ffffd9"],
-      [13, "#edf8b1"],
-      [15, "#c7e9b4"],
-      [17, "#7fcdbb"],
-      [19, "#41b6c4"],
-      [21, "#1d91c0"],
-      [24, "#225ea8"],
-      [27, "#253494"],
-      [30, "#081d58"]
+      [9, "#ffffcc"],
+      [10, "#f0fac0"],
+      [11, "#dff5b3"],
+      [12, "#cbf0a5"],
+      [13, "#b2eb98"],
+      [14, "#98e68c"],
+      [15, "#80e083"],
+      [16, "#74db8b"],
+      [17, "#69d693"],
+      [18, "#66d596"],
+      [19, "#5ed19f"],
+      [20, "#56ccac"],
+      [21, "#4ac7bc"],
+      [22, "#41b7c4"],
+      [23, "#3facbf"],
+      [24, "#3b94b8"],
+      [25, "#3789b3"],
+      [26, "#357fb0"],
+      [27, "#3373ab"],
+      [28, "#3169a8"],
+      [29, "#2e5da3"],
+      [30, "#2c529e"],
+      [31, "#2a489c"],
+      [32, "#273f96"],
+      [33, "#253494"]
     ],
-    full: "Indicators of Potential Disadvantage",
-    sub: "Composite Score"
+    horizontal: true,
+    full: "Title VI and Environmental Justice (EJ) populations",
+    sub:
+      'The IPD analysis identifies populations of interest under Title VI and EJ using U.S. Census American Community Survey (ACS) 2014-2018 five-year estimates data and maps these populations in each of the Census tracts in the region via GIS. Each population group is an “indicator” in the analysis and includes the following: youth, older adults, female, racial minority, ethnic minority, foreign-born, limited English proficiency, disabled, and low-income. For more information, explore the <a href="">Equity Analysis webmap</a>.'
   },
   CMP: {
     classifications: [
@@ -48,7 +66,7 @@ export const layers = {
       ["PA 100", "#FFEBBE"]
     ],
     full: "CMP Corridors",
-    sub: "Pennsylvania, 2015 (DVRPC)"
+    sub: "Pennsylvania, 2019 (DVRPC)"
   },
   LRP: {
     classifications: [

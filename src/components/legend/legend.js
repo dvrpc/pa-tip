@@ -72,30 +72,58 @@ class Legend extends Component {
             <h2 className="legendItem-title">
               {layers[this.state.selected].full}
             </h2>
-            <h4 className="legendItem-subtitle">
-              {layers[this.state.selected].sub}
-            </h4>
+            <h4
+              className="legendItem-subtitle"
+              dangerouslySetInnerHTML={{
+                __html: layers[this.state.selected].sub
+              }}
+            />
             <table
-              className={"legendItem-content"}
+              className={`legendItem-content ${layers[this.state.selected]
+                .horizontal && "legendItem-content__horizontal"}`}
               id={`legendTable-${this.state.selected}`}
             >
-              <tbody>
-                {layers[this.state.selected].classifications.map(row => {
-                  return (
-                    <tr key={row[0]}>
-                      <td
-                        style={{
-                          height: "25px",
-                          width: "25px",
-                          backgroundColor: `${row[1]}`,
-                          borderRadius: "3px"
-                        }}
-                      />
-                      <td>{row[0]}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
+              {layers[this.state.selected].horizontal ? (
+                <tbody>
+                  <tr>
+                    <td>Lower</td>
+                    {layers[this.state.selected].classifications.map(row => {
+                      return (
+                        <td
+                          key={row[0]}
+                          style={{
+                            height: "25px",
+                            width: "10px",
+                            backgroundColor: row[1],
+                            padding: 0,
+                            margin: 0
+                          }}
+                        />
+                      );
+                    })}
+                    <td>Higher</td>
+                  </tr>
+                </tbody>
+              ) : (
+                <tbody>
+                  {layers[this.state.selected].classifications.map(row => {
+                    return (
+                      <tr key={row[0]}>
+                        <td
+                          style={{
+                            height: "25px",
+                            width: "25px",
+                            backgroundColor: row[1],
+                            borderRadius: "3px",
+                            margin: "2px"
+                          }}
+                        />
+                        <td>{row[0]}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              )}
             </table>
           </div>
         ) : null}

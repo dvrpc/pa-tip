@@ -53,7 +53,7 @@ class MapComponent extends Component {
       "CMP Corridors": "CMP",
       "Connections 2045 Centers": "Connections",
       "Freight Centers": "Freight",
-      "DVRPC Land Use (2015)": "LandUse"
+      "DVRPC Land Use (2019)": "LandUse"
     };
 
     const selectedSrc = srcLookup[selectedLayer];

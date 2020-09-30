@@ -1,32 +1,35 @@
-.legendItem-container{
+.legendItem-container {
   display: flex;
   flex-flow: column;
   max-height: 25vh;
   width: 100%;
   overflow-y: scroll;
 }
-.legendLink{
+.legendLink {
   cursor: pointer;
 }
-.legendItem-title{
+.legendItem-title {
   color: #666;
   text-align: center;
-  margin: 1rem 0 0;  
+  margin: 1rem 0 0;
 }
-.legendItem-subtitle{
+.legendItem-subtitle {
   text-align: center;
   color: #aaa;
   margin: 5px;
   line-height: 1rem;
   max-width: 75%;
-  align-self: center;    
+  align-self: center;
 }
-.legendItem-content{
+.legendItem-content {
   display: flex;
   flex-flow: column;
   margin: 5px;
 }
-#legendTable-IPD{
+.legendItem-content__horizontal {
+  border-spacing: 0;
+}
+#legendTable-IPD {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -35,9 +38,9 @@
 #legendTable-IPD tr {
   width: 33%;
 }
-.legendItem-content>tr>td{
-  height: 25px
+.legendItem-content > tr > td {
+  height: 25px;
 }
-.active{
+.active {
   background-color: #fff;
 }
