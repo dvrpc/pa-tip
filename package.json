@@ -2,7 +2,7 @@
   "name": "pa-tip",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://www.dvrpc.org/TIP/PA/",
+  "homepage": "https://www.dvrpc.org/TIP/PA19/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npm version patch",
