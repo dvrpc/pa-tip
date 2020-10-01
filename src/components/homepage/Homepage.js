@@ -141,12 +141,16 @@ class Homepage extends Component {
 
             <section>
               <h2 className="info-section-header">Detailed Information</h2>
+              <a href="https://arcg.is/19nnb0" rel="external">
+                <figure>
+                  <img
+                    src="https://www.dvrpc.org/TIP/img/TIPStoryMapScreenshot.png"
+                    alt="TIP Fundamentals"
+                  />
+                  <figcaption>TIP Fundamentals: Learn the Basics</figcaption>
+                </figure>
+              </a>
               <ul className="list-group">
-                <li className="list-group-item">
-                  <a href="https://arcg.is/19nnb0" target="_blank">
-                    TIP Fundamentals: Learn the Basics
-                  </a>
-                </li>
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/HighlightsPA21.pdf">
                     Highlights of the FY2021 TIP for PA
