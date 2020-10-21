@@ -158,11 +158,11 @@ class Homepage extends Component {
                   <span className="sm">[30 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
-                  <a href="/TIP/PA/pdf/esHighlightsPA21.pdf">
+                  <a href="/reports/21001Ces.pdf">
                     Aspectos destacados del TIP para el FY2021 de Pennsylvania
                     (FY21-FY24)
                   </a>{" "}
-                  <span className="sm">[30 MB pdf]</span>
+                  <span className="sm">[5 MB pdf]</span>
                 </li>
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/TIPPA21.pdf">
