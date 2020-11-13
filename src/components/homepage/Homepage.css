@@ -194,7 +194,7 @@
 .homepage .btn {
   margin-top: 6px;
 }
-figure {
+.homepage figure {
   max-width: 100%;
   float: right;
   padding-top: 2%;
@@ -254,10 +254,10 @@ figure figcaption {
   #tip-info p {
     font-size: 1rem;
   }
-  figure {
+  .homepage figure {
     float: none;
   }
-  figure img {
+  .homepage figure img {
     max-width: 100%;
   }
 }

@@ -271,6 +271,18 @@ class Homepage extends Component {
 
             <section>
               <h2 className="info-section-header">
+                Summary of Amendments and Modifications
+              </h2>
+              <p>
+                DVRPC will update these project listings (generally each month),
+                as we amend or modify the TIP, as permitted under the TIP MOU.{" "}
+                <a href="./pdf/actpa21.pdf">
+                  The Summary of Amendments and Modifications
+                </a>
+                <span class="sm"> [0.3 MB pdf]</span> provides a chronological
+                listing of all project changes.
+              </p>
+              <h2 className="info-section-header">
                 DVRPC Regional Highway Program by County
               </h2>
               <ul className="list-group">
