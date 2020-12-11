@@ -327,6 +327,12 @@ class Homepage extends Component {
               </h2>
               <ul className="list-group">
                 <li className="list-group-item">
+                  <a href="/TIP/PA/pdf/penndottransit21f.pdf">
+                    PennDOT Transit Projects
+                  </a>{" "}
+                  <span className="sm">[0.1 MB pdf]</span>
+                </li>
+                <li className="list-group-item">
                   <a href="/TIP/PA/pdf/part21f.pdf">PART Projects</a>{" "}
                   <span className="sm">[0.1 MB pdf]</span>
                 </li>
