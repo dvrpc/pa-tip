@@ -8,10 +8,12 @@ import {
   getTIPByMapBounds,
   setProjectScope
 } from "../../redux/reducers/getTIPInfo";
+import { setActiveDistrict } from "../../redux/reducers/congressionalReducer";
 
 import { updateBounds, showPopup } from "./updateMap";
 import { clickTile } from "../../utils/clickTile.js";
 import { groupProjects } from "../../utils/groupProjectsMPMS.js";
+import getBoundingBox from "../../utils/getBoundingBox";
 
 import "./Map.css";
 import layers from "./layers.js";
@@ -28,7 +30,10 @@ class MapComponent extends Component {
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
         "Freight Centers": false,
-        "DVRPC Land Use (2015)": false
+        "DVRPC Land Use (2019)": false,
+        "PA Congressional Districts": false,
+        "PA Senate Districts": false,
+        "PA House Districts": false
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -45,39 +50,8 @@ class MapComponent extends Component {
     this.loaderTimeout = true;
   }
 
-  updateLayerVisibility = selectedLayer => {
+  updateLayerVisibility = (selectedLayer, forceOnOff) => {
     let { dropdownLayers } = this.state;
-
-    const srcLookup = {
-      "Indicators of Potential Disadvantage": "IPD",
-      "CMP Corridors": "CMP",
-      "Connections 2045 Centers": "Connections",
-      "Freight Centers": "Freight",
-      "DVRPC Land Use (2019)": "LandUse"
-    };
-
-    const selectedSrc = srcLookup[selectedLayer];
-    const hasSrc = this.map.getSource(selectedSrc);
-
-    // if the layer doesn't exist yet, add it
-    if (!hasSrc) {
-      const srcInfo = layers[selectedSrc];
-
-      // handle different addSource() format for vector tiles and geojsons
-      if (srcInfo.layerType === "geojson") {
-        this.map.addSource(selectedSrc, {
-          type: srcInfo.layerType,
-          data: srcInfo.data
-        });
-      } else {
-        this.map.addSource(selectedSrc, {
-          type: srcInfo.layerType,
-          url: srcInfo.url
-        });
-      }
-
-      this.map.addLayer(layers[selectedSrc], "water shadow");
-    }
 
     //toggle selected layer state
     Object.keys(dropdownLayers).forEach(layer => {
@@ -91,26 +65,24 @@ class MapComponent extends Component {
         dropdownLayers[layer] = false;
 
         // if a layer does exist, check it's visibility and set it to none if it was previously on
-        if (layerCheck) {
-          let isVisible = this.map.getLayoutProperty(layer, "visibility");
-          if (isVisible)
-            this.map.setLayoutProperty(layer, "visibility", "none");
-        }
+        this.map.setLayoutProperty(layer, "visibility", "none");
 
         // turn currently active layer on or off depending on its current state
       } else {
-        dropdownLayers[layer]
-          ? (dropdownLayers[layer] = false)
-          : (dropdownLayers[layer] = true);
+        let isVisible = !dropdownLayers[layers];
+        if (forceOnOff !== undefined) {
+          isVisible = forceOnOff;
+        }
 
+        dropdownLayers[layer] = isVisible;
         this.map.setLayoutProperty(
           layer,
           "visibility",
-          dropdownLayers[layer] ? "visible" : "none"
+          isVisible ? "visible" : "none"
         );
+        console.log(layer, dropdownLayers);
       }
     });
-
     this.setState({ dropdownLayers });
   };
 
@@ -138,6 +110,50 @@ class MapComponent extends Component {
       ? this.map.flyTo({ center: [-75.4, 40.15], zoom: this.state.zoom })
       : false;
 
+  renderActiveDistrict = (map, district, updateLayerVisibility) => {
+    const { xMin, yMin, xMax, yMax } = getBoundingBox(district.data);
+    if (!isNaN(xMin) && !isNaN(yMin) && !isNaN(xMax) && !isNaN(yMax)) {
+      map.fitBounds([xMin, yMin, xMax, yMax]);
+
+      const highlight = (source, layer) => {
+        //Show layer
+        updateLayerVisibility(layer, true);
+        //Reset highlight for ALL layers
+        ["Congressional", "Senate", "House"].forEach(src => {
+          if (map.getSource(src))
+            map.querySourceFeatures(src).forEach(feature => {
+              map.setFeatureState(
+                {
+                  source: src,
+                  id: feature.id
+                },
+                {
+                  active: false
+                }
+              );
+            });
+        });
+        //Set highlight
+        map.setFeatureState(
+          {
+            source,
+            id: district.data.features[0]?.id
+          },
+          {
+            active: true
+          }
+        );
+      };
+      //Delay if style is still loading
+      if (!map.isStyleLoaded())
+        map.on(
+          "styledata",
+          highlight.call(this, district.source, district.layer)
+        );
+      else highlight(district.source, district.layer);
+    }
+  };
+
   componentDidMount() {
     let popup;
     const { type, value } = this.props.match.params;
@@ -159,6 +175,19 @@ class MapComponent extends Component {
         break;
       case "keyword":
         this.props.getTIPByKeywords(value);
+        break;
+      case "congressional":
+        this.props.setActiveDistrict(
+          "Congressional",
+          "PA Congressional Districts",
+          value
+        );
+        break;
+      case "senate":
+        this.props.setActiveDistrict("Senate", "PA Senate Districts", value);
+        break;
+      case "house":
+        this.props.setActiveDistrict("House", "PA House Districts", value);
         break;
       default:
         const projectScope = {
@@ -239,6 +268,47 @@ class MapComponent extends Component {
 
     // after map is done initializing, build a filter
     if (this.props.category) this.buildCategoryFilter(this.props.category);
+
+    this.map.on("load", () => {
+      //Load and initialize optional layers/sources
+      for (const source in layers) {
+        const layer = layers[source];
+        console.log(layer.source);
+        if (layer.layerType === "geojson") {
+          this.map.addSource(layer.source, {
+            type: layer.layerType,
+            data: layer.data
+          });
+        } else {
+          this.map.addSource(layer.source, {
+            type: layer.layerType,
+            url: layer.url
+          });
+        }
+
+        this.map.addLayer(
+          layer,
+          layer.metadata?.beforeId !== undefined
+            ? layer.metadata?.beforeId
+            : "water shadow"
+        );
+
+        this.map.setLayoutProperty(
+          layer.id,
+          "visibility",
+          this.state.dropdownLayers[layer.id] ? "visible" : "none"
+        );
+      }
+
+      //Congressional District zoom to and style
+      if (this.props.district) {
+        this.renderActiveDistrict(
+          this.map,
+          this.props.district,
+          this.updateLayerVisibility
+        );
+      }
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -312,6 +382,22 @@ class MapComponent extends Component {
             zoom: this.state.zoom
           });
           break;
+        case "congressional":
+          this.props.setActiveDistrict(
+            "Congressional",
+            "PA Congressional Districts",
+            value
+          );
+          this.updateLayerVisibility("PA Congressional Districts", true);
+          break;
+        case "senate":
+          this.props.setActiveDistrict("Senate", "PA Senate Districts", value);
+          this.updateLayerVisibility("PA Senate Districts", true);
+          break;
+        case "house":
+          this.props.setActiveDistrict("House", "PA House Districts", value);
+          this.updateLayerVisibility("PA House Districts", true);
+          break;
         default:
           const projectScope = {
             coords: null,
@@ -381,6 +467,15 @@ class MapComponent extends Component {
         intervalId = window.setInterval(checkStyle, 400);
       }
     }
+
+    //Congressional District zoom to and style
+    if (this.props.district !== prevProps.district) {
+      this.renderActiveDistrict(
+        this.map,
+        this.props.district,
+        this.updateLayerVisibility
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -429,6 +524,7 @@ class MapComponent extends Component {
                 return (
                   <p
                     key={layer}
+                    data={layer}
                     className={
                       "dropdown-item " +
                       (this.state.dropdownLayers[layer].show ? "selected" : "")
@@ -479,7 +575,8 @@ const mapStateToProps = state => {
     category: state.getTIP.category,
     markerFromTiles: state.connectTilesToMap.markerInfo,
     projectScope: state.getTIP.projectScope,
-    activeProject: state.getTIP.activeProject
+    activeProject: state.getTIP.activeProject,
+    district: state.getDistricts.activeDistrict
   };
 };
 
@@ -487,7 +584,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getTIPByKeywords: keywords => dispatch(getTIPByKeywords(keywords)),
     getTIPByMapBounds: features => dispatch(getTIPByMapBounds(features)),
-    setProjectScope: projectScope => dispatch(setProjectScope(projectScope))
+    setProjectScope: projectScope => dispatch(setProjectScope(projectScope)),
+    setActiveDistrict: (source, layer, district) =>
+      dispatch(setActiveDistrict(source, layer, district))
   };
 };
 

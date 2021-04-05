@@ -4,8 +4,14 @@ import ReduxThunk from "redux-thunk";
 import getTIP from "./redux/reducers/getTIPInfo";
 import connectTilesToMap from "./redux/reducers/connectTilesToMap";
 import getComments from "./redux/reducers/commentsReducer";
+import getDistricts from "./redux/reducers/congressionalReducer";
 
-const rootReducer = combineReducers({ getTIP, connectTilesToMap, getComments });
+const rootReducer = combineReducers({
+  getTIP,
+  connectTilesToMap,
+  getComments,
+  getDistricts
+});
 
 let store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
