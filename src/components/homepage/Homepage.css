@@ -65,21 +65,20 @@
   justify-content: flex-end;
   align-items: center;
 }
-.homepage-bottom-bar a {
+.homepage-bottom-bar-a {
   color: #e5c942;
   white-space: nowrap;
   font-weight: 700;
 }
-.homepage-bottom-bar span {
+.homepage-bottom-bar-icon {
   font-size: 1.8rem;
   font-weight: 700;
   margin-left: 5px;
 }
 .homepage-bottom-bar-vr {
   margin: 0 5px;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #e5c942;
-  font-weight: 500;
 }
 .homepage-bottom-bar img {
   padding-left: 2%;

@@ -80,6 +80,8 @@ class Search extends Component {
   };
 
   onChange = newValue => {
+    if (!newValue) return;
+
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
     // @TODO: replace with mapboxgl geocoder
@@ -142,12 +144,14 @@ class Search extends Component {
     locations.options = locations.options.slice(0, 2);
     suggestions.push(locations);
 
+    // @TODO selecting then unselecting <Select> still fires this.onSelect. This causes the google maps error b/c it's passing Null.
     return (
       <Select
         placeholder={
           <span>Search TIP by Project, Keywords, Fund or Address</span>
         }
         options={suggestions}
+        defaultValue={"bruh"}
         formatGroupLabel={formatGroupLabel}
         onInputChange={this.onChange}
         onChange={(value, { action }) => {

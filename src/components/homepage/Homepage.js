@@ -57,12 +57,15 @@ class Homepage extends Component {
           </div>
 
           <div className="homepage-bottom-bar">
-            <a href="/TIP/PA/keyword/mpms">View Map</a>
+            <a href="/TIP/PA/keyword/mpms" className="homepage-bottom-bar-a">
+              View Full TIP Map
+            </a>
 
             <span className="homepage-bottom-bar-vr">|</span>
 
             <a
               href="#tip-info"
+              className="homepage-bottom-bar-a"
               onClick={e => {
                 scrollToElement(this, e, "tipInfo");
               }}
@@ -71,11 +74,12 @@ class Homepage extends Component {
             </a>
             <a
               href="#tip-info"
+              className="homepage-bottom-bar-a"
               onClick={e => {
                 scrollToElement(this, e, "tipInfo");
               }}
             >
-              <span>&darr;</span>
+              <span className="homepage-bottom-bar-icon">&darr;</span>
             </a>
           </div>
         </div>
@@ -283,8 +287,8 @@ class Homepage extends Component {
                 <a href="./pdf/actpa21.pdf">
                   The Summary of Amendments and Modifications
                 </a>
-                <span class="sm"> [0.3 MB pdf]</span> provides a chronological
-                listing of all project changes.
+                <span className="sm"> [0.3 MB pdf]</span> provides a
+                chronological listing of all project changes.
               </p>
               <h2 className="info-section-header">
                 DVRPC Regional Highway Program by County
