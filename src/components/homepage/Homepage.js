@@ -57,7 +57,10 @@ class Homepage extends Component {
           </div>
 
           <div className="homepage-bottom-bar">
-            <a href="/TIP/PA/keyword/mpms">More Information</a>
+            <a href="/TIP/PA/keyword/mpms">View Map</a>
+
+            <span className="homepage-bottom-bar-vr">|</span>
+
             <a
               href="#tip-info"
               onClick={e => {
