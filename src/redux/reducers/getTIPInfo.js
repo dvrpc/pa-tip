@@ -90,7 +90,10 @@ export const getTIPByKeywords = keyword => dispatch => {
           dispatch(get_tip_keywords(projects));
         });
       } else {
-        console.log("failed to fetch keyword projects with status: ", response);
+        console.error(
+          "failed to fetch keyword projects with status: ",
+          response
+        );
       }
     }
   );
@@ -191,7 +194,7 @@ export const setProjectScope = projectScope => dispatch => {
           dispatch(set_project_scope(projectScope));
         });
       } else {
-        console.log("failed to fetch coords for project ID: ", id);
+        console.error("failed to fetch coords for project ID: ", id);
         projectScope.coords = [-75.4, 40.15];
         projectScope.zoom = 8.5;
         dispatch(set_project_scope(projectScope));

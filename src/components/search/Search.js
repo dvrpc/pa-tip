@@ -48,7 +48,6 @@ const transformKeywordSuggestions = data => {
   };
 };
 
-// @TODO: change default text from Select to Seach for TIP Projects
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +59,7 @@ class Search extends Component {
     this.Autocomplete = {};
   }
 
-  // @TODO: replace with mapboxgl
+  // @TODO: replace with mapboxgl geocoder
   loadLocationSuggestions = input =>
     new Promise(resolve => {
       this.Autocomplete.getQueryPredictions(
@@ -80,9 +79,10 @@ class Search extends Component {
   };
 
   onChange = newValue => {
+    if (!newValue) return;
+
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
-    // @TODO: replace with mapboxgl geocoder
     this.loadLocationSuggestions(newValue).then(locations => {
       if (locations !== null) {
         this.setState({ locations });
@@ -98,6 +98,7 @@ class Search extends Component {
     this.props.clearKeywords();
 
     // let routing handle data
+    // @TODO routing is not handling the data. Keywords are never making a call (but the rest fires so it loops over empty response and shows nothing)
     this.props.history.push(`/${newType}/${newValue}`);
   };
 
@@ -148,6 +149,7 @@ class Search extends Component {
           <span>Search TIP by Project, Keywords, Fund or Address</span>
         }
         options={suggestions}
+        defaultValue={"bruh"}
         formatGroupLabel={formatGroupLabel}
         onInputChange={this.onChange}
         onChange={(value, { action }) => {
