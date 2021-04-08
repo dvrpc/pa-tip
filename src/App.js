@@ -14,7 +14,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route
-            path="/:type(location|keyword|project)/:value"
+            path="/:type(location|keyword|project|congressional|senate|house)/:value"
             component={AppContainer}
           />
         </Switch>

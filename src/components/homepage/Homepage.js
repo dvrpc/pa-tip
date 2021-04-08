@@ -279,8 +279,8 @@ class Homepage extends Component {
                 <a href="./pdf/actpa21.pdf">
                   The Summary of Amendments and Modifications
                 </a>
-                <span class="sm"> [0.3 MB pdf]</span> provides a chronological
-                listing of all project changes.
+                <span className="sm"> [0.3 MB pdf]</span> provides a
+                chronological listing of all project changes.
               </p>
               <h2 className="info-section-header">
                 DVRPC Regional Highway Program by County

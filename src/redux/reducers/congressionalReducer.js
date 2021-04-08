@@ -1,0 +1,89 @@
+/*** ACTIONS ***/
+const GET_CONGRESSIONAL_DISTRICT = "GET_CONGRESSIONAL_DISTRICT";
+const GET_SENATE_DISTRICT = "GET_SENATE_DISTRICT";
+const GET_HOUSE_DISTRICT = "GET_HOUSE_DISTRICT";
+const SET_ACTIVE_DISTRICT = "SET_ACTIVE_DISTRICT";
+
+/*** ACTION_CREATORS ***/
+const get_congressional_district = district => ({
+  type: GET_CONGRESSIONAL_DISTRICT,
+  district
+});
+
+const get_senate_district = district => ({
+  type: GET_SENATE_DISTRICT,
+  district
+});
+
+const get_house_district = district => ({
+  type: GET_HOUSE_DISTRICT,
+  district
+});
+
+const set_active_district = (source, layer, district) => ({
+  type: SET_ACTIVE_DISTRICT,
+  district,
+  layer,
+  source
+});
+
+/*** REDUCERS ***/
+export default function congressionalReducer(state = [], action) {
+  switch (action.type) {
+    case GET_CONGRESSIONAL_DISTRICT:
+      return Object.assign({}, state, { congressional: action.district });
+    case GET_SENATE_DISTRICT:
+      return Object.assign({}, state, { senate: action.district });
+    case GET_HOUSE_DISTRICT:
+      return Object.assign({}, state, { house: action.district });
+    case SET_ACTIVE_DISTRICT:
+      return Object.assign({}, state, {
+        activeDistrict: {
+          source: action.source,
+          layer: action.layer,
+          data: action.district
+        }
+      });
+    default:
+      return state;
+  }
+}
+
+const fetchDistrict = (source, id) => {
+  //parse id down to just numbers
+  id = id.match(/\d+/) || [0];
+  const sources = {
+    Congressional: `https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_Congressional/FeatureServer/0/query?where=leg_distri=${id[0]}&outfields=*&geometry=%7B%22rings%22%3A%5B%5B%5B-75.48%2C40.42%5D%2C%5B-75.41%2C40.49%5D%2C%5B-75.34%2C40.53%5D%2C%5B-75.26%2C40.58%5D%2C%5B-75.2%2C40.61%5D%2C%5B-75.19%2C40.57%5D%2C%5B-75.16%2C40.56%5D%2C%5B-75.14%2C40.58%5D%2C%5B-75.1%2C40.57%5D%2C%5B-75.07%2C40.54%5D%2C%5B-75.06%2C40.48%5D%2C%5B-75.07%2C40.46%5D%2C%5B-75.06%2C40.42%5D%2C%5B-75.03%2C40.4%5D%2C%5B-74.99%2C40.41%5D%2C%5B-74.96%2C40.4%5D%2C%5B-74.94%2C40.34%5D%2C%5B-74.91%2C40.32%5D%2C%5B-74.9%2C40.32%5D%2C%5B-74.86%2C40.29%5D%2C%5B-74.84%2C40.25%5D%2C%5B-74.77%2C40.22%5D%2C%5B-74.75%2C40.18%5D%2C%5B-74.72%2C40.16%5D%2C%5B-74.72%2C40.15%5D%2C%5B-74.78%2C40.12%5D%2C%5B-74.82%2C40.13%5D%2C%5B-74.83%2C40.12%5D%2C%5B-74.84%2C40.1%5D%2C%5B-74.86%2C40.08%5D%2C%5B-74.94%2C40.06%5D%2C%5B-74.97%2C40.05%5D%2C%5B-75.01%2C40.02%5D%2C%5B-75.05%2C40.01%5D%2C%5B-75.07%2C39.98%5D%2C%5B-75.12%2C39.97%5D%2C%5B-75.13%2C39.96%5D%2C%5B-75.14%2C39.93%5D%2C%5B-75.13%2C39.91%5D%2C%5B-75.14%2C39.89%5D%2C%5B-75.15%2C39.88%5D%2C%5B-75.19%2C39.88%5D%2C%5B-75.21%2C39.87%5D%2C%5B-75.25%2C39.85%5D%2C%5B-75.28%2C39.85%5D%2C%5B-75.3%2C39.85%5D%2C%5B-75.34%2C39.85%5D%2C%5B-75.41%2C39.8%5D%2C%5B-75.45%2C39.82%5D%2C%5B-75.52%2C39.84%5D%2C%5B-75.58%2C39.84%5D%2C%5B-75.59%2C39.84%5D%2C%5B-75.6%2C39.84%5D%2C%5B-75.66%2C39.82%5D%2C%5B-75.69%2C39.81%5D%2C%5B-75.74%2C39.77%5D%2C%5B-75.76%2C39.75%5D%2C%5B-75.77%2C39.72%5D%2C%5B-76.14%2C39.72%5D%2C%5B-76.1%2C39.72%5D%2C%5B-76.08%2C39.75%5D%2C%5B-76.08%2C39.76%5D%2C%5B-76.06%2C39.77%5D%2C%5B-76.04%2C39.8%5D%2C%5B-76.01%2C39.85%5D%2C%5B-76%2C39.87%5D%2C%5B-75.99%2C39.89%5D%2C%5B-76%2C39.92%5D%2C%5B-75.98%2C39.93%5D%2C%5B-75.99%2C39.95%5D%2C%5B-75.99%2C39.97%5D%2C%5B-75.94%2C40.04%5D%2C%5B-75.94%2C40.08%5D%2C%5B-75.94%2C40.11%5D%2C%5B-75.87%2C40.14%5D%2C%5B-75.73%2C40.22%5D%2C%5B-75.7%2C40.24%5D%2C%5B-75.53%2C40.45%5D%2C%5B-75.48%2C40.42%5D%5D%5D%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPolygon&f=geojson`,
+    Senate: `https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_State_Senate/FeatureServer/0/query?where=leg_distri=${id[0]}&outfields=*&geometry=%7B%22rings%22%3A%5B%5B%5B-75.48%2C40.42%5D%2C%5B-75.41%2C40.49%5D%2C%5B-75.34%2C40.53%5D%2C%5B-75.26%2C40.58%5D%2C%5B-75.2%2C40.61%5D%2C%5B-75.19%2C40.57%5D%2C%5B-75.16%2C40.56%5D%2C%5B-75.14%2C40.58%5D%2C%5B-75.1%2C40.57%5D%2C%5B-75.07%2C40.54%5D%2C%5B-75.06%2C40.48%5D%2C%5B-75.07%2C40.46%5D%2C%5B-75.06%2C40.42%5D%2C%5B-75.03%2C40.4%5D%2C%5B-74.99%2C40.41%5D%2C%5B-74.96%2C40.4%5D%2C%5B-74.94%2C40.34%5D%2C%5B-74.91%2C40.32%5D%2C%5B-74.9%2C40.32%5D%2C%5B-74.86%2C40.29%5D%2C%5B-74.84%2C40.25%5D%2C%5B-74.77%2C40.22%5D%2C%5B-74.75%2C40.18%5D%2C%5B-74.72%2C40.16%5D%2C%5B-74.72%2C40.15%5D%2C%5B-74.78%2C40.12%5D%2C%5B-74.82%2C40.13%5D%2C%5B-74.83%2C40.12%5D%2C%5B-74.84%2C40.1%5D%2C%5B-74.86%2C40.08%5D%2C%5B-74.94%2C40.06%5D%2C%5B-74.97%2C40.05%5D%2C%5B-75.01%2C40.02%5D%2C%5B-75.05%2C40.01%5D%2C%5B-75.07%2C39.98%5D%2C%5B-75.12%2C39.97%5D%2C%5B-75.13%2C39.96%5D%2C%5B-75.14%2C39.93%5D%2C%5B-75.13%2C39.91%5D%2C%5B-75.14%2C39.89%5D%2C%5B-75.15%2C39.88%5D%2C%5B-75.19%2C39.88%5D%2C%5B-75.21%2C39.87%5D%2C%5B-75.25%2C39.85%5D%2C%5B-75.28%2C39.85%5D%2C%5B-75.3%2C39.85%5D%2C%5B-75.34%2C39.85%5D%2C%5B-75.41%2C39.8%5D%2C%5B-75.45%2C39.82%5D%2C%5B-75.52%2C39.84%5D%2C%5B-75.58%2C39.84%5D%2C%5B-75.59%2C39.84%5D%2C%5B-75.6%2C39.84%5D%2C%5B-75.66%2C39.82%5D%2C%5B-75.69%2C39.81%5D%2C%5B-75.74%2C39.77%5D%2C%5B-75.76%2C39.75%5D%2C%5B-75.77%2C39.72%5D%2C%5B-76.14%2C39.72%5D%2C%5B-76.1%2C39.72%5D%2C%5B-76.08%2C39.75%5D%2C%5B-76.08%2C39.76%5D%2C%5B-76.06%2C39.77%5D%2C%5B-76.04%2C39.8%5D%2C%5B-76.01%2C39.85%5D%2C%5B-76%2C39.87%5D%2C%5B-75.99%2C39.89%5D%2C%5B-76%2C39.92%5D%2C%5B-75.98%2C39.93%5D%2C%5B-75.99%2C39.95%5D%2C%5B-75.99%2C39.97%5D%2C%5B-75.94%2C40.04%5D%2C%5B-75.94%2C40.08%5D%2C%5B-75.94%2C40.11%5D%2C%5B-75.87%2C40.14%5D%2C%5B-75.73%2C40.22%5D%2C%5B-75.7%2C40.24%5D%2C%5B-75.53%2C40.45%5D%2C%5B-75.48%2C40.42%5D%5D%5D%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPolygon&f=geojson`,
+    House: `https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_State_House/FeatureServer/0/query?where=leg_distri=${id[0]}&outfields=*&geometry=%7B%22rings%22%3A%5B%5B%5B-75.48%2C40.42%5D%2C%5B-75.41%2C40.49%5D%2C%5B-75.34%2C40.53%5D%2C%5B-75.26%2C40.58%5D%2C%5B-75.2%2C40.61%5D%2C%5B-75.19%2C40.57%5D%2C%5B-75.16%2C40.56%5D%2C%5B-75.14%2C40.58%5D%2C%5B-75.1%2C40.57%5D%2C%5B-75.07%2C40.54%5D%2C%5B-75.06%2C40.48%5D%2C%5B-75.07%2C40.46%5D%2C%5B-75.06%2C40.42%5D%2C%5B-75.03%2C40.4%5D%2C%5B-74.99%2C40.41%5D%2C%5B-74.96%2C40.4%5D%2C%5B-74.94%2C40.34%5D%2C%5B-74.91%2C40.32%5D%2C%5B-74.9%2C40.32%5D%2C%5B-74.86%2C40.29%5D%2C%5B-74.84%2C40.25%5D%2C%5B-74.77%2C40.22%5D%2C%5B-74.75%2C40.18%5D%2C%5B-74.72%2C40.16%5D%2C%5B-74.72%2C40.15%5D%2C%5B-74.78%2C40.12%5D%2C%5B-74.82%2C40.13%5D%2C%5B-74.83%2C40.12%5D%2C%5B-74.84%2C40.1%5D%2C%5B-74.86%2C40.08%5D%2C%5B-74.94%2C40.06%5D%2C%5B-74.97%2C40.05%5D%2C%5B-75.01%2C40.02%5D%2C%5B-75.05%2C40.01%5D%2C%5B-75.07%2C39.98%5D%2C%5B-75.12%2C39.97%5D%2C%5B-75.13%2C39.96%5D%2C%5B-75.14%2C39.93%5D%2C%5B-75.13%2C39.91%5D%2C%5B-75.14%2C39.89%5D%2C%5B-75.15%2C39.88%5D%2C%5B-75.19%2C39.88%5D%2C%5B-75.21%2C39.87%5D%2C%5B-75.25%2C39.85%5D%2C%5B-75.28%2C39.85%5D%2C%5B-75.3%2C39.85%5D%2C%5B-75.34%2C39.85%5D%2C%5B-75.41%2C39.8%5D%2C%5B-75.45%2C39.82%5D%2C%5B-75.52%2C39.84%5D%2C%5B-75.58%2C39.84%5D%2C%5B-75.59%2C39.84%5D%2C%5B-75.6%2C39.84%5D%2C%5B-75.66%2C39.82%5D%2C%5B-75.69%2C39.81%5D%2C%5B-75.74%2C39.77%5D%2C%5B-75.76%2C39.75%5D%2C%5B-75.77%2C39.72%5D%2C%5B-76.14%2C39.72%5D%2C%5B-76.1%2C39.72%5D%2C%5B-76.08%2C39.75%5D%2C%5B-76.08%2C39.76%5D%2C%5B-76.06%2C39.77%5D%2C%5B-76.04%2C39.8%5D%2C%5B-76.01%2C39.85%5D%2C%5B-76%2C39.87%5D%2C%5B-75.99%2C39.89%5D%2C%5B-76%2C39.92%5D%2C%5B-75.98%2C39.93%5D%2C%5B-75.99%2C39.95%5D%2C%5B-75.99%2C39.97%5D%2C%5B-75.94%2C40.04%5D%2C%5B-75.94%2C40.08%5D%2C%5B-75.94%2C40.11%5D%2C%5B-75.87%2C40.14%5D%2C%5B-75.73%2C40.22%5D%2C%5B-75.7%2C40.24%5D%2C%5B-75.53%2C40.45%5D%2C%5B-75.48%2C40.42%5D%5D%5D%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryPolygon&f=geojson`
+  };
+
+  return fetch(sources[source])
+    .then(r => r.json())
+    .catch(err => console.log(err));
+};
+
+/*** DISPATCHERS ***/
+export const getCongressionalDistrict = id => dispatch => {
+  fetchDistrict("Congressional", id).then(response =>
+    dispatch(get_congressional_district(response))
+  );
+};
+
+export const getSenateDistrict = id => dispatch => {
+  fetchDistrict("Senate", id).then(response =>
+    dispatch(get_senate_district(response))
+  );
+};
+
+export const getHouseDistrict = id => dispatch => {
+  fetchDistrict("House", id).then(response =>
+    dispatch(get_house_district(response))
+  );
+};
+
+export const setActiveDistrict = (source, layer, id) => dispatch => {
+  fetchDistrict(source, id).then(response =>
+    dispatch(set_active_district(source, layer, response))
+  );
+};

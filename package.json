@@ -2,7 +2,7 @@
   "name": "pa-tip",
   "version": "2.1.7",
   "private": true,
-  "homepage": "/TIP/PA/",
+  "homepage": "/TIP/PADistricts/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && npm version patch",

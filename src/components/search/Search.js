@@ -7,6 +7,11 @@ import {
   searchTIPByKeywords,
   clearKeywords
 } from "../../redux/reducers/getTIPInfo";
+import {
+  getCongressionalDistrict,
+  getSenateDistrict,
+  getHouseDistrict
+} from "../../redux/reducers/congressionalReducer";
 
 const formatGroupLabel = section => <strong>{section.label}</strong>;
 
@@ -48,6 +53,44 @@ const transformKeywordSuggestions = data => {
   };
 };
 
+const transformDistrictSuggestions = (data, type) => {
+  let options;
+
+  if (data?.features?.length) {
+    options = data.features.map(({ properties }) => ({
+      label: `District ${properties.leg_distri} - ${
+        properties[`${type[0]}_firstnam`]
+      } ${properties[`${type[0]}_lastname`]} (${properties.party})`,
+      value: properties.leg_distri + "",
+      type
+    }));
+  } else {
+    options = [];
+  }
+  return options;
+};
+
+const transformCongressionalSuggestions = data => {
+  return {
+    label: "Congressional Districts",
+    options: transformDistrictSuggestions(data, "congressional")
+  };
+};
+
+const transformSenateSuggestions = data => {
+  return {
+    label: "PA Senate Districts",
+    options: transformDistrictSuggestions(data, "senate")
+  };
+};
+
+const transformHouseSuggestions = data => {
+  return {
+    label: "PA House Districts",
+    options: transformDistrictSuggestions(data, "house")
+  };
+};
+
 // @TODO: change default text from Select to Seach for TIP Projects
 class Search extends Component {
   constructor(props) {
@@ -79,6 +122,18 @@ class Search extends Component {
     this.props.searchTIPByKeywords(input);
   };
 
+  loadDistrictSuggestions = input => {
+    this.setState({ districts: this.props.getCongressionalDistrict(input) });
+  };
+
+  loadSenateSuggestions = input => {
+    this.setState({ senate: this.props.getSenateDistrict(input) });
+  };
+
+  loadHouseSuggestions = input => {
+    this.setState({ house: this.props.getHouseDistrict(input) });
+  };
+
   onChange = newValue => {
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
@@ -88,6 +143,9 @@ class Search extends Component {
         this.setState({ locations });
       }
     });
+    this.loadDistrictSuggestions(newValue);
+    this.loadSenateSuggestions(newValue);
+    this.loadHouseSuggestions(newValue);
   };
 
   onSelect = suggestion => {
@@ -111,6 +169,9 @@ class Search extends Component {
     const suggestions = [];
     const locations = transformLocationSuggestions(this.state.locations);
     const projects = transformKeywordSuggestions(this.props.keywordProjects);
+    const districts = transformCongressionalSuggestions(this.props.districts);
+    const senate = transformSenateSuggestions(this.props.senate);
+    const house = transformHouseSuggestions(this.props.house);
 
     const search = {
       label: "Keyword",
@@ -137,6 +198,9 @@ class Search extends Component {
     suggestions.push(search);
     suggestions.push(projects);
     suggestions.push(fund);
+    suggestions.push(districts);
+    suggestions.push(senate);
+    suggestions.push(house);
 
     // because google wont let you limit results to > 5
     locations.options = locations.options.slice(0, 2);
@@ -160,12 +224,19 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => ({
-  keywordProjects: state.getTIP.fetchedKeywords
+  keywordProjects: state.getTIP.fetchedKeywords,
+  districts: state.getDistricts.congressional,
+  senate: state.getDistricts.senate,
+  house: state.getDistricts.house
 });
 
 const mapDispatchToProps = dispatch => ({
   searchTIPByKeywords: keywords => dispatch(searchTIPByKeywords(keywords)),
-  clearKeywords: () => dispatch(clearKeywords())
+  clearKeywords: () => dispatch(clearKeywords()),
+  getCongressionalDistrict: keywords =>
+    dispatch(getCongressionalDistrict(keywords)),
+  getSenateDistrict: keywords => dispatch(getSenateDistrict(keywords)),
+  getHouseDistrict: keywords => dispatch(getHouseDistrict(keywords))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
