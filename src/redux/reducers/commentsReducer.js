@@ -52,19 +52,19 @@ export const submitComment = comment => dispatch => {
         console.log("comment post failed with status: ", response.status);
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const getGeneralComments = () => dispatch => {
   fetch("https://www.dvrpc.org/data/tip/2021/comments/null")
     .then(response => response.json())
     .then(response => dispatch(get_comments(response)))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
 
 export const getSpecificComment = id => dispatch => {
   fetch(`https://www.dvrpc.org/data/tip/2021/comments/${id}`)
     .then(response => response.json())
     .then(response => dispatch(get_specific_comments(response)))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 };
