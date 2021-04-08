@@ -65,15 +65,20 @@
   justify-content: flex-end;
   align-items: center;
 }
-.homepage-bottom-bar a {
+.homepage-bottom-bar-a {
   color: #e5c942;
   white-space: nowrap;
   font-weight: 700;
 }
-.homepage-bottom-bar span {
+.homepage-bottom-bar-icon {
   font-size: 1.8rem;
   font-weight: 700;
   margin-left: 5px;
+}
+.homepage-bottom-bar-vr {
+  margin: 0 5px;
+  font-size: 1.5rem;
+  color: #e5c942;
 }
 .homepage-bottom-bar img {
   padding-left: 2%;
@@ -194,7 +199,7 @@
 .homepage .btn {
   margin-top: 6px;
 }
-.homepage figure {
+figure {
   max-width: 100%;
   float: right;
   padding-top: 2%;
@@ -207,6 +212,7 @@
 }
 figure img {
   max-height: 200px;
+  width: 100%;
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.7);
 }
 figure figcaption {
@@ -254,11 +260,8 @@ figure figcaption {
   #tip-info p {
     font-size: 1rem;
   }
-  .homepage figure {
+  figure {
     float: none;
-  }
-  .homepage figure img {
-    max-width: 100%;
   }
 }
 

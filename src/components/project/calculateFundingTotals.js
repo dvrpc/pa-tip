@@ -38,7 +38,7 @@ const convertToCurrency = jawns => {
   try {
     test.toLocaleString("en-US");
   } catch (e) {
-    console.log("failed ", e);
+    console.error("failed ", e);
     return e.name === "RangeError";
   }
 
