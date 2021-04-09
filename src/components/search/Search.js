@@ -135,6 +135,8 @@ class Search extends Component {
   };
 
   onChange = newValue => {
+    if (!newValue) return;
+
     this.setState({ value: newValue });
     this.loadKeywordSuggestions(newValue);
     // @TODO: replace with mapboxgl geocoder
