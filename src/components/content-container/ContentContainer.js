@@ -2,8 +2,9 @@ import React, { Component } from "react";
 
 import "./ContentContainer.css";
 
+import firstFrame from "../homepage/firstFrame.jpg";
+
 import Project from "../project/Project.js";
-import Results from "../results/Results.js";
 import Footer from "../footer/Footer.js";
 
 class ContentContainer extends Component {
@@ -38,7 +39,12 @@ class ContentContainer extends Component {
         {this.state.isProject ? (
           <Project mpms={this.state.mpms} history={this.props.history} />
         ) : (
-          <Results />
+          <section
+            id="hideResults"
+            style={{ backgroundImage: `url(${firstFrame})` }}
+          >
+            <div>Please select a project to view more details.</div>
+          </section>
         )}
         <Footer />
       </div>

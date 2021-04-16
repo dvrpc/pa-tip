@@ -96,6 +96,22 @@
     "boundary": {
       "type": "vector",
       "url": "https://tiles.dvrpc.org/data/dvrpc-municipal.json"
+    },
+    "mask": {
+      "type": "geojson",
+      "data": "https://arcgis.dvrpc.org/portal/rest/services/Boundaries/CountyBoundaries/FeatureServer/0/query?where=state%3C%3E%27PA%27&f=geojson"
+    },
+    "Congressional": {
+      "type": "geojson",
+      "data": "https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_Congressional/FeatureServer/0/query?where=1%3D1&f=geojson&outfields=*"
+    },
+    "Senate": {
+      "type": "geojson",
+      "data": "https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_State_Senate/FeatureServer/0/query?where=1%3D1&f=geojson&outfields=*"
+    },
+    "House": {
+      "type": "geojson",
+      "data": "https://arcgis.dvrpc.org/portal/rest/services/Boundaries/PA_State_House/FeatureServer/0/query?where=1%3D1&f=geojson&outfields=*"
     }
   },
   "sprite": "https://tiles.dvrpc.org/data/styles/dvrpc-pa-tip/sprite",
@@ -5820,6 +5836,61 @@
           "#fcc810",
           "#666"
         ]
+      },
+      "interactive": true
+    },
+    {
+      "id": "PA Congressional Districts",
+      "type": "fill",
+      "source": "Congressional",
+      "paint": {
+        "fill-color": "#6d6d6d",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          0,
+          0.75
+        ]
+      },
+      "interactive": true
+    },
+    {
+      "id": "PA Senate Districts",
+      "type": "fill",
+      "source": "Senate",
+      "paint": {
+        "fill-color": "#6d6d6d",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          0,
+          0.75
+        ]
+      },
+      "interactive": true
+    },
+    {
+      "id": "PA House Districts",
+      "type": "fill",
+      "source": "House",
+      "paint": {
+        "fill-color": "#6d6d6d",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          0,
+          0.75
+        ]
+      },
+      "interactive": true
+    },
+    {
+      "id": "mask",
+      "source": "mask",
+      "type": "fill",
+      "paint": {
+        "fill-color": "#6d6d6d",
+        "fill-opacity": 0.75
       },
       "interactive": true
     }

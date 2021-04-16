@@ -30,10 +30,7 @@ class MapComponent extends Component {
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
         "Freight Centers": false,
-        "DVRPC Land Use (2019)": false,
-        "PA Congressional Districts": false,
-        "PA Senate Districts": false,
-        "PA House Districts": false
+        "DVRPC Land Use (2019)": false
       },
       toggleLayerList: false,
       toggleLegendList: false,
@@ -80,10 +77,42 @@ class MapComponent extends Component {
           "visibility",
           isVisible ? "visible" : "none"
         );
-        console.log(layer, dropdownLayers);
       }
     });
     this.setState({ dropdownLayers });
+  };
+
+  updateDistrictLayerVisibility = (selectedLayer, forceOnOff) => {
+    [
+      "PA Congressional Districts",
+      "PA Senate Districts",
+      "PA House Districts"
+    ].forEach(layer => {
+      let layerCheck = this.map.getLayer(layer);
+
+      // move on to the next one if the layer hasn't been added yet
+      if (!layerCheck) return;
+
+      // set other layer states to false
+      if (layer !== selectedLayer) {
+        this.map.setLayoutProperty(layer, "visibility", "none");
+
+        // turn currently active layer on or off depending on its current state
+      } else {
+        let isVisible = !(
+          this.map.getLayoutProperty(layer, "visibility") === "visible"
+        );
+        if (forceOnOff !== undefined) {
+          isVisible = forceOnOff;
+        }
+
+        this.map.setLayoutProperty(
+          layer,
+          "visibility",
+          isVisible ? "visible" : "none"
+        );
+      }
+    });
   };
 
   toggleDropdown = e => {
@@ -110,14 +139,14 @@ class MapComponent extends Component {
       ? this.map.flyTo({ center: [-75.4, 40.15], zoom: this.state.zoom })
       : false;
 
-  renderActiveDistrict = (map, district, updateLayerVisibility) => {
+  renderActiveDistrict = (map, district, updateDistrictLayerVisibility) => {
     const { xMin, yMin, xMax, yMax } = getBoundingBox(district.data);
     if (!isNaN(xMin) && !isNaN(yMin) && !isNaN(xMax) && !isNaN(yMax)) {
       map.fitBounds([xMin, yMin, xMax, yMax]);
 
       const highlight = (source, layer) => {
         //Show layer
-        updateLayerVisibility(layer, true);
+        updateDistrictLayerVisibility(layer, true);
         //Reset highlight for ALL layers
         ["Congressional", "Senate", "House"].forEach(src => {
           if (map.getSource(src))
@@ -215,8 +244,7 @@ class MapComponent extends Component {
       let zoom = new mapboxgl.NavigationControl();
       this.map.addControl(zoom, "top-right");
     });
-
-    this.map.on("click", "pa-tip-points", e => {
+    const click = e => {
       if (!e) return;
 
       // get a handle on history
@@ -237,25 +265,30 @@ class MapComponent extends Component {
       };
 
       clickTile(project, this.props.setProjectScope);
-    });
+    };
+    this.map.on("click", "pa-tip-points", click);
+    this.map.on("click", "pa-tip-lines", click);
 
     // show popup when a user hovers over a marker.
-    this.map.on("mouseenter", "pa-tip-points", e => {
+    const mouseenter = e => {
       this.map.getCanvas().style.cursor = "pointer";
 
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const LONGITUDE = coordinates[0];
-      const LATITUDE = coordinates[1];
+      const LONGITUDE = e.lngLat.lng;
+      const LATITUDE = e.lngLat.lat;
 
       const marker = { ...e.features[0].properties, LONGITUDE, LATITUDE };
       popup = showPopup(marker, this.map);
-    });
+    };
+    this.map.on("mouseenter", "pa-tip-points", mouseenter);
+    this.map.on("mouseenter", "pa-tip-lines", mouseenter);
 
     // remove popup when the user leaves
-    this.map.on("mouseleave", "pa-tip-points", () => {
+    const mouseleave = () => {
       this.map.getCanvas().style.cursor = "";
       popup.remove();
-    });
+    };
+    this.map.on("mouseleave", "pa-tip-points", mouseleave);
+    this.map.on("mouseleave", "pa-tip-lines", mouseleave);
 
     // handle user events to update map results
     this.map.on("zoomend", () => updateBounds(this));
@@ -273,7 +306,7 @@ class MapComponent extends Component {
       //Load and initialize optional layers/sources
       for (const source in layers) {
         const layer = layers[source];
-        console.log(layer.source);
+
         if (layer.layerType === "geojson") {
           this.map.addSource(layer.source, {
             type: layer.layerType,
@@ -305,7 +338,7 @@ class MapComponent extends Component {
         this.renderActiveDistrict(
           this.map,
           this.props.district,
-          this.updateLayerVisibility
+          this.updateDistrictLayerVisibility
         );
       }
     });
@@ -388,15 +421,18 @@ class MapComponent extends Component {
             "PA Congressional Districts",
             value
           );
-          this.updateLayerVisibility("PA Congressional Districts", true);
+          this.updateDistrictLayerVisibility(
+            "PA Congressional Districts",
+            true
+          );
           break;
         case "senate":
           this.props.setActiveDistrict("Senate", "PA Senate Districts", value);
-          this.updateLayerVisibility("PA Senate Districts", true);
+          this.updateDistrictLayerVisibility("PA Senate Districts", true);
           break;
         case "house":
           this.props.setActiveDistrict("House", "PA House Districts", value);
-          this.updateLayerVisibility("PA House Districts", true);
+          this.updateDistrictLayerVisibility("PA House Districts", true);
           break;
         default:
           const projectScope = {
@@ -473,7 +509,7 @@ class MapComponent extends Component {
       this.renderActiveDistrict(
         this.map,
         this.props.district,
-        this.updateLayerVisibility
+        this.updateDistrictLayerVisibility
       );
     }
   }

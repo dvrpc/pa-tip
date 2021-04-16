@@ -200,9 +200,12 @@ class Search extends Component {
     suggestions.push(search);
     suggestions.push(projects);
     suggestions.push(fund);
-    suggestions.push(districts);
-    suggestions.push(senate);
-    suggestions.push(house);
+
+    if (this.props.history.location.pathname === "/") {
+      suggestions.push(districts);
+      suggestions.push(senate);
+      suggestions.push(house);
+    }
 
     // because google wont let you limit results to > 5
     locations.options = locations.options.slice(0, 2);

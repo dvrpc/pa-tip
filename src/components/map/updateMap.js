@@ -1,6 +1,21 @@
 import mapboxgl from "mapbox-gl";
 import { colors } from "../../utils/tileGeometryColorType.js";
 
+const tilePopup = new mapboxgl.Popup({
+  closeButton: false,
+  closeOnClick: false,
+  offset: {
+    top: [0, 0],
+    "top-left": [0, 0],
+    "top-right": [0, 0],
+    bottom: [0, -15],
+    "bottom-left": [0, -15],
+    "bottom-right": [0, -15],
+    left: [15, -5],
+    right: [-15, -5]
+  }
+});
+
 export const updateBounds = mapReference => {
   let rendered = mapReference.map.queryRenderedFeatures({
     layers: ["pa-tip-points", "pa-tip-lines"]
@@ -45,21 +60,6 @@ export const updateBounds = mapReference => {
 
 export const showPopup = (marker, map) => {
   let details = marker.properties || marker;
-
-  let tilePopup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false,
-    offset: {
-      top: [0, 0],
-      "top-left": [0, 0],
-      "top-right": [0, 0],
-      bottom: [0, -15],
-      "bottom-left": [0, -15],
-      "bottom-right": [0, -15],
-      left: [15, -5],
-      right: [-15, -5]
-    }
-  });
 
   // handle edge case where line features pass geometry
   if (Array.isArray(details.LONGITUDE) || Array.isArray(details.LATITUDE)) {
