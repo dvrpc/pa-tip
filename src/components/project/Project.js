@@ -235,7 +235,7 @@ class Project extends Component {
                       }}
                     >
                       <tr>
-                        <td colSpan={1}>
+                        <td>
                           <a
                             className="table-links"
                             href="/TIP/Draft/pdf/CodesAbbr.pdf"
@@ -260,13 +260,13 @@ class Project extends Component {
                       {details.funding &&
                         details.funding.data.map(row => (
                           <tr className="table-data-rows" key={row[0] + row[1]}>
-                            <td colSpan={1}>{row[0]}</td>
+                            <td>{row[0]}</td>
                             <td>{row[1]}</td>
                             <td>${row[2]}</td>
                             <td>${row[3]}</td>
                             <td>${row[4]}</td>
                             <td>${row[5]}</td>
-                            <td>${row[6]}</td>
+                            <td>${row[6] + row[7]}</td>
                           </tr>
                         ))}
                       <tr>
