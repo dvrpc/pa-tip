@@ -62,7 +62,7 @@ class PrintPage extends Component {
                     colSpan="4"
                     style={{ fontWeight: "700", textAlign: "center" }}
                   >
-                    Draft PA FY2021 TIP Program Years (in Millions)
+                    PA FY2021 TIP Program Years (in Millions)
                   </td>
                   <td colSpan="2" />
                 </tr>

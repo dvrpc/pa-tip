@@ -27,7 +27,7 @@ export const getTotals = info => {
     totalFunding
   ];
 
-  // return funds as is w/o formatting for commas since we're expressing these in millions
+  // return funds as is w/o formatting for commas since we're expressing these in thousands
   return convertToCurrency(formattedFunds);
 };
 
