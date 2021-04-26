@@ -222,7 +222,7 @@ class Project extends Component {
                         <th colSpan={2} />
                         <th colSpan={4}>
                           <h3>
-                            Draft FY2021 TIP for PA Program Years (in Millions)
+                            FY2021 TIP for PA Program Years (in Thousands)
                           </h3>
                         </th>
                         <th colSpan={1} />
@@ -270,7 +270,7 @@ class Project extends Component {
                           </tr>
                         ))}
                       <tr>
-                        <td colSpan={2}>Program Year Totals (in Millions):</td>
+                        <td colSpan={2}>Program Year Totals (in Thousands):</td>
                         <td style={{ fontWeight: "700" }}>{funding[0]}</td>
                         <td style={{ fontWeight: "700" }}>{funding[1]}</td>
                         <td style={{ fontWeight: "700" }}>{funding[2]}</td>
@@ -278,9 +278,13 @@ class Project extends Component {
                         <td />
                       </tr>
                       <tr id="funding-totals" style={{ fontWeight: "700" }}>
-                        <td colSpan={2}>Total FY21-FY24 Cost (in Millions):</td>
+                        <td colSpan={2}>
+                          Total FY21-FY24 Cost (in Thousands):
+                        </td>
                         <td>{funding[4]}</td>
-                        <td colSpan={2}>Total FY21-FY32 Cost (in Millions):</td>
+                        <td colSpan={2}>
+                          Total FY21-FY32 Cost (in Thousands):
+                        </td>
                         <td>{funding[5]}</td>
                       </tr>
                     </tbody>
