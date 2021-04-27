@@ -145,10 +145,6 @@ class Homepage extends Component {
                 <span className="sm">[0.2 MB pdf]</span> to view helpful tips
                 that can make a public comment more effective.
               </p>
-            </section>
-
-            <section>
-              <h2 className="info-section-header">Detailed Information</h2>
               <a href="https://arcg.is/19nnb0" rel="external">
                 <figure>
                   <img
@@ -158,6 +154,10 @@ class Homepage extends Component {
                   <figcaption>TIP Fundamentals: Learn the Basics</figcaption>
                 </figure>
               </a>
+            </section>
+
+            <section>
+              <h2 className="info-section-header">Detailed Information</h2>
               <ul className="list-group">
                 <li className="list-group-item">
                   <a href="/TIP/PA/pdf/HighlightsPA21.pdf">
