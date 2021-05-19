@@ -58,9 +58,7 @@ const transformDistrictSuggestions = (data, type) => {
 
   if (data?.features?.length) {
     options = data.features.map(({ properties }) => ({
-      label: `District ${properties.leg_distri} - ${
-        properties[`${type[0]}_firstnam`]
-      } ${properties[`${type[0]}_lastname`]} (${properties.party})`,
+      label: `District ${properties.leg_distri}`,
       value: properties.leg_distri + "",
       type
     }));
