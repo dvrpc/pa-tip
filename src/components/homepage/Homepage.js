@@ -433,6 +433,12 @@ class Homepage extends Component {
                   </a>{" "}
                   <span className="sm">[206 MB pdf]</span>
                 </li>
+                <li className="list-group-item">
+                  <a href="/TIP/PA/pdf/6079_FY2021PATIP_TransitSafety.pdf">
+                    J - Transit Safety Performance Measure
+                  </a>{" "}
+                  <span className="sm">[0.2 MB pdf]</span>
+                </li>
               </ul>
             </section>
 
