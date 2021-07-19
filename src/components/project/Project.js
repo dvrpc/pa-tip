@@ -222,7 +222,7 @@ class Project extends Component {
                         <th colSpan={2} />
                         <th colSpan={4}>
                           <h3>
-                            Draft FY2021 TIP for PA Program Years (in Millions)
+                            FY2021 TIP for PA Program Years (in Thousands)
                           </h3>
                         </th>
                         <th colSpan={1} />
@@ -235,7 +235,7 @@ class Project extends Component {
                       }}
                     >
                       <tr>
-                        <td colSpan={1}>
+                        <td>
                           <a
                             className="table-links"
                             href="/TIP/Draft/pdf/CodesAbbr.pdf"
@@ -260,17 +260,17 @@ class Project extends Component {
                       {details.funding &&
                         details.funding.data.map(row => (
                           <tr className="table-data-rows" key={row[0] + row[1]}>
-                            <td colSpan={1}>{row[0]}</td>
+                            <td>{row[0]}</td>
                             <td>{row[1]}</td>
                             <td>${row[2]}</td>
                             <td>${row[3]}</td>
                             <td>${row[4]}</td>
                             <td>${row[5]}</td>
-                            <td>${row[6]}</td>
+                            <td>${row[6] + row[7]}</td>
                           </tr>
                         ))}
                       <tr>
-                        <td colSpan={2}>Program Year Totals (in Millions):</td>
+                        <td colSpan={2}>Program Year Totals (in Thousands):</td>
                         <td style={{ fontWeight: "700" }}>{funding[0]}</td>
                         <td style={{ fontWeight: "700" }}>{funding[1]}</td>
                         <td style={{ fontWeight: "700" }}>{funding[2]}</td>
@@ -278,9 +278,13 @@ class Project extends Component {
                         <td />
                       </tr>
                       <tr id="funding-totals" style={{ fontWeight: "700" }}>
-                        <td colSpan={2}>Total FY21-FY24 Cost (in Millions):</td>
+                        <td colSpan={2}>
+                          Total FY21-FY24 Cost (in Thousands):
+                        </td>
                         <td>{funding[4]}</td>
-                        <td colSpan={2}>Total FY21-FY32 Cost (in Millions):</td>
+                        <td colSpan={2}>
+                          Total FY21-FY32 Cost (in Thousands):
+                        </td>
                         <td>{funding[5]}</td>
                       </tr>
                     </tbody>

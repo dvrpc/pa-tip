@@ -62,7 +62,7 @@ class PrintPage extends Component {
                     colSpan="4"
                     style={{ fontWeight: "700", textAlign: "center" }}
                   >
-                    Draft PA FY2021 TIP Program Years (in Millions)
+                    PA FY2021 TIP Program Years (in Thousands)
                   </td>
                   <td colSpan="2" />
                 </tr>
@@ -92,7 +92,7 @@ class PrintPage extends Component {
                 ))}
                 <tr>
                   <td colSpan="2" style={{ fontWeight: "700", color: "#333" }}>
-                    Program Year Totals (in Millions):
+                    Program Year Totals (in Thousands):
                   </td>
                   <td style={{ fontWeight: "700" }}>{totals[0]}</td>
                   <td style={{ fontWeight: "700" }}>{totals[1]}</td>
@@ -104,11 +104,13 @@ class PrintPage extends Component {
               </tbody>
             </table>
             <p style={{ marginLeft: "2%" }}>
-              Total FY21 - FY24 Cost (in Millions): <strong>{totals[4]}</strong>
+              Total FY21 - FY24 Cost (in Thousands):{" "}
+              <strong>{totals[4]}</strong>
             </p>
 
             <p style={{ marginLeft: "2%" }}>
-              Total FY21 - FY32 Cost (in Millions): <strong>{totals[5]}</strong>
+              Total FY21 - FY32 Cost (in Thousands):{" "}
+              <strong>{totals[5]}</strong>
             </p>
           </div>
         ) : (
