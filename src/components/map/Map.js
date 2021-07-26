@@ -28,7 +28,7 @@ class MapComponent extends Component {
         "CMP Corridors": false,
         "Connections 2045 Centers": false,
         "Freight Centers": false,
-        "DVRPC Land Use (2015)": false
+        "DVRPC Land Use (2019)": false
       },
       toggleLayerList: false,
       toggleLegendList: false,

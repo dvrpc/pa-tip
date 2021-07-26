@@ -133,7 +133,7 @@ const Freight = {
   }
 };
 const LandUse = {
-  id: "DVRPC Land Use (2015)",
+  id: "DVRPC Land Use (2019)",
   url: "https://tiles.dvrpc.org/data/dvrpc-landuse-2015.json",
   layerType: "vector",
   type: "fill",
