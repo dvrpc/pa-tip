@@ -442,20 +442,6 @@ class Homepage extends Component {
               </ul>
             </section>
 
-            <section>
-              <h2 className="info-section-header">
-                Annual List of Federally Obligated Projects for PA
-              </h2>
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <a href="/TIP/PA/pdf/DVRPC-FFY-2021-Annual-Obligations-Report.pdf">
-                    PA FY21 Obligations for Highway and Transit Projects
-                  </a>
-                  <span className="sm">[0.6 MB pdf]</span>
-                </li>
-              </ul>
-            </section>
-
             <section id="obligation-table-wrapper">
               <h2 className="info-section-header">Obligation Summary</h2>
               <table id="obligation-summary-table">
