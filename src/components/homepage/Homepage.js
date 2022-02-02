@@ -461,6 +461,21 @@ class Homepage extends Component {
               <table id="obligation-summary-table">
                 <tbody>
                   <tr>
+                    <td>FY2022:</td>
+
+                    <td>
+                      <a href="/TIP/PA/pdf/DVRPCSummary22.pdf">Summary</a>{" "}
+                      <span className="sm">[0.2 MB pdf]</span>
+                    </td>
+
+                    <td>
+                      <a href="/TIP/PA/pdf/DVRPCandInterstateDetails22.pdf">
+                        Details
+                      </a>{" "}
+                      <span className="sm">[0.4 MB pdf]</span>
+                    </td>
+                  </tr>
+                  <tr>
                     <td>FY2021:</td>
 
                     <td>
